@@ -59,18 +59,18 @@ export default function HomePage() {
           aria-label="Main navigation"
           className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12"
         >
-         <Link
+          <Link
   href="/"
   aria-label="Trailbliz home"
-  className={`relative block h-12 w-44 shrink-0 overflow-hidden rounded-lg bg-[#084CAA] ${focus}`}
+  className={`block shrink-0 ${focus}`}
 >
   <Image
     src="/trailbliz.png"
     alt="Trailbliz"
-    width={176}
-    height={176}
+    width={220}
+    height={54}
     priority
-    className="absolute -top-[69px] left-0 h-44 w-44 max-w-none"
+    className="h-auto w-[180px] sm:w-[210px]"
   />
 </Link>
 
