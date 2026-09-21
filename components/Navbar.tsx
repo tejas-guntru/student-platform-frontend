@@ -83,7 +83,7 @@ export default function Navbar() {
           "
         >
           <img
-            src="/trailbliz.png"
+            src="/trailbliz-logo-v2.png"
             alt="Trailbliz"
             className="
               h-full

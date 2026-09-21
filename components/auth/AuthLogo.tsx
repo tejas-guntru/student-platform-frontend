@@ -2,14 +2,19 @@ import Image from "next/image";
 
 export default function AuthLogo() {
   return (
-    <div className="mb-10 flex justify-center">
+    <div className="mb-8 flex justify-center sm:mb-10">
       <Image
-        src="/trailbliz.png"
+        src="/trailbliz-logo-v2.png"
         alt="Trailbliz"
-        width={170}
-        height={40}
+        width={260}
+        height={80}
         priority
-        className="h-auto max-h-10 w-auto object-contain"
+        className="
+          h-auto
+          w-[220px]
+          object-contain
+          sm:w-[245px]
+        "
       />
     </div>
   );

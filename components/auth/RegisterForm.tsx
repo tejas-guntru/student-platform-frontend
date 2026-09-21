@@ -126,31 +126,125 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="rounded-[24px] border border-[#D8D5CC] bg-white p-7 shadow-[0_20px_60px_rgba(20,33,61,0.08)] sm:p-9">
-
+    <div>
       {/* HEADER */}
-      <div className="text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A227]">
-          Get started
-        </p>
 
-        <h1 className="mt-4 text-4xl font-bold leading-[0.95] tracking-[-0.055em] text-[#14213D]">
+      <div className="text-center">
+        <div
+          className="
+            mx-auto
+            inline-flex
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-[#CBE5F8]
+            bg-[#EFF8FF]
+            px-3.5
+            py-1.5
+          "
+        >
+          <span
+            className="
+              h-1.5
+              w-1.5
+              rounded-full
+              bg-[#0877E8]
+              shadow-[0_0_8px_rgba(8,119,232,0.45)]
+            "
+          />
+
+          <span
+            className="
+              text-[10px]
+              font-semibold
+              uppercase
+              tracking-[0.16em]
+              text-[#4381B3]
+            "
+          >
+            Join Trailbliz
+          </span>
+        </div>
+
+        <h1
+          className="
+            mt-5
+            text-3xl
+            font-bold
+            leading-[0.95]
+            tracking-[-0.05em]
+            text-[#173B63]
+
+            sm:text-4xl
+          "
+        >
           Create your account.
         </h1>
 
-        <p className="mt-4 text-sm leading-6 text-[#5F6470]">
-          Start your trail and build your student profile.
+        <p
+          className="
+            mx-auto
+            mt-4
+            max-w-sm
+            text-sm
+            leading-6
+            text-[#647B91]
+          "
+        >
+          Start building your profile and connect everything that
+          shapes your career journey.
         </p>
       </div>
 
       {/* ERROR */}
+
       {error && (
-        <div className="mt-7 rounded-xl border border-[#E4C7C7] bg-[#FBF1F1] px-4 py-3 text-sm text-[#A43F3F]">
-          {error}
+        <div
+          role="alert"
+          className="
+            mt-7
+            flex
+            items-start
+            gap-3
+            rounded-2xl
+            border
+            border-[#F1CCCC]
+            bg-[#FFF5F5]
+            px-4
+            py-3.5
+            text-sm
+            leading-5
+            text-[#A43F3F]
+          "
+        >
+          <span
+            aria-hidden="true"
+            className="
+              mt-[2px]
+              flex
+              h-5
+              w-5
+              shrink-0
+              items-center
+              justify-center
+              rounded-full
+              bg-[#FCE4E4]
+              text-[11px]
+              font-bold
+            "
+          >
+            !
+          </span>
+
+          <span>
+            {error}
+          </span>
         </div>
       )}
 
       {/* FORM */}
+
       <form
         onSubmit={handleRegister}
         className="mt-8 space-y-5"
@@ -195,9 +289,33 @@ export default function RegisterForm() {
             }
           />
 
-          <p className="mt-2 text-xs text-[#858994]">
-            Use at least 8 characters.
-          </p>
+          <div
+            className="
+              mt-2
+              flex
+              items-center
+              gap-2
+              px-1
+            "
+          >
+            <span
+              className="
+                h-1.5
+                w-1.5
+                rounded-full
+                bg-[#79BFF0]
+              "
+            />
+
+            <p
+              className="
+                text-xs
+                text-[#7B91A6]
+              "
+            >
+              Use at least 8 characters.
+            </p>
+          </div>
         </div>
 
         <AuthInput
@@ -214,53 +332,133 @@ export default function RegisterForm() {
           }
         />
 
+        {/* SUBMIT */}
+
         <button
           type="submit"
           disabled={loading}
           className="
             group
+            relative
             flex
+            min-h-[52px]
             w-full
             items-center
             justify-center
             gap-3
-            rounded-xl
-            bg-[#C9A227]
-            px-4
+            overflow-hidden
+            rounded-2xl
+
+            bg-gradient-to-r
+            from-[#0877E8]
+            via-[#118EED]
+            to-[#2DB5F7]
+
+            px-5
             py-3.5
-            text-sm
-            font-bold
-            text-[#14213D]
+
+            text-[14px]
+            font-semibold
+            text-white
+
+            shadow-[0_12px_30px_rgba(8,119,232,0.22)]
+
             transition-all
             duration-200
-            hover:bg-[#E0C766]
-            hover:shadow-md
+
+            hover:-translate-y-0.5
+            hover:shadow-[0_16px_38px_rgba(8,119,232,0.28)]
+
+            focus-visible:outline-none
+            focus-visible:ring-4
+            focus-visible:ring-[#1689F5]/20
+
             disabled:cursor-not-allowed
-            disabled:opacity-50
+            disabled:translate-y-0
+            disabled:opacity-60
           "
         >
-          {loading
-            ? "Creating account..."
-            : "Create account"}
+          <span
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-x-8
+              top-0
+              h-px
+              bg-gradient-to-r
+              from-transparent
+              via-white/70
+              to-transparent
+            "
+          />
 
-          {!loading && (
-            <span className="transition-transform duration-200 group-hover:translate-x-1">
-              →
-            </span>
+          {loading ? (
+            <>
+              <span
+                className="
+                  h-4
+                  w-4
+                  animate-spin
+                  rounded-full
+                  border-2
+                  border-white/35
+                  border-t-white
+                "
+              />
+
+              Creating account...
+            </>
+          ) : (
+            <>
+              Create account
+
+              <span
+                aria-hidden="true"
+                className="
+                  text-base
+                  transition-transform
+                  duration-200
+                  group-hover:translate-x-1
+                "
+              >
+                →
+              </span>
+            </>
           )}
         </button>
       </form>
 
       {/* LOGIN */}
-      <div className="mt-7 border-t border-[#E3E1DA] pt-6 text-center">
-        <p className="text-sm text-[#6B707B]">
+
+      <div
+        className="
+          mt-7
+          border-t
+          border-[#DCEAF6]
+          pt-6
+          text-center
+        "
+      >
+        <p
+          className="
+            text-sm
+            text-[#6A8096]
+          "
+        >
           Already have an account?{" "}
 
           <Link
             href="/login"
-            className="font-bold text-[#14213D] transition-colors hover:text-[#C9A227]"
+            className="
+              font-semibold
+              text-[#0877E8]
+              transition-colors
+              duration-200
+              hover:text-[#075FCB]
+            "
           >
-            Login
+            Sign in
           </Link>
         </p>
       </div>
