@@ -6,9 +6,12 @@ import Discover from "@/components/home/Discover";
 import MoveForward from "@/components/home/MoveForward";
 import KeepGoing from "@/components/home/KeepGoing";
 import Navbar from "@/components/Navbar";
+import StructuredData from "@/components/seo/StructuredData";
+
 export default function HomePage() {
   return (
     <main>
+      <StructuredData />
       <Navbar />
       <Hero />
       <YourTrail />
