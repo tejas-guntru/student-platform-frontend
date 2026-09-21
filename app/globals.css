@@ -1,26 +1,724 @@
 @import "tailwindcss";
 
+/* =========================================================
+   TRAILBLIZ — GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ---------- Brand ---------- */
+
+  --navy: #14213d;
+  --navy-light: #1d2d4f;
+  --navy-dark: #0d172b;
+
+  --gold: #c9a227;
+  --gold-light: #e0c766;
+  --gold-dark: #a98616;
+
+  /* ---------- Neutrals ---------- */
+
+  --background: #f8f7f3;
+  --surface: #ffffff;
+  --surface-soft: #f1f0eb;
+
+  --foreground: #14213d;
+  --foreground-soft: #30394c;
+
+  --muted: #5f6470;
+  --muted-light: #858994;
+
+  --border: #e3e1da;
+  --border-strong: #d2cfc5;
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ---------- States ---------- */
+
+  --success: #2f6b4f;
+  --warning: #b98216;
+  --danger: #b64242;
+  --info: #3f628f;
+
+  /* ---------- Typography ---------- */
+
+  --font-body: Arial, Helvetica, sans-serif;
+
+  /* ---------- Layout ---------- */
+
+  --container: 1280px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ---------- Shadows ---------- */
+
+  --shadow-sm:
+    0 1px 2px rgba(20, 33, 61, 0.04);
+
+  --shadow-md:
+    0 8px 30px rgba(20, 33, 61, 0.08);
+
+  --shadow-lg:
+    0 20px 60px rgba(20, 33, 61, 0.12);
+
+  /* ---------- Motion ---------- */
+
+  --ease:
+    cubic-bezier(0.22, 1, 0.36, 1);
+
+  --duration-fast: 160ms;
+  --duration-normal: 260ms;
+  --duration-slow: 500ms;
 }
+
+/* =========================================================
+   TAILWIND THEME
+   ========================================================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-navy-dark: var(--navy-dark);
+
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--gold);
+  color: var(--navy-dark);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  color: var(--foreground);
+
+  font-weight: 700;
+  letter-spacing: -0.035em;
+
+  text-wrap: balance;
+}
+
+h1 {
+  line-height: 0.95;
+}
+
+h2 {
+  line-height: 1;
+}
+
+h3 {
+  line-height: 1.1;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+small {
+  font-size: 0.875rem;
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  border: 0;
+  font: inherit;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   INPUTS / FORMS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: var(--surface);
+  color: var(--foreground);
+
+  font: inherit;
+
+  outline: none;
+
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    background var(--duration-fast) ease;
+}
+
+input,
+select {
+  min-height: 44px;
+  padding: 0 14px;
+}
+
+textarea {
+  min-height: 120px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-light);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--border-strong);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+}
+
+/* =========================================================
+   IMAGES / MEDIA
+   ========================================================= */
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   HR
+   ========================================================= */
+
+hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-light);
+}
+
+/* =========================================================
+   GLOBAL CONTAINER
+   ========================================================= */
+
+.container {
+  width: min(
+    calc(100% - 48px),
+    var(--container)
+  );
+
+  margin-inline: auto;
+}
+
+/* =========================================================
+   BRAND UTILITIES
+   ========================================================= */
+
+.text-brand {
+  color: var(--navy);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.bg-brand {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.bg-gold {
+  background: var(--gold);
+  color: var(--navy-dark);
+}
+
+.bg-surface {
+  background: var(--surface);
+}
+
+.bg-soft {
+  background: var(--surface-soft);
+}
+
+.border-brand {
+  border-color: var(--navy);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+/* =========================================================
+   BRAND BUTTONS
+   ========================================================= */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 46px;
+  padding: 0 20px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--navy);
+  color: var(--white);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform var(--duration-fast) var(--ease),
+    background var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.btn-primary:hover {
+  background: var(--navy-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 46px;
+  padding: 0 20px;
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+
+  background: var(--surface);
+  color: var(--navy);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--navy);
+  background: var(--surface-soft);
+  transform: translateY(-1px);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 46px;
+  padding: 0 20px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--gold);
+  color: var(--navy-dark);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform var(--duration-fast) var(--ease),
+    background var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform var(--duration-normal) var(--ease),
+    border-color var(--duration-normal) ease,
+    box-shadow var(--duration-normal) ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav-link {
+  color: var(--muted);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    color var(--duration-fast) ease;
+}
+
+.nav-link:hover {
+  color: var(--navy);
+}
+
+/* =========================================================
+   SECTION SYSTEM
+   ========================================================= */
+
+.section {
+  padding-block: 96px;
+}
+
+.section-sm {
+  padding-block: 64px;
+}
+
+.section-lg {
+  padding-block: 128px;
+}
+
+/* =========================================================
+   BRAND TRAIL
+   ========================================================= */
+
+.trail-line {
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.trail-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 999px;
+
+  background: var(--gold);
+}
+
+.trail-dot-outline {
+  width: 8px;
+  height: 8px;
+
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+
+  background: transparent;
+}
+
+/* =========================================================
+   DARK SECTIONS
+   ========================================================= */
+
+.dark-section {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section h5,
+.dark-section h6 {
+  color: var(--white);
+}
+
+.dark-section p {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.dark-section .trail-line {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* =========================================================
+   GOLD ACCENT
+   ========================================================= */
+
+.gold-accent {
+  color: var(--gold);
+}
+
+.gold-line {
+  height: 2px;
+  background: var(--gold);
+}
+
+/* =========================================================
+   GRADIENT — VERY SUBTLE
+   ========================================================= */
+
+.brand-glow {
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(201, 162, 39, 0.08),
+      transparent 35%
+    );
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .container {
+    width: min(
+      calc(100% - 32px),
+      var(--container)
+    );
+  }
+
+  .section {
+    padding-block: 72px;
+  }
+
+  .section-sm {
+    padding-block: 48px;
+  }
+
+  .section-lg {
+    padding-block: 88px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   DARK MODE
+   =========================================================
+   Trailbliz intentionally stays light-first.
+   Do not automatically switch the entire site based on
+   the user's OS preference.
+   ========================================================= */
