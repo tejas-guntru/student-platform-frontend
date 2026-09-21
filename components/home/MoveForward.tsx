@@ -6,22 +6,22 @@ const steps = [
   {
     number: "01",
     title: "Apply",
-    description: "Put yourself forward.",
+    description: "Put yourself forward for the opportunity.",
   },
   {
     number: "02",
     title: "Review",
-    description: "See where you stand.",
+    description: "Your application moves into review.",
   },
   {
     number: "03",
     title: "Shortlisted",
-    description: "Move to the next stage.",
+    description: "Move forward to the next stage.",
   },
   {
     number: "04",
     title: "Selected",
-    description: "Take the next step.",
+    description: "Take the next step in your career.",
   },
 ];
 
@@ -31,143 +31,758 @@ export default function MoveForward() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActive((current) => (current + 1) % steps.length);
-    }, 1800);
+    }, 2200);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="overflow-hidden border-y border-[#E3E1DA] bg-[#F1F0EB] px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
-      <div className="mx-auto max-w-7xl">
+    <section
+      className="
+        relative
+        overflow-hidden
+        bg-[#F4FAFF]
+        px-5
+        py-20
 
-        {/* Header */}
-        <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+        sm:px-8
+        sm:py-24
 
+        lg:px-12
+        lg:py-32
+      "
+    >
+      {/* =====================================================
+          BACKGROUND EFFECTS
+      ===================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -left-44
+          top-16
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[#CDEBFF]/70
+          blur-[140px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -right-48
+          bottom-0
+          h-[560px]
+          w-[560px]
+          rounded-full
+          bg-[#B7E1FF]/55
+          blur-[150px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.3]
+        "
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(8,119,232,0.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(8,119,232,0.045) 1px, transparent 1px)
+          `,
+          backgroundSize: "54px 54px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
+
+        <div
+          className="
+            grid
+            gap-8
+
+            lg:grid-cols-[1fr_0.7fr]
+            lg:items-end
+          "
+        >
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A227]">
-              Move forward
-            </p>
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2.5
+                rounded-full
+                border
+                border-[#CBE4F8]
+                bg-white/85
+                px-4
+                py-2
+                shadow-sm
+                backdrop-blur-md
+              "
+            >
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#0877E8]
+                  shadow-[0_0_12px_rgba(8,119,232,0.55)]
+                "
+              />
 
-            <h2 className="mt-5 text-5xl font-bold leading-[0.88] tracking-[-0.065em] text-[#14213D] sm:text-6xl lg:text-7xl">
-              Keep
-              <br />
-              moving.
+              <span
+                className="
+                  text-[11px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.16em]
+                  text-[#3977AC]
+                "
+              >
+                Move forward
+              </span>
+            </div>
+
+            <h2
+              className="
+                mt-6
+                max-w-4xl
+                text-[clamp(3rem,6vw,6rem)]
+                font-bold
+                leading-[0.9]
+                tracking-[-0.065em]
+                text-[#102F51]
+              "
+            >
+              From application
+              <span
+                className="
+                  block
+                  bg-gradient-to-r
+                  from-[#0877E8]
+                  via-[#1294F2]
+                  to-[#38BDF8]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
+                to opportunity.
+              </span>
             </h2>
           </div>
 
-          <p className="max-w-md text-lg leading-8 text-[#5F6470]">
-            From the moment you apply, every step of your opportunity
-            journey stays connected.
-          </p>
-        </div>
+          <p
+            className="
+              max-w-md
+              text-base
+              leading-7
+              text-[#607890]
 
-        {/* Main journey */}
-        <div className="relative mt-24 lg:mt-28">
+              sm:text-lg
+              sm:leading-8
 
-          {/* Giant number */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-4 -top-20 select-none text-[180px] font-bold leading-none tracking-[-0.1em] text-[#E7E5DD] sm:text-[240px] lg:-top-28 lg:text-[320px]"
+              lg:justify-self-end
+            "
           >
-            04
-          </div>
+            Follow every stage of your application journey in one place,
+            from the moment you apply to the moment you move ahead.
+          </p>
+        </div>
 
-          {/* Trail */}
+        {/* =====================================================
+            JOURNEY PANEL
+        ===================================================== */}
+
+        <div
+          className="
+            relative
+            mt-16
+            overflow-hidden
+            rounded-[34px]
+            border
+            border-[#D2E7F7]
+            bg-white/80
+            p-6
+            shadow-[0_24px_70px_rgba(8,119,232,0.09)]
+            backdrop-blur-xl
+
+            sm:p-8
+
+            lg:mt-20
+            lg:p-10
+          "
+        >
+          {/* Panel glow */}
+
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-5 hidden h-[2px] bg-[#D2CFC5] md:block"
+            className="
+              pointer-events-none
+              absolute
+              -right-24
+              -top-24
+              h-[320px]
+              w-[320px]
+              rounded-full
+              bg-[#D9F1FF]
+              blur-[80px]
+            "
           />
 
-          <div
-            aria-hidden="true"
-            className="absolute left-0 top-5 hidden h-[2px] bg-[#C9A227] transition-all duration-700 ease-out md:block"
-            style={{
-              width: `${(active / (steps.length - 1)) * 100}%`,
-            }}
-          />
+          {/* ===================================================
+              DESKTOP PROGRESS
+          =================================================== */}
 
-          {/* Steps */}
-          <div className="relative grid gap-12 md:grid-cols-4 md:gap-0">
+          <div className="relative hidden md:block">
+            {/* Base line */}
 
-            {steps.map((step, index) => {
-              const isActive = active === index;
-              const isPassed = index < active;
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                left-[24px]
+                right-[24px]
+                top-[26px]
+                h-[3px]
+                rounded-full
+                bg-[#DCECF8]
+              "
+            />
 
-              return (
-                <div
-                  key={step.number}
-                  className="relative md:pr-10"
-                >
+            {/* Active line */}
 
-                  {/* Node */}
-                  <div
-                    className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[#F1F0EB] text-xs font-bold transition-all duration-500 ${
-                      isActive
-                        ? "border-[#C9A227] text-[#14213D] shadow-[0_0_0_6px_rgba(201,162,39,0.12)]"
-                        : isPassed
-                          ? "border-[#14213D] bg-[#14213D] text-white"
-                          : "border-[#C8C5BC] text-[#858994]"
-                    }`}
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                left-[24px]
+                top-[26px]
+                h-[3px]
+                rounded-full
+                bg-gradient-to-r
+                from-[#0877E8]
+                via-[#1498F2]
+                to-[#40C6FF]
+                transition-all
+                duration-700
+                ease-out
+              "
+              style={{
+                width: `calc(${(active / (steps.length - 1)) * 100}% - ${
+                  active === steps.length - 1 ? "48px" : "24px"
+                })`,
+              }}
+            />
+
+            <div className="relative grid grid-cols-4 gap-6">
+              {steps.map((step, index) => {
+                const isActive = active === index;
+                const isPassed = index < active;
+
+                return (
+                  <button
+                    key={step.number}
+                    type="button"
+                    onClick={() => setActive(index)}
+                    className="
+                      group
+                      relative
+                      text-left
+                    "
                   >
-                    {step.number}
-                  </div>
+                    {/* Node */}
 
-                  {/* Text */}
-                  <div className="mt-8">
+                    <div
+                      className={`
+                        relative
+                        z-10
+                        flex
+                        h-[54px]
+                        w-[54px]
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        border
+                        text-xs
+                        font-bold
+                        transition-all
+                        duration-500
 
-                    <h3
-                      className={`text-2xl font-bold tracking-[-0.04em] transition-colors duration-500 ${
-                        isActive
-                          ? "text-[#14213D]"
-                          : "text-[#5F6470]"
-                      }`}
+                        ${
+                          isActive
+                            ? `
+                              border-[#1689F5]
+                              bg-gradient-to-br
+                              from-[#0877E8]
+                              to-[#36BDF8]
+                              text-white
+                              shadow-[0_10px_28px_rgba(8,119,232,0.28)]
+                            `
+                            : isPassed
+                              ? `
+                                border-[#B2D9F5]
+                                bg-[#E6F5FF]
+                                text-[#0877E8]
+                              `
+                              : `
+                                border-[#D6E7F4]
+                                bg-white
+                                text-[#8CA2B6]
+                              `
+                        }
+                      `}
                     >
-                      {step.title}
-                    </h3>
-
-                    <p
-                      className={`mt-2 max-w-[180px] text-sm leading-6 transition-colors duration-500 ${
-                        isActive
-                          ? "text-[#5F6470]"
-                          : "text-[#858994]"
-                      }`}
-                    >
-                      {step.description}
-                    </p>
-
-                  </div>
-
-                  {/* Active marker */}
-                  {isActive && (
-                    <div className="mt-7 flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
-                      <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#C9A227]">
-                        You&apos;re here
-                      </span>
+                      {step.number}
                     </div>
-                  )}
-                </div>
-              );
-            })}
 
+                    {/* Card */}
+
+                    <div
+                      className={`
+                        mt-7
+                        min-h-[170px]
+                        rounded-[24px]
+                        border
+                        p-5
+                        transition-all
+                        duration-500
+
+                        ${
+                          isActive
+                            ? `
+                              -translate-y-1
+                              border-[#B7DCF7]
+                              bg-white
+                              shadow-[0_16px_45px_rgba(8,119,232,0.12)]
+                            `
+                            : `
+                              border-[#E0EDF7]
+                              bg-[#F9FCFF]
+                            `
+                        }
+                      `}
+                    >
+                      <p
+                        className={`
+                          text-[10px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.14em]
+
+                          ${
+                            isActive
+                              ? "text-[#1689F5]"
+                              : "text-[#91A5B7]"
+                          }
+                        `}
+                      >
+                        Stage {step.number}
+                      </p>
+
+                      <h3
+                        className="
+                          mt-3
+                          text-xl
+                          font-bold
+                          tracking-[-0.03em]
+                          text-[#173B63]
+                        "
+                      >
+                        {step.title}
+                      </h3>
+
+                      <p
+                        className="
+                          mt-2
+                          max-w-[200px]
+                          text-sm
+                          leading-6
+                          text-[#6C8297]
+                        "
+                      >
+                        {step.description}
+                      </p>
+
+                      {isActive && (
+                        <div
+                          className="
+                            mt-5
+                            inline-flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            bg-[#E9F6FF]
+                            px-3
+                            py-1.5
+                          "
+                        >
+                          <span
+                            className="
+                              h-1.5
+                              w-1.5
+                              rounded-full
+                              bg-[#0877E8]
+                              shadow-[0_0_8px_rgba(8,119,232,0.5)]
+                            "
+                          />
+
+                          <span
+                            className="
+                              text-[10px]
+                              font-semibold
+                              uppercase
+                              tracking-[0.12em]
+                              text-[#0877E8]
+                            "
+                          >
+                            You&apos;re here
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ===================================================
+              MOBILE JOURNEY
+          =================================================== */}
+
+          <div className="relative md:hidden">
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                bottom-0
+                left-[23px]
+                top-0
+                w-[2px]
+                bg-[#DCECF8]
+              "
+            />
+
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                left-[23px]
+                top-0
+                w-[2px]
+                bg-gradient-to-b
+                from-[#0877E8]
+                to-[#40C6FF]
+                transition-all
+                duration-700
+                ease-out
+              "
+              style={{
+                height: `${(active / (steps.length - 1)) * 100}%`,
+              }}
+            />
+
+            <div className="space-y-5">
+              {steps.map((step, index) => {
+                const isActive = active === index;
+                const isPassed = index < active;
+
+                return (
+                  <button
+                    key={step.number}
+                    type="button"
+                    onClick={() => setActive(index)}
+                    className="
+                      relative
+                      flex
+                      w-full
+                      gap-5
+                      text-left
+                    "
+                  >
+                    <div
+                      className={`
+                        relative
+                        z-10
+                        flex
+                        h-12
+                        w-12
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        border
+                        text-xs
+                        font-bold
+                        transition-all
+                        duration-500
+
+                        ${
+                          isActive
+                            ? `
+                              border-[#1689F5]
+                              bg-gradient-to-br
+                              from-[#0877E8]
+                              to-[#38BDF8]
+                              text-white
+                              shadow-[0_9px_24px_rgba(8,119,232,0.25)]
+                            `
+                            : isPassed
+                              ? `
+                                border-[#B5DBF5]
+                                bg-[#E7F5FF]
+                                text-[#0877E8]
+                              `
+                              : `
+                                border-[#D7E8F4]
+                                bg-white
+                                text-[#8CA2B6]
+                              `
+                        }
+                      `}
+                    >
+                      {step.number}
+                    </div>
+
+                    <div
+                      className={`
+                        flex-1
+                        rounded-[22px]
+                        border
+                        p-5
+                        transition-all
+                        duration-500
+
+                        ${
+                          isActive
+                            ? `
+                              border-[#B8DCF7]
+                              bg-white
+                              shadow-[0_12px_34px_rgba(8,119,232,0.11)]
+                            `
+                            : `
+                              border-[#DFEDF7]
+                              bg-white/75
+                            `
+                        }
+                      `}
+                    >
+                      <p
+                        className="
+                          text-[10px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.14em]
+                          text-[#7B98B1]
+                        "
+                      >
+                        Stage {step.number}
+                      </p>
+
+                      <h3
+                        className="
+                          mt-2
+                          text-xl
+                          font-bold
+                          tracking-[-0.03em]
+                          text-[#173B63]
+                        "
+                      >
+                        {step.title}
+                      </h3>
+
+                      <p
+                        className="
+                          mt-2
+                          text-sm
+                          leading-6
+                          text-[#6A8196]
+                        "
+                      >
+                        {step.description}
+                      </p>
+
+                      {isActive && (
+                        <p
+                          className="
+                            mt-4
+                            text-xs
+                            font-semibold
+                            text-[#0877E8]
+                          "
+                        >
+                          Current stage →
+                        </p>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ===================================================
+              STATUS SUMMARY
+          =================================================== */}
+
+          <div
+            className="
+              relative
+              mt-10
+              overflow-hidden
+              rounded-[24px]
+              bg-gradient-to-r
+              from-[#0877E8]
+              via-[#1294F2]
+              to-[#35BDF8]
+              p-[1px]
+            "
+          >
+            <div
+              className="
+                flex
+                flex-col
+                gap-5
+                rounded-[23px]
+                bg-white
+                px-6
+                py-5
+
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+              "
+            >
+              <div>
+                <p
+                  className="
+                    text-[10px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.14em]
+                    text-[#1689F5]
+                  "
+                >
+                  Application journey
+                </p>
+
+                <p
+                  className="
+                    mt-1
+                    text-lg
+                    font-semibold
+                    tracking-[-0.02em]
+                    text-[#173B63]
+                  "
+                >
+                  {steps[active].title}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span
+                  className="
+                    text-sm
+                    font-semibold
+                    text-[#5D7891]
+                  "
+                >
+                  {active + 1} of {steps.length}
+                </span>
+
+                <div
+                  className="
+                    h-2
+                    w-24
+                    overflow-hidden
+                    rounded-full
+                    bg-[#DDEEF9]
+                  "
+                >
+                  <div
+                    className="
+                      h-full
+                      rounded-full
+                      bg-gradient-to-r
+                      from-[#0877E8]
+                      to-[#40C6FF]
+                      transition-all
+                      duration-700
+                    "
+                    style={{
+                      width: `${((active + 1) / steps.length) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom statement */}
-        <div className="mt-20 flex flex-col gap-5 border-t border-[#D2CFC5] pt-7 sm:flex-row sm:items-center sm:justify-between">
+        {/* =====================================================
+            BOTTOM
+        ===================================================== */}
 
-          <p className="text-2xl font-semibold tracking-[-0.03em] text-[#14213D] sm:text-3xl">
+        <div
+          className="
+            mt-16
+            flex
+            flex-col
+            gap-5
+            border-t
+            border-[#D7E8F5]
+            pt-8
+
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <p
+            className="
+              text-xl
+              font-semibold
+              tracking-[-0.03em]
+              text-[#173B63]
+
+              sm:text-2xl
+              lg:text-3xl
+            "
+          >
             Apply.
-            <span className="text-[#C9A227]"> Move.</span>
-            <span> Repeat.</span>
+            <span className="text-[#0877E8]">
+              {" "}
+              Move.
+            </span>
+            <span>
+              {" "}
+              Grow.
+            </span>
           </p>
 
-          <p className="text-sm font-medium text-[#6B707B]">
-            Your next step is always ahead.
+          <p
+            className="
+              text-sm
+              font-medium
+              text-[#6B8197]
+            "
+          >
+            Your next step stays visible.
           </p>
-
         </div>
-
       </div>
     </section>
   );

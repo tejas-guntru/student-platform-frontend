@@ -1,155 +1,751 @@
 export default function Show() {
+  const skills = [
+    "Java",
+    "React",
+    "Spring Boot",
+    "AWS",
+    "PostgreSQL",
+  ];
+
   return (
-    <section className="overflow-hidden border-y border-[#E3E1DA] bg-[#F1F0EB] px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
-      <div className="mx-auto max-w-7xl">
+    <section
+      className="
+        relative
+        overflow-hidden
+        bg-[#F3F9FF]
+        px-5
+        py-20
+        sm:px-8
+        sm:py-24
+        lg:px-12
+        lg:py-32
+      "
+    >
+      {/* =====================================================
+          BACKGROUND EFFECTS
+      ===================================================== */}
 
-        {/* Heading */}
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -right-48
+          -top-40
+          h-[560px]
+          w-[560px]
+          rounded-full
+          bg-[#BDE5FF]/60
+          blur-[140px]
+        "
+      />
 
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -bottom-52
+          -left-40
+          h-[520px]
+          w-[520px]
+          rounded-full
+          bg-[#D9F0FF]
+          blur-[130px]
+        "
+      />
+
+      {/* Subtle grid */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.3]
+        "
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(8,119,232,0.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(8,119,232,0.045) 1px, transparent 1px)
+          `,
+          backgroundSize: "52px 52px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
+
+        <div
+          className="
+            flex
+            flex-col
+            gap-8
+            lg:flex-row
+            lg:items-end
+            lg:justify-between
+          "
+        >
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A227]">
-              Show
-            </p>
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2.5
+                rounded-full
+                border
+                border-[#C9E4F8]
+                bg-white/80
+                px-4
+                py-2
+                shadow-sm
+                backdrop-blur-md
+              "
+            >
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#0877E8]
+                  shadow-[0_0_12px_rgba(8,119,232,0.5)]
+                "
+              />
 
-            <h2 className="mt-5 text-5xl font-bold leading-[0.88] tracking-[-0.065em] text-[#14213D] sm:text-6xl lg:text-7xl">
-              Don&apos;t just
-              <br />
-              say it.
+              <span
+                className="
+                  text-[11px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.16em]
+                  text-[#3977AC]
+                "
+              >
+                Show your work
+              </span>
+            </div>
+
+            <h2
+              className="
+                mt-6
+                max-w-4xl
+                text-[clamp(3rem,6vw,6rem)]
+                font-bold
+                leading-[0.9]
+                tracking-[-0.065em]
+                text-[#102F51]
+              "
+            >
+              Proof speaks
+              <span
+                className="
+                  block
+                  bg-gradient-to-r
+                  from-[#0877E8]
+                  via-[#1397F3]
+                  to-[#37BEF9]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
+                louder than words.
+              </span>
             </h2>
           </div>
 
-          <p className="max-w-md text-lg leading-8 text-[#5F6470]">
-            Your work says more than a list of words ever could.
-            Put the things you&apos;ve actually done where they can be seen.
+          <p
+            className="
+              max-w-md
+              text-base
+              leading-7
+              text-[#607890]
+              sm:text-lg
+              sm:leading-8
+            "
+          >
+            Turn your projects, skills and progress into visible proof
+            of what you can actually do.
           </p>
-
         </div>
 
-        {/* Showcase */}
-        <div className="relative mt-20 lg:mt-24">
+        {/* =====================================================
+            SHOWCASE GRID
+        ===================================================== */}
 
-          {/* Background trail */}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 1200 500"
-            className="absolute inset-0 h-full w-full"
-            fill="none"
-            preserveAspectRatio="none"
+        <div
+          className="
+            mt-14
+            grid
+            gap-5
+            sm:mt-16
+            lg:mt-20
+            lg:grid-cols-12
+            lg:grid-rows-[250px_250px]
+          "
+        >
+          {/* ===================================================
+              MAIN PROJECT
+          =================================================== */}
+
+          <div
+            className="
+              group
+              relative
+              overflow-hidden
+              rounded-[32px]
+              bg-gradient-to-br
+              from-[#075DC8]
+              via-[#0877E8]
+              to-[#22AAF4]
+              p-7
+              text-white
+              shadow-[0_25px_80px_rgba(8,119,232,0.22)]
+
+              sm:p-9
+
+              lg:col-span-7
+              lg:row-span-2
+              lg:p-10
+            "
           >
-            <path
-              d="M40 410 C260 410 180 90 470 120 C730 150 600 420 850 380 C1010 355 1030 180 1160 90"
-              stroke="#D2CFC5"
-              strokeWidth="2"
+            {/* Main card effects */}
+
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                -right-24
+                -top-24
+                h-[330px]
+                w-[330px]
+                rounded-full
+                bg-white/20
+                blur-[85px]
+              "
             />
 
-            <path
-              d="M40 410 C260 410 180 90 470 120 C730 150 600 420 850 380 C1010 355 1030 180 1160 90"
-              stroke="#C9A227"
-              strokeWidth="3"
-              strokeDasharray="4 12"
-              strokeLinecap="round"
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                -bottom-40
+                -left-32
+                h-[360px]
+                w-[360px]
+                rounded-full
+                bg-[#60D7FF]/25
+                blur-[100px]
+              "
             />
-          </svg>
 
-          <div className="relative grid gap-5 lg:grid-cols-12 lg:grid-rows-[220px_220px]">
+            {/* Internal grid */}
 
-            {/* Main project */}
-            <div className="group relative overflow-hidden rounded-[24px] border border-[#D8D5CC] bg-[#14213D] p-7 text-white lg:col-span-7 lg:row-span-2 lg:p-10">
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                opacity-[0.12]
+              "
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
+                `,
+                backgroundSize: "48px 48px",
+              }}
+            />
 
-              <div className="flex items-start justify-between">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#C9A227]">
-                  Project
-                </span>
+            <div className="relative flex h-full flex-col">
+              {/* Project header */}
 
-                <span className="text-xs text-white/40">
+              <div className="flex items-center justify-between">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-white/20
+                    bg-white/10
+                    px-3.5
+                    py-2
+                    backdrop-blur-md
+                  "
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#9BE9FF]" />
+
+                  <span
+                    className="
+                      text-[11px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.15em]
+                      text-white/85
+                    "
+                  >
+                    Featured project
+                  </span>
+                </div>
+
+                <span
+                  className="
+                    text-xs
+                    font-semibold
+                    tracking-[0.12em]
+                    text-white/45
+                  "
+                >
                   01
                 </span>
               </div>
 
-              <div className="mt-20 lg:mt-28">
-                <h3 className="text-4xl font-bold tracking-[-0.05em] sm:text-5xl">
+              {/* Main project content */}
+
+              <div
+                className="
+                  flex
+                  flex-1
+                  flex-col
+                  justify-center
+                  py-12
+                  sm:py-16
+                "
+              >
+                <p
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.14em]
+                    text-[#BFEFFF]
+                  "
+                >
+                  Backend · Fintech
+                </p>
+
+                <h3
+                  className="
+                    mt-4
+                    max-w-lg
+                    text-4xl
+                    font-bold
+                    leading-[0.95]
+                    tracking-[-0.055em]
+                    text-white
+                    sm:text-5xl
+                    lg:text-6xl
+                  "
+                >
                   College
                   <br />
                   Payment OS
                 </h3>
 
-                <p className="mt-5 max-w-md text-sm leading-6 text-white/55">
-                  A payment infrastructure layer connecting colleges,
-                  students, fees, payments, and reconciliation.
+                <p
+                  className="
+                    mt-6
+                    max-w-md
+                    text-sm
+                    leading-6
+                    text-white/70
+                    sm:text-base
+                    sm:leading-7
+                  "
+                >
+                  A payment infrastructure platform connecting colleges,
+                  students, fees, payments and reconciliation in one
+                  system.
                 </p>
               </div>
 
-              <div className="absolute bottom-7 left-7 right-7 flex items-center justify-between border-t border-white/10 pt-5 lg:bottom-10 lg:left-10 lg:right-10">
-                <span className="text-xs text-white/45">
-                  Java · Spring Boot · PostgreSQL
-                </span>
+              {/* Project footer */}
 
-                <span className="text-lg text-[#C9A227] transition-transform duration-300 group-hover:translate-x-1">
+              <div
+                className="
+                  flex
+                  flex-col
+                  gap-5
+                  border-t
+                  border-white/15
+                  pt-5
+
+                  sm:flex-row
+                  sm:items-center
+                  sm:justify-between
+                "
+              >
+                <div className="flex flex-wrap gap-2">
+                  {["Java", "Spring Boot", "PostgreSQL"].map(
+                    (technology) => (
+                      <span
+                        key={technology}
+                        className="
+                          rounded-full
+                          border
+                          border-white/20
+                          bg-white/10
+                          px-3
+                          py-1.5
+                          text-[11px]
+                          font-medium
+                          text-white/80
+                          backdrop-blur-md
+                        "
+                      >
+                        {technology}
+                      </span>
+                    ),
+                  )}
+                </div>
+
+                <div
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-white
+                    text-lg
+                    font-semibold
+                    text-[#0877E8]
+                    shadow-lg
+                    transition-all
+                    duration-300
+
+                    group-hover:translate-x-1
+                    group-hover:-translate-y-1
+                  "
+                >
                   →
-                </span>
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Skills */}
-            <div className="rounded-[24px] border border-[#D8D5CC] bg-white p-7 lg:col-span-5 lg:p-8">
+          {/* ===================================================
+              SKILLS CARD
+          =================================================== */}
 
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#858994]">
-                Skills
-              </p>
+          <div
+            className="
+              group
+              relative
+              overflow-hidden
+              rounded-[30px]
+              border
+              border-[#D5E8F7]
+              bg-white/90
+              p-7
+              shadow-[0_14px_45px_rgba(8,119,232,0.07)]
+              backdrop-blur-xl
+              transition-all
+              duration-300
 
-              <div className="mt-8 flex flex-wrap gap-2">
-                {["Java", "React", "Spring Boot", "AWS", "PostgreSQL"].map(
-                  (skill) => (
-                    <span
-                      key={skill}
-                      className="rounded-full border border-[#D8D5CC] px-4 py-2 text-sm font-semibold text-[#14213D]"
-                    >
-                      {skill}
-                    </span>
-                  ),
-                )}
+              hover:-translate-y-1
+              hover:border-[#AED9F5]
+              hover:shadow-[0_20px_55px_rgba(8,119,232,0.12)]
+
+              lg:col-span-5
+              lg:p-8
+            "
+          >
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                -right-16
+                -top-20
+                h-52
+                w-52
+                rounded-full
+                bg-[#DDF2FF]
+                blur-[55px]
+              "
+            />
+
+            <div className="relative">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p
+                    className="
+                      text-[11px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.15em]
+                      text-[#5D8EB5]
+                    "
+                  >
+                    Skills
+                  </p>
+
+                  <h3
+                    className="
+                      mt-2
+                      text-2xl
+                      font-bold
+                      tracking-[-0.035em]
+                      text-[#173B63]
+                    "
+                  >
+                    What you know.
+                  </h3>
+                </div>
+
+                <div
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-[#E7F5FF]
+                    text-lg
+                    text-[#0877E8]
+                  "
+                >
+                  ✦
+                </div>
               </div>
 
+              <div className="mt-7 flex flex-wrap gap-2.5">
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="
+                      rounded-xl
+                      border
+                      border-[#D9EAF7]
+                      bg-[#F6FBFF]
+                      px-4
+                      py-2.5
+                      text-sm
+                      font-semibold
+                      text-[#234B70]
+                      transition-all
+                      duration-200
+
+                      hover:border-[#A9D6F5]
+                      hover:bg-[#EAF6FF]
+                      hover:text-[#0877E8]
+                    "
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
+          </div>
 
-            {/* Progress */}
-            <div className="rounded-[24px] border border-[#D8D5CC] bg-[#C9A227] p-7 text-[#14213D] lg:col-span-5 lg:p-8">
+          {/* ===================================================
+              PROGRESS CARD
+          =================================================== */}
 
-              <div className="flex items-start justify-between">
-                <p className="text-xs font-bold uppercase tracking-[0.16em]">
-                  Progress
-                </p>
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[30px]
+              border
+              border-[#B9E1FA]
+              bg-gradient-to-br
+              from-[#E8F7FF]
+              via-[#F3FBFF]
+              to-white
+              p-7
+              shadow-[0_14px_45px_rgba(8,119,232,0.08)]
 
-                <span className="text-xs font-bold">
+              lg:col-span-5
+              lg:p-8
+            "
+          >
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                -bottom-20
+                -right-14
+                h-52
+                w-52
+                rounded-full
+                bg-[#83D7FF]/25
+                blur-[55px]
+              "
+            />
+
+            <div className="relative flex h-full flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p
+                    className="
+                      text-[11px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.15em]
+                      text-[#4383B5]
+                    "
+                  >
+                    Progress
+                  </p>
+
+                  <p
+                    className="
+                      mt-2
+                      text-sm
+                      font-medium
+                      text-[#668098]
+                    "
+                  >
+                    Your profile keeps growing.
+                  </p>
+                </div>
+
+                <span
+                  className="
+                    rounded-full
+                    bg-[#DFF3FF]
+                    px-3
+                    py-1.5
+                    text-xs
+                    font-semibold
+                    text-[#0877E8]
+                  "
+                >
                   Growing
                 </span>
               </div>
 
-              <div className="mt-10">
-                <p className="text-5xl font-bold tracking-[-0.06em]">
-                  Keep going.
-                </p>
+              <div className="mt-8">
+                <div className="flex items-end justify-between">
+                  <p
+                    className="
+                      text-3xl
+                      font-bold
+                      tracking-[-0.045em]
+                      text-[#173B63]
+                      sm:text-4xl
+                    "
+                  >
+                    Keep going.
+                  </p>
 
-                <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-[#14213D]/15">
-                  <div className="h-full w-[72%] rounded-full bg-[#14213D]" />
+                  <span
+                    className="
+                      text-sm
+                      font-bold
+                      text-[#0877E8]
+                    "
+                  >
+                    72%
+                  </span>
+                </div>
+
+                <div
+                  className="
+                    mt-5
+                    h-2
+                    overflow-hidden
+                    rounded-full
+                    bg-[#DCEEF9]
+                  "
+                >
+                  <div
+                    className="
+                      h-full
+                      w-[72%]
+                      rounded-full
+                      bg-gradient-to-r
+                      from-[#0877E8]
+                      via-[#1599F1]
+                      to-[#43C7FF]
+                      shadow-[0_0_18px_rgba(8,119,232,0.35)]
+                    "
+                  />
+                </div>
+
+                <div
+                  className="
+                    mt-4
+                    flex
+                    justify-between
+                    text-[11px]
+                    font-medium
+                    text-[#849AAF]
+                  "
+                >
+                  <span>Started</span>
+                  <span>Career ready</span>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
 
-        {/* Closing statement */}
-        <div className="mt-16 flex items-center gap-4">
-          <span className="h-px w-16 bg-[#C9A227]" />
+        {/* =====================================================
+            CLOSING
+        ===================================================== */}
 
-          <p className="text-2xl font-semibold tracking-[-0.03em] text-[#14213D] sm:text-3xl">
-            Don&apos;t just say it.
-            <span className="text-[#C9A227]"> Show it.</span>
+        <div
+          className="
+            mt-14
+            flex
+            flex-col
+            gap-5
+            border-t
+            border-[#D7E8F5]
+            pt-8
+
+            sm:mt-16
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <p
+            className="
+              text-xl
+              font-semibold
+              tracking-[-0.03em]
+              text-[#173B63]
+
+              sm:text-2xl
+              lg:text-3xl
+            "
+          >
+            Don&apos;t just say what you can do.
+            <span className="text-[#0877E8]">
+              {" "}
+              Show it.
+            </span>
           </p>
-        </div>
 
+          <div
+            className="
+              flex
+              items-center
+              gap-3
+              text-sm
+              font-semibold
+              text-[#0877E8]
+            "
+          >
+            <span className="h-px w-10 bg-[#6DC9FA]" />
+            Build your proof
+            <span>→</span>
+          </div>
+        </div>
       </div>
     </section>
   );
