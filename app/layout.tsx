@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Trailbliz helps students build professional profiles, track coding progress, discover internships and job opportunities, and move forward in their careers.",
+    "Trailbliz helps students build professional profiles, showcase projects and skills, track coding progress, discover internships and job opportunities, and move forward in their careers.",
 
   applicationName: "Trailbliz",
 
@@ -41,13 +41,41 @@ export const metadata: Metadata = {
     canonical: "/",
   },
 
+  icons: {
+    icon: [
+      {
+        url: "/trailbliz-icon.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+      {
+        url: "/trailbliz-icon.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+    ],
+
+    shortcut: "/trailbliz-icon.png",
+
+    apple: [
+      {
+        url: "/trailbliz-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+
   openGraph: {
     type: "website",
     url: "https://www.trailbliz.in",
     siteName: "Trailbliz",
+
     title: "Trailbliz | Your Next Opportunity Starts Here",
+
     description:
-      "Build your student profile, showcase your skills, track coding progress and discover internships and job opportunities.",
+      "Build your student profile, showcase your skills and projects, track coding progress, and discover internships and job opportunities.",
+
     images: [
       {
         url: "/og-image.png",
@@ -60,15 +88,19 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
+
     title: "Trailbliz | Your Next Opportunity Starts Here",
+
     description:
       "Build your profile, showcase your skills and discover internships and job opportunities.",
+
     images: ["/og-image.png"],
   },
 
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -77,13 +109,15 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+
+  category: "education",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: ReactNode;
-}) {
+}>) {
   return (
     <html
       lang="en"

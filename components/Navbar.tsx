@@ -96,7 +96,7 @@ export default function Navbar() {
         {/* Desktop */}
         <div className="hidden items-center gap-1 md:flex">
           <Link
-            href="#your-trail"
+            href="/about"
             className="
               rounded-xl
               px-4
