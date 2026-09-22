@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  BriefcaseBusiness,
+  LoaderCircle,
+  Sparkles,
+} from "lucide-react";
+
 import ExperienceHeader from "@/components/experience/ExperienceHeader";
 import ExperienceForm from "@/components/experience/ExperienceForm";
 import ExperienceList from "@/components/experience/ExperienceList";
@@ -10,138 +16,378 @@ import {
   useStudentExperience,
 } from "@/hooks/useStudentExperience";
 
+// =========================================================
+// LOADING
+// =========================================================
+
+function ExperienceLoading() {
+  return (
+    <main
+      className="
+        relative
+        flex
+        min-h-screen
+        items-center
+        justify-center
+        overflow-hidden
+        bg-[#F4F9FF]
+      "
+    >
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-32
+          top-10
+          h-[420px]
+          w-[420px]
+          rounded-full
+          bg-[#38BDF8]/15
+          blur-[120px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-32
+          bottom-10
+          h-[460px]
+          w-[460px]
+          rounded-full
+          bg-emerald-500/10
+          blur-[130px]
+        "
+      />
+
+      <div
+        className="
+          relative
+          flex
+          flex-col
+          items-center
+          text-center
+        "
+      >
+        <div
+          className="
+            flex
+            h-14
+            w-14
+            items-center
+            justify-center
+            rounded-2xl
+            bg-gradient-to-br
+            from-[#0877E8]
+            to-[#38BDF8]
+            text-white
+            shadow-[0_14px_35px_rgba(8,119,232,0.25)]
+          "
+        >
+          <LoaderCircle
+            size={25}
+            className="animate-spin"
+          />
+        </div>
+
+        <p
+          role="status"
+          className="
+            mt-5
+            font-semibold
+            text-[#173B63]
+          "
+        >
+          Loading your experience
+        </p>
+
+        <p
+          className="
+            mt-1
+            text-sm
+            text-[#8095A8]
+          "
+        >
+          Preparing your professional profile...
+        </p>
+      </div>
+    </main>
+  );
+}
+
+// =========================================================
+// BACKGROUND
+// =========================================================
+
+function ExperiencePageBackground() {
+  return (
+    <>
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -left-52
+          top-20
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[#38BDF8]/10
+          blur-[150px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -right-52
+          top-[620px]
+          h-[580px]
+          w-[580px]
+          rounded-full
+          bg-emerald-500/6
+          blur-[160px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.18]
+        "
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              rgba(8,119,232,0.04) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(8,119,232,0.04) 1px,
+              transparent 1px
+            )
+          `,
+          backgroundSize: "56px 56px",
+        }}
+      />
+    </>
+  );
+}
+
+// =========================================================
+// FOOTER
+// =========================================================
+
+function ExperienceFooter() {
+  return (
+    <footer
+      className="
+        mt-12
+        border-t
+        border-[#DCEAF5]
+        py-6
+        text-center
+      "
+    >
+      <div
+        className="
+          inline-flex
+          items-center
+          gap-2
+          text-xs
+          text-[#8298AB]
+        "
+      >
+        <BriefcaseBusiness
+          size={13}
+          className="text-emerald-600"
+        />
+
+        <span>
+          Keep your experience updated as your career grows.
+        </span>
+
+        <Sparkles
+          size={12}
+          className="text-[#38A9EE]"
+        />
+      </div>
+    </footer>
+  );
+}
+
+// =========================================================
+// PAGE
+// =========================================================
+
 export default function ExperiencePage() {
   const experience =
     useStudentExperience();
 
   if (experience.loading) {
-    return (
-      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F8F7F3] text-[#14213D]">
-        <div className="flex flex-col items-center">
-          <div className="h-9 w-9 animate-spin rounded-full border-4 border-[#E3E1DA] border-t-[#C9A227]" />
-
-          <p className="mt-4 text-sm font-medium text-[#6B707B]">
-            Loading experience...
-          </p>
-        </div>
-      </main>
-    );
+    return <ExperienceLoading />;
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#F8F7F3] text-[#14213D]">
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:py-10 lg:py-12">
+    <main
+      className="
+        relative
+        min-h-screen
+        overflow-hidden
+        bg-[#F4F9FF]
+        text-[#173B63]
+      "
+    >
+      <ExperiencePageBackground />
+
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-6xl
+          px-4
+          py-6
+
+          sm:px-6
+          sm:py-8
+
+          lg:px-8
+          lg:py-10
+        "
+      >
+        {/* HEADER */}
+
         <ExperienceHeader />
 
-        <ProfileAlerts
-          error={
-            experience.error
-          }
-          success={
-            experience.success
-          }
-        />
+        {/* ALERTS */}
 
-        <ExperienceForm
-          companyName={
-            experience.companyName
-          }
+        <div className="mt-6">
+          <ProfileAlerts
+            error={
+              experience.error
+            }
+            success={
+              experience.success
+            }
+          />
+        </div>
 
-          roleTitle={
-            experience.roleTitle
-          }
+        {/* EXPERIENCE FORM */}
 
-          employmentType={
-            experience.employmentType
-          }
+        <div className="mt-8">
+          <ExperienceForm
+            companyName={
+              experience.companyName
+            }
 
-          location={
-            experience.location
-          }
+            roleTitle={
+              experience.roleTitle
+            }
 
-          description={
-            experience.description
-          }
+            employmentType={
+              experience.employmentType
+            }
 
-          startDate={
-            experience.startDate
-          }
+            location={
+              experience.location
+            }
 
-          endDate={
-            experience.endDate
-          }
+            description={
+              experience.description
+            }
 
-          currentlyWorking={
-            experience.currentlyWorking
-          }
+            startDate={
+              experience.startDate
+            }
 
-          editingId={
-            experience.editingId
-          }
+            endDate={
+              experience.endDate
+            }
 
-          saving={
-            experience.saving
-          }
+            currentlyWorking={
+              experience.currentlyWorking
+            }
 
-          setCompanyName={
-            experience.setCompanyName
-          }
+            editingId={
+              experience.editingId
+            }
 
-          setRoleTitle={
-            experience.setRoleTitle
-          }
+            saving={
+              experience.saving
+            }
 
-          setEmploymentType={
-            experience.setEmploymentType
-          }
+            setCompanyName={
+              experience.setCompanyName
+            }
 
-          setLocation={
-            experience.setLocation
-          }
+            setRoleTitle={
+              experience.setRoleTitle
+            }
 
-          setDescription={
-            experience.setDescription
-          }
+            setEmploymentType={
+              experience.setEmploymentType
+            }
 
-          setStartDate={
-            experience.setStartDate
-          }
+            setLocation={
+              experience.setLocation
+            }
 
-          setEndDate={
-            experience.setEndDate
-          }
+            setDescription={
+              experience.setDescription
+            }
 
-          onCurrentChange={
-            experience.handleCurrentChange
-          }
+            setStartDate={
+              experience.setStartDate
+            }
 
-          onSubmit={
-            experience.handleSubmit
-          }
+            setEndDate={
+              experience.setEndDate
+            }
 
-          onCancelEdit={
-            experience.resetForm
-          }
-        />
+            onCurrentChange={
+              experience.handleCurrentChange
+            }
 
-        <ExperienceList
-          experiences={
-            experience.experiences
-          }
+            onSubmit={
+              experience.handleSubmit
+            }
 
-          deletingId={
-            experience.deletingId
-          }
+            onCancelEdit={
+              experience.resetForm
+            }
+          />
+        </div>
 
-          onEdit={
-            experience.startEdit
-          }
+        {/* EXPERIENCE LIST */}
 
-          onDelete={
-            experience.handleDelete
-          }
-        />
+        <div className="mt-8">
+          <ExperienceList
+            experiences={
+              experience.experiences
+            }
 
+            deletingId={
+              experience.deletingId
+            }
+
+            onEdit={
+              experience.startEdit
+            }
+
+            onDelete={
+              experience.handleDelete
+            }
+          />
+        </div>
+
+        <ExperienceFooter />
       </div>
     </main>
   );

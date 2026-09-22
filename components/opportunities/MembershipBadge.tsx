@@ -1,3 +1,8 @@
+import {
+  BadgeCheck,
+  CircleAlert,
+} from "lucide-react";
+
 import type {
   MembershipResponse,
 } from "@/types/membership";
@@ -12,19 +17,62 @@ export default function MembershipBadge({
 }: MembershipBadgeProps) {
   const active =
     membership?.active === true ||
-    membership?.status ===
-      "ACTIVE";
+    membership?.status === "ACTIVE";
 
   if (active) {
     return (
-      <span className="rounded-full border border-[#BFD7C3] bg-[#F1F8F2] px-4 py-2 text-sm font-bold text-[#347A3A]">
+      <span
+        className="
+          inline-flex
+          items-center
+          gap-2
+          rounded-full
+          border
+          border-emerald-200
+          bg-emerald-50
+          px-3
+          py-2
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.08em]
+          text-emerald-700
+        "
+      >
+        <BadgeCheck
+          size={13}
+          strokeWidth={2.3}
+        />
+
         Membership Active
       </span>
     );
   }
 
   return (
-    <span className="rounded-full border border-[#E8DCA9] bg-[#FBF7E8] px-4 py-2 text-sm font-bold text-[#806E30]">
+    <span
+      className="
+        inline-flex
+        items-center
+        gap-2
+        rounded-full
+        border
+        border-[#CBE5F8]
+        bg-[#EFF8FF]
+        px-3
+        py-2
+        text-[10px]
+        font-bold
+        uppercase
+        tracking-[0.08em]
+        text-[#0877E8]
+      "
+    >
+      <CircleAlert
+        size={13}
+        strokeWidth={2.3}
+      />
+
       Membership Inactive
     </span>
   );

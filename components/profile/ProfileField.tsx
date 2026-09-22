@@ -13,7 +13,17 @@ export default function ProfileField({
 }: ProfileFieldProps) {
   return (
     <div>
-      <label className="mb-2 block text-sm font-medium text-zinc-300">
+      <label
+        className="
+          mb-2
+          block
+          text-xs
+          font-bold
+          uppercase
+          tracking-[0.08em]
+          text-[#5F7C92]
+        "
+      >
         {label}
       </label>
 

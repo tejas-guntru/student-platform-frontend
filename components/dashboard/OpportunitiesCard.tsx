@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  LockKeyhole,
+  Sparkles,
+} from "lucide-react";
+
 interface OpportunitiesCardProps {
   membershipActive: boolean;
 }
@@ -8,105 +15,290 @@ export default function OpportunitiesCard({
   membershipActive,
 }: OpportunitiesCardProps) {
   return (
-    <div className="card flex h-full flex-col justify-between p-6">
-      <div>
-        {/* ICON */}
-        <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[#14213d] text-white">
-          <svg
-            width="21"
-            height="21"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+    <article
+      className="
+        group
+        relative
+        flex
+        h-full
+        flex-col
+        justify-between
+        overflow-hidden
+        rounded-[24px]
+        border
+        border-[#DCEAF5]
+        bg-white
+        p-5
+        shadow-[0_10px_30px_rgba(8,119,232,0.045)]
+        transition-all
+        duration-300
+
+        hover:-translate-y-1
+        hover:border-[#B8DCF3]
+        hover:shadow-[0_18px_40px_rgba(8,119,232,0.09)]
+
+        sm:p-6
+      "
+    >
+      {/* TOP ACCENT */}
+
+      <div
+        className="
+          absolute
+          left-0
+          right-0
+          top-0
+          h-[3px]
+          bg-gradient-to-r
+          from-[#0877E8]
+          via-[#1294F2]
+          to-[#38BDF8]
+        "
+      />
+
+      {/* BACKGROUND GLOW */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-16
+          -top-16
+          h-40
+          w-40
+          rounded-full
+          bg-[#38BDF8]/0
+          blur-3xl
+          transition-all
+          duration-300
+
+          group-hover:bg-[#38BDF8]/10
+        "
+      />
+
+      <div className="relative">
+        {/* HEADER */}
+
+        <div
+          className="
+            flex
+            items-start
+            justify-between
+            gap-4
+          "
+        >
+          <div
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              rounded-2xl
+              bg-[#EAF6FF]
+              text-[#0877E8]
+            "
           >
-            <rect x="3" y="7" width="18" height="13" rx="2" />
-            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            <path d="M3 12h18" />
-            <path d="M10 12v2h4v-2" />
-          </svg>
+            <BriefcaseBusiness size={19} />
+          </div>
+
+          <span
+            className="
+              inline-flex
+              items-center
+              gap-1.5
+              rounded-full
+              border
+              border-[#D7E8F4]
+              bg-[#F8FCFF]
+              px-2.5
+              py-1.5
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.1em]
+              text-[#68849A]
+            "
+          >
+            <Sparkles
+              size={11}
+              className="text-[#0877E8]"
+            />
+
+            Discover
+          </span>
         </div>
 
-        {/* LABEL */}
-        <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-[#858994]">
+        {/* CONTENT */}
+
+        <p
+          className="
+            mt-5
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.15em]
+            text-[#0877E8]
+          "
+        >
           Opportunities
         </p>
 
-        {/* TITLE */}
-        <h3 className="text-xl font-bold tracking-tight text-[#14213d]">
+        <h3
+          className="
+            mt-1.5
+            text-xl
+            font-bold
+            tracking-[-0.03em]
+            text-[#173B63]
+          "
+        >
           Discover Opportunities
         </h3>
 
-        {/* DESCRIPTION */}
-        <p className="mt-2 text-sm leading-6 text-[#5f6470]">
-          Explore placement drives, internships, hiring opportunities and
-          other career opportunities available through Trailbliz.
+        <p
+          className="
+            mt-2
+            text-sm
+            leading-6
+            text-[#6F879A]
+          "
+        >
+          Explore internships, placement drives,
+          hiring opportunities and other career
+          paths available through Trailbliz.
         </p>
 
-        {/* MEMBERSHIP NOTICE */}
-        <div
-          className={`mt-5 rounded-[10px] px-4 py-3 ${
-            membershipActive
-              ? "bg-[#f1f0eb]"
-              : "bg-[#f8f0cf]"
-          }`}
-        >
-          <p
-            className={`text-xs font-bold ${
-              membershipActive
-                ? "text-[#30394c]"
-                : "text-[#a98616]"
-            }`}
-          >
-            {membershipActive
-              ? "Your membership is active."
-              : "Membership required"}
-          </p>
+        {/* ACCESS STATUS */}
 
-          <p className="mt-1 text-xs leading-5 text-[#5f6470]">
-            {membershipActive
-              ? "You can access opportunities available to your profile."
-              : "Activate your membership before accessing paid opportunities."}
-          </p>
+        <div
+          className={`
+            mt-5
+            rounded-[18px]
+            border
+            p-4
+
+            ${
+              membershipActive
+                ? `
+                  border-emerald-200
+                  bg-emerald-50/70
+                `
+                : `
+                  border-[#DCEAF5]
+                  bg-[#F8FCFF]
+                `
+            }
+          `}
+        >
+          <div
+            className="
+              flex
+              items-start
+              gap-3
+            "
+          >
+            <div
+              className={`
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+
+                ${
+                  membershipActive
+                    ? "bg-emerald-100 text-emerald-600"
+                    : "bg-[#EAF6FF] text-[#0877E8]"
+                }
+              `}
+            >
+              {membershipActive ? (
+                <BriefcaseBusiness
+                  size={15}
+                />
+              ) : (
+                <LockKeyhole
+                  size={15}
+                />
+              )}
+            </div>
+
+            <div>
+              <p
+                className={`
+                  text-xs
+                  font-bold
+
+                  ${
+                    membershipActive
+                      ? "text-emerald-700"
+                      : "text-[#456982]"
+                  }
+                `}
+              >
+                {membershipActive
+                  ? "Opportunity access active"
+                  : "Membership required"}
+              </p>
+
+              <p
+                className="
+                  mt-1
+                  text-xs
+                  leading-5
+                  text-[#71899D]
+                "
+              >
+                {membershipActive
+                  ? "You can access opportunities available to your profile."
+                  : "Activate membership to access eligible paid opportunities."}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ACTION */}
-      <div className="mt-6">
+
+      <div
+        className="
+          relative
+          mt-6
+          border-t
+          border-[#E7F0F7]
+          pt-4
+        "
+      >
         <Link
           href="/opportunities"
           className="
-            group
+            group/link
             inline-flex
             items-center
             gap-2
             text-sm
             font-bold
-            text-[#14213d]
+            text-[#0877E8]
             transition
-            hover:text-[#a98616]
+
+            hover:text-[#1294F2]
           "
         >
           Browse Opportunities
 
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="transition-transform group-hover:translate-x-1"
-          >
-            <path d="M5 12h14" />
-            <path d="m13 6 6 6-6 6" />
-          </svg>
+          <ArrowRight
+            size={15}
+            className="
+              transition-transform
+              duration-200
+              group-hover/link:translate-x-1
+            "
+          />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

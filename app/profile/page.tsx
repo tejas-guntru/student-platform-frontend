@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  LoaderCircle,
+  Sparkles,
+} from "lucide-react";
+
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileAlerts from "@/components/profile/ProfileAlerts";
 import ProfileSummary from "@/components/profile/ProfileSummary";
@@ -12,30 +17,211 @@ import {
   useStudentProfile,
 } from "@/hooks/useStudentProfile";
 
+// =========================================================
+// LOADING
+// =========================================================
+
 function ProfileLoading() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#F8F7F3] text-[#14213D]">
-      <p role="status">Loading profile...</p>
+    <main
+      className="
+        relative
+        flex
+        min-h-screen
+        items-center
+        justify-center
+        overflow-hidden
+        bg-[#F4F9FF]
+      "
+    >
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-32
+          top-10
+          h-[420px]
+          w-[420px]
+          rounded-full
+          bg-[#38BDF8]/15
+          blur-[120px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-32
+          bottom-10
+          h-[460px]
+          w-[460px]
+          rounded-full
+          bg-[#0877E8]/12
+          blur-[130px]
+        "
+      />
+
+      <div
+        className="
+          relative
+          flex
+          flex-col
+          items-center
+          text-center
+        "
+      >
+        <div
+          className="
+            flex
+            h-14
+            w-14
+            items-center
+            justify-center
+            rounded-2xl
+            bg-gradient-to-br
+            from-[#0877E8]
+            to-[#38BDF8]
+            text-white
+            shadow-[0_14px_35px_rgba(8,119,232,0.25)]
+          "
+        >
+          <LoaderCircle
+            size={25}
+            className="animate-spin"
+          />
+        </div>
+
+        <p
+          role="status"
+          className="
+            mt-5
+            font-semibold
+            text-[#173B63]
+          "
+        >
+          Loading your profile
+        </p>
+
+        <p
+          className="
+            mt-1
+            text-sm
+            text-[#8095A8]
+          "
+        >
+          Preparing your Trailbliz profile...
+        </p>
+      </div>
     </main>
   );
 }
 
+// =========================================================
+// BACKGROUND
+// =========================================================
+
 function ProfilePageBackground() {
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(244,162,97,0.16),_transparent_35%),radial-gradient(circle_at_bottom_left,_rgba(42,157,143,0.12),_transparent_30%)]"
-    />
+    <>
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -left-52
+          top-24
+          h-[520px]
+          w-[520px]
+          rounded-full
+          bg-[#38BDF8]/10
+          blur-[150px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -right-56
+          top-[760px]
+          h-[580px]
+          w-[580px]
+          rounded-full
+          bg-[#0877E8]/8
+          blur-[160px]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.18]
+        "
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              rgba(8,119,232,0.04) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(8,119,232,0.04) 1px,
+              transparent 1px
+            )
+          `,
+          backgroundSize: "56px 56px",
+        }}
+      />
+    </>
   );
 }
 
+// =========================================================
+// FOOTER
+// =========================================================
+
 function ProfileFooter() {
   return (
-    <footer className="mt-12 border-t border-[#14213D]/10 pt-6 text-center text-sm text-[#14213D]/60">
-      Keep your profile up to date for better opportunities.
+    <footer
+      className="
+        mt-12
+        border-t
+        border-[#DCEAF5]
+        py-6
+        text-center
+      "
+    >
+      <div
+        className="
+          inline-flex
+          items-center
+          gap-2
+          text-xs
+          text-[#8298AB]
+        "
+      >
+        <Sparkles
+          size={13}
+          className="text-[#38A9EE]"
+        />
+
+        <span>
+          Keep your profile updated so your
+          progress stays ready for opportunities.
+        </span>
+      </div>
     </footer>
   );
 }
+
+// =========================================================
+// PAGE
+// =========================================================
 
 export default function ProfilePage() {
   const profile =
@@ -46,160 +232,223 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#F8F7F3] text-[#14213D]">
+    <main
+      className="
+        relative
+        min-h-screen
+        overflow-hidden
+        bg-[#F4F9FF]
+        text-[#173B63]
+      "
+    >
       <ProfilePageBackground />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:py-10 lg:py-12">
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-6xl
+          px-4
+          py-6
+
+          sm:px-6
+          sm:py-8
+
+          lg:px-8
+          lg:py-10
+        "
+      >
+        {/* ===================================================
+            HEADER
+        =================================================== */}
+
         <ProfileHeader />
 
-        <ProfileAlerts
-          error={profile.error}
-          success={profile.success}
-        />
+        {/* ===================================================
+            ALERTS
+        =================================================== */}
 
-        <ProfileSummary
-          fullName={
-            profile.fullName
-          }
-          preferredRole={
-            profile.preferredRole
-          }
-          collegeName={
-            profile.collegeName
-          }
-          degree={
-            profile.degree
-          }
-          branch={
-            profile.branch
-          }
-          graduationYear={
-            profile.graduationYear
-          }
-          city={
-            profile.city
-          }
-        />
+        <div className="mt-6">
+          <ProfileAlerts
+            error={profile.error}
+            success={profile.success}
+          />
+        </div>
 
-        <ProfileCompletionSection
-          completion={
-            profile.completion
-          }
-        />
+        {/* ===================================================
+            PROFILE SUMMARY
+        =================================================== */}
 
-        <ProfileSectionsGrid />
+        <div className="mt-6">
+          <ProfileSummary
+            fullName={
+              profile.fullName
+            }
+            preferredRole={
+              profile.preferredRole
+            }
+            collegeName={
+              profile.collegeName
+            }
+            degree={
+              profile.degree
+            }
+            branch={
+              profile.branch
+            }
+            graduationYear={
+              profile.graduationYear
+            }
+            city={
+              profile.city
+            }
+          />
+        </div>
 
-        <BasicProfileForm
-          fullName={
-            profile.fullName
-          }
-          phone={
-            profile.phone
-          }
-          degree={
-            profile.degree
-          }
-          branch={
-            profile.branch
-          }
-          graduationYear={
-            profile.graduationYear
-          }
-          city={
-            profile.city
-          }
-          preferredRole={
-            profile.preferredRole
-          }
-          bio={
-            profile.bio
-          }
+        {/* ===================================================
+            COMPLETION
+        =================================================== */}
 
-          collegeId={
-            profile.collegeId
-          }
-          collegeName={
-            profile.collegeName
-          }
-          collegeSearch={
-            profile.collegeSearch
-          }
+        <div className="mt-8">
+          <ProfileCompletionSection
+            completion={
+              profile.completion
+            }
+          />
+        </div>
 
-          colleges={
-            profile.colleges
-          }
+        {/* ===================================================
+            PROFILE SECTIONS
+        =================================================== */}
 
-          searchingColleges={
-            profile.searchingColleges
-          }
+        <div className="mt-8">
+          <ProfileSectionsGrid />
+        </div>
 
-          showCollegeResults={
-            profile.showCollegeResults
-          }
+        {/* ===================================================
+            BASIC PROFILE
+        =================================================== */}
 
-          saving={
-            profile.saving
-          }
+        <div className="mt-8">
+          <BasicProfileForm
+            fullName={
+              profile.fullName
+            }
+            phone={
+              profile.phone
+            }
+            degree={
+              profile.degree
+            }
+            branch={
+              profile.branch
+            }
+            graduationYear={
+              profile.graduationYear
+            }
+            city={
+              profile.city
+            }
+            preferredRole={
+              profile.preferredRole
+            }
+            bio={
+              profile.bio
+            }
 
-          setFullName={
-            profile.setFullName
-          }
+            collegeId={
+              profile.collegeId
+            }
+            collegeName={
+              profile.collegeName
+            }
+            collegeSearch={
+              profile.collegeSearch
+            }
 
-          setPhone={
-            profile.setPhone
-          }
+            colleges={
+              profile.colleges
+            }
 
-          setDegree={
-            profile.setDegree
-          }
+            searchingColleges={
+              profile.searchingColleges
+            }
 
-          setBranch={
-            profile.setBranch
-          }
+            showCollegeResults={
+              profile.showCollegeResults
+            }
 
-          setGraduationYear={
-            profile.setGraduationYear
-          }
+            saving={
+              profile.saving
+            }
 
-          setCity={
-            profile.setCity
-          }
+            setFullName={
+              profile.setFullName
+            }
 
-          setPreferredRole={
-            profile.setPreferredRole
-          }
+            setPhone={
+              profile.setPhone
+            }
 
-          setBio={
-            profile.setBio
-          }
+            setDegree={
+              profile.setDegree
+            }
 
-          setShowCollegeResults={
-            profile.setShowCollegeResults
-          }
+            setBranch={
+              profile.setBranch
+            }
 
-          updateCollegeSearch={
-            profile.updateCollegeSearch
-          }
+            setGraduationYear={
+              profile.setGraduationYear
+            }
 
-          selectCollege={
-            profile.selectCollege
-          }
+            setCity={
+              profile.setCity
+            }
 
-          clearCollege={
-            profile.clearCollege
-          }
+            setPreferredRole={
+              profile.setPreferredRole
+            }
 
-          saveProfile={
-            profile.saveProfile
-          }
-        />
+            setBio={
+              profile.setBio
+            }
 
-        <ProfileNextStep
-          percentage={
-            profile.completion
-              ?.percentage
-          }
-        />
+            setShowCollegeResults={
+              profile.setShowCollegeResults
+            }
+
+            updateCollegeSearch={
+              profile.updateCollegeSearch
+            }
+
+            selectCollege={
+              profile.selectCollege
+            }
+
+            clearCollege={
+              profile.clearCollege
+            }
+
+            saveProfile={
+              profile.saveProfile
+            }
+          />
+        </div>
+
+        {/* ===================================================
+            NEXT STEP
+        =================================================== */}
+
+        <div className="mt-8">
+          <ProfileNextStep
+            percentage={
+              profile.completion
+                ?.percentage
+            }
+          />
+        </div>
 
         <ProfileFooter />
       </div>

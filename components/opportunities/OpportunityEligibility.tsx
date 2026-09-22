@@ -1,3 +1,8 @@
+import {
+  CheckCircle2,
+  XCircle,
+} from "lucide-react";
+
 import type {
   Opportunity,
 } from "@/types/opportunity";
@@ -54,7 +59,9 @@ export default function OpportunityEligibility({
   studentGraduationYear,
 }: OpportunityEligibilityProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2.5">
+      {/* MEMBERSHIP */}
+
       <EligibilityCheck
         passed={
           membershipEligible
@@ -66,6 +73,8 @@ export default function OpportunityEligibility({
         }
       />
 
+      {/* PROFILE */}
+
       <EligibilityCheck
         passed={
           profileEligible
@@ -76,6 +85,8 @@ export default function OpportunityEligibility({
             : `Profile ${profilePercentage}% complete`
         }
       />
+
+      {/* GRADUATION YEAR */}
 
       <EligibilityCheck
         passed={
@@ -89,6 +100,8 @@ export default function OpportunityEligibility({
         }
       />
 
+      {/* DEADLINE */}
+
       <EligibilityCheck
         passed={
           deadlineOpen
@@ -100,6 +113,8 @@ export default function OpportunityEligibility({
         }
       />
 
+      {/* OPPORTUNITY STATUS */}
+
       <EligibilityCheck
         passed={
           opportunityActive
@@ -110,6 +125,8 @@ export default function OpportunityEligibility({
             : "Opportunity not accepting applications"
         }
       />
+
+      {/* EXISTING APPLICATION */}
 
       {application && (
         <EligibilityCheck
@@ -131,25 +148,82 @@ function EligibilityCheck({
   label: string;
 }) {
   return (
-    <div className="flex items-start gap-3">
-      <span
-        className={
+    <div
+      className={`
+        flex
+        items-start
+        gap-3
+        rounded-xl
+        border
+        px-3
+        py-2.5
+
+        ${
           passed
-            ? "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#DDEEDF] text-xs font-bold text-[#347A3A]"
-            : "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F6DEDE] text-xs font-bold text-[#A43F3F]"
+            ? `
+              border-emerald-100
+              bg-emerald-50/70
+            `
+            : `
+              border-red-100
+              bg-red-50/70
+            `
         }
+      `}
+    >
+      {/* ICON */}
+
+      <div
+        className={`
+          flex
+          h-6
+          w-6
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+
+          ${
+            passed
+              ? `
+                bg-emerald-100
+                text-emerald-600
+              `
+              : `
+                bg-red-100
+                text-red-600
+              `
+          }
+        `}
       >
-        {passed
-          ? "✓"
-          : "✕"}
-      </span>
+        {passed ? (
+          <CheckCircle2
+            size={14}
+            strokeWidth={2.4}
+          />
+        ) : (
+          <XCircle
+            size={14}
+            strokeWidth={2.4}
+          />
+        )}
+      </div>
+
+      {/* LABEL */}
 
       <p
-        className={
-          passed
-            ? "pt-0.5 text-sm text-[#347A3A]"
-            : "pt-0.5 text-sm text-[#A43F3F]"
-        }
+        className={`
+          pt-0.5
+          text-xs
+          font-semibold
+          leading-5
+
+          ${
+            passed
+              ? "text-emerald-700"
+              : "text-red-600"
+          }
+        `}
       >
         {label}
       </p>

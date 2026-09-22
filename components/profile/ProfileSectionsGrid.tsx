@@ -1,5 +1,19 @@
 import Link from "next/link";
 
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Code2,
+  FolderGit2,
+  GraduationCap,
+  Trophy,
+  UserRound,
+} from "lucide-react";
+
+import type {
+  ElementType,
+} from "react";
+
 const sections = [
   {
     title: "Basic Profile",
@@ -7,6 +21,11 @@ const sections = [
       "Update personal, academic and college details.",
     href: "#basic-profile",
     action: "Edit Profile",
+    icon: UserRound,
+    iconClass:
+      "bg-[#EAF6FF] text-[#0877E8]",
+    accent:
+      "from-[#0877E8] to-[#38BDF8]",
   },
   {
     title: "Skills",
@@ -14,6 +33,11 @@ const sections = [
       "Add technical skills and proficiency levels.",
     href: "/profile/skills",
     action: "Manage Skills",
+    icon: GraduationCap,
+    iconClass:
+      "bg-cyan-50 text-cyan-600",
+    accent:
+      "from-cyan-500 to-[#38BDF8]",
   },
   {
     title: "Projects",
@@ -21,6 +45,11 @@ const sections = [
       "Showcase academic and personal projects.",
     href: "/profile/projects",
     action: "Manage Projects",
+    icon: FolderGit2,
+    iconClass:
+      "bg-violet-50 text-violet-600",
+    accent:
+      "from-violet-500 to-[#0877E8]",
   },
   {
     title: "Experience",
@@ -28,6 +57,11 @@ const sections = [
       "Add internships and professional experience.",
     href: "/profile/experience",
     action: "Manage Experience",
+    icon: BriefcaseBusiness,
+    iconClass:
+      "bg-emerald-50 text-emerald-600",
+    accent:
+      "from-emerald-500 to-cyan-400",
   },
   {
     title: "Coding Profiles",
@@ -35,6 +69,11 @@ const sections = [
       "Manage Codeforces, LeetCode and CodeChef.",
     href: "/coding-profiles",
     action: "Coding Accounts",
+    icon: Code2,
+    iconClass:
+      "bg-[#EAF6FF] text-[#0877E8]",
+    accent:
+      "from-[#1294F2] to-[#38BDF8]",
   },
   {
     title: "Leaderboard",
@@ -42,37 +81,79 @@ const sections = [
       "See global, college and batch rankings.",
     href: "/leaderboard",
     action: "View Ranking",
+    icon: Trophy,
+    iconClass:
+      "bg-amber-50 text-amber-600",
+    accent:
+      "from-amber-500 to-orange-400",
   },
 ];
 
 export default function ProfileSectionsGrid() {
   return (
-    <section className="mt-8">
-      {/* SECTION HEADER */}
-      <div className="flex items-center gap-3">
-        <span className="h-px w-8 bg-[#C9A227]" />
+    <section>
+      {/* HEADER */}
 
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C9A227]">
+      <div>
+        <p
+          className="
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.17em]
+            text-[#0877E8]
+          "
+        >
           Profile Sections
+        </p>
+
+        <h2
+          className="
+            mt-2
+            text-2xl
+            font-bold
+            tracking-[-0.035em]
+            text-[#173B63]
+          "
+        >
+          Build Your Student Profile
+        </h2>
+
+        <p
+          className="
+            mt-2
+            max-w-xl
+            text-sm
+            leading-6
+            text-[#71899D]
+          "
+        >
+          Complete each section to build a stronger
+          candidate profile and keep your progress ready
+          for opportunities.
         </p>
       </div>
 
-      <h2 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[#14213D]">
-        Build Your Student Profile
-      </h2>
-
-      <p className="mt-2 max-w-xl text-sm leading-6 text-[#6B707B]">
-        Complete each section to build a stronger candidate profile.
-      </p>
-
       {/* CARDS */}
-      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {sections.map((section) => (
-          <ProfileCard
-            key={section.title}
-            {...section}
-          />
-        ))}
+
+      <div
+        className="
+          mt-5
+          grid
+          gap-5
+
+          sm:grid-cols-2
+          lg:grid-cols-3
+        "
+      >
+        {sections.map(
+          (section) => (
+            <ProfileCard
+              key={section.title}
+              {...section}
+            />
+          )
+        )}
       </div>
     </section>
   );
@@ -83,58 +164,165 @@ function ProfileCard({
   description,
   href,
   action,
+  icon: Icon,
+  iconClass,
+  accent,
 }: {
   title: string;
   description: string;
   href: string;
   action: string;
+  icon: ElementType;
+  iconClass: string;
+  accent: string;
 }) {
   return (
     <Link
       href={href}
       className="
         group
+        relative
         flex
-        min-h-[190px]
+        min-h-[200px]
         flex-col
         justify-between
-        rounded-[20px]
+        overflow-hidden
+        rounded-[24px]
         border
-        border-[#D8D5CC]
+        border-[#DCEAF5]
         bg-white
-        p-6
-        shadow-[0_12px_35px_rgba(20,33,61,0.04)]
+        p-5
+        shadow-[0_10px_30px_rgba(8,119,232,0.045)]
         transition-all
-        duration-200
+        duration-300
+
         hover:-translate-y-1
-        hover:border-[#C9A227]
-        hover:shadow-[0_18px_45px_rgba(20,33,61,0.08)]
+        hover:border-[#B8DCF3]
+        hover:shadow-[0_18px_40px_rgba(8,119,232,0.09)]
+
+        sm:p-6
       "
     >
-      <div>
-        {/* ICON MARKER */}
-        <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F8F0CF] text-[#A98616] transition-colors group-hover:bg-[#C9A227] group-hover:text-[#14213D]">
-          <span className="text-sm font-bold">
-            →
-          </span>
+      {/* TOP ACCENT */}
+
+      <div
+        className={`
+          absolute
+          left-0
+          right-0
+          top-0
+          h-[3px]
+          bg-gradient-to-r
+          ${accent}
+        `}
+      />
+
+      {/* GLOW */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-14
+          -top-14
+          h-36
+          w-36
+          rounded-full
+          bg-[#38BDF8]/0
+          blur-3xl
+          transition-all
+          duration-300
+
+          group-hover:bg-[#38BDF8]/8
+        "
+      />
+
+      <div className="relative">
+        <div
+          className={`
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
+            rounded-2xl
+            ${iconClass}
+          `}
+        >
+          <Icon size={19} />
         </div>
 
-        <h3 className="text-lg font-bold tracking-[-0.02em] text-[#14213D]">
+        <h3
+          className="
+            mt-5
+            text-lg
+            font-bold
+            tracking-[-0.025em]
+            text-[#173B63]
+          "
+        >
           {title}
         </h3>
 
-        <p className="mt-2 min-h-[48px] text-sm leading-6 text-[#6B707B]">
+        <p
+          className="
+            mt-2
+            min-h-[48px]
+            text-sm
+            leading-6
+            text-[#6F879A]
+          "
+        >
           {description}
         </p>
       </div>
 
-      <div className="mt-5 flex items-center justify-between border-t border-[#EEECE6] pt-4">
-        <span className="text-sm font-bold text-[#14213D] transition-colors group-hover:text-[#A98616]">
+      {/* ACTION */}
+
+      <div
+        className="
+          relative
+          mt-5
+          flex
+          items-center
+          justify-between
+          border-t
+          border-[#E7F0F7]
+          pt-4
+        "
+      >
+        <span
+          className="
+            text-sm
+            font-bold
+            text-[#0877E8]
+            transition-colors
+
+            group-hover:text-[#1294F2]
+          "
+        >
           {action}
         </span>
 
-        <span className="text-[#C9A227] transition-transform duration-200 group-hover:translate-x-1">
-          →
+        <span
+          className="
+            flex
+            h-8
+            w-8
+            items-center
+            justify-center
+            rounded-xl
+            bg-[#EAF6FF]
+            text-[#0877E8]
+            transition-all
+            duration-200
+
+            group-hover:translate-x-0.5
+            group-hover:bg-[#0877E8]
+            group-hover:text-white
+          "
+        >
+          <ArrowRight size={14} />
         </span>
       </div>
     </Link>

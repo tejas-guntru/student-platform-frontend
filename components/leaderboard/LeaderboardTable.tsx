@@ -1,19 +1,32 @@
 "use client";
 
 import type {
+  ReactNode,
+} from "react";
+
+import {
+  Building2,
+  GraduationCap,
+  LoaderCircle,
+  Sparkles,
+  Trophy,
+  UserRound,
+  Users,
+} from "lucide-react";
+
+import type {
   LeaderboardEntry,
 } from "@/types/leaderboard";
+
+import {
+  formatRank,
+  formatScore,
+} from "@/utils/leaderboardFormatters";
 
 type ViewMode =
   | "GLOBAL"
   | "COLLEGE"
   | "YEAR";
-
-import {
-  formatRank,
-  formatScore,
-  
-} from "@/utils/leaderboardFormatters";
 
 interface LeaderboardTableProps {
   leaderboard:
@@ -57,48 +70,233 @@ export default function LeaderboardTable({
   getEntryRank,
 }: LeaderboardTableProps) {
   return (
-    <section className="mt-5 overflow-hidden rounded-[24px] border border-[#D8D5CC] bg-white shadow-[0_16px_45px_rgba(20,33,61,0.05)]">
-      {/* HEADER */}
-      <div className="flex flex-col gap-2 border-b border-[#EEECE6] px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h2 className="text-lg font-bold text-[#14213D]">
-            {tableTitle}
-          </h2>
+    <section
+      className="
+        relative
+        overflow-hidden
+        rounded-[26px]
+        border
+        border-[#DCEAF5]
+        bg-white
+        shadow-[0_14px_40px_rgba(8,119,232,0.05)]
+      "
+    >
+      {/* =====================================================
+          TOP ACCENT
+      ===================================================== */}
 
-          <p className="mt-1 text-xs text-[#858994]">
-            {leaderboard.length}
+      <div
+        className="
+          absolute
+          left-0
+          right-0
+          top-0
+          h-[3px]
+          bg-gradient-to-r
+          from-violet-500
+          via-[#0877E8]
+          to-[#38BDF8]
+        "
+      />
 
-            {leaderboard.length === 1
-              ? " ranked student"
-              : " ranked students"}
-          </p>
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
+
+      <div
+        className="
+          flex
+          flex-col
+          gap-4
+          border-b
+          border-[#E7F0F7]
+          px-5
+          py-5
+
+          sm:flex-row
+          sm:items-center
+          sm:justify-between
+          sm:px-6
+        "
+      >
+        <div
+          className="
+            flex
+            items-start
+            gap-3
+          "
+        >
+          <div
+            className="
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              bg-violet-50
+              text-violet-600
+            "
+          >
+            <Trophy size={17} />
+          </div>
+
+          <div>
+            <div
+              className="
+                flex
+                items-center
+                gap-2
+              "
+            >
+              <p
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.13em]
+                  text-violet-600
+                "
+              >
+                Rankings
+              </p>
+
+              <Sparkles
+                size={11}
+                className="text-[#38A9EE]"
+              />
+            </div>
+
+            <h2
+              className="
+                mt-1
+                text-lg
+                font-bold
+                tracking-[-0.025em]
+                text-[#173B63]
+              "
+            >
+              {tableTitle}
+            </h2>
+
+            <div
+              className="
+                mt-1.5
+                flex
+                items-center
+                gap-1.5
+                text-xs
+                text-[#879CAD]
+              "
+            >
+              <Users size={12} />
+
+              <span>
+                {leaderboard.length}
+
+                {leaderboard.length === 1
+                  ? " ranked student"
+                  : " ranked students"}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {viewMode ===
-          "COLLEGE" &&
-          collegeName && (
-            <ContextBadge>
-              {collegeName}
-            </ContextBadge>
-          )}
+        {/* CONTEXT */}
 
-        {viewMode ===
-          "YEAR" &&
-          selectedYear && (
-            <ContextBadge>
-              Class of{" "}
-              {selectedYear}
-            </ContextBadge>
-          )}
+        <div
+          className="
+            flex
+            flex-wrap
+            gap-2
+          "
+        >
+          {viewMode ===
+            "COLLEGE" &&
+            collegeName && (
+              <ContextBadge
+                icon={
+                  <Building2
+                    size={12}
+                  />
+                }
+              >
+                {collegeName}
+              </ContextBadge>
+            )}
+
+          {viewMode ===
+            "YEAR" &&
+            selectedYear && (
+              <ContextBadge
+                icon={
+                  <GraduationCap
+                    size={13}
+                  />
+                }
+              >
+                Class of{" "}
+                {selectedYear}
+              </ContextBadge>
+            )}
+        </div>
       </div>
 
-      {/* LOADING */}
-      {tableLoading ? (
-        <div className="flex flex-col items-center p-12">
-          <div className="h-7 w-7 animate-spin rounded-full border-4 border-[#E3E1DA] border-t-[#C9A227]" />
+      {/* =====================================================
+          LOADING
+      ===================================================== */}
 
-          <p className="mt-3 text-sm text-[#6B707B]">
+      {tableLoading ? (
+        <div
+          className="
+            flex
+            min-h-[280px]
+            flex-col
+            items-center
+            justify-center
+            px-6
+            py-12
+            text-center
+          "
+        >
+          <div
+            className="
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              rounded-2xl
+              bg-[#EAF6FF]
+              text-[#0877E8]
+            "
+          >
+            <LoaderCircle
+              size={22}
+              className="animate-spin"
+            />
+          </div>
+
+          <p
+            className="
+              mt-4
+              text-sm
+              font-semibold
+              text-[#527087]
+            "
+          >
             Loading leaderboard...
+          </p>
+
+          <p
+            className="
+              mt-1
+              text-xs
+              text-[#8AA0B2]
+            "
+          >
+            Fetching the latest rankings.
           </p>
         </div>
       ) : leaderboard.length ===
@@ -112,47 +310,75 @@ export default function LeaderboardTable({
           }
         />
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[900px]">
-            <thead className="bg-[#F8F7F3]">
-              <tr className="text-left text-xs font-bold uppercase tracking-wider text-[#858994]">
-                <th className="px-6 py-4">
+        /* ===================================================
+            TABLE
+        =================================================== */
+
+        <div
+          className="
+            overflow-x-auto
+          "
+        >
+          <table
+            className="
+              w-full
+              min-w-[900px]
+              border-collapse
+            "
+          >
+            {/* TABLE HEAD */}
+
+            <thead>
+              <tr
+                className="
+                  border-b
+                  border-[#E7F0F7]
+                  bg-[#F7FBFE]
+                  text-left
+                "
+              >
+                <TableHeading>
                   Rank
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Student
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   College
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Year
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   CF
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   LC
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   CC
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Score
-                </th>
+                </TableHeading>
               </tr>
             </thead>
 
+            {/* TABLE BODY */}
+
             <tbody>
               {leaderboard.map(
-                (entry) => {
+                (
+                  entry,
+                  index
+                ) => {
                   const isMe =
                     Boolean(
                       myRank &&
@@ -160,72 +386,249 @@ export default function LeaderboardTable({
                           myRank.studentId
                     );
 
+                  const rank =
+                    getEntryRank(
+                      entry
+                    );
+
                   return (
                     <tr
                       key={
                         entry.studentId
                       }
-                      className={
-                        isMe
-                          ? "border-t border-[#EEECE6] bg-[#F1F8F2]"
-                          : "border-t border-[#EEECE6] transition-colors hover:bg-[#FBFAF6]"
-                      }
+                      className={`
+                        border-b
+                        border-[#EDF3F8]
+                        transition-colors
+                        duration-200
+                        last:border-b-0
+
+                        ${
+                          isMe
+                            ? "bg-[#F1FAFF]"
+                            : "bg-white hover:bg-[#F8FCFF]"
+                        }
+                      `}
                     >
-                      <td className="px-6 py-4">
-                        <span className="text-lg font-bold text-[#14213D]">
-                          {formatRank(
-                            getEntryRank(
-                              entry
-                            )
-                          )}
-                        </span>
+                      {/* RANK */}
+
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <RankDisplay
+                          rank={
+                            rank
+                          }
+                          index={
+                            index
+                          }
+                        />
                       </td>
 
-                      <td className="px-6 py-4">
-                        <p className="font-bold text-[#14213D]">
-                          {entry.fullName ||
-                            "Student"}
-                        </p>
+                      {/* STUDENT */}
 
-                        {isMe && (
-                          <span className="mt-1 inline-block rounded-full border border-[#BFD7C3] bg-white px-2 py-0.5 text-[10px] font-bold text-[#347A3A]">
-                            YOU
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-3
+                          "
+                        >
+                          <div
+                            className={`
+                              flex
+                              h-9
+                              w-9
+                              shrink-0
+                              items-center
+                              justify-center
+                              rounded-xl
+
+                              ${
+                                isMe
+                                  ? "bg-[#0877E8] text-white"
+                                  : "bg-[#EAF6FF] text-[#0877E8]"
+                              }
+                            `}
+                          >
+                            <UserRound
+                              size={15}
+                            />
+                          </div>
+
+                          <div>
+                            <p
+                              className="
+                                font-bold
+                                text-[#173B63]
+                              "
+                            >
+                              {entry.fullName ||
+                                "Student"}
+                            </p>
+
+                            {isMe && (
+                              <span
+                                className="
+                                  mt-1
+                                  inline-flex
+                                  items-center
+                                  rounded-full
+                                  border
+                                  border-[#B9DCF2]
+                                  bg-white
+                                  px-2
+                                  py-0.5
+                                  text-[9px]
+                                  font-bold
+                                  uppercase
+                                  tracking-[0.08em]
+                                  text-[#0877E8]
+                                "
+                              >
+                                You
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* COLLEGE */}
+
+                      <td
+                        className="
+                          max-w-[230px]
+                          px-6
+                          py-4
+                        "
+                      >
+                        <div
+                          className="
+                            flex
+                            items-start
+                            gap-2
+                            text-sm
+                            text-[#607C91]
+                          "
+                        >
+                          <Building2
+                            size={13}
+                            className="
+                              mt-0.5
+                              shrink-0
+                              text-[#9AB4C6]
+                            "
+                          />
+
+                          <span
+                            className="
+                              line-clamp-2
+                            "
+                          >
+                            {entry.collegeName ||
+                              "-"}
                           </span>
-                        )}
+                        </div>
                       </td>
 
-                      <td className="px-6 py-4 text-sm text-[#6B707B]">
-                        {entry.collegeName ||
-                          "-"}
-                      </td>
+                      {/* YEAR */}
 
-                      <td className="px-6 py-4 text-sm text-[#6B707B]">
+                      <td
+                        className="
+                          px-6
+                          py-4
+                          text-sm
+                          font-semibold
+                          text-[#607C91]
+                        "
+                      >
                         {entry.graduationYear ||
                           "-"}
                       </td>
 
-                      <td className="px-6 py-4 text-sm text-[#14213D]">
-                        {formatScore(
-                          entry.codeforcesScore
-                        )}
+                      {/* CODEFORCES */}
+
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <ScoreValue
+                          value={
+                            entry.codeforcesScore
+                          }
+                        />
                       </td>
 
-                      <td className="px-6 py-4 text-sm text-[#14213D]">
-                        {formatScore(
-                          entry.leetcodeScore
-                        )}
+                      {/* LEETCODE */}
+
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <ScoreValue
+                          value={
+                            entry.leetcodeScore
+                          }
+                        />
                       </td>
 
-                      <td className="px-6 py-4 text-sm text-[#14213D]">
-                        {formatScore(
-                          entry.codechefScore
-                        )}
+                      {/* CODECHEF */}
+
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <ScoreValue
+                          value={
+                            entry.codechefScore
+                          }
+                        />
                       </td>
 
-                      <td className="px-6 py-4 font-bold text-[#14213D]">
-                        {formatScore(
-                          entry.overallScore
-                        )}
+                      {/* OVERALL SCORE */}
+
+                      <td
+                        className="
+                          px-6
+                          py-4
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex
+                            min-w-[72px]
+                            justify-center
+                            rounded-xl
+                            bg-gradient-to-r
+                            from-[#0877E8]
+                            to-[#1294F2]
+                            px-3
+                            py-2
+                            text-sm
+                            font-bold
+                            text-white
+                            shadow-[0_6px_15px_rgba(8,119,232,0.15)]
+                          "
+                        >
+                          {formatScore(
+                            entry.overallScore
+                          )}
+                        </span>
                       </td>
                     </tr>
                   );
@@ -239,18 +642,164 @@ export default function LeaderboardTable({
   );
 }
 
-function ContextBadge({
+// =========================================================
+// TABLE HEADING
+// =========================================================
+
+function TableHeading({
   children,
 }: {
-  children:
-    React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <span className="rounded-full border border-[#E8DCA9] bg-[#FBF7E8] px-3 py-1 text-xs font-semibold text-[#806E30]">
+    <th
+      className="
+        whitespace-nowrap
+        px-6
+        py-4
+        text-[9px]
+        font-bold
+        uppercase
+        tracking-[0.13em]
+        text-[#8298AA]
+      "
+    >
+      {children}
+    </th>
+  );
+}
+
+// =========================================================
+// RANK
+// =========================================================
+
+function RankDisplay({
+  rank,
+  index,
+}: {
+  rank:
+    | number
+    | null;
+  index: number;
+}) {
+  const topThree =
+    index < 3;
+
+  return (
+    <div
+      className="
+        flex
+        items-center
+        gap-2
+      "
+    >
+      {topThree && (
+        <div
+          className={`
+            flex
+            h-7
+            w-7
+            items-center
+            justify-center
+            rounded-lg
+
+            ${
+              index === 0
+                ? "bg-amber-50 text-amber-600"
+                : index === 1
+                  ? "bg-slate-100 text-slate-500"
+                  : "bg-orange-50 text-orange-600"
+            }
+          `}
+        >
+          <Trophy size={13} />
+        </div>
+      )}
+
+      <span
+        className="
+          whitespace-nowrap
+          text-lg
+          font-bold
+          tracking-[-0.025em]
+          text-[#173B63]
+        "
+      >
+        {formatRank(
+          rank
+        )}
+      </span>
+    </div>
+  );
+}
+
+// =========================================================
+// SCORE
+// =========================================================
+
+function ScoreValue({
+  value,
+}: {
+  value:
+    | number
+    | null;
+}) {
+  return (
+    <span
+      className="
+        text-sm
+        font-bold
+        text-[#355E7A]
+      "
+    >
+      {formatScore(
+        value
+      )}
+    </span>
+  );
+}
+
+// =========================================================
+// CONTEXT BADGE
+// =========================================================
+
+function ContextBadge({
+  icon,
+  children,
+}: {
+  icon: ReactNode;
+  children:
+    ReactNode;
+}) {
+  return (
+    <span
+      className="
+        inline-flex
+        items-center
+        gap-1.5
+        rounded-full
+        border
+        border-[#CBE5F8]
+        bg-[#EFF8FF]
+        px-3
+        py-1.5
+        text-[10px]
+        font-bold
+        text-[#52748D]
+      "
+    >
+      <span className="text-[#0877E8]">
+        {icon}
+      </span>
+
       {children}
     </span>
   );
 }
+
+// =========================================================
+// EMPTY
+// =========================================================
 
 function EmptyLeaderboard({
   viewMode,
@@ -266,30 +815,86 @@ function EmptyLeaderboard({
     "No verified students are currently ranked.";
 
   if (
-    viewMode ===
-    "COLLEGE"
+    viewMode === "COLLEGE"
   ) {
     message =
       "No verified students from this college are currently ranked.";
   }
 
   if (
-    viewMode ===
-    "YEAR"
+    viewMode === "YEAR"
   ) {
     message =
       `No verified students from the ${selectedYear} batch are currently ranked.`;
   }
 
   return (
-    <div className="p-12 text-center">
-      <h3 className="font-bold text-[#14213D]">
-        No ranked students found
-      </h3>
+    <div
+      className="
+        relative
+        overflow-hidden
+        px-6
+        py-14
+        text-center
+      "
+    >
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          h-40
+          w-40
+          -translate-x-1/2
+          rounded-full
+          bg-violet-500/8
+          blur-[70px]
+        "
+      />
 
-      <p className="mt-2 text-sm text-[#6B707B]">
-        {message}
-      </p>
+      <div className="relative">
+        <div
+          className="
+            mx-auto
+            flex
+            h-14
+            w-14
+            items-center
+            justify-center
+            rounded-2xl
+            bg-violet-50
+            text-violet-600
+          "
+        >
+          <Trophy size={22} />
+        </div>
+
+        <h3
+          className="
+            mt-4
+            text-lg
+            font-bold
+            tracking-[-0.02em]
+            text-[#173B63]
+          "
+        >
+          No ranked students found
+        </h3>
+
+        <p
+          className="
+            mx-auto
+            mt-2
+            max-w-md
+            text-sm
+            leading-6
+            text-[#71899D]
+          "
+        >
+          {message}
+        </p>
+      </div>
     </div>
   );
 }

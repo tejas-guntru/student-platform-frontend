@@ -1,3 +1,9 @@
+import {
+  Circle,
+  CircleDot,
+  Sparkles,
+} from "lucide-react";
+
 import type {
   SkillProficiency,
 } from "@/types/studentSkill";
@@ -14,26 +20,52 @@ interface ProficiencyBadgeProps {
 export default function ProficiencyBadge({
   proficiency,
 }: ProficiencyBadgeProps) {
-  let style =
-    "border-[#E8DCA9] bg-[#FBF7E8] text-[#806E30]";
+  const config = {
+    BEGINNER: {
+      className:
+        "border-[#D8E7F2] bg-[#F5FAFE] text-[#68849A]",
+      icon: Circle,
+    },
 
-  if (
-    proficiency === "ADVANCED"
-  ) {
-    style =
-      "border-[#BFD7C3] bg-[#F1F8F2] text-[#347A3A]";
-  } else if (
-    proficiency ===
-    "INTERMEDIATE"
-  ) {
-    style =
-      "border-[#C9D5E8] bg-[#F2F6FB] text-[#476486]";
-  }
+    INTERMEDIATE: {
+      className:
+        "border-[#BFE0F5] bg-[#EAF6FF] text-[#0877E8]",
+      icon: CircleDot,
+    },
+
+    ADVANCED: {
+      className:
+        "border-emerald-200 bg-emerald-50 text-emerald-700",
+      icon: Sparkles,
+    },
+  }[proficiency];
+
+  const Icon = config.icon;
 
   return (
     <span
-      className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${style}`}
+      className={`
+        inline-flex
+        shrink-0
+        items-center
+        gap-1.5
+        rounded-full
+        border
+        px-2.5
+        py-1.5
+        text-[10px]
+        font-bold
+        uppercase
+        tracking-[0.08em]
+
+        ${config.className}
+      `}
     >
+      <Icon
+        size={11}
+        strokeWidth={2.2}
+      />
+
       {formatProficiency(
         proficiency
       )}

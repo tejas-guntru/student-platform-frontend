@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  Code2,
+  LoaderCircle,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+
 import type {
   StudentSkill,
 } from "@/types/studentSkill";
@@ -25,44 +32,177 @@ export default function SkillCard({
   onDelete,
 }: SkillCardProps) {
   return (
-    <article className="rounded-[18px] border border-[#D8D5CC] bg-white p-5 shadow-[0_10px_30px_rgba(20,33,61,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C9A227] hover:shadow-[0_16px_40px_rgba(20,33,61,0.07)]">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-bold text-[#14213D]">
-            {skill.skillName}
-          </h3>
+    <article
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-[22px]
+        border
+        border-[#DCEAF5]
+        bg-white
+        p-5
+        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
+        transition-all
+        duration-300
 
-          <div className="mt-3">
-            <ProficiencyBadge
-              proficiency={
-                skill.proficiency
-              }
-            />
+        hover:-translate-y-0.5
+        hover:border-[#B8DCF3]
+        hover:shadow-[0_16px_38px_rgba(8,119,232,0.08)]
+      "
+    >
+      {/* TOP ACCENT */}
+
+      <div
+        className="
+          absolute
+          left-0
+          right-0
+          top-0
+          h-[3px]
+          bg-gradient-to-r
+          from-[#0877E8]
+          to-[#38BDF8]
+        "
+      />
+
+      {/* BACKGROUND GLOW */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-14
+          -top-14
+          h-32
+          w-32
+          rounded-full
+          bg-[#38BDF8]/0
+          blur-3xl
+          transition-all
+          duration-300
+
+          group-hover:bg-[#38BDF8]/8
+        "
+      />
+
+      <div className="relative">
+        {/* HEADER */}
+
+        <div
+          className="
+            flex
+            items-start
+            justify-between
+            gap-4
+          "
+        >
+          <div
+            className="
+              flex
+              min-w-0
+              items-start
+              gap-3
+            "
+          >
+            <div
+              className="
+                flex
+                h-10
+                w-10
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#EAF6FF]
+                text-[#0877E8]
+              "
+            >
+              <Code2 size={17} />
+            </div>
+
+            <div className="min-w-0">
+              <p
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+                  text-[#8AA0B2]
+                "
+              >
+                Technical Skill
+              </p>
+
+              <h3
+                className="
+                  mt-1
+                  break-words
+                  text-lg
+                  font-bold
+                  tracking-[-0.025em]
+                  text-[#173B63]
+                "
+              >
+                {skill.skillName}
+              </h3>
+            </div>
           </div>
+
+          <ProficiencyBadge
+            proficiency={
+              skill.proficiency
+            }
+          />
         </div>
 
-        <div className="flex gap-2">
+        {/* ACTIONS */}
+
+        <div
+          className="
+            mt-5
+            flex
+            items-center
+            justify-end
+            gap-2
+            border-t
+            border-[#E7F0F7]
+            pt-4
+          "
+        >
           <button
             type="button"
             onClick={() =>
               onEdit(skill)
             }
+            disabled={deleting}
             className="
-              rounded-lg
+              inline-flex
+              items-center
+              justify-center
+              gap-1.5
+              rounded-xl
               border
-              border-[#D8D5CC]
-              bg-[#F8F7F3]
+              border-[#D5E7F3]
+              bg-[#F8FCFF]
               px-3
               py-2
               text-xs
               font-bold
-              text-[#14213D]
+              text-[#58748B]
               transition-all
-              hover:border-[#C9A227]
+              duration-200
+
+              hover:border-[#B9DCF2]
               hover:bg-white
-              hover:text-[#A98616]
+              hover:text-[#0877E8]
+
+              disabled:cursor-not-allowed
+              disabled:opacity-50
             "
           >
+            <Pencil size={13} />
+
             Edit
           </button>
 
@@ -73,24 +213,45 @@ export default function SkillCard({
               onDelete(skill)
             }
             className="
-              rounded-lg
+              inline-flex
+              items-center
+              justify-center
+              gap-1.5
+              rounded-xl
               border
-              border-[#E4C7C7]
-              bg-[#FBF1F1]
+              border-red-200
+              bg-red-50
               px-3
               py-2
               text-xs
               font-bold
-              text-[#A43F3F]
+              text-red-600
               transition-all
-              hover:bg-[#F7E7E7]
+              duration-200
+
+              hover:border-red-300
+              hover:bg-red-100
+
               disabled:cursor-not-allowed
-              disabled:opacity-50
+              disabled:opacity-60
             "
           >
-            {deleting
-              ? "Deleting..."
-              : "Delete"}
+            {deleting ? (
+              <>
+                <LoaderCircle
+                  size={13}
+                  className="animate-spin"
+                />
+
+                Deleting...
+              </>
+            ) : (
+              <>
+                <Trash2 size={13} />
+
+                Delete
+              </>
+            )}
           </button>
         </div>
       </div>

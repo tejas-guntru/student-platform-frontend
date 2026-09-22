@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+import {
+  ArrowRight,
+  CalendarX2,
+  CircleAlert,
+  LockKeyhole,
+  UserRound,
+} from "lucide-react";
+
 interface BlockedActionProps {
   membershipEligible:
     boolean;
@@ -28,12 +36,16 @@ export default function BlockedAction({
     !membershipEligible
   ) {
     return (
-      <Link
+      <ActionLink
         href="/membership"
-        className="mt-6 block w-full rounded-xl bg-[#C9A227] px-5 py-3 text-center font-bold text-[#14213D] transition hover:bg-[#E0C766]"
+        icon={
+          <LockKeyhole
+            size={15}
+          />
+        }
       >
         Get Membership
-      </Link>
+      </ActionLink>
     );
   }
 
@@ -41,12 +53,16 @@ export default function BlockedAction({
     !profileEligible
   ) {
     return (
-      <Link
+      <ActionLink
         href="/profile"
-        className="mt-6 block w-full rounded-xl bg-[#C9A227] px-5 py-3 text-center font-bold text-[#14213D] transition hover:bg-[#E0C766]"
+        icon={
+          <UserRound
+            size={15}
+          />
+        }
       >
         Complete Profile
-      </Link>
+      </ActionLink>
     );
   }
 
@@ -56,9 +72,43 @@ export default function BlockedAction({
     return (
       <Link
         href="/profile"
-        className="mt-6 block w-full rounded-xl border border-[#E4C7C7] bg-[#FBF1F1] px-5 py-3 text-center font-bold text-[#A43F3F] transition hover:bg-[#F7E7E7]"
+        className="
+          group
+          inline-flex
+          w-full
+          items-center
+          justify-center
+          gap-2
+          rounded-xl
+          border
+          border-red-200
+          bg-red-50
+          px-5
+          py-3
+          text-sm
+          font-bold
+          text-red-600
+          transition-all
+          duration-200
+
+          hover:border-red-300
+          hover:bg-red-100
+        "
       >
+        <CircleAlert
+          size={15}
+        />
+
         Check Graduation Year
+
+        <ArrowRight
+          size={14}
+          className="
+            transition-transform
+            duration-200
+            group-hover:translate-x-0.5
+          "
+        />
       </Link>
     );
   }
@@ -67,13 +117,15 @@ export default function BlockedAction({
     !deadlineOpen
   ) {
     return (
-      <button
-        type="button"
-        disabled
-        className="mt-6 w-full cursor-not-allowed rounded-xl bg-[#EEECE6] px-5 py-3 font-bold text-[#858994]"
+      <DisabledAction
+        icon={
+          <CalendarX2
+            size={15}
+          />
+        }
       >
         Applications Closed
-      </button>
+      </DisabledAction>
     );
   }
 
@@ -81,15 +133,109 @@ export default function BlockedAction({
     !opportunityActive
   ) {
     return (
-      <button
-        type="button"
-        disabled
-        className="mt-6 w-full cursor-not-allowed rounded-xl bg-[#EEECE6] px-5 py-3 font-bold text-[#858994]"
+      <DisabledAction
+        icon={
+          <LockKeyhole
+            size={15}
+          />
+        }
       >
         Opportunity Closed
-      </button>
+      </DisabledAction>
     );
   }
 
   return null;
+}
+
+function ActionLink({
+  href,
+  icon,
+  children,
+}: {
+  href: string;
+  icon:
+    React.ReactNode;
+  children:
+    React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="
+        group
+        inline-flex
+        w-full
+        items-center
+        justify-center
+        gap-2
+        rounded-xl
+        bg-gradient-to-r
+        from-[#0877E8]
+        to-[#1294F2]
+        px-5
+        py-3
+        text-sm
+        font-bold
+        text-white
+        shadow-[0_9px_22px_rgba(8,119,232,0.18)]
+        transition-all
+        duration-200
+
+        hover:-translate-y-0.5
+        hover:shadow-[0_13px_28px_rgba(8,119,232,0.24)]
+      "
+    >
+      {icon}
+
+      {children}
+
+      <ArrowRight
+        size={14}
+        className="
+          transition-transform
+          duration-200
+          group-hover:translate-x-0.5
+        "
+      />
+    </Link>
+  );
+}
+
+function DisabledAction({
+  icon,
+  children,
+}: {
+  icon:
+    React.ReactNode;
+  children:
+    React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      disabled
+      className="
+        inline-flex
+        w-full
+        cursor-not-allowed
+        items-center
+        justify-center
+        gap-2
+        rounded-xl
+        border
+        border-[#DCE7EF]
+        bg-[#F3F7FA]
+        px-5
+        py-3
+        text-sm
+        font-bold
+        text-[#91A5B5]
+      "
+    >
+      {icon}
+
+      {children}
+    </button>
+  );
 }

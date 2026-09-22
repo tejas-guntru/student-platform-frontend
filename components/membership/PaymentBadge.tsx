@@ -1,3 +1,9 @@
+import {
+  CheckCircle2,
+  Clock3,
+  XCircle,
+} from "lucide-react";
+
 interface PaymentBadgeProps {
   status:
     | "CREATED"
@@ -8,29 +14,91 @@ interface PaymentBadgeProps {
 export default function PaymentBadge({
   status,
 }: PaymentBadgeProps) {
-  if (
-    status === "PAID"
-  ) {
+  if (status === "PAID") {
     return (
-      <span className="rounded-full border border-[#BFD7C3] bg-[#F1F8F2] px-3 py-1 text-xs font-bold text-[#347A3A]">
-        PAID
+      <span
+        className="
+          inline-flex
+          items-center
+          gap-1.5
+          rounded-full
+          border
+          border-emerald-200
+          bg-emerald-50
+          px-2.5
+          py-1.5
+          text-[9px]
+          font-bold
+          uppercase
+          tracking-[0.09em]
+          text-emerald-700
+        "
+      >
+        <CheckCircle2
+          size={12}
+          strokeWidth={2.3}
+        />
+
+        Paid
       </span>
     );
   }
 
-  if (
-    status === "FAILED"
-  ) {
+  if (status === "FAILED") {
     return (
-      <span className="rounded-full border border-[#E4C7C7] bg-[#FBF1F1] px-3 py-1 text-xs font-bold text-[#A43F3F]">
-        FAILED
+      <span
+        className="
+          inline-flex
+          items-center
+          gap-1.5
+          rounded-full
+          border
+          border-red-200
+          bg-red-50
+          px-2.5
+          py-1.5
+          text-[9px]
+          font-bold
+          uppercase
+          tracking-[0.09em]
+          text-red-600
+        "
+      >
+        <XCircle
+          size={12}
+          strokeWidth={2.3}
+        />
+
+        Failed
       </span>
     );
   }
 
   return (
-    <span className="rounded-full border border-[#E8DCA9] bg-[#FBF7E8] px-3 py-1 text-xs font-bold text-[#806E30]">
-      CREATED
+    <span
+      className="
+        inline-flex
+        items-center
+        gap-1.5
+        rounded-full
+        border
+        border-[#CBE5F8]
+        bg-[#EFF8FF]
+        px-2.5
+        py-1.5
+        text-[9px]
+        font-bold
+        uppercase
+        tracking-[0.09em]
+        text-[#0877E8]
+      "
+    >
+      <Clock3
+        size={12}
+        strokeWidth={2.3}
+      />
+
+      Created
     </span>
   );
 }

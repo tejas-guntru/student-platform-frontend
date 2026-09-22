@@ -1,3 +1,9 @@
+import {
+  BadgeCheck,
+  Mail,
+  ShieldCheck,
+} from "lucide-react";
+
 interface AccountStatusProps {
   email: string;
   membershipActive: boolean;
@@ -8,82 +14,296 @@ export default function AccountStatus({
   membershipActive,
 }: AccountStatusProps) {
   return (
-    <section className="card overflow-hidden">
-      <div className="flex flex-col gap-6 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
-        {/* LEFT */}
-        <div className="flex items-start gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-[#f1f0eb] text-[#14213d]">
-            <svg
-              width="21"
-              height="21"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 8v4" />
-              <path d="M12 16h.01" />
-            </svg>
+    <section
+      className="
+        relative
+        overflow-hidden
+        rounded-[24px]
+        border
+        border-[#DCEAF5]
+        bg-white
+        shadow-[0_10px_30px_rgba(8,119,232,0.045)]
+      "
+    >
+      {/* BACKGROUND */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-24
+          -top-24
+          h-56
+          w-56
+          rounded-full
+          bg-[#38BDF8]/10
+          blur-[80px]
+        "
+      />
+
+      <div
+        className="
+          relative
+          flex
+          flex-col
+          gap-6
+          p-5
+
+          sm:p-6
+
+          lg:flex-row
+          lg:items-center
+          lg:justify-between
+        "
+      >
+        {/* ===================================================
+            LEFT
+        =================================================== */}
+
+        <div
+          className="
+            flex
+            items-start
+            gap-4
+          "
+        >
+          <div
+            className="
+              flex
+              h-12
+              w-12
+              shrink-0
+              items-center
+              justify-center
+              rounded-2xl
+              bg-[#EAF6FF]
+              text-[#0877E8]
+            "
+          >
+            <ShieldCheck size={20} />
           </div>
 
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#858994]">
+          <div className="min-w-0">
+            <p
+              className="
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.15em]
+                text-[#0877E8]
+              "
+            >
               Account Status
             </p>
 
-            <h3 className="mt-1 text-lg font-bold tracking-tight text-[#14213d]">
+            <h3
+              className="
+                mt-1.5
+                text-xl
+                font-bold
+                tracking-[-0.03em]
+                text-[#173B63]
+              "
+            >
               Your Trailbliz account
             </h3>
 
-            <p className="mt-1 max-w-xl text-sm text-[#5f6470]">
-              {email}
-            </p>
+            <div
+              className="
+                mt-2
+                flex
+                items-center
+                gap-2
+                text-sm
+                text-[#71899D]
+              "
+            >
+              <Mail
+                size={14}
+                className="
+                  shrink-0
+                  text-[#8CB8D4]
+                "
+              />
+
+              <span
+                className="
+                  break-all
+                "
+              >
+                {email || "-"}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="flex flex-wrap items-center gap-3 sm:justify-end">
-          {/* ACCOUNT */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#e3e1da] bg-[#f8f7f3] px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-[#22c55e]" />
+        {/* ===================================================
+            STATUS
+        =================================================== */}
 
-            <span className="text-xs font-bold text-[#30394c]">
-              Account Active
-            </span>
+        <div
+          className="
+            grid
+            gap-3
+
+            sm:grid-cols-2
+
+            lg:min-w-[420px]
+          "
+        >
+          {/* ACCOUNT */}
+
+          <div
+            className="
+              flex
+              items-center
+              gap-3
+              rounded-[18px]
+              border
+              border-emerald-200
+              bg-emerald-50/70
+              px-4
+              py-3.5
+            "
+          >
+            <div
+              className="
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                bg-emerald-100
+                text-emerald-600
+              "
+            >
+              <BadgeCheck size={16} />
+            </div>
+
+            <div>
+              <p
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+                  text-emerald-600/70
+                "
+              >
+                Account
+              </p>
+
+              <p
+                className="
+                  mt-0.5
+                  text-xs
+                  font-bold
+                  text-emerald-700
+                "
+              >
+                Active
+              </p>
+            </div>
           </div>
 
           {/* MEMBERSHIP */}
-          <div
-            className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 ${
-              membershipActive
-                ? "border-[#d8e8dc] bg-[#f0f7f1]"
-                : "border-[#e6d9a7] bg-[#fdf8e7]"
-            }`}
-          >
-            <span
-              className={`h-2 w-2 rounded-full ${
-                membershipActive ? "bg-[#22c55e]" : "bg-[#c9a227]"
-              }`}
-            />
 
-            <span
-              className={`text-xs font-bold ${
-                membershipActive ? "text-[#28743a]" : "text-[#a98616]"
-              }`}
+          <div
+            className={`
+              flex
+              items-center
+              gap-3
+              rounded-[18px]
+              border
+              px-4
+              py-3.5
+
+              ${
+                membershipActive
+                  ? `
+                    border-emerald-200
+                    bg-emerald-50/70
+                  `
+                  : `
+                    border-[#DCEAF5]
+                    bg-[#F8FCFF]
+                  `
+              }
+            `}
+          >
+            <div
+              className={`
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+
+                ${
+                  membershipActive
+                    ? "bg-emerald-100 text-emerald-600"
+                    : "bg-[#EAF6FF] text-[#0877E8]"
+                }
+              `}
             >
-              {membershipActive
-                ? "Membership Active"
-                : "Membership Inactive"}
-            </span>
+              <ShieldCheck size={16} />
+            </div>
+
+            <div>
+              <p
+                className={`
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+
+                  ${
+                    membershipActive
+                      ? "text-emerald-600/70"
+                      : "text-[#8AA0B2]"
+                  }
+                `}
+              >
+                Membership
+              </p>
+
+              <p
+                className={`
+                  mt-0.5
+                  text-xs
+                  font-bold
+
+                  ${
+                    membershipActive
+                      ? "text-emerald-700"
+                      : "text-[#58748B]"
+                  }
+                `}
+              >
+                {membershipActive
+                  ? "Active"
+                  : "Inactive"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* GOLD ACCENT */}
-      <div className="h-[3px] bg-[#c9a227]" />
+      {/* BOTTOM ACCENT */}
+
+      <div
+        className="
+          h-[3px]
+          bg-gradient-to-r
+          from-[#0877E8]
+          via-[#1294F2]
+          to-[#38BDF8]
+        "
+      />
     </section>
   );
 }
