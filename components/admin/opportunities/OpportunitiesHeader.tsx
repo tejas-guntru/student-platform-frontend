@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+import {
+  ArrowLeft,
+  BriefcaseBusiness,
+  Plus,
+} from "lucide-react";
+
 interface OpportunitiesHeaderProps {
   onCreate: () => void;
 }
@@ -8,36 +14,181 @@ export default function OpportunitiesHeader({
   onCreate,
 }: OpportunitiesHeaderProps) {
   return (
-    <header className="flex flex-col gap-5 border-b border-zinc-800 pb-6 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.2em] text-zinc-500">
-          ADMIN
-        </p>
+    <header
+      className="
+        flex
+        flex-col
+        gap-4
+        rounded-[24px]
+        border
+        border-[#DCEAF5]
+        bg-white/85
+        px-5
+        py-4
+        shadow-[0_10px_35px_rgba(8,119,232,0.05)]
+        backdrop-blur-xl
 
-        <h1 className="mt-2 text-3xl font-bold">
-          Opportunities
-        </h1>
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+      "
+    >
+      {/* LEFT */}
 
-        <p className="mt-2 text-sm text-zinc-400">
-          Create, edit and close jobs and internships.
-        </p>
+      <div className="flex items-center gap-4">
+        <div
+          className="
+            flex
+            h-11
+            w-11
+            shrink-0
+            items-center
+            justify-center
+            rounded-2xl
+            bg-[#EAF6FF]
+            text-[#0877E8]
+          "
+        >
+          <BriefcaseBusiness size={20} />
+        </div>
+
+        <div>
+          <div
+            className="
+              flex
+              flex-wrap
+              items-center
+              gap-2
+            "
+          >
+            <p
+              className="
+                text-lg
+                font-bold
+                tracking-[-0.025em]
+                text-[#173B63]
+              "
+            >
+              Opportunities
+            </p>
+
+            <span
+              className="
+                rounded-full
+                border
+                border-[#CBE5F8]
+                bg-[#EFF8FF]
+                px-2.5
+                py-1
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.14em]
+                text-[#0877E8]
+              "
+            >
+              Admin
+            </span>
+          </div>
+
+          <p
+            className="
+              mt-0.5
+              text-xs
+              text-[#8297AA]
+            "
+          >
+            Manage jobs and internships
+          </p>
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      {/* ACTIONS */}
+
+      <div
+        className="
+          flex
+          flex-wrap
+          items-center
+          gap-3
+        "
+      >
+        <Link
+          href="/admin/dashboard"
+          className="
+            group
+            inline-flex
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            border
+            border-[#D8E8F4]
+            bg-white
+            px-4
+            py-2.5
+            text-sm
+            font-semibold
+            text-[#58738B]
+            transition-all
+            duration-200
+
+            hover:border-[#B8DBF3]
+            hover:bg-[#F5FBFF]
+            hover:text-[#0877E8]
+          "
+        >
+          <ArrowLeft
+            size={15}
+            className="
+              transition-transform
+              duration-200
+              group-hover:-translate-x-0.5
+            "
+          />
+
+          Dashboard
+        </Link>
+
         <button
           type="button"
           onClick={onCreate}
-          className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-zinc-200"
-        >
-          + Create Opportunity
-        </button>
+          className="
+            group
+            inline-flex
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            bg-gradient-to-r
+            from-[#0877E8]
+            to-[#1294F2]
+            px-4
+            py-2.5
+            text-sm
+            font-semibold
+            text-white
+            shadow-[0_10px_24px_rgba(8,119,232,0.20)]
+            transition-all
+            duration-200
 
-        <Link
-          href="/admin/dashboard"
-          className="rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-900"
+            hover:-translate-y-0.5
+            hover:shadow-[0_14px_30px_rgba(8,119,232,0.28)]
+
+            active:translate-y-0
+          "
         >
-          ← Dashboard
-        </Link>
+          <Plus
+            size={16}
+            className="
+              transition-transform
+              duration-200
+              group-hover:rotate-90
+            "
+          />
+
+          Create Opportunity
+        </button>
       </div>
     </header>
   );

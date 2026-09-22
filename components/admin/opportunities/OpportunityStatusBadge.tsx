@@ -1,3 +1,9 @@
+import {
+  CheckCircle2,
+  Clock3,
+  XCircle,
+} from "lucide-react";
+
 import type {
   OpportunityStatus,
 } from "@/types/opportunity";
@@ -11,23 +17,80 @@ export default function OpportunityStatusBadge({
 }: OpportunityStatusBadgeProps) {
   if (status === "ACTIVE") {
     return (
-      <span className="rounded-full border border-emerald-900 bg-emerald-950/40 px-3 py-1 text-xs font-semibold text-emerald-400">
-        ACTIVE
+      <span
+        className="
+          inline-flex
+          items-center
+          gap-1.5
+          rounded-full
+          border
+          border-emerald-200
+          bg-emerald-50
+          px-3
+          py-1.5
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.08em]
+          text-emerald-700
+        "
+      >
+        <CheckCircle2 size={12} />
+
+        Active
       </span>
     );
   }
 
   if (status === "CLOSED") {
     return (
-      <span className="rounded-full border border-red-900 bg-red-950/40 px-3 py-1 text-xs font-semibold text-red-400">
-        CLOSED
+      <span
+        className="
+          inline-flex
+          items-center
+          gap-1.5
+          rounded-full
+          border
+          border-red-200
+          bg-red-50
+          px-3
+          py-1.5
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.08em]
+          text-red-600
+        "
+      >
+        <XCircle size={12} />
+
+        Closed
       </span>
     );
   }
 
   return (
-    <span className="rounded-full border border-amber-900 bg-amber-950/40 px-3 py-1 text-xs font-semibold text-amber-400">
-      DRAFT
+    <span
+      className="
+        inline-flex
+        items-center
+        gap-1.5
+        rounded-full
+        border
+        border-amber-200
+        bg-amber-50
+        px-3
+        py-1.5
+        text-[10px]
+        font-bold
+        uppercase
+        tracking-[0.08em]
+        text-amber-700
+      "
+    >
+      <Clock3 size={12} />
+
+      Draft
     </span>
   );
 }
