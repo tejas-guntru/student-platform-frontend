@@ -42,7 +42,7 @@ export default function CandidateHeader({
         </Link>
 
         <Link
-          href="/admin"
+          href="/admin/dashboard"
           className="rounded-lg border border-zinc-700 px-4 py-2.5 text-sm hover:bg-zinc-900"
         >
           Dashboard

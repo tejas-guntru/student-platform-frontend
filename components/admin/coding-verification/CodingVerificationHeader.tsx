@@ -38,7 +38,7 @@ export default function CodingVerificationHeader({
         </button>
 
         <Link
-          href="/admin"
+          href="/admin/dashboard"
           className="rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-900"
         >
           ← Dashboard
