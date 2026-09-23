@@ -1,25 +1,29 @@
+"use client";
+
 import Link from "next/link";
 
-export default function Hero() {
-  return (
-    <section className="relative isolate overflow-hidden bg-[#0877E8]">
-      {/* =====================================================
-          BACKGROUND BASE
-      ===================================================== */}
+export default function HeroSection() {
+  const features = [
+    "Expert Mentorship",
+    "Regular Assessments",
+    "Real-World Projects",
+    "Career Focused",
+    "Vibrant Community",
+  ];
 
+  return (
+    <section className="relative isolate overflow-hidden bg-[#064C9D]">
+      {/* Background Gradient */}
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute inset-0
-          bg-[linear-gradient(135deg,#0877E8_0%,#1294F2_42%,#36B9FF_100%)]
+          bg-[linear-gradient(135deg,#064C9D_0%,#086BC4_45%,#1298E8_100%)]
         "
       />
 
-      {/* =====================================================
-          LARGE LIGHT GLOW — TOP RIGHT
-      ===================================================== */}
-
+      {/* Top Right Glow */}
       <div
         aria-hidden="true"
         className="
@@ -27,8 +31,8 @@ export default function Hero() {
           absolute -right-32 -top-44
           h-[520px] w-[520px]
           rounded-full
-          bg-white/35
-          blur-[120px]
+          bg-white/18
+          blur-[130px]
 
           sm:h-[650px]
           sm:w-[650px]
@@ -40,10 +44,7 @@ export default function Hero() {
         "
       />
 
-      {/* =====================================================
-          CYAN GLOW — BOTTOM LEFT
-      ===================================================== */}
-
+      {/* Bottom Left Glow */}
       <div
         aria-hidden="true"
         className="
@@ -51,7 +52,7 @@ export default function Hero() {
           absolute -bottom-40 -left-32
           h-[420px] w-[420px]
           rounded-full
-          bg-[#6DE2FF]/45
+          bg-[#38BDF8]/25
           blur-[120px]
 
           lg:h-[600px]
@@ -59,10 +60,7 @@ export default function Hero() {
         "
       />
 
-      {/* =====================================================
-          DEEP BLUE GLOW
-      ===================================================== */}
-
+      {/* Deep Blue Glow */}
       <div
         aria-hidden="true"
         className="
@@ -70,35 +68,29 @@ export default function Hero() {
           absolute left-[35%] top-[15%]
           h-[400px] w-[400px]
           rounded-full
-          bg-[#0054C7]/35
+          bg-[#003F91]/30
           blur-[140px]
         "
       />
 
-      {/* =====================================================
-          GRID EFFECT
-      ===================================================== */}
-
+      {/* Grid Effect */}
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute inset-0
-          opacity-[0.13]
+          opacity-[0.08]
         "
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.35) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
           `,
           backgroundSize: "56px 56px",
         }}
       />
 
-      {/* =====================================================
-          LIGHT BEAM
-      ===================================================== */}
-
+      {/* Light Beam */}
       <div
         aria-hidden="true"
         className="
@@ -108,608 +100,227 @@ export default function Hero() {
           rotate-[-20deg]
           bg-gradient-to-r
           from-transparent
-          via-white/10
+          via-white/[0.07]
           to-transparent
           blur-3xl
         "
       />
 
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
+      {/* Main Content */}
+      {/* Main Content */}
+<div
+  className="
+    relative z-10
+    mx-auto
+    flex
+    min-h-[calc(100vh-80px)]
+    max-w-7xl
+    items-center
+    justify-center
+    px-5
+    py-16
+    sm:px-8
+    sm:py-20
+    lg:px-12
+  "
+>
+  <div className="mx-auto w-full max-w-5xl text-center">
 
-      <div
+    {/* Badge */}
+    <div
+      className="
+        mb-6
+        inline-flex
+        items-center
+        gap-2.5
+        rounded-full
+        border border-white/20
+        bg-white/10
+        px-4 py-2
+        backdrop-blur-md
+      "
+    >
+      <span
         className="
-          relative
-          mx-auto
-          grid
-          min-h-[calc(100vh-80px)]
-          max-w-7xl
+          h-2 w-2
+          rounded-full
+          bg-[#8DDEFF]
+          shadow-[0_0_14px_rgba(141,222,255,0.9)]
+        "
+      />
+
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/90">
+        Learn • Build • Get Ready
+      </span>
+    </div>
+
+    {/* Main Heading */}
+    <h1
+      className="
+        mx-auto
+        max-w-5xl
+        text-4xl
+        font-semibold
+        leading-[1.08]
+        tracking-[-0.04em]
+        text-white
+
+        sm:text-5xl
+        md:text-6xl
+        lg:text-7xl
+        xl:text-[5.5rem]
+      "
+    >
+      Build{" "}
+      <span className="text-[#BFEAFF]">
+        job-ready skills
+      </span>{" "}
+      that matter.
+    </h1>
+
+    {/* Secondary Heading */}
+    <h2
+      className="
+        mt-5
+        text-2xl
+        font-semibold
+        tracking-[-0.03em]
+        text-white/90
+
+        sm:text-3xl
+        md:text-4xl
+        lg:text-[2.75rem]
+      "
+    >
+      Learn. Build.{" "}
+      <span className="text-[#BFEAFF]">
+        Get Ready.
+      </span>
+    </h2>
+
+   {/* Description */}
+<div className="mt-6 flex w-full justify-center">
+  <p
+    className="
+      max-w-[900px]
+      text-center
+      text-base
+      leading-relaxed
+      text-white/75
+      sm:text-lg
+      lg:text-xl
+      lg:leading-9
+      [text-wrap:balance]
+    "
+  >
+    Build real-world software skills through{" "}
+    <span className="font-semibold text-white">
+      expert-led coding courses
+    </span>
+    , hands-on projects, regular assessments, and career-focused mentorship
+    designed for today&apos;s job market.
+  </p>
+</div>
+    {/* CTA Buttons */}
+    <div
+      className="
+        mt-9
+        flex
+        flex-col
+        items-center
+        justify-center
+        gap-4
+        sm:flex-row
+      "
+    >
+      <Link
+        href="/sign-in"
+        className="
+          group
+          inline-flex
+          min-h-[52px]
           items-center
-          gap-14
-          px-5
-          py-20
+          justify-center
+          gap-3
+          rounded-xl
+          bg-white
+          px-7 py-3
+          text-base
+          font-semibold
+          text-[#064C9D]
+          shadow-[0_14px_40px_rgba(0,25,70,0.28)]
+          transition-all
+          duration-200
 
-          sm:px-8
-          sm:py-24
-
-          lg:grid-cols-[1.08fr_0.92fr]
-          lg:gap-16
-          lg:px-12
-          lg:py-24
+          hover:-translate-y-1
+          hover:bg-[#F3FAFF]
+          hover:shadow-[0_18px_48px_rgba(0,25,70,0.38)]
         "
       >
-        {/* ===================================================
-            LEFT CONTENT
-        =================================================== */}
+        Join Trailbliz Today
 
-        <div className="relative z-10 max-w-3xl">
-          {/* Eyebrow */}
+        <span className="transition-transform duration-200 group-hover:translate-x-1">
+          →
+        </span>
+      </Link>
 
-          <div
-            className="
-              mb-7
-              inline-flex
-              items-center
-              gap-2.5
-              rounded-full
-              border
-              border-white/25
-              bg-white/10
-              px-4
-              py-2
-              backdrop-blur-md
-            "
-          >
-            <span
-              className="
-                h-2
-                w-2
-                rounded-full
-                bg-[#9AEAFF]
-                shadow-[0_0_14px_rgba(154,234,255,0.95)]
-              "
-            />
+      <Link
+        href="#features"
+        className="
+          inline-flex
+          min-h-[52px]
+          items-center
+          justify-center
+          gap-2
+          rounded-xl
+          border border-white/20
+          bg-white/[0.08]
+          px-7 py-3
+          text-base
+          font-semibold
+          text-white
+          backdrop-blur-md
+          transition-all
+          duration-200
 
-            <span
-              className="
-                text-[12px]
-                font-semibold
-                tracking-[0.12em]
-                text-white/90
-                uppercase
-              "
-            >
-              Your career, connected
-            </span>
-          </div>
+          hover:border-white/35
+          hover:bg-white/[0.14]
+        "
+      >
+        Explore Platform
+        <span>↓</span>
+      </Link>
+    </div>
 
-          {/* Main heading */}
-
-          <h1
-            className="
-              max-w-[900px]
-              text-[clamp(3.4rem,8vw,7.4rem)]
-              font-bold
-              leading-[0.88]
-              tracking-[-0.065em]
-              text-white
-            "
-          >
-            Build your profile.
-            <span className="block text-[#C6F1FF]">
-              Find your path.
-            </span>
-          </h1>
-
-          {/* Description */}
-
-          <p
-            className="
-              mt-8
-              max-w-xl
-              text-base
-              leading-7
-              text-white/75
-
-              sm:text-lg
-              sm:leading-8
-
-              lg:text-xl
-            "
-          >
-            Bring your academics, skills, projects and opportunities
-            together in one place — and turn your progress into your
-            next move.
-          </p>
-
-          {/* CTA */}
-
-          <div
-            className="
-              mt-10
-              flex
-              flex-col
-              gap-4
-
-              sm:flex-row
-              sm:items-center
-            "
-          >
-            <Link
-              href="/register"
-              className="
-                group
-                inline-flex
-                min-h-13
-                items-center
-                justify-center
-                gap-3
-                rounded-2xl
-                bg-white
-                px-7
-                py-3.5
-                text-[15px]
-                font-semibold
-                text-[#0869D3]
-                shadow-[0_14px_40px_rgba(0,67,145,0.22)]
-                transition-all
-                duration-200
-
-                hover:-translate-y-1
-                hover:bg-[#F3FBFF]
-                hover:shadow-[0_18px_48px_rgba(0,67,145,0.3)]
-              "
-            >
-              Join Trailbliz
-
-              <span
-                className="
-                  text-lg
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
-                "
-              >
-                →
-              </span>
-            </Link>
-
-            <Link
-              href="#your-trail"
-              className="
-                inline-flex
-                min-h-13
-                items-center
-                justify-center
-                gap-2
-                rounded-2xl
-                border
-                border-white/25
-                bg-white/10
-                px-6
-                py-3.5
-                text-[15px]
-                font-semibold
-                text-white
-                backdrop-blur-md
-                transition-all
-                duration-200
-
-                hover:bg-white/20
-                hover:border-white/40
-              "
-            >
-              Explore platform
-
-              <span aria-hidden="true">
-                ↓
-              </span>
-            </Link>
-          </div>
-
-          {/* Mini supporting row */}
-
-          <div
-            className="
-              mt-12
-              flex
-              flex-wrap
-              gap-x-7
-              gap-y-3
-              text-sm
-              text-white/65
-            "
-          >
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
-              Student profile
-            </span>
-
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
-              Projects
-            </span>
-
-            <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
-              Opportunities
-            </span>
-          </div>
-        </div>
-
-        {/* ===================================================
-            RIGHT VISUAL
-        =================================================== */}
-
-        <div
-          className="
-            relative
-            mx-auto
-            w-full
-            max-w-[520px]
-
-            lg:mx-0
-            lg:justify-self-end
-          "
+    {/* Features */}
+    <div
+      className="
+        mt-10
+        flex
+        flex-wrap
+        items-center
+        justify-center
+        gap-x-6
+        gap-y-3
+        text-sm
+        text-white/65
+      "
+    >
+      {features.map((item) => (
+        <span
+          key={item}
+          className="flex items-center gap-2"
         >
-          {/* Outer glow */}
+          <span className="h-1.5 w-1.5 rounded-full bg-[#8DDEFF]" />
+          {item}
+        </span>
+      ))}
+    </div>
 
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              inset-8
-              rounded-[40px]
-              bg-white/30
-              blur-[70px]
-            "
-          />
+  </div>
+</div>
 
-          {/* Main glass panel */}
-
-          <div
-            className="
-              relative
-              overflow-hidden
-              rounded-[32px]
-              border
-              border-white/30
-              bg-white/14
-              p-4
-              shadow-[0_30px_100px_rgba(0,61,138,0.28)]
-              backdrop-blur-2xl
-
-              sm:p-5
-            "
-          >
-            {/* Top bar */}
-
-            <div
-              className="
-                mb-4
-                flex
-                items-center
-                justify-between
-                px-2
-                pt-1
-              "
-            >
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/50" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
-              </div>
-
-              <span
-                className="
-                  text-[11px]
-                  font-semibold
-                  tracking-[0.12em]
-                  text-white/60
-                  uppercase
-                "
-              >
-                Trailbliz
-              </span>
-            </div>
-
-            {/* Inner dashboard */}
-
-            <div
-              className="
-                rounded-[24px]
-                bg-white
-                p-5
-                shadow-[0_18px_50px_rgba(0,67,145,0.15)]
-
-                sm:p-6
-              "
-            >
-              {/* Profile */}
-
-              <div className="flex items-center gap-4">
-                <div
-                  className="
-                    flex
-                    h-12
-                    w-12
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-gradient-to-br
-                    from-[#1689F5]
-                    to-[#55C9FF]
-                    text-sm
-                    font-bold
-                    text-white
-                    shadow-lg
-                  "
-                >
-                  T
-                </div>
-
-                <div>
-                  <p className="font-semibold text-[#122A46]">
-                    Your Trail
-                  </p>
-
-                  <p className="mt-1 text-sm text-[#64748B]">
-                    Build. Improve. Move forward.
-                  </p>
-                </div>
-              </div>
-
-              {/* Progress */}
-
-              <div
-                className="
-                  mt-6
-                  rounded-2xl
-                  border
-                  border-[#DCEAF7]
-                  bg-[#F5FAFF]
-                  p-4
-                "
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-[#173B63]">
-                    Profile progress
-                  </span>
-
-                  <span className="text-sm font-bold text-[#1689F5]">
-                    78%
-                  </span>
-                </div>
-
-                <div
-                  className="
-                    mt-3
-                    h-2
-                    overflow-hidden
-                    rounded-full
-                    bg-[#DDEFFC]
-                  "
-                >
-                  <div
-                    className="
-                      h-full
-                      w-[78%]
-                      rounded-full
-                      bg-gradient-to-r
-                      from-[#0877E8]
-                      to-[#48C6FF]
-                    "
-                  />
-                </div>
-              </div>
-
-              {/* Cards */}
-
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div
-                  className="
-                    rounded-2xl
-                    border
-                    border-[#DCEAF7]
-                    bg-[#F8FCFF]
-                    p-4
-                  "
-                >
-                  <div
-                    className="
-                      mb-3
-                      flex
-                      h-9
-                      w-9
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-[#E4F3FF]
-                      text-[#0877E8]
-                    "
-                  >
-                    ◇
-                  </div>
-
-                  <p className="text-xs text-[#7A8CA3]">
-                    Projects
-                  </p>
-
-                  <p className="mt-1 text-lg font-bold text-[#173B63]">
-                    Build proof
-                  </p>
-                </div>
-
-                <div
-                  className="
-                    rounded-2xl
-                    border
-                    border-[#DCEAF7]
-                    bg-[#F8FCFF]
-                    p-4
-                  "
-                >
-                  <div
-                    className="
-                      mb-3
-                      flex
-                      h-9
-                      w-9
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-[#E4F3FF]
-                      text-[#0877E8]
-                    "
-                  >
-                    ↗
-                  </div>
-
-                  <p className="text-xs text-[#7A8CA3]">
-                    Opportunities
-                  </p>
-
-                  <p className="mt-1 text-lg font-bold text-[#173B63]">
-                    Move ahead
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom card */}
-
-              <div
-                className="
-                  mt-3
-                  flex
-                  items-center
-                  justify-between
-                  rounded-2xl
-                  bg-gradient-to-r
-                  from-[#0B76E5]
-                  to-[#26ACF5]
-                  p-4
-                  text-white
-                "
-              >
-                <div>
-                  <p className="text-xs text-white/70">
-                    Your next step
-                  </p>
-
-                  <p className="mt-1 text-sm font-semibold">
-                    Keep building your trail
-                  </p>
-                </div>
-
-                <span
-                  className="
-                    flex
-                    h-9
-                    w-9
-                    items-center
-                    justify-center
-                    rounded-xl
-                    bg-white/15
-                    text-lg
-                  "
-                >
-                  →
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* ===================================================
-              FLOATING CARD 1
-          =================================================== */}
-
-          <div
-            className="
-              absolute
-              -left-5
-              top-[18%]
-              hidden
-              rounded-2xl
-              border
-              border-white/40
-              bg-white/90
-              px-4
-              py-3
-              shadow-[0_14px_40px_rgba(0,67,145,0.18)]
-              backdrop-blur-xl
-
-              sm:block
-              lg:-left-12
-            "
-          >
-            <p className="text-xs text-[#74879D]">
-              Skills
-            </p>
-
-            <p className="mt-1 text-sm font-bold text-[#173B63]">
-              Show what you can do
-            </p>
-          </div>
-
-          {/* ===================================================
-              FLOATING CARD 2
-          =================================================== */}
-
-          <div
-            className="
-              absolute
-              -bottom-5
-              right-2
-              hidden
-              rounded-2xl
-              border
-              border-white/40
-              bg-white/90
-              px-4
-              py-3
-              shadow-[0_14px_40px_rgba(0,67,145,0.18)]
-              backdrop-blur-xl
-
-              sm:block
-              lg:-right-7
-            "
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className="
-                  flex
-                  h-9
-                  w-9
-                  items-center
-                  justify-center
-                  rounded-xl
-                  bg-[#E6F5FF]
-                  text-[#0877E8]
-                "
-              >
-                ✓
-              </div>
-
-              <div>
-                <p className="text-xs text-[#74879D]">
-                  Profile
-                </p>
-
-                <p className="text-sm font-bold text-[#173B63]">
-                  Career ready
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* =====================================================
-          BOTTOM FADE
-      ===================================================== */}
-
+      {/* Bottom Fade */}
       <div
         aria-hidden="true"
         className="

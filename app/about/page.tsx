@@ -6,10 +6,12 @@ import OurTeam from "../../components/about/OurTeam";
 import OurJourney from "../../components/about/OurJourney";
 import EducationalApproach from "../../components/about/EducationalApproach";
 import TechnologyPlatform from "../../components/about/TechnologyPlatform";
+import Navbar from "@/components/Navbar";
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
+      <Navbar/>
       <AboutHeader />
       <OurMission />
       <EducationalApproach />

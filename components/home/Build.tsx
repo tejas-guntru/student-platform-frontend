@@ -1,41 +1,82 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const items = [
+  {
+    number: "01",
+    title: "Academics",
+    value: "Computer Science Engineering",
+    description: "Your foundation and academic journey.",
+    side: "left",
+  },
+  {
+    number: "02",
+    title: "Skills",
+    value: "Java · React · Spring Boot · AWS",
+    description: "What you know and what you keep improving.",
+    side: "right",
+  },
+  {
+    number: "03",
+    title: "Projects",
+    value: "Operating System",
+    description: "Proof of what you can actually build.",
+    side: "left",
+  },
+  {
+    number: "04",
+    title: "Experience",
+    value: "Software Engineering Intern",
+    description: "Where your skills meet real work.",
+    side: "right",
+  },
+];
+
 export default function Build() {
-  const items = [
-    {
-      number: "01",
-      title: "Academics",
-      value: "Computer Science Engineering",
-      description: "Your foundation and academic journey.",
-      position: "lg:ml-[2%]",
-      width: "lg:w-[43%]",
-    },
-    {
-      number: "02",
-      title: "Skills",
-      value: "Java · React · Spring Boot · AWS",
-      description: "What you know and what you keep improving.",
-      position: "lg:ml-[54%]",
-      width: "lg:w-[43%]",
-    },
-    {
-      number: "03",
-      title: "Projects",
-      value: "College Payment OS · Trailbliz",
-      description: "Proof of what you can actually build.",
-      position: "lg:ml-[8%]",
-      width: "lg:w-[43%]",
-    },
-    {
-      number: "04",
-      title: "Experience",
-      value: "Software Engineering Intern",
-      description: "Where your skills meet real work.",
-      position: "lg:ml-[57%]",
-      width: "lg:w-[40%]",
-    },
-  ];
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const section = sectionRef.current;
+
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const start = windowHeight * 0.75;
+      const end = -rect.height * 0.65;
+
+      const rawProgress =
+        (start - rect.top) / (start - end);
+
+      const nextProgress = Math.min(
+        1,
+        Math.max(0, rawProgress)
+      );
+
+      setProgress(nextProgress);
+    };
+
+    updateProgress();
+
+    window.addEventListener("scroll", updateProgress, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       className="
         relative
         overflow-hidden
@@ -51,7 +92,7 @@ export default function Build() {
       "
     >
       {/* =====================================================
-          BACKGROUND EFFECTS
+          BACKGROUND
       ===================================================== */}
 
       <div
@@ -60,7 +101,7 @@ export default function Build() {
           pointer-events-none
           absolute
           -left-40
-          top-[18%]
+          top-[15%]
           h-[460px]
           w-[460px]
           rounded-full
@@ -75,7 +116,7 @@ export default function Build() {
           pointer-events-none
           absolute
           -right-48
-          top-[40%]
+          top-[45%]
           h-[520px]
           w-[520px]
           rounded-full
@@ -84,6 +125,7 @@ export default function Build() {
         "
       />
 
+      {/* Dots */}
       <div
         aria-hidden="true"
         className="
@@ -93,9 +135,8 @@ export default function Build() {
           opacity-[0.38]
         "
         style={{
-          backgroundImage: `
-            radial-gradient(circle at center, rgba(8,119,232,0.08) 1px, transparent 1px)
-          `,
+          backgroundImage:
+            "radial-gradient(circle at center, rgba(8,119,232,0.08) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -163,6 +204,7 @@ export default function Build() {
               "
             >
               You&apos;re more than
+
               <span
                 className="
                   block
@@ -192,275 +234,139 @@ export default function Build() {
               lg:justify-self-end
             "
           >
-            Your academics, skills, projects and experience tell a much
-            bigger story when they&apos;re connected together.
+            Your academics, skills, projects and experience
+            tell a much bigger story when they&apos;re
+            connected together.
           </p>
         </div>
 
         {/* =====================================================
-            BUILD JOURNEY
+            SCROLL JOURNEY
         ===================================================== */}
 
         <div
           className="
             relative
-            mt-16
+            mt-20
 
-            sm:mt-20
-
-            lg:mt-28
+            sm:mt-24
+            lg:mt-32
           "
         >
-          {/* ===================================================
-              DESKTOP CENTER TRAIL
-          =================================================== */}
+          {/* ===============================================
+              CENTER TRAIL
+          =============================================== */}
 
           <div
             aria-hidden="true"
             className="
               absolute
-              bottom-[70px]
+              bottom-[110px]
               left-1/2
-              top-[40px]
+              top-[70px]
               hidden
               w-[2px]
               -translate-x-1/2
-              bg-gradient-to-b
-              from-transparent
-              via-[#9FD6FA]
-              to-transparent
+              overflow-hidden
+              rounded-full
+              bg-[#D9ECFA]
 
               lg:block
             "
-          />
+          >
+            {/* Scroll progress */}
+            <div
+              className="
+                absolute
+                left-0
+                top-0
+                w-full
+                rounded-full
+                bg-gradient-to-b
+                from-[#0877E8]
+                via-[#25A9F6]
+                to-[#55D2FF]
 
-          {/* Center glow */}
+                shadow-[0_0_18px_rgba(8,119,232,0.55)]
+              "
+              style={{
+                height: `${progress * 100}%`,
+              }}
+            />
+          </div>
 
+          {/* Trail glow */}
           <div
             aria-hidden="true"
             className="
+              pointer-events-none
               absolute
               left-1/2
               top-1/2
               hidden
-              h-[70%]
+              h-[85%]
               w-24
               -translate-x-1/2
               -translate-y-1/2
-              bg-[#55C8FF]/15
+              bg-[#55C8FF]/10
               blur-[60px]
 
               lg:block
             "
           />
 
-          {/* ===================================================
+          {/* ===============================================
               ITEMS
-          =================================================== */}
+          =============================================== */}
 
-          <div className="relative space-y-5 lg:space-y-14">
-            {items.map((item) => (
-              <div
-                key={item.number}
-                className={`
-                  relative
-                  w-full
-                  ${item.position}
-                  ${item.width}
-                `}
-              >
-                <div
-                  className="
-                    group
-                    relative
-                    overflow-hidden
-                    rounded-[28px]
-                    border
-                    border-[#D9EAF7]
-                    bg-white/85
-                    p-6
-                    shadow-[0_14px_45px_rgba(8,119,232,0.07)]
-                    backdrop-blur-xl
-                    transition-all
-                    duration-300
+          <div className="relative space-y-8 lg:space-y-24">
+            {items.map((item, index) => {
+              const trigger = index * 0.18 + 0.05;
 
-                    hover:-translate-y-1
-                    hover:border-[#A9D7F5]
-                    hover:shadow-[0_20px_60px_rgba(8,119,232,0.14)]
+              const visible = progress >= trigger;
 
-                    sm:p-7
-                  "
-                >
-                  {/* Card glow */}
-
-                  <div
-                    aria-hidden="true"
-                    className="
-                      pointer-events-none
-                      absolute
-                      -right-14
-                      -top-14
-                      h-36
-                      w-36
-                      rounded-full
-                      bg-[#DDF2FF]
-                      blur-[45px]
-                      transition-transform
-                      duration-500
-                      group-hover:scale-125
-                    "
-                  />
-
-                  <div className="relative">
-                    {/* Number */}
-
-                    <div className="flex items-center justify-between">
-                      <span
-                        className="
-                          inline-flex
-                          h-10
-                          w-10
-                          items-center
-                          justify-center
-                          rounded-xl
-                          bg-[#E7F4FF]
-                          text-xs
-                          font-bold
-                          text-[#0877E8]
-                        "
-                      >
-                        {item.number}
-                      </span>
-
-                      <span
-                        className="
-                          h-2
-                          w-2
-                          rounded-full
-                          bg-[#39BDF7]
-                          shadow-[0_0_10px_rgba(57,189,247,0.6)]
-                        "
-                      />
-                    </div>
-
-                    {/* Category */}
-
-                    <p
-                      className="
-                        mt-6
-                        text-[11px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.15em]
-                        text-[#5B8DB5]
-                      "
-                    >
-                      {item.title}
-                    </p>
-
-                    {/* Value */}
-
-                    <h3
-                      className="
-                        mt-2
-                        text-xl
-                        font-bold
-                        leading-tight
-                        tracking-[-0.03em]
-                        text-[#173B63]
-
-                        sm:text-2xl
-                      "
-                    >
-                      {item.value}
-                    </h3>
-
-                    {/* Description */}
-
-                    <p
-                      className="
-                        mt-3
-                        text-sm
-                        leading-6
-                        text-[#6A8198]
-                      "
-                    >
-                      {item.description}
-                    </p>
-
-                    {/* Bottom accent */}
-
-                    <div
-                      className="
-                        mt-6
-                        h-1
-                        w-10
-                        rounded-full
-                        bg-gradient-to-r
-                        from-[#0877E8]
-                        to-[#45C6FF]
-                        transition-all
-                        duration-300
-                        group-hover:w-20
-                      "
-                    />
-                  </div>
-                </div>
-
-                {/* =================================================
-                    DESKTOP CONNECTION DOT
-                ================================================= */}
-
-                <div
-                  aria-hidden="true"
-                  className={`
-                    absolute
-                    top-1/2
-                    hidden
-                    h-4
-                    w-4
-                    -translate-y-1/2
-                    rounded-full
-                    border-[4px]
-                    border-white
-                    bg-[#1689F5]
-                    shadow-[0_0_0_1px_#83C5F3,0_0_20px_rgba(8,119,232,0.4)]
-
-                    lg:block
-
-                    ${
-                      item.position.includes("54") ||
-                      item.position.includes("57")
-                        ? "-left-[calc(10%+18px)]"
-                        : "-right-[calc(18%+18px)]"
-                    }
-                  `}
+              return (
+                <JourneyItem
+                  key={item.number}
+                  item={item}
+                  visible={visible}
                 />
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* ===================================================
-              FINAL POINT
-          =================================================== */}
+          {/* =================================================
+              FINAL DESTINATION
+          ================================================= */}
 
           <div
-            className="
+            className={`
               relative
               mx-auto
-              mt-14
+              mt-20
               max-w-lg
 
-              lg:mt-24
-            "
+              transition-all
+              duration-1000
+              ease-out
+
+              lg:mt-28
+
+              ${
+                progress > 0.72
+                  ? "translate-y-0 scale-100 opacity-100"
+                  : "translate-y-16 scale-[0.94] opacity-0"
+              }
+            `}
           >
+            {/* Glow */}
             <div
               className="
                 absolute
                 inset-4
                 rounded-[32px]
-                bg-[#1AA4F6]/25
-                blur-[50px]
+                bg-[#1AA4F6]/30
+                blur-[55px]
               "
             />
 
@@ -468,142 +374,438 @@ export default function Build() {
               className="
                 relative
                 overflow-hidden
-                rounded-[28px]
+                rounded-[30px]
                 bg-gradient-to-r
                 from-[#0877E8]
                 via-[#1294F2]
                 to-[#38BDF8]
                 p-[1px]
-                shadow-[0_24px_70px_rgba(8,119,232,0.22)]
+
+                shadow-[0_30px_80px_rgba(8,119,232,0.28)]
               "
             >
               <div
                 className="
-                  rounded-[27px]
+                  relative
+                  overflow-hidden
+                  rounded-[29px]
                   bg-[#0A83E9]
                   px-7
-                  py-8
+                  py-9
                   text-center
                   text-white
                 "
               >
+                {/* shine */}
                 <div
                   className="
-                    mx-auto
-                    flex
-                    h-12
-                    w-12
-                    items-center
-                    justify-center
-                    rounded-2xl
+                    pointer-events-none
+                    absolute
+                    left-1/2
+                    top-[-100px]
+                    h-[180px]
+                    w-[70%]
+                    -translate-x-1/2
+                    rounded-full
                     bg-white/15
-                    text-xl
-                    backdrop-blur-md
+                    blur-[60px]
                   "
-                >
-                  ↗
+                />
+
+                <div className="relative">
+                  <div
+                    className="
+                      mx-auto
+                      flex
+                      h-12
+                      w-12
+                      items-center
+                      justify-center
+                      rounded-2xl
+                      bg-white/15
+                      text-xl
+                      backdrop-blur-md
+
+                      transition-transform
+                      duration-500
+
+                      hover:scale-110
+                      hover:rotate-6
+                    "
+                  >
+                    ↗
+                  </div>
+
+                  <p
+                    className="
+                      mt-5
+                      text-[11px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.16em]
+                      text-white/65
+                    "
+                  >
+                    Your story
+                  </p>
+
+                  <h3
+                    className="
+                      mt-2
+                      text-2xl
+                      font-bold
+                      tracking-[-0.035em]
+                      text-white
+
+                      sm:text-3xl
+                    "
+                  >
+                    One profile. Everything about you.
+                  </h3>
+
+                  <p
+                    className="
+                      mx-auto
+                      mt-3
+                      max-w-sm
+                      text-sm
+                      leading-6
+                      text-white/70
+                    "
+                  >
+                    Your complete journey becomes a profile
+                    that grows with you.
+                  </p>
                 </div>
-
-                <p
-                  className="
-                    mt-5
-                    text-[11px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.16em]
-                    text-white/65
-                  "
-                >
-                  Your story
-                </p>
-
-                <h3
-                  className="
-                    mt-2
-                    text-2xl
-                    font-bold
-                    tracking-[-0.035em]
-                    text-white
-
-                    sm:text-3xl
-                  "
-                >
-                  One profile. Everything about you.
-                </h3>
-
-                <p
-                  className="
-                    mx-auto
-                    mt-3
-                    max-w-sm
-                    text-sm
-                    leading-6
-                    text-white/70
-                  "
-                >
-                  Your complete journey becomes a profile that grows
-                  with you.
-                </p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* =====================================================
-            CLOSING STATEMENT
-        ===================================================== */}
-
-        <div
-          className="
-            mt-20
-            border-t
-            border-[#DCEAF6]
-            pt-8
-
-            sm:mt-24
-          "
-        >
-          <div
-            className="
-              flex
-              flex-col
-              gap-3
-
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
-            "
-          >
-            <p
-              className="
-                text-xl
-                font-semibold
-                tracking-[-0.03em]
-                text-[#173B63]
-
-                sm:text-2xl
-                lg:text-3xl
-              "
-            >
-              Everything you&apos;ve done.
-              <span className="text-[#1689F5]">
-                {" "}
-                Connected.
-              </span>
-            </p>
-
-            <span
-              className="
-                text-sm
-                font-semibold
-                text-[#0877E8]
-              "
-            >
-              This is your Trailbliz profile →
-            </span>
-          </div>
-        </div>
       </div>
     </section>
+  );
+}
+
+/* =========================================================
+   JOURNEY ITEM
+========================================================= */
+
+function JourneyItem({
+  item,
+  visible,
+}: {
+  item: {
+    number: string;
+    title: string;
+    value: string;
+    description: string;
+    side: string;
+  };
+  visible: boolean;
+}) {
+  const isLeft = item.side === "left";
+
+  return (
+    <div
+      className={`
+        relative
+        w-full
+
+        transition-all
+        duration-1000
+        ease-out
+
+        lg:w-[43%]
+
+        ${
+          isLeft
+            ? "lg:mr-auto"
+            : "lg:ml-auto"
+        }
+
+        ${
+          visible
+            ? "translate-x-0 translate-y-0 opacity-100"
+            : isLeft
+              ? "-translate-x-16 translate-y-12 opacity-20"
+              : "translate-x-16 translate-y-12 opacity-20"
+        }
+      `}
+    >
+      {/* ===============================================
+          CONNECTION LINE
+      =============================================== */}
+
+      <div
+        aria-hidden="true"
+        className={`
+          absolute
+          top-1/2
+          hidden
+          h-px
+          w-[16.3%]
+          -translate-y-1/2
+
+          transition-all
+          duration-700
+
+          lg:block
+
+          ${
+            isLeft
+              ? "left-full"
+              : "right-full"
+          }
+
+          ${
+            visible
+              ? "bg-[#7BC8F6]"
+              : "bg-[#D9EAF7]"
+          }
+        `}
+      />
+
+      {/* ===============================================
+          CENTER DOT
+      =============================================== */}
+
+      <div
+        aria-hidden="true"
+        className={`
+          absolute
+          top-1/2
+          hidden
+          h-4
+          w-4
+          -translate-y-1/2
+          rounded-full
+          border-[4px]
+          border-white
+
+          transition-all
+          duration-700
+
+          lg:block
+
+          ${
+            isLeft
+              ? "left-[calc(116.3%-8px)]"
+              : "right-[calc(116.3%-8px)]"
+          }
+
+          ${
+            visible
+              ? `
+                scale-100
+                bg-[#1689F5]
+                shadow-[0_0_0_1px_#83C5F3,0_0_25px_rgba(8,119,232,0.55)]
+              `
+              : `
+                scale-75
+                bg-[#B8D9EF]
+              `
+          }
+        `}
+      />
+
+      {/* ===============================================
+          CARD
+      =============================================== */}
+
+      <div
+        className={`
+          group
+          relative
+          overflow-hidden
+          rounded-[28px]
+          border
+          bg-white/90
+          p-6
+          backdrop-blur-xl
+
+          transition-all
+          duration-700
+
+          sm:p-7
+
+          ${
+            visible
+              ? `
+                border-[#C5E2F5]
+                shadow-[0_20px_60px_rgba(8,119,232,0.11)]
+              `
+              : `
+                border-[#E5EFF6]
+                shadow-[0_10px_30px_rgba(8,119,232,0.04)]
+              `
+          }
+
+          hover:-translate-y-2
+          hover:border-[#8CCEF5]
+          hover:shadow-[0_26px_70px_rgba(8,119,232,0.16)]
+        `}
+      >
+        {/* Card glow */}
+        <div
+          aria-hidden="true"
+          className={`
+            pointer-events-none
+            absolute
+            -right-16
+            -top-16
+            h-40
+            w-40
+            rounded-full
+            blur-[45px]
+
+            transition-all
+            duration-700
+
+            ${
+              visible
+                ? "scale-100 bg-[#DDF2FF]"
+                : "scale-75 bg-transparent"
+            }
+
+            group-hover:scale-125
+          `}
+        />
+
+        {/* Top accent */}
+        <div
+          className={`
+            absolute
+            left-8
+            right-8
+            top-0
+            h-[2px]
+
+            bg-gradient-to-r
+            from-transparent
+            via-[#38BDF8]
+            to-transparent
+
+            transition-opacity
+            duration-700
+
+            ${
+              visible
+                ? "opacity-60"
+                : "opacity-0"
+            }
+          `}
+        />
+
+        <div className="relative">
+          <div className="flex items-center justify-between">
+            <span
+              className="
+                inline-flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#E7F4FF]
+
+                text-xs
+                font-bold
+                text-[#0877E8]
+
+                transition-all
+                duration-500
+
+                group-hover:scale-110
+                group-hover:bg-[#0877E8]
+                group-hover:text-white
+              "
+            >
+              {item.number}
+            </span>
+
+            <span
+              className={`
+                h-2
+                w-2
+                rounded-full
+
+                transition-all
+                duration-700
+
+                ${
+                  visible
+                    ? `
+                      bg-[#39BDF7]
+                      shadow-[0_0_12px_rgba(57,189,247,0.8)]
+                    `
+                    : "bg-[#C6DFEF]"
+                }
+              `}
+            />
+          </div>
+
+          <p
+            className="
+              mt-6
+              text-[11px]
+              font-semibold
+              uppercase
+              tracking-[0.15em]
+              text-[#5B8DB5]
+            "
+          >
+            {item.title}
+          </p>
+
+          <h3
+            className="
+              mt-2
+              text-xl
+              font-bold
+              leading-tight
+              tracking-[-0.03em]
+              text-[#173B63]
+
+              sm:text-2xl
+            "
+          >
+            {item.value}
+          </h3>
+
+          <p
+            className="
+              mt-3
+              text-sm
+              leading-6
+              text-[#6A8198]
+            "
+          >
+            {item.description}
+          </p>
+
+          <div
+            className={`
+              mt-6
+              h-1
+              rounded-full
+              bg-gradient-to-r
+              from-[#0877E8]
+              to-[#45C6FF]
+
+              transition-all
+              duration-700
+
+              ${
+                visible
+                  ? "w-14"
+                  : "w-0"
+              }
+
+              group-hover:w-24
+            `}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

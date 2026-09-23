@@ -11,7 +11,6 @@ export default function Navbar() {
         z-50
         px-4
         pt-4
-
         sm:px-6
         lg:px-8
       "
@@ -26,47 +25,70 @@ export default function Navbar() {
           items-center
           justify-between
 
+          overflow-hidden
           rounded-[22px]
-          border
-          border-white/25
 
-          bg-white/[0.12]
+          border
+          border-white/20
+
+          bg-[#075EB5]/45
 
           px-5
           py-3
 
-          shadow-[0_12px_40px_rgba(0,45,110,0.16)]
+          shadow-[0_12px_40px_rgba(0,35,90,0.14)]
 
-          backdrop-blur-2xl
+          backdrop-blur-xl
           backdrop-saturate-150
 
           sm:px-7
           lg:px-8
         "
       >
-        {/* Top glass highlight */}
+        {/* Glass highlight */}
         <div
           aria-hidden="true"
           className="
             pointer-events-none
             absolute
-            left-8
-            right-8
+            left-10
+            right-10
             top-0
             h-px
             bg-gradient-to-r
             from-transparent
-            via-white/60
+            via-white/45
             to-transparent
           "
         />
 
-        {/* Logo */}
+        {/* Soft inner glow */}
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-[-70px]
+            h-[120px]
+            w-[65%]
+            -translate-x-1/2
+            rounded-full
+            bg-white/[0.10]
+            blur-[45px]
+          "
+        />
+
+        {/* =========================
+            LOGO
+        ========================= */}
+
         <Link
           href="/"
           aria-label="Trailbliz home"
           className="
             relative
+            z-10
             flex
             h-[42px]
             w-[175px]
@@ -74,6 +96,11 @@ export default function Navbar() {
             items-center
             justify-start
             overflow-hidden
+
+            transition-transform
+            duration-300
+
+            hover:scale-[1.02]
 
             sm:h-[46px]
             sm:w-[195px]
@@ -89,21 +116,27 @@ export default function Navbar() {
               h-full
               w-auto
               object-contain
+              drop-shadow-[0_3px_12px_rgba(0,0,0,0.12)]
             "
           />
         </Link>
 
-        {/* Desktop */}
-        <div className="hidden items-center gap-1 md:flex">
+        {/* =========================
+            DESKTOP NAVIGATION
+        ========================= */}
+
+        <div className="relative z-10 hidden items-center gap-1 md:flex">
           <Link
             href="/about"
             className="
               rounded-xl
               px-4
               py-2.5
+
               text-sm
               font-medium
               text-white/85
+
               transition-all
               duration-200
 
@@ -120,9 +153,11 @@ export default function Navbar() {
               rounded-xl
               px-4
               py-2.5
+
               text-sm
               font-medium
               text-white/85
+
               transition-all
               duration-200
 
@@ -133,8 +168,10 @@ export default function Navbar() {
             Log in
           </Link>
 
-          <div className="mx-2 h-6 w-px bg-white/25" />
+          {/* Divider */}
+          <div className="mx-2 h-6 w-px bg-white/20" />
 
+          {/* CTA */}
           <Link
             href="/register"
             className="
@@ -147,6 +184,9 @@ export default function Navbar() {
 
               rounded-xl
 
+              border
+              border-white/40
+
               bg-white
 
               px-5
@@ -156,14 +196,14 @@ export default function Navbar() {
               font-semibold
               text-[#0877E8]
 
-              shadow-[0_8px_24px_rgba(0,52,120,0.18)]
+              shadow-[0_8px_24px_rgba(0,40,100,0.18)]
 
               transition-all
-              duration-200
+              duration-300
 
               hover:-translate-y-0.5
-              hover:bg-[#F1FAFF]
-              hover:shadow-[0_12px_30px_rgba(0,52,120,0.25)]
+              hover:bg-[#F4FBFF]
+              hover:shadow-[0_12px_32px_rgba(0,40,100,0.25)]
             "
           >
             Join Trailbliz
@@ -171,7 +211,7 @@ export default function Navbar() {
             <span
               className="
                 transition-transform
-                duration-200
+                duration-300
                 group-hover:translate-x-1
               "
             >
@@ -180,17 +220,27 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile */}
-        <div className="flex items-center gap-1 md:hidden">
+        {/* =========================
+            MOBILE
+        ========================= */}
+
+        <div className="relative z-10 flex items-center gap-1 md:hidden">
           <Link
             href="/login"
             className="
               rounded-lg
               px-3
               py-2
+
               text-[13px]
               font-medium
-              text-white/85
+              text-white/90
+
+              transition-all
+              duration-200
+
+              hover:bg-white/10
+              hover:text-white
             "
           >
             Log in
@@ -206,6 +256,9 @@ export default function Navbar() {
 
               rounded-xl
 
+              border
+              border-white/40
+
               bg-white
 
               px-4
@@ -215,7 +268,13 @@ export default function Navbar() {
               font-semibold
               text-[#0877E8]
 
-              shadow-[0_6px_18px_rgba(0,52,120,0.18)]
+              shadow-[0_6px_18px_rgba(0,40,100,0.18)]
+
+              transition-all
+              duration-200
+
+              hover:-translate-y-0.5
+              hover:bg-[#F4FBFF]
             "
           >
             Join

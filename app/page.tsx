@@ -7,6 +7,9 @@ import MoveForward from "@/components/home/MoveForward";
 import KeepGoing from "@/components/home/KeepGoing";
 import Navbar from "@/components/Navbar";
 import StructuredData from "@/components/seo/StructuredData";
+import RecognitionComponent from "@/components/home/RecognitionComponent";
+import CollegeSection from "@/components/home/CollegeSection";
+import CompaniesSection from "@/components/home/CompaniesSection";
 
 export default function HomePage() {
   return (
@@ -15,7 +18,10 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <YourTrail />
+      <RecognitionComponent />
       <Build />
+      <CollegeSection />
+      <CompaniesSection />
       <Show />
       <Discover />
       <MoveForward />
