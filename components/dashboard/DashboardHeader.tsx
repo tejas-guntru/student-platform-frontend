@@ -79,7 +79,7 @@ export default function DashboardHeader({
             "
           >
             <Image
-              src="/trailbliz-icon.png"
+              src="/tbz.png"
               alt="Trailbliz"
               width={32}
               height={32}

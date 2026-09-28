@@ -53,7 +53,7 @@ export default function AdminHeader({
           "
         >
           <Image
-            src="/trailbliz-icon.png"
+            src="/tbz.png"
             alt="Trailbliz"
             width={44}
             height={44}

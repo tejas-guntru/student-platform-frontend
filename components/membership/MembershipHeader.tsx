@@ -109,7 +109,7 @@ export default function MembershipHeader() {
             "
           >
             <Image
-              src="/trailbliz-icon.png"
+              src="/tbz.png"
               alt="Trailbliz"
               width={34}
               height={34}

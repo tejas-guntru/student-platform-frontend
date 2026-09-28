@@ -7,7 +7,7 @@ import { FormEvent, useState } from "react";
 import AuthInput from "@/components/auth/AuthInput";
 import { register } from "@/services/authService";
 
-export default function RegisterForm() {
+export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,23 +50,17 @@ export default function RegisterForm() {
         fullName: fullName.trim(),
         email: email.trim().toLowerCase(),
         password,
+
+        // This registration page is only for students.
+        role: "STUDENT",
       });
 
       localStorage.setItem("token", response.token);
       localStorage.setItem("email", response.email);
       localStorage.setItem("role", response.role);
 
-      if (response.role === "STUDENT") {
-        window.location.href = "/profile";
-        return;
-      }
-
-      if (response.role === "ADMIN") {
-        window.location.href = "/admin/dashboard";
-        return;
-      }
-
-      setError("Unknown account role.");
+      // This page only registers students.
+      window.location.href = "/profile";
     } catch (error: unknown) {
       console.error("REGISTER ERROR:", error);
 
@@ -120,8 +114,8 @@ export default function RegisterForm() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-gray-600">
-          Start building your profile and connect everything that shapes your
-          career journey.
+          Start building your profile and connect everything
+          that shapes your career journey.
         </p>
       </div>
 
