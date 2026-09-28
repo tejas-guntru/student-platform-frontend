@@ -611,11 +611,14 @@ export default function Footer() {
           </p>
 
           <p>
-            Made with love.{" "}
-            <span className="text-gray-300">
-              Tejas Guntru
-            </span>
-          </p>
+  Made with love.{" "}
+  <Link
+    href="/developers"
+    className="text-gray-300 transition-colors duration-200 hover:text-white"
+  >
+    Tejas Guntru
+  </Link>
+</p>
         </div>
       </div>
     </footer>
