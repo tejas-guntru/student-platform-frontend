@@ -9,12 +9,7 @@ export default function AuthLogo() {
         width={260}
         height={80}
         priority
-        className="
-          h-auto
-          w-[220px]
-          object-contain
-          sm:w-[245px]
-        "
+        className="h-auto w-[220px] object-contain sm:w-[245px]"
       />
     </div>
   );

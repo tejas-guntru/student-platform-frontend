@@ -4,8 +4,8 @@ import axios from "axios";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-import { login } from "@/services/authService";
 import AuthInput from "@/components/auth/AuthInput";
+import { login } from "@/services/authService";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -28,43 +28,23 @@ export default function LoginForm() {
         password,
       });
 
-      localStorage.setItem(
-        "token",
-        response.token
-      );
-
-      localStorage.setItem(
-        "email",
-        response.email
-      );
-
-      localStorage.setItem(
-        "role",
-        response.role
-      );
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("email", response.email);
+      localStorage.setItem("role", response.role);
 
       if (response.role === "ADMIN") {
-        window.location.href =
-          "/admin/dashboard";
-
+        window.location.href = "/admin/dashboard";
         return;
       }
 
       if (response.role === "STUDENT") {
-        window.location.href =
-          "/dashboard";
-
+        window.location.href = "/dashboard";
         return;
       }
 
-      setError(
-        "Unknown user role returned by server."
-      );
+      setError("Unknown user role returned by server.");
     } catch (error: unknown) {
-      console.error(
-        "LOGIN ERROR:",
-        error
-      );
+      console.error("LOGIN ERROR:", error);
 
       if (axios.isAxiosError(error)) {
         setError(
@@ -72,9 +52,7 @@ export default function LoginForm() {
             "Invalid email or password."
         );
       } else {
-        setError(
-          "Something went wrong."
-        );
+        setError("Something went wrong.");
       }
     } finally {
       setLoading(false);
@@ -83,128 +61,39 @@ export default function LoginForm() {
 
   return (
     <div>
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
-
       <div className="text-center">
-        <div
-          className="
-            mx-auto
-            inline-flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-[#CBE5F8]
-            bg-[#EFF8FF]
-            px-3.5
-            py-1.5
-          "
-        >
-          <span
-            className="
-              h-1.5
-              w-1.5
-              rounded-full
-              bg-[#0877E8]
-              shadow-[0_0_8px_rgba(8,119,232,0.45)]
-            "
-          />
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#1256AF]/15 bg-[#1256AF]/5 px-3.5 py-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#1256AF]" />
 
-          <span
-            className="
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.16em]
-              text-[#4381B3]
-            "
-          >
+          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#1256AF]">
             Sign in
           </span>
         </div>
 
-        <h1
-          className="
-            mt-5
-            text-3xl
-            font-bold
-            leading-[0.95]
-            tracking-[-0.05em]
-            text-[#173B63]
-
-            sm:text-4xl
-          "
-        >
+        <h1 className="mt-5 text-3xl font-bold leading-[0.95] tracking-[-0.05em] text-gray-900 sm:text-4xl">
           Welcome back.
         </h1>
 
-        <p
-          className="
-            mx-auto
-            mt-4
-            max-w-sm
-            text-sm
-            leading-6
-            text-[#647B91]
-          "
-        >
+        <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-gray-600">
           Continue building your profile and moving your career forward.
         </p>
       </div>
 
-      {/* =====================================================
-          ERROR
-      ===================================================== */}
-
       {error && (
         <div
           role="alert"
-          className="
-            mt-7
-            flex
-            items-start
-            gap-3
-            rounded-2xl
-            border
-            border-[#F1CCCC]
-            bg-[#FFF5F5]
-            px-4
-            py-3.5
-            text-sm
-            leading-5
-            text-[#A43F3F]
-          "
+          className="mt-7 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm leading-5 text-red-700"
         >
           <span
             aria-hidden="true"
-            className="
-              mt-[2px]
-              flex
-              h-5
-              w-5
-              shrink-0
-              items-center
-              justify-center
-              rounded-full
-              bg-[#FCE4E4]
-              text-[11px]
-              font-bold
-            "
+            className="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-100 text-[11px] font-bold"
           >
             !
           </span>
 
-          <span>
-            {error}
-          </span>
+          <span>{error}</span>
         </div>
       )}
-
-      {/* =====================================================
-          FORM
-      ===================================================== */}
 
       <form
         onSubmit={handleSubmit}
@@ -234,84 +123,43 @@ export default function LoginForm() {
           }
         />
 
-        {/* ===================================================
-            SUBMIT
-        =================================================== */}
-
         <button
           type="submit"
           disabled={loading}
           className="
             group
-            relative
             flex
             min-h-[52px]
             w-full
             items-center
             justify-center
             gap-3
-            overflow-hidden
             rounded-2xl
-
-            bg-gradient-to-r
-            from-[#0877E8]
-            via-[#118EED]
-            to-[#2DB5F7]
-
+            border
+            border-[#1256AF]
+            bg-[#1256AF]
             px-5
             py-3.5
-
             text-[14px]
             font-semibold
             text-white
-
-            shadow-[0_12px_30px_rgba(8,119,232,0.22)]
-
+            shadow-[0_12px_30px_rgba(18,86,175,0.18)]
             transition-all
             duration-200
-
             hover:-translate-y-0.5
-            hover:shadow-[0_16px_38px_rgba(8,119,232,0.28)]
-
+            hover:bg-[#0F4994]
+            hover:shadow-[0_16px_38px_rgba(18,86,175,0.22)]
             focus-visible:outline-none
             focus-visible:ring-4
-            focus-visible:ring-[#1689F5]/20
-
+            focus-visible:ring-[#1256AF]/20
             disabled:cursor-not-allowed
             disabled:translate-y-0
             disabled:opacity-60
           "
         >
-          {/* Button highlight */}
-          <span
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-x-8
-              top-0
-              h-px
-              bg-gradient-to-r
-              from-transparent
-              via-white/70
-              to-transparent
-            "
-          />
-
           {loading ? (
             <>
-              <span
-                className="
-                  h-4
-                  w-4
-                  animate-spin
-                  rounded-full
-                  border-2
-                  border-white/35
-                  border-t-white
-                "
-              />
-
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
               Signing in...
             </>
           ) : (
@@ -320,12 +168,7 @@ export default function LoginForm() {
 
               <span
                 aria-hidden="true"
-                className="
-                  text-base
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
-                "
+                className="text-base transition-transform duration-200 group-hover:translate-x-1"
               >
                 →
               </span>
@@ -334,38 +177,12 @@ export default function LoginForm() {
         </button>
       </form>
 
-      {/* =====================================================
-          REGISTER
-      ===================================================== */}
-
-      <div
-        className="
-          mt-7
-          border-t
-          border-[#DCEAF6]
-          pt-6
-          text-center
-        "
-      >
-        <p
-          className="
-            text-sm
-            text-[#6A8096]
-          "
-        >
+      <div className="mt-7 border-t border-gray-200 pt-6 text-center">
+        <p className="text-sm text-gray-500">
           Don&apos;t have an account?{" "}
-
           <Link
             href="/register"
-            className="
-              font-semibold
-              text-[#0877E8]
-
-              transition-colors
-              duration-200
-
-              hover:text-[#075FCB]
-            "
+            className="font-semibold text-[#1256AF] transition-colors duration-200 hover:text-[#0F4994]"
           >
             Create an account
           </Link>
