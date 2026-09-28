@@ -59,24 +59,28 @@ const principles = [
 const actions = [
   {
     icon: UserRound,
+    number: "01",
     title: "Build",
     description:
       "Create a student profile that grows with your academics, skills and career journey.",
   },
   {
     icon: FolderKanban,
+    number: "02",
     title: "Show",
     description:
       "Turn projects and skills into visible proof of what you can actually do.",
   },
   {
     icon: Target,
+    number: "03",
     title: "Discover",
     description:
       "Explore opportunities that align with your direction and growing profile.",
   },
   {
     icon: Route,
+    number: "04",
     title: "Move",
     description:
       "Track your progress and keep taking the next meaningful step forward.",
@@ -98,50 +102,39 @@ export default function OurMission() {
       "
     >
       {/* =====================================================
-          BACKGROUND
+          SUBTLE BACKGROUND
       ===================================================== */}
 
       <div
-        className="
-          pointer-events-none
-          absolute
-          -left-52
-          top-24
-          h-[430px]
-          w-[430px]
-          rounded-full
-          bg-[#38BDF8]/10
-          blur-[120px]
-        "
-      />
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-32
+            h-[360px]
+            w-[360px]
+            rounded-full
+            bg-blue-50/70
+            blur-3xl
+          "
+        />
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-52
-          bottom-20
-          h-[500px]
-          w-[500px]
-          rounded-full
-          bg-[#0877E8]/10
-          blur-[140px]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.18]
-        "
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(8,119,232,0.18) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-        }}
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-32
+            h-[400px]
+            w-[400px]
+            rounded-full
+            bg-sky-50/60
+            blur-3xl
+          "
+        />
+      </div>
 
       <div
         className="
@@ -149,22 +142,16 @@ export default function OurMission() {
           z-10
           mx-auto
           max-w-7xl
-          px-5
+          px-4
           sm:px-6
-          lg:px-8
+          lg:px-12
         "
       >
         {/* =====================================================
             HEADER
         ===================================================== */}
 
-        <div
-          className="
-            mx-auto
-            max-w-3xl
-            text-center
-          "
-        >
+        <div className="mx-auto max-w-4xl text-center">
           <div
             className="
               inline-flex
@@ -172,55 +159,47 @@ export default function OurMission() {
               gap-2
               rounded-full
               border
-              border-[#CBE5F8]
-              bg-[#EFF8FF]
+              border-[#1256af]/15
+              bg-[#1256af]/5
               px-4
               py-2
             "
           >
             <Sparkles
               size={14}
-              className="text-[#0877E8]"
+              className="text-[#1256af]"
             />
 
             <span
               className="
-                text-[11px]
-                font-bold
+                text-xs
+                font-semibold
                 uppercase
-                tracking-[0.17em]
-                text-[#4C7DA7]
+                tracking-[0.12em]
+                text-[#1256af]
+                sm:text-sm
               "
             >
-              Our mission
+              Our Mission
             </span>
           </div>
 
           <h2
             className="
+              mx-auto
               mt-6
+              max-w-4xl
               text-4xl
-              font-bold
-              leading-[1]
-              tracking-[-0.05em]
-              text-[#143655]
-
+              font-semibold
+              leading-[1.08]
+              tracking-tight
+              text-gray-900
               sm:text-5xl
               lg:text-6xl
             "
           >
-            Help students turn
-            <span
-              className="
-                block
-                bg-gradient-to-r
-                from-[#0877E8]
-                via-[#1294F2]
-                to-[#38BDF8]
-                bg-clip-text
-                text-transparent
-              "
-            >
+            Help students turn{" "}
+            <span className="text-[#1256af]">
               progress into opportunity.
             </span>
           </h2>
@@ -231,16 +210,16 @@ export default function OurMission() {
               mt-6
               max-w-2xl
               text-base
+              font-light
               leading-7
-              text-[#607A92]
-
+              text-gray-600
               sm:text-lg
               sm:leading-8
             "
           >
-            Trailbliz is designed to make a student&apos;s journey easier
-            to understand, easier to build and easier to present when the
-            right opportunity appears.
+            Trailbliz is designed to make a student&apos;s journey
+            easier to understand, easier to build and easier to present
+            when the right opportunity appears.
           </p>
         </div>
 
@@ -250,35 +229,14 @@ export default function OurMission() {
 
         <div
           className="
-            relative
-            mt-16
+            mt-14
             grid
-            gap-6
+            gap-5
+            lg:mt-16
             lg:grid-cols-2
-            lg:gap-8
+            lg:gap-6
           "
         >
-          {/* center divider */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              bottom-10
-              left-1/2
-              top-10
-              hidden
-              w-px
-              -translate-x-1/2
-              bg-gradient-to-b
-              from-transparent
-              via-[#D7E9F6]
-              to-transparent
-
-              lg:block
-            "
-          />
-
           {principles.map((principle) => {
             const Icon = principle.icon;
 
@@ -289,49 +247,26 @@ export default function OurMission() {
                   group
                   relative
                   overflow-hidden
-                  rounded-[30px]
+                  rounded-[28px]
                   border
-                  border-[#DCEAF5]
-                  bg-[#F9FCFF]
+                  border-gray-200
+                  bg-[#FAFAFA]
                   p-6
-                  shadow-[0_12px_40px_rgba(8,119,232,0.05)]
                   transition-all
                   duration-300
 
                   hover:-translate-y-1
-                  hover:border-[#B9DCF4]
-                  hover:shadow-[0_22px_55px_rgba(8,119,232,0.09)]
+                  hover:border-[#1256af]/20
+                  hover:bg-white
+                  hover:shadow-[0_20px_50px_rgba(18,86,175,0.08)]
 
                   sm:p-8
+                  lg:p-9
                 "
               >
-                {/* decorative glow */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    -right-20
-                    -top-20
-                    h-52
-                    w-52
-                    rounded-full
-                    bg-[#38BDF8]/10
-                    blur-3xl
-                  "
-                />
-
                 {/* top */}
 
-                <div
-                  className="
-                    relative
-                    flex
-                    items-start
-                    justify-between
-                    gap-5
-                  "
-                >
+                <div className="flex items-start justify-between gap-5">
                   <div
                     className="
                       flex
@@ -340,11 +275,13 @@ export default function OurMission() {
                       items-center
                       justify-center
                       rounded-2xl
-                      bg-gradient-to-br
-                      from-[#0877E8]
-                      to-[#38BDF8]
-                      text-white
-                      shadow-[0_12px_28px_rgba(8,119,232,0.20)]
+                      bg-[#1256af]/[0.07]
+                      text-[#1256af]
+                      transition-all
+                      duration-300
+
+                      group-hover:bg-[#1256af]
+                      group-hover:text-white
                     "
                   >
                     <Icon size={25} />
@@ -352,24 +289,25 @@ export default function OurMission() {
 
                   <span
                     className="
-                      text-5xl
+                      text-sm
                       font-bold
-                      tracking-[-0.06em]
-                      text-[#DCECF7]
+                      tracking-[0.12em]
+                      text-[#1256af]/30
                     "
                   >
                     {principle.number}
                   </span>
                 </div>
 
+                {/* content */}
+
                 <h3
                   className="
-                    relative
                     mt-7
                     text-3xl
-                    font-bold
-                    tracking-[-0.04em]
-                    text-[#173B63]
+                    font-semibold
+                    tracking-tight
+                    text-gray-900
                   "
                 >
                   {principle.title}
@@ -377,13 +315,11 @@ export default function OurMission() {
 
                 <p
                   className="
-                    relative
-                    mt-4
+                    mt-3
                     max-w-xl
                     text-sm
                     leading-7
-                    text-[#647E95]
-
+                    text-gray-600
                     sm:text-base
                   "
                 >
@@ -392,7 +328,7 @@ export default function OurMission() {
 
                 {/* points */}
 
-                <div className="relative mt-7 space-y-3">
+                <div className="mt-7 space-y-3">
                   {principle.points.map((point) => (
                     <div
                       key={point.title}
@@ -402,7 +338,7 @@ export default function OurMission() {
                         gap-3
                         rounded-2xl
                         border
-                        border-[#E2EDF6]
+                        border-gray-200/80
                         bg-white
                         px-4
                         py-4
@@ -418,7 +354,7 @@ export default function OurMission() {
                           items-center
                           justify-center
                           rounded-full
-                          bg-[#E7F5FF]
+                          bg-[#1256af]/[0.07]
                         "
                       >
                         <div
@@ -426,7 +362,7 @@ export default function OurMission() {
                             h-2
                             w-2
                             rounded-full
-                            bg-[#0877E8]
+                            bg-[#1256af]
                           "
                         />
                       </div>
@@ -436,7 +372,7 @@ export default function OurMission() {
                           className="
                             text-sm
                             font-semibold
-                            text-[#173B63]
+                            text-gray-800
                           "
                         >
                           {point.title}
@@ -447,7 +383,7 @@ export default function OurMission() {
                             mt-1
                             text-xs
                             leading-5
-                            text-[#7890A5]
+                            text-gray-500
                           "
                         >
                           {point.text}
@@ -462,7 +398,7 @@ export default function OurMission() {
         </div>
 
         {/* =====================================================
-            VALUES IN ACTION
+            MISSION IN ACTION
         ===================================================== */}
 
         <div className="mt-24">
@@ -471,14 +407,13 @@ export default function OurMission() {
               className="
                 inline-flex
                 items-center
-                gap-3
+                gap-2
                 rounded-full
                 border
-                border-[#D5E8F6]
-                bg-white
-                px-5
-                py-2.5
-                shadow-[0_8px_24px_rgba(8,119,232,0.05)]
+                border-[#1256af]/15
+                bg-[#1256af]/5
+                px-4
+                py-2
               "
             >
               <span
@@ -486,46 +421,37 @@ export default function OurMission() {
                   h-2
                   w-2
                   rounded-full
-                  bg-[#0877E8]
+                  bg-[#1256af]
                 "
               />
 
               <span
                 className="
-                  text-[11px]
-                  font-bold
+                  text-xs
+                  font-semibold
                   uppercase
-                  tracking-[0.16em]
-                  text-[#607F9A]
+                  tracking-[0.12em]
+                  text-[#1256af]
+                  sm:text-sm
                 "
               >
                 Mission in action
               </span>
-
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-[#38BDF8]
-                "
-              />
             </div>
 
             <h3
               className="
                 mt-6
                 text-3xl
-                font-bold
-                tracking-[-0.04em]
-                text-[#173B63]
-
+                font-semibold
+                tracking-tight
+                text-gray-900
                 sm:text-4xl
+                lg:text-5xl
               "
             >
-              One journey.
-              <span className="text-[#0877E8]">
-                {" "}
+              One journey.{" "}
+              <span className="text-[#1256af]">
                 Four connected steps.
               </span>
             </h3>
@@ -537,7 +463,7 @@ export default function OurMission() {
                 max-w-2xl
                 text-base
                 leading-7
-                text-[#687F95]
+                text-gray-600
               "
             >
               Trailbliz connects the pieces students normally manage
@@ -551,6 +477,7 @@ export default function OurMission() {
 
           <div
             className="
+              relative
               mt-12
               grid
               gap-4
@@ -564,79 +491,118 @@ export default function OurMission() {
               return (
                 <div
                   key={action.title}
-                  className="
-                    group
-                    relative
-                    overflow-hidden
-                    rounded-[24px]
-                    border
-                    border-[#DDEBF5]
-                    bg-white
-                    p-5
-                    shadow-[0_8px_30px_rgba(8,119,232,0.045)]
-                    transition-all
-                    duration-300
-
-                    hover:-translate-y-1
-                    hover:border-[#B5DAF3]
-                    hover:shadow-[0_16px_38px_rgba(8,119,232,0.09)]
-                  "
+                  className="relative"
                 >
-                  <div
-                    className="
-                      absolute
-                      right-4
-                      top-4
-                      text-xs
-                      font-bold
-                      text-[#D0E5F4]
-                    "
-                  >
-                    0{index + 1}
-                  </div>
+                  {/* desktop connector */}
+
+                  {index < actions.length - 1 && (
+                    <div
+                      aria-hidden="true"
+                      className="
+                        absolute
+                        left-[calc(100%-2px)]
+                        top-[35px]
+                        z-20
+                        hidden
+                        h-px
+                        w-[20px]
+                        bg-[#1256af]/15
+                        lg:block
+                      "
+                    />
+                  )}
 
                   <div
                     className="
-                      flex
-                      h-11
-                      w-11
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      bg-[#EAF6FF]
-                      text-[#0877E8]
-                      transition-colors
+                      group
+                      relative
+                      h-full
+                      overflow-hidden
+                      rounded-[24px]
+                      border
+                      border-gray-200
+                      bg-white
+                      p-5
+                      transition-all
                       duration-300
 
-                      group-hover:bg-[#0877E8]
-                      group-hover:text-white
+                      hover:-translate-y-1
+                      hover:border-[#1256af]/20
+                      hover:shadow-[0_16px_40px_rgba(18,86,175,0.08)]
                     "
                   >
-                    <Icon size={20} />
+                    <span
+                      className="
+                        absolute
+                        right-5
+                        top-5
+                        text-xs
+                        font-bold
+                        tracking-[0.1em]
+                        text-gray-300
+                      "
+                    >
+                      {action.number}
+                    </span>
+
+                    <div
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        bg-[#1256af]/[0.07]
+                        text-[#1256af]
+                        transition-all
+                        duration-300
+
+                        group-hover:bg-[#1256af]
+                        group-hover:text-white
+                      "
+                    >
+                      <Icon size={20} />
+                    </div>
+
+                    <h4
+                      className="
+                        mt-5
+                        text-xl
+                        font-semibold
+                        tracking-tight
+                        text-gray-900
+                      "
+                    >
+                      {action.title}
+                    </h4>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-gray-500
+                      "
+                    >
+                      {action.description}
+                    </p>
+
+                    <div
+                      className="
+                        mt-6
+                        h-[2px]
+                        w-8
+                        rounded-full
+                        bg-[#1256af]/20
+                        transition-all
+                        duration-300
+
+                        group-hover:w-14
+                        group-hover:bg-[#1256af]
+                      "
+                    />
                   </div>
-
-                  <h4
-                    className="
-                      mt-5
-                      text-xl
-                      font-bold
-                      tracking-[-0.025em]
-                      text-[#173B63]
-                    "
-                  >
-                    {action.title}
-                  </h4>
-
-                  <p
-                    className="
-                      mt-2
-                      text-sm
-                      leading-6
-                      text-[#70879C]
-                    "
-                  >
-                    {action.description}
-                  </p>
                 </div>
               );
             })}
@@ -653,42 +619,45 @@ export default function OurMission() {
             mt-20
             overflow-hidden
             rounded-[30px]
-            bg-gradient-to-r
-            from-[#0877E8]
-            via-[#1294F2]
-            to-[#38BDF8]
+            bg-[#1256af]
             px-6
             py-8
-            shadow-[0_24px_60px_rgba(8,119,232,0.18)]
+            shadow-[0_22px_55px_rgba(18,86,175,0.16)]
 
             sm:px-9
             sm:py-10
+
+            lg:px-12
           "
         >
+          {/* subtle decoration */}
+
           <div
+            aria-hidden="true"
             className="
               pointer-events-none
               absolute
-              -right-16
+              -right-20
               -top-24
               h-64
               w-64
               rounded-full
-              bg-white/15
+              bg-white/10
               blur-3xl
             "
           />
 
           <div
+            aria-hidden="true"
             className="
               pointer-events-none
               absolute
-              -bottom-24
+              -bottom-28
               left-1/3
               h-56
               w-56
               rounded-full
-              bg-[#BDEBFF]/20
+              bg-blue-300/10
               blur-3xl
             "
           />
@@ -699,6 +668,7 @@ export default function OurMission() {
               flex
               flex-col
               gap-7
+
               lg:flex-row
               lg:items-center
               lg:justify-between
@@ -707,11 +677,11 @@ export default function OurMission() {
             <div className="max-w-2xl">
               <p
                 className="
-                  text-[11px]
-                  font-bold
+                  text-xs
+                  font-semibold
                   uppercase
-                  tracking-[0.17em]
-                  text-white/65
+                  tracking-[0.14em]
+                  text-white/60
                 "
               >
                 Your trail starts here
@@ -721,11 +691,12 @@ export default function OurMission() {
                 className="
                   mt-3
                   text-2xl
-                  font-bold
-                  tracking-[-0.035em]
+                  font-semibold
+                  tracking-tight
                   text-white
 
                   sm:text-3xl
+                  lg:text-4xl
                 "
               >
                 Build a profile that grows as you do.
@@ -734,9 +705,12 @@ export default function OurMission() {
               <p
                 className="
                   mt-3
+                  max-w-xl
                   text-sm
                   leading-6
                   text-white/75
+
+                  sm:text-base
                 "
               >
                 Start with where you are today. Keep adding the work,
@@ -749,23 +723,32 @@ export default function OurMission() {
               className="
                 group
                 inline-flex
+                min-h-[52px]
                 shrink-0
                 items-center
                 justify-center
                 gap-3
                 rounded-2xl
+                border
+                border-white
                 bg-white
-                px-6
+                px-7
                 py-3.5
                 text-sm
-                font-semibold
-                text-[#0877E8]
-                shadow-[0_10px_30px_rgba(0,67,145,0.16)]
+                font-bold
+                text-[#1256af]
+                shadow-lg
                 transition-all
-                duration-200
+                duration-300
 
                 hover:-translate-y-0.5
-                hover:shadow-[0_14px_36px_rgba(0,67,145,0.22)]
+                hover:bg-transparent
+                hover:text-white
+                hover:shadow-xl
+
+                focus:outline-none
+                focus:ring-2
+                focus:ring-white/40
               "
             >
               Join Trailbliz
@@ -774,7 +757,7 @@ export default function OurMission() {
                 size={17}
                 className="
                   transition-transform
-                  duration-200
+                  duration-300
                   group-hover:translate-x-1
                 "
               />

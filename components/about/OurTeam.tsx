@@ -66,7 +66,7 @@ export default function OurTeam() {
         relative
         isolate
         overflow-hidden
-        bg-[#F5FAFF]
+        bg-[#FAFAFA]
         py-20
         sm:py-24
         lg:py-28
@@ -77,55 +77,35 @@ export default function OurTeam() {
       ===================================================== */}
 
       <div
-        className="
-          pointer-events-none
-          absolute
-          -left-48
-          top-12
-          h-[480px]
-          w-[480px]
-          rounded-full
-          bg-[#38BDF8]/13
-          blur-[130px]
-        "
-      />
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-20
+            h-[380px]
+            w-[380px]
+            rounded-full
+            bg-blue-50/70
+            blur-3xl
+          "
+        />
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-56
-          bottom-0
-          h-[520px]
-          w-[520px]
-          rounded-full
-          bg-[#0877E8]/12
-          blur-[140px]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.2]
-        "
-        style={{
-          backgroundImage: `
-            linear-gradient(
-              rgba(8,119,232,0.04) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(8,119,232,0.04) 1px,
-              transparent 1px
-            )
-          `,
-          backgroundSize: "52px 52px",
-        }}
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-20
+            h-[420px]
+            w-[420px]
+            rounded-full
+            bg-sky-50/60
+            blur-3xl
+          "
+        />
+      </div>
 
       <div
         className="
@@ -133,16 +113,16 @@ export default function OurTeam() {
           z-10
           mx-auto
           max-w-7xl
-          px-5
+          px-4
           sm:px-6
-          lg:px-8
+          lg:px-12
         "
       >
         {/* =====================================================
             HEADER
         ===================================================== */}
 
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <div
             className="
               inline-flex
@@ -150,25 +130,25 @@ export default function OurTeam() {
               gap-2
               rounded-full
               border
-              border-[#CBE5F8]
-              bg-white/70
+              border-[#1256af]/15
+              bg-[#1256af]/5
               px-4
               py-2
-              backdrop-blur-xl
             "
           >
             <Users
               size={14}
-              className="text-[#0877E8]"
+              className="text-[#1256af]"
             />
 
             <span
               className="
-                text-[11px]
-                font-bold
+                text-xs
+                font-semibold
                 uppercase
-                tracking-[0.17em]
-                text-[#4D7FA8]
+                tracking-[0.12em]
+                text-[#1256af]
+                sm:text-sm
               "
             >
               Behind Trailbliz
@@ -177,29 +157,20 @@ export default function OurTeam() {
 
           <h2
             className="
+              mx-auto
               mt-6
+              max-w-4xl
               text-4xl
-              font-bold
-              leading-[1]
-              tracking-[-0.05em]
-              text-[#143655]
-
+              font-semibold
+              leading-[1.08]
+              tracking-tight
+              text-gray-900
               sm:text-5xl
               lg:text-6xl
             "
           >
-            Building for students,
-            <span
-              className="
-                block
-                bg-gradient-to-r
-                from-[#0877E8]
-                via-[#1294F2]
-                to-[#38BDF8]
-                bg-clip-text
-                text-transparent
-              "
-            >
+            Building for students,{" "}
+            <span className="text-[#1256af]">
               not around them.
             </span>
           </h2>
@@ -210,9 +181,9 @@ export default function OurTeam() {
               mt-6
               max-w-2xl
               text-base
+              font-light
               leading-7
-              text-[#607A92]
-
+              text-gray-600
               sm:text-lg
               sm:leading-8
             "
@@ -224,55 +195,55 @@ export default function OurTeam() {
         </div>
 
         {/* =====================================================
-            MAIN TEAM STORY
+            MAIN STORY
         ===================================================== */}
 
         <div
           className="
-            mt-16
+            mt-14
             grid
-            gap-8
+            gap-6
+            lg:mt-16
             lg:grid-cols-[1.1fr_0.9fr]
             lg:items-stretch
           "
         >
           {/* ===================================================
-              LEFT — STORY CARD
+              LEFT — STORY
           =================================================== */}
 
           <div
             className="
               relative
               overflow-hidden
-              rounded-[32px]
-              bg-gradient-to-br
-              from-[#0877E8]
-              via-[#1294F2]
-              to-[#38BDF8]
+              rounded-[30px]
+              bg-[#1256af]
               p-7
               text-white
-              shadow-[0_30px_70px_rgba(8,119,232,0.18)]
-
+              shadow-[0_25px_60px_rgba(18,86,175,0.16)]
               sm:p-9
+              lg:p-10
             "
           >
-            {/* glows */}
+            {/* decorations */}
 
             <div
+              aria-hidden="true"
               className="
                 pointer-events-none
                 absolute
                 -right-20
-                -top-20
+                -top-24
                 h-72
                 w-72
                 rounded-full
-                bg-white/20
-                blur-[80px]
+                bg-white/10
+                blur-3xl
               "
             />
 
             <div
+              aria-hidden="true"
               className="
                 pointer-events-none
                 absolute
@@ -281,37 +252,14 @@ export default function OurTeam() {
                 h-72
                 w-72
                 rounded-full
-                bg-[#AEEAFF]/20
-                blur-[90px]
+                bg-blue-300/10
+                blur-3xl
               "
-            />
-
-            {/* grid */}
-
-            <div
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                opacity-[0.16]
-              "
-              style={{
-                backgroundImage: `
-                  linear-gradient(
-                    rgba(255,255,255,0.18) 1px,
-                    transparent 1px
-                  ),
-                  linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.18) 1px,
-                    transparent 1px
-                  )
-                `,
-                backgroundSize: "42px 42px",
-              }}
             />
 
             <div className="relative">
+              {/* icon */}
+
               <div
                 className="
                   flex
@@ -319,44 +267,52 @@ export default function OurTeam() {
                   w-14
                   items-center
                   justify-center
-                  rounded-[20px]
+                  rounded-[18px]
                   border
                   border-white/20
-                  bg-white/15
-                  backdrop-blur-xl
+                  bg-white/10
+                  text-white
                 "
               >
                 <Rocket size={25} />
               </div>
 
+              {/* label */}
+
               <p
                 className="
                   mt-8
-                  text-[11px]
-                  font-bold
+                  text-xs
+                  font-semibold
                   uppercase
-                  tracking-[0.17em]
-                  text-white/65
+                  tracking-[0.14em]
+                  text-white/60
                 "
               >
                 Why we&apos;re building Trailbliz
               </p>
+
+              {/* heading */}
 
               <h3
                 className="
                   mt-3
                   max-w-xl
                   text-3xl
-                  font-bold
-                  leading-[1.05]
-                  tracking-[-0.045em]
-
+                  font-semibold
+                  leading-[1.08]
+                  tracking-tight
+                  text-white
                   sm:text-4xl
                 "
               >
                 College creates a lot of progress.
-                Career profiles often show very little of it.
+                <span className="mt-1 block text-white/75">
+                  Career profiles often show very little of it.
+                </span>
               </h3>
+
+              {/* content */}
 
               <div
                 className="
@@ -365,8 +321,7 @@ export default function OurTeam() {
                   space-y-4
                   text-sm
                   leading-7
-                  text-white/78
-
+                  text-white/75
                   sm:text-base
                 "
               >
@@ -388,6 +343,8 @@ export default function OurTeam() {
                 </p>
               </div>
 
+              {/* flow chips */}
+
               <div
                 className="
                   mt-8
@@ -396,30 +353,26 @@ export default function OurTeam() {
                   gap-2
                 "
               >
-                {[
-                  "Build",
-                  "Show",
-                  "Discover",
-                  "Move",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="
-                      rounded-full
-                      border
-                      border-white/20
-                      bg-white/10
-                      px-4
-                      py-2
-                      text-xs
-                      font-semibold
-                      text-white/90
-                      backdrop-blur
-                    "
-                  >
-                    {item}
-                  </span>
-                ))}
+                {["Build", "Show", "Discover", "Move"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="
+                        rounded-full
+                        border
+                        border-white/20
+                        bg-white/10
+                        px-4
+                        py-2
+                        text-xs
+                        font-semibold
+                        text-white/90
+                      "
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -428,7 +381,7 @@ export default function OurTeam() {
               RIGHT — FOCUS AREAS
           =================================================== */}
 
-          <div className="space-y-4">
+          <div className="grid gap-4">
             {focusAreas.map((area, index) => {
               const Icon = area.icon;
 
@@ -438,49 +391,34 @@ export default function OurTeam() {
                   className="
                     group
                     relative
+                    flex
+                    items-center
                     overflow-hidden
                     rounded-[24px]
                     border
-                    border-[#DCEAF5]
+                    border-gray-200
                     bg-white
                     p-5
-                    shadow-[0_10px_32px_rgba(8,119,232,0.045)]
                     transition-all
                     duration-300
 
                     hover:-translate-y-1
-                    hover:border-[#B7DCF4]
-                    hover:shadow-[0_18px_42px_rgba(8,119,232,0.09)]
+                    hover:border-[#1256af]/20
+                    hover:shadow-[0_16px_40px_rgba(18,86,175,0.08)]
 
                     sm:p-6
                   "
                 >
                   <div
                     className="
-                      pointer-events-none
-                      absolute
-                      -right-12
-                      -top-12
-                      h-32
-                      w-32
-                      rounded-full
-                      bg-[#38BDF8]/0
-                      blur-2xl
-                      transition-all
-                      duration-300
-
-                      group-hover:bg-[#38BDF8]/10
-                    "
-                  />
-
-                  <div
-                    className="
-                      relative
                       flex
+                      w-full
                       items-start
                       gap-4
                     "
                   >
+                    {/* icon */}
+
                     <div
                       className="
                         flex
@@ -490,19 +428,21 @@ export default function OurTeam() {
                         items-center
                         justify-center
                         rounded-2xl
-                        bg-[#EAF6FF]
-                        text-[#0877E8]
+                        bg-[#1256af]/[0.07]
+                        text-[#1256af]
                         transition-all
                         duration-300
 
-                        group-hover:bg-[#0877E8]
+                        group-hover:bg-[#1256af]
                         group-hover:text-white
                       "
                     >
                       <Icon size={21} />
                     </div>
 
-                    <div className="flex-1">
+                    {/* content */}
+
+                    <div className="min-w-0 flex-1">
                       <div
                         className="
                           flex
@@ -514,9 +454,9 @@ export default function OurTeam() {
                         <h4
                           className="
                             text-lg
-                            font-bold
-                            tracking-[-0.025em]
-                            text-[#173B63]
+                            font-semibold
+                            tracking-tight
+                            text-gray-900
                           "
                         >
                           {area.title}
@@ -526,7 +466,8 @@ export default function OurTeam() {
                           className="
                             text-xs
                             font-bold
-                            text-[#D1E5F3]
+                            tracking-[0.1em]
+                            text-gray-300
                           "
                         >
                           0{index + 1}
@@ -538,11 +479,26 @@ export default function OurTeam() {
                           mt-2
                           text-sm
                           leading-6
-                          text-[#71879A]
+                          text-gray-500
                         "
                       >
                         {area.description}
                       </p>
+
+                      <div
+                        className="
+                          mt-4
+                          h-[2px]
+                          w-8
+                          rounded-full
+                          bg-[#1256af]/20
+                          transition-all
+                          duration-300
+
+                          group-hover:w-14
+                          group-hover:bg-[#1256af]
+                        "
+                      />
                     </div>
                   </div>
                 </article>
@@ -560,7 +516,7 @@ export default function OurTeam() {
             className="
               flex
               flex-col
-              gap-4
+              gap-5
 
               sm:flex-row
               sm:items-end
@@ -568,30 +524,55 @@ export default function OurTeam() {
             "
           >
             <div>
-              <p
+              <div
                 className="
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  tracking-[0.17em]
-                  text-[#0877E8]
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-[#1256af]/15
+                  bg-[#1256af]/5
+                  px-3.5
+                  py-1.5
                 "
               >
-                How we build
-              </p>
+                <span
+                  className="
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-[#1256af]
+                  "
+                />
+
+                <p
+                  className="
+                    text-[10px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.14em]
+                    text-[#1256af]
+                  "
+                >
+                  How we build
+                </p>
+              </div>
 
               <h3
                 className="
-                  mt-3
+                  mt-4
                   text-3xl
-                  font-bold
-                  tracking-[-0.04em]
-                  text-[#173B63]
-
+                  font-semibold
+                  tracking-tight
+                  text-gray-900
                   sm:text-4xl
                 "
               >
-                Principles behind the product.
+                Principles behind{" "}
+                <span className="text-[#1256af]">
+                  the product.
+                </span>
               </h3>
             </div>
 
@@ -600,13 +581,15 @@ export default function OurTeam() {
                 max-w-md
                 text-sm
                 leading-6
-                text-[#72889B]
+                text-gray-500
               "
             >
               The product decisions behind Trailbliz are guided by
               usefulness, simplicity and student progress.
             </p>
           </div>
+
+          {/* principles */}
 
           <div
             className="
@@ -617,28 +600,47 @@ export default function OurTeam() {
               lg:grid-cols-4
             "
           >
-            {principles.map((principle) => {
+            {principles.map((principle, index) => {
               const Icon = principle.icon;
 
               return (
-                <div
+                <article
                   key={principle.title}
                   className="
                     group
+                    relative
+                    overflow-hidden
                     rounded-[24px]
                     border
-                    border-[#DCEAF5]
+                    border-gray-200
                     bg-white
                     p-5
-                    shadow-[0_8px_28px_rgba(8,119,232,0.04)]
                     transition-all
                     duration-300
 
                     hover:-translate-y-1
-                    hover:border-[#B4DAF3]
-                    hover:shadow-[0_16px_38px_rgba(8,119,232,0.08)]
+                    hover:border-[#1256af]/20
+                    hover:shadow-[0_16px_38px_rgba(18,86,175,0.07)]
                   "
                 >
+                  {/* number */}
+
+                  <span
+                    className="
+                      absolute
+                      right-5
+                      top-5
+                      text-xs
+                      font-bold
+                      tracking-[0.1em]
+                      text-gray-300
+                    "
+                  >
+                    0{index + 1}
+                  </span>
+
+                  {/* icon */}
+
                   <div
                     className="
                       flex
@@ -647,12 +649,12 @@ export default function OurTeam() {
                       items-center
                       justify-center
                       rounded-2xl
-                      bg-[#EAF6FF]
-                      text-[#0877E8]
+                      bg-[#1256af]/[0.07]
+                      text-[#1256af]
                       transition-all
                       duration-300
 
-                      group-hover:bg-[#0877E8]
+                      group-hover:bg-[#1256af]
                       group-hover:text-white
                     "
                   >
@@ -663,9 +665,9 @@ export default function OurTeam() {
                     className="
                       mt-5
                       text-lg
-                      font-bold
-                      tracking-[-0.025em]
-                      text-[#173B63]
+                      font-semibold
+                      tracking-tight
+                      text-gray-900
                     "
                   >
                     {principle.title}
@@ -676,12 +678,27 @@ export default function OurTeam() {
                       mt-2
                       text-sm
                       leading-6
-                      text-[#72889B]
+                      text-gray-500
                     "
                   >
                     {principle.description}
                   </p>
-                </div>
+
+                  <div
+                    className="
+                      mt-5
+                      h-[2px]
+                      w-8
+                      rounded-full
+                      bg-[#1256af]/20
+                      transition-all
+                      duration-300
+
+                      group-hover:w-14
+                      group-hover:bg-[#1256af]
+                    "
+                  />
+                </article>
               );
             })}
           </div>
@@ -693,22 +710,43 @@ export default function OurTeam() {
 
         <div
           className="
+            relative
             mt-20
             overflow-hidden
             rounded-[30px]
             border
-            border-[#D7E9F6]
+            border-[#1256af]/10
             bg-white
             px-6
             py-8
-            shadow-[0_14px_42px_rgba(8,119,232,0.055)]
+            shadow-[0_14px_42px_rgba(18,86,175,0.06)]
 
             sm:px-8
             sm:py-9
+
+            lg:px-10
           "
         >
+          {/* subtle CTA background */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              -right-20
+              -top-20
+              h-64
+              w-64
+              rounded-full
+              bg-[#1256af]/[0.04]
+              blur-3xl
+            "
+          />
+
           <div
             className="
+              relative
               flex
               flex-col
               gap-6
@@ -722,10 +760,10 @@ export default function OurTeam() {
               <p
                 className="
                   text-[10px]
-                  font-bold
+                  font-semibold
                   uppercase
-                  tracking-[0.17em]
-                  text-[#0877E8]
+                  tracking-[0.14em]
+                  text-[#1256af]
                 "
               >
                 Built to evolve
@@ -735,22 +773,25 @@ export default function OurTeam() {
                 className="
                   mt-2
                   text-2xl
-                  font-bold
-                  tracking-[-0.035em]
-                  text-[#173B63]
-
+                  font-semibold
+                  tracking-tight
+                  text-gray-900
                   sm:text-3xl
                 "
               >
-                Trailbliz grows as the student journey grows.
+                Trailbliz grows as the{" "}
+                <span className="text-[#1256af]">
+                  student journey grows.
+                </span>
               </h3>
 
               <p
                 className="
                   mt-3
+                  max-w-xl
                   text-sm
                   leading-6
-                  text-[#6E8599]
+                  text-gray-500
                 "
               >
                 The platform is being built step by step around the
@@ -764,25 +805,32 @@ export default function OurTeam() {
               className="
                 group
                 inline-flex
+                min-h-[52px]
                 shrink-0
                 items-center
                 justify-center
                 gap-3
                 rounded-2xl
-                bg-gradient-to-r
-                from-[#0877E8]
-                to-[#25AEF5]
-                px-6
+                border
+                border-[#1256af]
+                bg-[#1256af]
+                px-7
                 py-3.5
                 text-sm
-                font-semibold
+                font-bold
                 text-white
-                shadow-[0_12px_30px_rgba(8,119,232,0.20)]
+                shadow-[0_10px_24px_rgba(18,86,175,0.16)]
                 transition-all
-                duration-200
+                duration-300
 
                 hover:-translate-y-0.5
-                hover:shadow-[0_16px_36px_rgba(8,119,232,0.26)]
+                hover:bg-white
+                hover:text-[#1256af]
+                hover:shadow-[0_14px_30px_rgba(18,86,175,0.13)]
+
+                focus:outline-none
+                focus:ring-2
+                focus:ring-[#1256af]/25
               "
             >
               Join Trailbliz
@@ -791,7 +839,7 @@ export default function OurTeam() {
                 size={17}
                 className="
                   transition-transform
-                  duration-200
+                  duration-300
                   group-hover:translate-x-1
                 "
               />

@@ -69,13 +69,12 @@ export default function OurJourney() {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  const sectionRef = useRef<HTMLElement | null>(null);
   const timelineRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // =========================================================
-  // REVEAL MILESTONES
-  // =========================================================
+  /* =========================================================
+     REVEAL MILESTONES
+  ========================================================= */
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,22 +94,20 @@ export default function OurJourney() {
         });
       },
       {
-        threshold: 0.2,
+        threshold: 0.18,
       }
     );
 
     itemRefs.current.forEach((item) => {
-      if (item) {
-        observer.observe(item);
-      }
+      if (item) observer.observe(item);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  // =========================================================
-  // TIMELINE SCROLL PROGRESS
-  // =========================================================
+  /* =========================================================
+     TIMELINE SCROLL PROGRESS
+  ========================================================= */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,14 +121,10 @@ export default function OurJourney() {
       const start = viewportHeight * 0.75;
       const end = viewportHeight * 0.2;
 
-      const totalDistance =
-        rect.height + start - end;
+      const totalDistance = rect.height + start - end;
+      const travelled = start - rect.top;
 
-      const travelled =
-        start - rect.top;
-
-      const progress =
-        travelled / totalDistance;
+      const progress = travelled / totalDistance;
 
       setScrollProgress(
         Math.max(0, Math.min(1, progress))
@@ -140,89 +133,65 @@ export default function OurJourney() {
 
     handleScroll();
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      { passive: true }
-    );
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
-    window.addEventListener(
-      "resize",
-      handleScroll
-    );
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
-      window.removeEventListener(
-        "resize",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
   return (
     <section
-      ref={sectionRef}
       id="our-journey"
       className="
         relative
         isolate
         overflow-hidden
-        bg-white
+        bg-[#FAFAFA]
         py-20
         sm:py-24
         lg:py-28
       "
     >
       {/* =====================================================
-          BACKGROUND
+          SUBTLE BACKGROUND
       ===================================================== */}
 
       <div
-        className="
-          pointer-events-none
-          absolute
-          -left-52
-          top-40
-          h-[480px]
-          w-[480px]
-          rounded-full
-          bg-[#38BDF8]/10
-          blur-[140px]
-        "
-      />
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-40
+            h-[380px]
+            w-[380px]
+            rounded-full
+            bg-blue-50/70
+            blur-3xl
+          "
+        />
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-52
-          bottom-20
-          h-[520px]
-          w-[520px]
-          rounded-full
-          bg-[#0877E8]/10
-          blur-[150px]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.18]
-        "
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(8,119,232,0.16) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-20
+            h-[420px]
+            w-[420px]
+            rounded-full
+            bg-sky-50/60
+            blur-3xl
+          "
+        />
+      </div>
 
       <div
         className="
@@ -230,16 +199,16 @@ export default function OurJourney() {
           z-10
           mx-auto
           max-w-7xl
-          px-5
+          px-4
           sm:px-6
-          lg:px-8
+          lg:px-12
         "
       >
         {/* =====================================================
             HEADER
         ===================================================== */}
 
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <div
             className="
               inline-flex
@@ -247,55 +216,48 @@ export default function OurJourney() {
               gap-2
               rounded-full
               border
-              border-[#CBE5F8]
-              bg-[#F0F9FF]
+              border-[#1256af]/15
+              bg-[#1256af]/5
               px-4
               py-2
             "
           >
             <Sparkles
               size={14}
-              className="text-[#0877E8]"
+              className="text-[#1256af]"
             />
 
             <span
               className="
-                text-[11px]
-                font-bold
+                text-xs
+                font-semibold
                 uppercase
-                tracking-[0.17em]
-                text-[#4D7FA8]
+                tracking-[0.12em]
+                text-[#1256af]
+                sm:text-sm
               "
             >
-              Our journey
+              Our Journey
             </span>
           </div>
 
           <h2
             className="
+              mx-auto
               mt-6
+              max-w-4xl
               text-4xl
-              font-bold
-              leading-[1]
-              tracking-[-0.05em]
-              text-[#143655]
+              font-semibold
+              leading-[1.08]
+              tracking-tight
+              text-gray-900
 
               sm:text-5xl
               lg:text-6xl
             "
           >
-            From scattered progress
-            <span
-              className="
-                block
-                bg-gradient-to-r
-                from-[#0877E8]
-                via-[#1294F2]
-                to-[#38BDF8]
-                bg-clip-text
-                text-transparent
-              "
-            >
+            From scattered progress{" "}
+            <span className="text-[#1256af]">
               to one connected trail.
             </span>
           </h2>
@@ -306,8 +268,9 @@ export default function OurJourney() {
               mt-6
               max-w-2xl
               text-base
+              font-light
               leading-7
-              text-[#607A92]
+              text-gray-600
 
               sm:text-lg
               sm:leading-8
@@ -328,8 +291,10 @@ export default function OurJourney() {
           className="
             relative
             mx-auto
-            mt-20
+            mt-16
             max-w-6xl
+
+            sm:mt-20
           "
         >
           {/* ===================================================
@@ -337,6 +302,7 @@ export default function OurJourney() {
           =================================================== */}
 
           <div
+            aria-hidden="true"
             className="
               absolute
               bottom-0
@@ -348,18 +314,18 @@ export default function OurJourney() {
               md:-translate-x-1/2
             "
           >
-            {/* background */}
+            {/* Base line */}
 
             <div
               className="
                 absolute
                 inset-0
                 rounded-full
-                bg-[#DFEBF4]
+                bg-gray-200
               "
             />
 
-            {/* progress */}
+            {/* Scroll progress */}
 
             <div
               className="
@@ -368,398 +334,373 @@ export default function OurJourney() {
                 top-0
                 w-full
                 rounded-full
-                bg-gradient-to-b
-                from-[#0877E8]
-                via-[#1294F2]
-                to-[#38BDF8]
+                bg-[#1256af]
                 transition-[height]
-                duration-200
+                duration-150
               "
               style={{
                 height: `${scrollProgress * 100}%`,
               }}
             />
 
-            {/* moving cursor */}
+            {/* Moving marker */}
 
             <div
               className="
                 absolute
                 left-1/2
-                z-20
-                h-4
-                w-4
+                z-30
+                h-3
+                w-3
                 -translate-x-1/2
                 -translate-y-1/2
+                rounded-full
+                border-[3px]
+                border-white
+                bg-[#1256af]
+                shadow-[0_4px_12px_rgba(18,86,175,0.25)]
                 transition-[top,opacity]
-                duration-200
+                duration-150
               "
               style={{
-                top: `${
-                  Math.min(
-                    98,
-                    scrollProgress * 100
-                  )
-                }%`,
+                top: `${Math.min(
+                  98,
+                  scrollProgress * 100
+                )}%`,
                 opacity:
                   scrollProgress > 0 ? 1 : 0,
               }}
-            >
-              <div
-                className="
-                  absolute
-                  inset-0
-                  rounded-full
-                  bg-[#0877E8]/30
-                  animate-ping
-                "
-              />
-
-              <div
-                className="
-                  relative
-                  h-full
-                  w-full
-                  rounded-full
-                  border-[3px]
-                  border-white
-                  bg-[#0877E8]
-                  shadow-[0_4px_14px_rgba(8,119,232,0.35)]
-                "
-              />
-            </div>
+            />
           </div>
 
           {/* ===================================================
-              ITEMS
+              MILESTONES
           =================================================== */}
 
           <div className="space-y-14 md:space-y-20">
-            {milestones.map(
-              (milestone, index) => {
-                const Icon = milestone.icon;
-                const visible =
-                  visibleItems.includes(index);
+            {milestones.map((milestone, index) => {
+              const Icon = milestone.icon;
+              const visible =
+                visibleItems.includes(index);
 
-                const even =
-                  index % 2 === 0;
+              const even = index % 2 === 0;
 
-                return (
+              return (
+                <div
+                  key={milestone.title}
+                  data-index={index}
+                  ref={(element) => {
+                    itemRefs.current[index] =
+                      element;
+                  }}
+                  className={`
+                    relative
+                    transition-all
+                    duration-700
+                    ease-out
+
+                    ${
+                      visible
+                        ? `
+                          translate-y-0
+                          opacity-100
+                        `
+                        : `
+                          translate-y-8
+                          opacity-0
+                        `
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${index * 80}ms`,
+                  }}
+                >
+                  {/* Timeline marker */}
+
                   <div
-                    key={milestone.title}
-                    data-index={index}
-                    ref={(element) => {
-                      itemRefs.current[index] =
-                        element;
-                    }}
-                    className={`
-                      relative
-                      transition-all
-                      duration-700
-                      ease-out
+                    className="
+                      absolute
+                      left-[14px]
+                      top-5
+                      z-20
 
-                      ${
-                        visible
-                          ? `
-                            translate-y-0
-                            opacity-100
-                          `
-                          : `
-                            translate-y-8
-                            opacity-0
-                          `
-                      }
-                    `}
-                    style={{
-                      transitionDelay:
-                        `${index * 90}ms`,
-                    }}
+                      md:left-1/2
+                      md:-translate-x-1/2
+                    "
                   >
-                    {/* =========================================
-                        MARKER
-                    ========================================= */}
-
                     <div
                       className="
-                        absolute
-                        left-[14px]
-                        top-5
-                        z-20
-
-                        md:left-1/2
-                        md:-translate-x-1/2
+                        flex
+                        h-[20px]
+                        w-[20px]
+                        items-center
+                        justify-center
+                        rounded-full
+                        border-4
+                        border-[#FAFAFA]
+                        bg-[#1256af]
+                        shadow-[0_4px_12px_rgba(18,86,175,0.18)]
                       "
-                    >
-                      <div
-                        className="
-                          flex
-                          h-[20px]
-                          w-[20px]
-                          items-center
-                          justify-center
-                          rounded-full
-                          border-4
-                          border-white
-                          bg-[#0877E8]
-                          shadow-[0_5px_15px_rgba(8,119,232,0.22)]
-                        "
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    {/* =========================================
-                        CONTENT ROW
-                    ========================================= */}
+                  {/* =================================================
+                      ROW
+                  ================================================= */}
+
+                  <div
+                    className={`
+                      flex
+                      flex-col
+                      md:flex-row
+
+                      ${
+                        even
+                          ? ""
+                          : "md:flex-row-reverse"
+                      }
+                    `}
+                  >
+                    {/* ===============================================
+                        PHASE SIDE
+                    =============================================== */}
 
                     <div
                       className={`
-                        flex
-                        flex-col
+                        w-full
+                        pl-16
 
-                        md:flex-row
+                        md:w-1/2
+                        md:pl-0
 
                         ${
                           even
-                            ? ""
-                            : "md:flex-row-reverse"
+                            ? `
+                              md:pr-14
+                              md:text-right
+                            `
+                            : `
+                              md:pl-14
+                              md:text-left
+                            `
                         }
                       `}
                     >
-                      {/* =======================================
-                          PHASE / DATE SIDE
-                      ======================================= */}
-
                       <div
-                        className={`
-                          w-full
-                          pl-16
-
-                          md:w-1/2
-                          md:pl-0
-
-                          ${
-                            even
-                              ? `
-                                md:pr-14
-                                md:text-right
-                              `
-                              : `
-                                md:pl-14
-                                md:text-left
-                              `
-                          }
-                        `}
+                        className="
+                          inline-flex
+                          items-center
+                          gap-2
+                          rounded-full
+                          border
+                          border-[#1256af]/10
+                          bg-white
+                          px-3
+                          py-1.5
+                          shadow-sm
+                        "
                       >
-                        <div
+                        <span
                           className="
-                            inline-flex
-                            items-center
-                            gap-2
+                            h-1.5
+                            w-1.5
                             rounded-full
-                            border
-                            border-[#D9E9F5]
-                            bg-[#F6FBFF]
-                            px-3
-                            py-1.5
+                            bg-[#1256af]
+                          "
+                        />
+
+                        <span
+                          className="
+                            text-[10px]
+                            font-semibold
+                            uppercase
+                            tracking-[0.14em]
+                            text-gray-500
                           "
                         >
-                          <span
+                          {milestone.phase}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* ===============================================
+                        CARD SIDE
+                    =============================================== */}
+
+                    <div
+                      className={`
+                        mt-4
+                        w-full
+                        pl-16
+
+                        md:mt-0
+                        md:w-1/2
+                        md:pl-0
+
+                        ${
+                          even
+                            ? "md:pl-10"
+                            : "md:pr-10"
+                        }
+                      `}
+                    >
+                      <article
+                        className="
+                          group
+                          relative
+                          overflow-hidden
+                          rounded-[26px]
+                          border
+                          border-gray-200
+                          bg-white
+                          p-5
+                          shadow-[0_10px_35px_rgba(17,24,39,0.045)]
+                          transition-all
+                          duration-300
+
+                          hover:-translate-y-1
+                          hover:border-[#1256af]/20
+                          hover:shadow-[0_20px_50px_rgba(18,86,175,0.08)]
+
+                          sm:p-6
+                        "
+                      >
+                        {/* top */}
+
+                        <div
+                          className="
+                            flex
+                            items-start
+                            justify-between
+                            gap-4
+                          "
+                        >
+                          <div
                             className="
-                              h-1.5
-                              w-1.5
-                              rounded-full
-                              bg-[#0877E8]
+                              flex
+                              h-12
+                              w-12
+                              items-center
+                              justify-center
+                              rounded-2xl
+                              bg-[#1256af]/[0.07]
+                              text-[#1256af]
+                              transition-all
+                              duration-300
+
+                              group-hover:bg-[#1256af]
+                              group-hover:text-white
                             "
-                          />
+                          >
+                            <Icon size={21} />
+                          </div>
 
                           <span
                             className="
+                              rounded-full
+                              bg-gray-50
+                              px-3
+                              py-1.5
                               text-[10px]
                               font-bold
                               uppercase
                               tracking-[0.14em]
-                              text-[#6685A0]
+                              text-gray-400
                             "
                           >
-                            {milestone.phase}
+                            {milestone.label}
                           </span>
                         </div>
-                      </div>
 
-                      {/* =======================================
-                          CARD SIDE
-                      ======================================= */}
+                        {/* Title */}
 
-                      <div
-                        className={`
-                          mt-4
-                          w-full
-                          pl-16
-
-                          md:mt-0
-                          md:w-1/2
-                          md:pl-0
-
-                          ${
-                            even
-                              ? "md:pl-10"
-                              : "md:pr-10"
-                          }
-                        `}
-                      >
-                        <article
+                        <h3
                           className="
-                            group
-                            relative
-                            overflow-hidden
-                            rounded-[26px]
-                            border
-                            border-[#DCEAF5]
-                            bg-white
-                            p-5
-                            shadow-[0_12px_38px_rgba(8,119,232,0.055)]
-                            transition-all
-                            duration-300
+                            mt-5
+                            text-xl
+                            font-semibold
+                            leading-tight
+                            tracking-tight
+                            text-gray-900
 
-                            hover:-translate-y-1
-                            hover:border-[#B5DAF3]
-                            hover:shadow-[0_22px_50px_rgba(8,119,232,0.10)]
-
-                            sm:p-6
+                            sm:text-2xl
                           "
                         >
-                          {/* glow */}
+                          {milestone.title}
+                        </h3>
 
-                          <div
+                        {/* Description */}
+
+                        <p
+                          className="
+                            mt-3
+                            text-sm
+                            leading-6
+                            text-gray-600
+                          "
+                        >
+                          {milestone.description}
+                        </p>
+
+                        {/* Detail */}
+
+                        <div
+                          className="
+                            mt-5
+                            flex
+                            items-start
+                            gap-3
+                            rounded-2xl
+                            border
+                            border-[#1256af]/10
+                            bg-[#1256af]/[0.035]
+                            px-4
+                            py-3.5
+                          "
+                        >
+                          <BadgeCheck
+                            size={17}
                             className="
-                              pointer-events-none
-                              absolute
-                              -right-16
-                              -top-16
-                              h-40
-                              w-40
-                              rounded-full
-                              bg-[#38BDF8]/0
-                              blur-3xl
-                              transition-all
-                              duration-300
-
-                              group-hover:bg-[#38BDF8]/12
+                              mt-0.5
+                              shrink-0
+                              text-[#1256af]
                             "
                           />
 
-                          <div className="relative">
-                            {/* top */}
+                          <p
+                            className="
+                              text-xs
+                              leading-5
+                              text-gray-500
+                            "
+                          >
+                            {milestone.detail}
+                          </p>
+                        </div>
 
-                            <div
-                              className="
-                                flex
-                                items-start
-                                justify-between
-                                gap-4
-                              "
-                            >
-                              <div
-                                className="
-                                  flex
-                                  h-12
-                                  w-12
-                                  items-center
-                                  justify-center
-                                  rounded-2xl
-                                  bg-[#EAF6FF]
-                                  text-[#0877E8]
-                                  transition-all
-                                  duration-300
+                        {/* Bottom accent */}
 
-                                  group-hover:bg-[#0877E8]
-                                  group-hover:text-white
-                                "
-                              >
-                                <Icon size={21} />
-                              </div>
+                        <div
+                          aria-hidden="true"
+                          className="
+                            mt-5
+                            h-[2px]
+                            w-8
+                            rounded-full
+                            bg-[#1256af]/20
+                            transition-all
+                            duration-300
 
-                              <span
-                                className="
-                                  text-[10px]
-                                  font-bold
-                                  uppercase
-                                  tracking-[0.15em]
-                                  text-[#9AAEBF]
-                                "
-                              >
-                                {milestone.label}
-                              </span>
-                            </div>
-
-                            <h3
-                              className="
-                                mt-5
-                                text-xl
-                                font-bold
-                                leading-tight
-                                tracking-[-0.03em]
-                                text-[#173B63]
-
-                                sm:text-2xl
-                              "
-                            >
-                              {milestone.title}
-                            </h3>
-
-                            <p
-                              className="
-                                mt-3
-                                text-sm
-                                leading-6
-                                text-[#6B8296]
-                              "
-                            >
-                              {
-                                milestone.description
-                              }
-                            </p>
-
-                            <div
-                              className="
-                                mt-5
-                                flex
-                                items-start
-                                gap-3
-                                rounded-2xl
-                                border
-                                border-[#E0EDF6]
-                                bg-[#F7FBFF]
-                                px-4
-                                py-3.5
-                              "
-                            >
-                              <BadgeCheck
-                                size={17}
-                                className="
-                                  mt-0.5
-                                  shrink-0
-                                  text-[#0877E8]
-                                "
-                              />
-
-                              <p
-                                className="
-                                  text-xs
-                                  leading-5
-                                  text-[#678198]
-                                "
-                              >
-                                {milestone.detail}
-                              </p>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
+                            group-hover:w-14
+                            group-hover:bg-[#1256af]
+                          "
+                        />
+                      </article>
                     </div>
                   </div>
-                );
-              }
-            )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -779,21 +720,21 @@ export default function OurJourney() {
             className="
               relative
               overflow-hidden
-              rounded-[32px]
-              bg-gradient-to-r
-              from-[#0877E8]
-              via-[#1294F2]
-              to-[#38BDF8]
+              rounded-[30px]
+              bg-[#1256af]
               px-6
               py-10
               text-center
-              shadow-[0_28px_65px_rgba(8,119,232,0.18)]
+              shadow-[0_22px_55px_rgba(18,86,175,0.16)]
 
               sm:px-10
               sm:py-12
             "
           >
+            {/* subtle decorations */}
+
             <div
+              aria-hidden="true"
               className="
                 pointer-events-none
                 absolute
@@ -802,12 +743,13 @@ export default function OurJourney() {
                 h-64
                 w-64
                 rounded-full
-                bg-white/15
+                bg-white/10
                 blur-3xl
               "
             />
 
             <div
+              aria-hidden="true"
               className="
                 pointer-events-none
                 absolute
@@ -816,7 +758,7 @@ export default function OurJourney() {
                 h-64
                 w-64
                 rounded-full
-                bg-[#BDEBFF]/20
+                bg-blue-300/10
                 blur-3xl
               "
             />
@@ -833,9 +775,8 @@ export default function OurJourney() {
                   rounded-2xl
                   border
                   border-white/20
-                  bg-white/15
+                  bg-white/10
                   text-white
-                  backdrop-blur
                 "
               >
                 <Rocket size={21} />
@@ -844,11 +785,11 @@ export default function OurJourney() {
               <p
                 className="
                   mt-6
-                  text-[10px]
-                  font-bold
+                  text-xs
+                  font-semibold
                   uppercase
-                  tracking-[0.17em]
-                  text-white/65
+                  tracking-[0.14em]
+                  text-white/60
                 "
               >
                 The journey continues
@@ -860,15 +801,15 @@ export default function OurJourney() {
                   mt-3
                   max-w-2xl
                   text-3xl
-                  font-bold
-                  tracking-[-0.04em]
+                  font-semibold
+                  tracking-tight
                   text-white
 
                   sm:text-4xl
                 "
               >
-                Trailbliz is only the
-                beginning of the trail.
+                Trailbliz is only the beginning
+                of the trail.
               </h3>
 
               <p
