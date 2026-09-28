@@ -1,265 +1,265 @@
 import Link from "next/link";
 
-export default function Discover() {
-  const opportunities = [
-    {
-      type: "INTERNSHIP",
-      category: "Technology",
-      title: "Software Engineering Intern",
-      company: "Amazon",
-      location: "Remote · India",
-      featured: true,
-    },
-    {
-      type: "FULL-TIME",
-      category: "Engineering",
-      title: "Graduate Software Engineer",
-      company: "Google",
-      location: "Bengaluru · India",
-      featured: false,
-    },
-    {
-      type: "INTERNSHIP",
-      category: "Product",
-      title: "Frontend Developer Intern",
-      company: "Microsoft",
-      location: "Hyderabad · India",
-      featured: false,
-    },
-  ];
+const opportunities = [
+  {
+    number: "01",
+    type: "INTERNSHIP",
+    category: "Technology",
+    title: "Software Engineering Internship",
+    description:
+      "Discover internship opportunities that align with your technical skills, projects and interests.",
+    location: "Remote & On-site",
+    featured: true,
+  },
+  {
+    number: "02",
+    type: "GRADUATE ROLE",
+    category: "Engineering",
+    title: "Graduate Engineering Roles",
+    description:
+      "Explore early-career opportunities designed for students and recent graduates building their careers.",
+    location: "Across India",
+    featured: false,
+  },
+  {
+    number: "03",
+    type: "INTERNSHIP",
+    category: "Product",
+    title: "Product & Frontend Internships",
+    description:
+      "Find opportunities where your projects, frontend skills and product thinking can become real experience.",
+    location: "Multiple locations",
+    featured: false,
+  },
+];
 
+const discoveryPoints = [
+  "Relevant roles",
+  "Student opportunities",
+  "Profile-based discovery",
+];
+
+export default function Discover() {
   return (
     <section
+      id="discover"
       className="
         relative
         overflow-hidden
         bg-white
-        px-5
-        py-20
-
-        sm:px-8
-        sm:py-24
-
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
         lg:px-12
-        lg:py-32
+        lg:py-28
       "
     >
-      {/* =====================================================
-          BACKGROUND EFFECTS
-      ===================================================== */}
-
+      {/* Background */}
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -left-40
-          top-20
-          h-[480px]
-          w-[480px]
-          rounded-full
-          bg-[#DDF2FF]
-          blur-[140px]
-        "
-      />
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-20
+            h-80
+            w-80
+            rounded-full
+            bg-[#1256af]/[0.035]
+            blur-3xl
+          "
+        />
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-52
-          bottom-0
-          h-[540px]
-          w-[540px]
-          rounded-full
-          bg-[#C8E9FF]/70
-          blur-[150px]
-        "
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-0
+            h-96
+            w-96
+            rounded-full
+            bg-blue-50
+            blur-3xl
+          "
+        />
+      </div>
 
-      {/* Dot pattern */}
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.32]
-        "
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(8,119,232,0.09) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl">
-        {/* =====================================================
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* =========================================================
             HEADER
-        ===================================================== */}
+        ========================================================= */}
 
         <div
           className="
             grid
-            gap-8
-
+            gap-6
             lg:grid-cols-[1fr_0.72fr]
             lg:items-end
+            lg:gap-12
           "
         >
           <div>
-            {/* Label */}
-
             <div
               className="
                 inline-flex
                 items-center
-                gap-2.5
+                gap-2
                 rounded-full
                 border
-                border-[#CBE4F8]
-                bg-[#F5FBFF]
+                border-[#1256af]/15
+                bg-[#FAFAFA]
                 px-4
                 py-2
               "
             >
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-[#0877E8]
-                  shadow-[0_0_12px_rgba(8,119,232,0.5)]
-                "
-              />
+              <span className="h-2 w-2 rounded-full bg-[#1256af]" />
 
               <span
                 className="
-                  text-[11px]
+                  text-xs
                   font-semibold
                   uppercase
-                  tracking-[0.16em]
-                  text-[#3977AC]
+                  tracking-[0.14em]
+                  text-[#1256af]
                 "
               >
                 Discover opportunities
               </span>
             </div>
 
-            {/* Heading */}
-
             <h2
               className="
                 mt-6
                 max-w-4xl
-                text-[clamp(3rem,6vw,6rem)]
+                text-3xl
                 font-bold
-                leading-[0.9]
-                tracking-[-0.065em]
-                text-[#102F51]
+                leading-tight
+                tracking-tight
+                text-gray-900
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
               "
             >
-              Find what&apos;s
-              <span
-                className="
-                  block
-                  bg-gradient-to-r
-                  from-[#0877E8]
-                  via-[#1396F2]
-                  to-[#36BDF8]
-                  bg-clip-text
-                  text-transparent
-                "
-              >
+              Find what&apos;s{" "}
+              <span className="text-[#1256af]">
                 next for you.
               </span>
             </h2>
           </div>
 
-          {/* Description */}
-
           <p
             className="
-              max-w-md
+              max-w-xl
               text-base
               leading-7
-              text-[#607890]
-
+              text-gray-600
               sm:text-lg
               sm:leading-8
-
               lg:justify-self-end
             "
           >
-            Explore internships and graduate opportunities connected to
-            your skills, profile and career journey.
+            Explore internships and graduate opportunities connected to your
+            skills, profile and career journey.
           </p>
         </div>
 
-        {/* =====================================================
-            OPPORTUNITIES
-        ===================================================== */}
+        {/* =========================================================
+            DISCOVERY POINTS
+        ========================================================= */}
 
         <div
           className="
-            mt-14
+            mt-10
+            flex
+            flex-wrap
+            gap-3
+          "
+        >
+          {discoveryPoints.map((point) => (
+            <div
+              key={point}
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-gray-200
+                bg-[#FAFAFA]
+                px-4
+                py-2
+              "
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[#1256af]" />
+
+              <span
+                className="
+                  text-xs
+                  font-semibold
+                  text-gray-600
+                  sm:text-sm
+                "
+              >
+                {point}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* =========================================================
+            OPPORTUNITIES
+        ========================================================= */}
+
+        <div
+          className="
+            mt-12
             grid
-            gap-5
-
-            sm:mt-16
-
-            lg:mt-20
+            gap-6
+            lg:mt-16
             lg:grid-cols-12
           "
         >
-          {opportunities.map((opportunity, index) => {
+          {opportunities.map((opportunity) => {
             const isFeatured = opportunity.featured;
 
             return (
-              <div
-                key={opportunity.title}
+              <article
+                key={opportunity.number}
                 className={`
                   group
                   relative
                   overflow-hidden
-                  rounded-[30px]
+                  rounded-3xl
+                  border
                   transition-all
                   duration-300
-
-                  hover:-translate-y-1
 
                   ${
                     isFeatured
                       ? `
-                        bg-gradient-to-br
-                        from-[#075FCB]
-                        via-[#0877E8]
-                        to-[#22AAF4]
-                        text-white
-                        shadow-[0_24px_70px_rgba(8,119,232,0.22)]
-
-                        lg:col-span-12
-                      `
+                          border-[#1256af]
+                          bg-[#1256af]
+                          text-white
+                          shadow-lg
+                          lg:col-span-12
+                        `
                       : `
-                        border
-                        border-[#D7E9F6]
-                        bg-white/90
-                        shadow-[0_12px_40px_rgba(8,119,232,0.06)]
-
-                        hover:border-[#ADD9F5]
-                        hover:shadow-[0_20px_55px_rgba(8,119,232,0.12)]
-
-                        lg:col-span-6
-                      `
+                          border-gray-200
+                          bg-white
+                          shadow-sm
+                          hover:-translate-y-1
+                          hover:border-[#1256af]/25
+                          hover:shadow-md
+                          lg:col-span-6
+                        `
                   }
                 `}
               >
-                {/* =================================================
-                    BACKGROUND EFFECT FOR FEATURED CARD
-                ================================================= */}
-
+                {/* Featured decoration */}
                 {isFeatured && (
                   <>
                     <div
@@ -268,12 +268,12 @@ export default function Discover() {
                         pointer-events-none
                         absolute
                         -right-24
-                        -top-32
-                        h-[350px]
-                        w-[350px]
+                        -top-24
+                        h-72
+                        w-72
                         rounded-full
-                        bg-white/20
-                        blur-[90px]
+                        bg-white/10
+                        blur-3xl
                       "
                     />
 
@@ -282,31 +282,14 @@ export default function Discover() {
                       className="
                         pointer-events-none
                         absolute
-                        -bottom-28
-                        left-[30%]
-                        h-[280px]
-                        w-[280px]
+                        -bottom-32
+                        left-1/3
+                        h-64
+                        w-64
                         rounded-full
-                        bg-[#54D4FF]/25
-                        blur-[90px]
+                        bg-blue-300/10
+                        blur-3xl
                       "
-                    />
-
-                    <div
-                      aria-hidden="true"
-                      className="
-                        pointer-events-none
-                        absolute
-                        inset-0
-                        opacity-[0.1]
-                      "
-                      style={{
-                        backgroundImage: `
-                          linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
-                        `,
-                        backgroundSize: "48px 48px",
-                      }}
                     />
                   </>
                 )}
@@ -314,34 +297,24 @@ export default function Discover() {
                 <div
                   className={`
                     relative
+                    z-10
                     flex
                     h-full
                     flex-col
                     p-6
-
                     sm:p-8
 
                     ${
                       isFeatured
-                        ? "lg:flex-row lg:items-center lg:justify-between lg:p-10"
+                        ? "lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:p-10"
                         : ""
                     }
                   `}
                 >
-                  {/* =================================================
-                      LEFT
-                  ================================================= */}
+                  {/* Content */}
 
-                  <div
-                    className={
-                      isFeatured
-                        ? "max-w-3xl"
-                        : ""
-                    }
-                  >
-                    {/* Meta */}
-
-                    <div className="flex flex-wrap items-center gap-2.5">
+                  <div className={isFeatured ? "max-w-3xl" : ""}>
+                    <div className="flex flex-wrap items-center gap-2">
                       <span
                         className={`
                           rounded-full
@@ -355,16 +328,15 @@ export default function Discover() {
                           ${
                             isFeatured
                               ? `
-                                border
-                                border-white/20
-                                bg-white/12
-                                text-white
-                                backdrop-blur-md
-                              `
+                                  border
+                                  border-white/20
+                                  bg-white/10
+                                  text-white
+                                `
                               : `
-                                bg-[#E8F5FF]
-                                text-[#0877E8]
-                              `
+                                  bg-[#1256af]/[0.07]
+                                  text-[#1256af]
+                                `
                           }
                         `}
                       >
@@ -378,8 +350,8 @@ export default function Discover() {
 
                           ${
                             isFeatured
-                              ? "text-white/60"
-                              : "text-[#72889E]"
+                              ? "text-white/65"
+                              : "text-gray-500"
                           }
                         `}
                       >
@@ -387,96 +359,85 @@ export default function Discover() {
                       </span>
                     </div>
 
-                    {/* Title */}
-
                     <h3
                       className={`
                         mt-6
                         font-bold
-                        tracking-[-0.045em]
+                        tracking-tight
 
                         ${
                           isFeatured
                             ? `
-                              max-w-2xl
-                              text-3xl
-                              text-white
-
-                              sm:text-4xl
-
-                              lg:text-5xl
-                            `
+                                max-w-3xl
+                                text-3xl
+                                text-white
+                                sm:text-4xl
+                                lg:text-5xl
+                              `
                             : `
-                              text-2xl
-                              text-[#173B63]
-
-                              sm:text-3xl
-                            `
+                                text-2xl
+                                text-gray-900
+                                sm:text-3xl
+                              `
                         }
                       `}
                     >
                       {opportunity.title}
                     </h3>
 
-                    {/* Company / Location */}
+                    <p
+                      className={`
+                        mt-4
+                        max-w-2xl
+                        text-sm
+                        leading-6
+                        sm:text-base
+                        sm:leading-7
+
+                        ${
+                          isFeatured
+                            ? "text-white/75"
+                            : "text-gray-600"
+                        }
+                      `}
+                    >
+                      {opportunity.description}
+                    </p>
 
                     <div
                       className={`
-                        mt-5
+                        mt-6
                         flex
-                        flex-wrap
-                        gap-x-5
-                        gap-y-2
+                        items-center
+                        gap-2
                         text-sm
 
                         ${
                           isFeatured
                             ? "text-white/65"
-                            : "text-[#667D94]"
+                            : "text-gray-500"
                         }
                       `}
                     >
-                      <span className="flex items-center gap-2">
-                        <span
-                          className={`
-                            h-1.5
-                            w-1.5
-                            rounded-full
+                      <span
+                        className={`
+                          h-1.5
+                          w-1.5
+                          rounded-full
 
-                            ${
-                              isFeatured
-                                ? "bg-[#A7E9FF]"
-                                : "bg-[#5BBBF4]"
-                            }
-                          `}
-                        />
+                          ${
+                            isFeatured
+                              ? "bg-white/70"
+                              : "bg-[#1256af]"
+                          }
+                        `}
+                      />
 
-                        {opportunity.company}
-                      </span>
-
-                      <span className="flex items-center gap-2">
-                        <span
-                          className={`
-                            h-1.5
-                            w-1.5
-                            rounded-full
-
-                            ${
-                              isFeatured
-                                ? "bg-[#A7E9FF]"
-                                : "bg-[#5BBBF4]"
-                            }
-                          `}
-                        />
-
-                        {opportunity.location}
-                      </span>
+                      {opportunity.location}
                     </div>
                   </div>
 
-                  {/* =================================================
-                      ACTION
-                  ================================================= */}
+                  {/* Action */}
 
                   <div
                     className={`
@@ -484,24 +445,22 @@ export default function Discover() {
                       flex
                       items-center
                       justify-between
+                      border-t
+                      pt-6
 
                       ${
                         isFeatured
                           ? `
-                            border-t
-                            border-white/15
-                            pt-6
-
-                            lg:mt-0
-                            lg:border-0
-                            lg:pt-0
-                          `
+                              border-white/15
+                              lg:mt-0
+                              lg:min-w-[220px]
+                              lg:border-0
+                              lg:pt-0
+                            `
                           : `
-                            mt-auto
-                            border-t
-                            border-[#E0EDF7]
-                            pt-6
-                          `
+                              mt-auto
+                              border-gray-100
+                            `
                       }
                     `}
                   >
@@ -516,11 +475,27 @@ export default function Discover() {
                           ${
                             isFeatured
                               ? "text-white/45"
-                              : "text-[#8EA3B6]"
+                              : "text-gray-400"
                           }
                         `}
                       >
-                        Opportunity {String(index + 1).padStart(2, "0")}
+                        Opportunity
+                      </p>
+
+                      <p
+                        className={`
+                          mt-1
+                          text-sm
+                          font-semibold
+
+                          ${
+                            isFeatured
+                              ? "text-white/80"
+                              : "text-gray-600"
+                          }
+                        `}
+                      >
+                        {opportunity.number}
                       </p>
                     </div>
 
@@ -528,13 +503,14 @@ export default function Discover() {
                       href="/register"
                       aria-label={`Explore ${opportunity.title}`}
                       className={`
-                        flex
-                        h-12
+                        inline-flex
+                        min-h-11
                         items-center
                         justify-center
                         gap-2
-                        rounded-2xl
+                        rounded-xl
                         px-5
+                        py-2.5
                         text-sm
                         font-semibold
                         transition-all
@@ -543,19 +519,19 @@ export default function Discover() {
                         ${
                           isFeatured
                             ? `
-                              bg-white
-                              text-[#0877E8]
-                              shadow-[0_10px_30px_rgba(0,68,145,0.18)]
-
-                              hover:-translate-y-0.5
-                              hover:bg-[#F0FAFF]
-                            `
+                                bg-white
+                                text-[#1256af]
+                                shadow-sm
+                                hover:-translate-y-0.5
+                                hover:shadow-md
+                              `
                             : `
-                              bg-[#EAF6FF]
-                              text-[#0877E8]
-
-                              hover:bg-[#DCEFFF]
-                            `
+                                border
+                                border-[#1256af]
+                                text-[#1256af]
+                                hover:bg-[#1256af]
+                                hover:text-white
+                              `
                         }
                       `}
                     >
@@ -574,119 +550,299 @@ export default function Discover() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
 
-        {/* =====================================================
-            BOTTOM CTA
-        ===================================================== */}
+        {/* =========================================================
+            HOW DISCOVERY CONNECTS TO PROFILE
+        ========================================================= */}
 
         <div
           className="
-            relative
-            mt-16
-            overflow-hidden
-            rounded-[30px]
-            bg-gradient-to-r
-            from-[#F0F9FF]
-            via-white
-            to-[#E8F6FF]
-            p-[1px]
-
-            sm:mt-20
+            mt-14
+            rounded-3xl
+            border
+            border-gray-200
+            bg-[#FAFAFA]
+            p-6
+            sm:mt-16
+            sm:p-8
+            lg:mt-20
+            lg:p-10
           "
         >
           <div
             className="
-              flex
-              flex-col
-              gap-6
-              rounded-[29px]
-              border
-              border-[#D7EAF8]
-              bg-white/85
-              px-6
-              py-7
-              backdrop-blur-xl
-
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
-              sm:px-8
+              grid
+              gap-8
+              lg:grid-cols-[0.8fr_1.2fr]
+              lg:items-center
+              lg:gap-12
             "
           >
             <div>
               <p
                 className="
-                  text-[11px]
+                  text-xs
                   font-semibold
                   uppercase
                   tracking-[0.14em]
-                  text-[#1689F5]
+                  text-[#1256af]
                 "
               >
-                Your next move
+                Built around your journey
               </p>
+
+              <h3
+                className="
+                  mt-3
+                  text-2xl
+                  font-bold
+                  tracking-tight
+                  text-gray-900
+                  sm:text-3xl
+                "
+              >
+                Your profile helps make discovery more meaningful.
+              </h3>
 
               <p
                 className="
-                  mt-2
-                  text-xl
-                  font-semibold
-                  tracking-[-0.03em]
-                  text-[#173B63]
-
-                  sm:text-2xl
+                  mt-4
+                  text-sm
+                  leading-6
+                  text-gray-600
+                  sm:text-base
+                  sm:leading-7
                 "
               >
-                The right opportunity could be one step away.
+                The more your profile reflects your skills, projects and
+                experience, the easier it becomes to understand which
+                opportunities fit your direction.
               </p>
             </div>
 
-            <Link
-              href="/register"
+            {/* Connection visual */}
+
+            <div
               className="
-                group
-                inline-flex
-                min-h-12
-                shrink-0
-                items-center
-                justify-center
-                gap-2
-                rounded-2xl
-                bg-[#0877E8]
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-
-                shadow-[0_10px_28px_rgba(8,119,232,0.18)]
-
-                transition-all
-                duration-200
-
-                hover:-translate-y-0.5
-                hover:bg-[#126FD0]
-                hover:shadow-[0_14px_34px_rgba(8,119,232,0.24)]
+                grid
+                grid-cols-1
+                gap-3
+                sm:grid-cols-[1fr_auto_1fr_auto_1fr]
+                sm:items-center
               "
             >
-              Discover opportunities
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-gray-200
+                  bg-white
+                  p-5
+                  text-center
+                  shadow-sm
+                "
+              >
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-[#1256af]/10
+                    text-xs
+                    font-bold
+                    text-[#1256af]
+                  "
+                >
+                  01
+                </div>
 
-              <span
+                <p className="mt-3 text-sm font-semibold text-gray-800">
+                  Your profile
+                </p>
+              </div>
+
+              <div
                 aria-hidden="true"
                 className="
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
+                  hidden
+                  text-center
+                  text-xl
+                  text-gray-300
+                  sm:block
                 "
               >
                 →
-              </span>
-            </Link>
+              </div>
+
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-gray-200
+                  bg-white
+                  p-5
+                  text-center
+                  shadow-sm
+                "
+              >
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-[#1256af]/10
+                    text-xs
+                    font-bold
+                    text-[#1256af]
+                  "
+                >
+                  02
+                </div>
+
+                <p className="mt-3 text-sm font-semibold text-gray-800">
+                  Relevant roles
+                </p>
+              </div>
+
+              <div
+                aria-hidden="true"
+                className="
+                  hidden
+                  text-center
+                  text-xl
+                  text-gray-300
+                  sm:block
+                "
+              >
+                →
+              </div>
+
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-[#1256af]/25
+                  bg-white
+                  p-5
+                  text-center
+                  shadow-sm
+                "
+              >
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-[#1256af]
+                    text-xs
+                    font-bold
+                    text-white
+                  "
+                >
+                  03
+                </div>
+
+                <p className="mt-3 text-sm font-semibold text-gray-800">
+                  Your next move
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* =========================================================
+            CTA
+        ========================================================= */}
+
+        <div
+          className="
+            mt-14
+            flex
+            flex-col
+            gap-6
+            border-t
+            border-gray-200
+            pt-8
+            sm:mt-16
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <div>
+            <p
+              className="
+                text-lg
+                font-semibold
+                text-gray-700
+                sm:text-xl
+              "
+            >
+              Your next opportunity could be{" "}
+              <span className="text-[#1256af]">
+                one step away.
+              </span>
+            </p>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Build your profile and start exploring what comes next.
+            </p>
+          </div>
+
+          <Link
+            href="/register"
+            className="
+              group
+              inline-flex
+              w-fit
+              shrink-0
+              items-center
+              justify-center
+              gap-2
+              rounded-xl
+              bg-[#1256af]
+              px-6
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:bg-[#0f4b99]
+              hover:shadow-md
+            "
+          >
+            Discover opportunities
+
+            <span
+              aria-hidden="true"
+              className="
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+            >
+              →
+            </span>
+          </Link>
         </div>
       </div>
     </section>

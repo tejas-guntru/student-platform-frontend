@@ -22,86 +22,257 @@ export default function CollegeSection() {
   return (
     <section
       id="colleges"
-      className="relative isolate overflow-hidden bg-[#F8FBFF] py-20 sm:py-24 lg:py-28"
+      className="
+        relative
+        overflow-hidden
+        bg-white
+        py-20
+        sm:py-24
+        lg:py-28
+      "
     >
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-[#0877E8]/10 blur-[150px]" />
+      {/* =====================================================
+          SUBTLE AMBIENT LIGHT
+      ===================================================== */}
 
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-[350px] w-[350px] rounded-full bg-[#38BDF8]/10 blur-[120px]" />
-
-      <div className="pointer-events-none absolute -right-40 top-1/2 h-[350px] w-[350px] rounded-full bg-[#0877E8]/10 blur-[120px]" />
-
-      {/* Dot texture */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.10]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #94A3B8 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-        }}
+        className="
+          pointer-events-none
+          absolute
+          -right-48
+          -top-48
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[#24598a]/[0.04]
+          blur-[110px]
+        "
       />
 
-      {/* Top separator */}
-      <div className="absolute left-1/2 top-0 h-px w-[85%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#0877E8]/20 to-transparent" />
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -bottom-52
+          -left-44
+          h-[450px]
+          w-[450px]
+          rounded-full
+          bg-[#c9a227]/[0.025]
+          blur-[110px]
+        "
+      />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        {/* =========================
-            HEADING
-        ========================= */}
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
+
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-7xl
+          px-5
+          sm:px-8
+          lg:px-12
+        "
+      >
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
 
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-[#0877E8]/15 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#38BDF8] opacity-30" />
+          {/* Eyebrow */}
 
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0877E8] shadow-[0_0_10px_rgba(8,119,232,0.5)]" />
-            </span>
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-[#c5d6e8]
+              bg-white
+              px-4
+              py-2
+              shadow-[0_1px_3px_rgba(23,59,99,0.05)]
+            "
+          >
+            <span
+              className="
+                h-1.5
+                w-1.5
+                rounded-full
+                bg-[#c9a227]
+              "
+            />
 
-            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0877E8]">
+            <span
+              className="
+                text-[11px]
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-[#173b63]
+              "
+            >
               Trusted Across Campuses
             </span>
           </div>
 
-          <h2 className="mt-6 text-3xl font-extrabold leading-[1.08] tracking-[-0.045em] text-[#07182E] sm:text-4xl md:text-5xl lg:text-[3.6rem]">
-            Built for ambitious students
+          {/* Heading */}
 
-            <span className="mt-1 block bg-gradient-to-r from-[#0877E8] via-[#129CE9] to-[#32BDF7] bg-clip-text text-transparent">
+          <h2
+            className="
+              mt-6
+              text-3xl
+              font-bold
+              leading-[1.05]
+              tracking-[-0.04em]
+              text-[#122a46]
+
+              sm:text-4xl
+              md:text-5xl
+              lg:text-[3.5rem]
+            "
+          >
+            Built for ambitious students
+            <span
+              className="
+                mt-1
+                block
+                text-[#24598a]
+              "
+            >
               across campuses.
             </span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg">
+          {/* Description */}
+
+          <p
+            className="
+              mx-auto
+              mt-5
+              max-w-2xl
+              text-base
+              leading-7
+              text-[#64748b]
+
+              sm:text-lg
+              sm:leading-8
+            "
+          >
             Students from{" "}
-            <span className="font-bold text-[#07182E]">
+            <span
+              className="
+                font-semibold
+                text-[#173b63]
+              "
+            >
               20+ institutions and universities
             </span>{" "}
             have benefited from Trailbliz.
           </p>
         </div>
 
-        {/* =========================
-            LOGOS
-        ========================= */}
+        {/* =====================================================
+            SMALL SECTION LABEL
+        ===================================================== */}
 
-        <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
-          {/* Glow behind logos */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0877E8]/10 blur-[90px]" />
+        <div
+          className="
+            mx-auto
+            mt-14
+            flex
+            max-w-6xl
+            items-center
+            gap-5
 
-          <div className="relative grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-5">
-            {colleges.map((src, index) => (
-              <CollegeLogo
-                key={`${src}-${index}`}
-                src={src}
-                index={index}
-              />
-            ))}
+            sm:mt-16
+          "
+        >
+          <div
+            className="
+              h-px
+              flex-1
+              bg-gradient-to-r
+              from-transparent
+              to-[#dce7f3]
+            "
+          />
+
+          <p
+            className="
+              shrink-0
+              text-[10px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-[#94a3b8]
+
+              sm:text-xs
+            "
+          >
+            Institutions in our community
+          </p>
+
+          <div
+            className="
+              h-px
+              flex-1
+              bg-gradient-to-l
+              from-transparent
+              to-[#dce7f3]
+            "
+          />
+        </div>
+
+        {/* =====================================================
+            COLLEGE LOGOS
+        ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-8
+            max-w-6xl
+          "
+        >
+          <div
+            className="
+              grid
+              grid-cols-2
+              gap-3
+
+              sm:grid-cols-3
+              sm:gap-4
+
+              md:grid-cols-5
+            "
+          >
+            {colleges.map(
+              (src, index) => (
+                <CollegeLogo
+                  key={`${src}-${index}`}
+                  src={src}
+                  index={index}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+/* =========================================================
+   COLLEGE LOGO
+========================================================= */
 
 function CollegeLogo({
   src,
@@ -116,37 +287,78 @@ function CollegeLogo({
         group
         relative
         flex
-        h-[110px]
+        h-[105px]
         items-center
         justify-center
         overflow-hidden
-        rounded-[20px]
+
+        rounded-2xl
+
         border
-        border-slate-200/80
+        border-[#dce7f3]
+
         bg-white
+
         p-4
-        shadow-[0_8px_30px_rgba(15,23,42,0.05)]
+
+        shadow-[0_1px_3px_rgba(23,59,99,0.05)]
+
         transition-all
-        duration-500
+        duration-300
 
-        hover:-translate-y-2
-        hover:scale-[1.02]
-        hover:border-[#0877E8]/30
-        hover:shadow-[0_20px_50px_rgba(8,119,232,0.15)]
+        hover:-translate-y-1
+        hover:border-[#b8cee4]
+        hover:shadow-[0_10px_30px_rgba(23,59,99,0.09)]
 
-        sm:h-[120px]
+        sm:h-[115px]
         sm:p-5
-        lg:h-[130px]
+
+        lg:h-[120px]
       "
     >
-      {/* Top glow line */}
-      <div className="absolute left-1/2 top-0 h-[2px] w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent transition-all duration-500 group-hover:w-[65%]" />
+      {/* Gold hover accent */}
 
-      {/* Hover glow */}
-      <div className="pointer-events-none absolute -bottom-16 left-1/2 h-28 w-28 -translate-x-1/2 rounded-full bg-[#0877E8]/0 blur-2xl transition-all duration-500 group-hover:bg-[#0877E8]/20" />
+      <div
+        aria-hidden="true"
+        className="
+          absolute
+          left-1/2
+          top-0
 
-      {/* Hover tint */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0877E8]/0 to-[#38BDF8]/0 transition-all duration-500 group-hover:from-[#0877E8]/[0.02] group-hover:to-[#38BDF8]/[0.07]" />
+          h-[2px]
+          w-0
+
+          -translate-x-1/2
+
+          rounded-full
+          bg-[#c9a227]
+
+          transition-all
+          duration-300
+
+          group-hover:w-10
+        "
+      />
+
+      {/* Very subtle hover surface */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+
+          bg-[#f7fbff]/0
+
+          transition-colors
+          duration-300
+
+          group-hover:bg-[#f7fbff]/60
+        "
+      />
+
+      {/* Logo */}
 
       <img
         src={src}
@@ -155,18 +367,24 @@ function CollegeLogo({
         className="
           relative
           z-10
-          max-h-[70px]
-          max-w-full
+
+          max-h-[64px]
+          max-w-[85%]
+
           object-contain
+
           opacity-80
+          saturate-[0.9]
+
           transition-all
-          duration-500
+          duration-300
 
-          group-hover:scale-110
+          group-hover:scale-[1.04]
           group-hover:opacity-100
+          group-hover:saturate-100
 
-          sm:max-h-[78px]
-          lg:max-h-[85px]
+          sm:max-h-[70px]
+          lg:max-h-[74px]
         "
       />
     </div>

@@ -1,284 +1,452 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+const navLinks = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Courses",
+    href: "/courses",
+  },
+  {
+    label: "Hiring",
+    href: "/hiring",
+  },
+  {
+    label: "Blogs",
+    href: "/login",
+  },
+  {
+    label: "About",
+    href: "/about",
+  },
+];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname === href;
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
+
   return (
     <header
       className="
-        absolute
-        left-0
-        right-0
-        top-0
+        fixed
+        left-1/2
+        top-2
         z-50
-        px-4
-        pt-4
-        sm:px-6
-        lg:px-8
+        w-[96%]
+        max-w-7xl
+        -translate-x-1/2
+        sm:top-4
+        sm:w-[95%]
       "
     >
       <nav
         aria-label="Main navigation"
         className="
           relative
-          mx-auto
-          flex
-          max-w-7xl
-          items-center
-          justify-between
-
           overflow-hidden
-          rounded-[22px]
-
+          rounded-2xl
           border
-          border-white/20
-
-          bg-[#075EB5]/45
-
-          px-5
-          py-3
-
-          shadow-[0_12px_40px_rgba(0,35,90,0.14)]
-
+          border-gray-200/80
+          bg-white/95
+          px-4
+          shadow-lg
+          shadow-gray-900/[0.06]
           backdrop-blur-xl
-          backdrop-saturate-150
-
-          sm:px-7
-          lg:px-8
+          sm:px-5
+          lg:px-6
         "
       >
-        {/* Glass highlight */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            left-10
-            right-10
-            top-0
-            h-px
-            bg-gradient-to-r
-            from-transparent
-            via-white/45
-            to-transparent
-          "
-        />
+        {/* =====================================================
+            SUBTLE NAVBAR GLOW
+        ===================================================== */}
 
-        {/* Soft inner glow */}
         <div
           aria-hidden="true"
           className="
             pointer-events-none
             absolute
             left-1/2
-            top-[-70px]
-            h-[120px]
+            top-[-80px]
+            h-[130px]
             w-[65%]
             -translate-x-1/2
             rounded-full
-            bg-white/[0.10]
+            bg-[#1256af]/[0.05]
             blur-[45px]
           "
         />
 
-        {/* =========================
-            LOGO
-        ========================= */}
+        {/* =====================================================
+            NAVBAR CONTENT
+        ===================================================== */}
 
-        <Link
-          href="/"
-          aria-label="Trailbliz home"
+        <div
           className="
             relative
             z-10
             flex
-            h-[42px]
-            w-[175px]
-            shrink-0
+            h-[68px]
             items-center
-            justify-start
-            overflow-hidden
-
-            transition-transform
-            duration-300
-
-            hover:scale-[1.02]
-
-            sm:h-[46px]
-            sm:w-[195px]
-
-            lg:h-[48px]
-            lg:w-[210px]
+            justify-between
+            sm:h-[72px]
           "
         >
-          <img
-            src="/trailbliz-logo-v2.png"
-            alt="Trailbliz"
-            className="
-              h-full
-              w-auto
-              object-contain
-              drop-shadow-[0_3px_12px_rgba(0,0,0,0.12)]
-            "
-          />
-        </Link>
-
-        {/* =========================
-            DESKTOP NAVIGATION
-        ========================= */}
-
-        <div className="relative z-10 hidden items-center gap-1 md:flex">
-          <Link
-            href="/about"
-            className="
-              rounded-xl
-              px-4
-              py-2.5
-
-              text-sm
-              font-medium
-              text-white/85
-
-              transition-all
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Platform
-          </Link>
+          {/* ===================================================
+              LOGO
+          =================================================== */}
 
           <Link
-            href="/login"
+            href="/"
+            onClick={closeMobileMenu}
             className="
-              rounded-xl
-              px-4
-              py-2.5
-
-              text-sm
-              font-medium
-              text-white/85
-
-              transition-all
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Log in
-          </Link>
-
-          {/* Divider */}
-          <div className="mx-2 h-6 w-px bg-white/20" />
-
-          {/* CTA */}
-          <Link
-            href="/register"
-            className="
-              group
-              inline-flex
-              min-h-11
+              flex
+              shrink-0
               items-center
-              justify-center
-              gap-2.5
-
-              rounded-xl
-
-              border
-              border-white/40
-
-              bg-white
-
-              px-5
-              py-2.5
-
-              text-sm
-              font-semibold
-              text-[#0877E8]
-
-              shadow-[0_8px_24px_rgba(0,40,100,0.18)]
-
               transition-all
               duration-300
+              hover:scale-[1.02]
+            "
+            aria-label="Trailbliz home"
+          >
+            <Image
+              src="/tbz.png"
+              alt="Trailbliz"
+              width={190}
+              height={50}
+              priority
+              className="
+                h-9
+                w-auto
+                object-contain
+                sm:h-10
+                lg:h-11
+              "
+            />
+          </Link>
 
-              hover:-translate-y-0.5
-              hover:bg-[#F4FBFF]
-              hover:shadow-[0_12px_32px_rgba(0,40,100,0.25)]
+          {/* ===================================================
+              DESKTOP NAVIGATION
+          =================================================== */}
+
+          <div
+            className="
+              hidden
+              items-center
+              gap-1
+              lg:flex
             "
           >
-            Join Trailbliz
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
 
-            <span
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`
+                    relative
+                    rounded-lg
+                    px-4
+                    py-2.5
+                    text-sm
+                    font-medium
+                    transition-all
+                    duration-200
+
+                    ${
+                      active
+                        ? "text-[#1256af]"
+                        : "text-gray-600 hover:bg-[#1256af]/[0.05] hover:text-[#1256af]"
+                    }
+                  `}
+                >
+                  {link.label}
+
+                  {active && (
+                    <span
+                      className="
+                        absolute
+                        bottom-0
+                        left-1/2
+                        h-[2px]
+                        w-5
+                        -translate-x-1/2
+                        rounded-full
+                        bg-[#1256af]
+                      "
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* ===================================================
+              DESKTOP ACTIONS
+          =================================================== */}
+
+          <div
+            className="
+              hidden
+              items-center
+              gap-3
+              lg:flex
+            "
+          >
+            <Link
+              href="/login"
               className="
-                transition-transform
-                duration-300
-                group-hover:translate-x-1
+                inline-flex
+                min-h-10
+                items-center
+                justify-center
+                rounded-xl
+                px-4
+                py-2
+                text-sm
+                font-semibold
+                text-gray-600
+                transition-all
+                duration-200
+                hover:bg-[#1256af]/[0.05]
+                hover:text-[#1256af]
               "
             >
-              →
-            </span>
-          </Link>
-        </div>
+              Log in
+            </Link>
 
-        {/* =========================
-            MOBILE
-        ========================= */}
+            <Link
+              href="/register"
+              className="
+                group
+                inline-flex
+                min-h-11
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                bg-[#1256af]
+                px-5
+                py-2.5
+                text-sm
+                font-semibold
+                text-white
+                shadow-[0_8px_24px_rgba(18,86,175,0.18)]
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:bg-[#0f4b99]
+                hover:shadow-[0_12px_30px_rgba(18,86,175,0.24)]
+              "
+            >
+              Join Trailbliz
 
-        <div className="relative z-10 flex items-center gap-1 md:hidden">
-          <Link
-            href="/login"
+              <span
+                aria-hidden="true"
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-1
+                "
+              >
+                →
+              </span>
+            </Link>
+          </div>
+
+          {/* ===================================================
+              MOBILE MENU BUTTON
+          =================================================== */}
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((current) => !current)}
+            aria-label={
+              mobileOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            aria-expanded={mobileOpen}
             className="
-              rounded-lg
-              px-3
-              py-2
-
-              text-[13px]
-              font-medium
-              text-white/90
-
-              transition-all
-              duration-200
-
-              hover:bg-white/10
-              hover:text-white
-            "
-          >
-            Log in
-          </Link>
-
-          <Link
-            href="/register"
-            className="
-              inline-flex
-              min-h-10
+              flex
+              h-11
+              w-11
               items-center
               justify-center
-
               rounded-xl
-
               border
-              border-white/40
-
+              border-gray-200
               bg-white
-
-              px-4
-              py-2
-
-              text-[13px]
-              font-semibold
-              text-[#0877E8]
-
-              shadow-[0_6px_18px_rgba(0,40,100,0.18)]
-
+              text-gray-700
               transition-all
               duration-200
-
-              hover:-translate-y-0.5
-              hover:bg-[#F4FBFF]
+              hover:border-[#1256af]/30
+              hover:bg-[#1256af]/[0.04]
+              hover:text-[#1256af]
+              lg:hidden
             "
           >
-            Join
-          </Link>
+            {mobileOpen ? (
+              <X size={21} strokeWidth={2} />
+            ) : (
+              <Menu size={21} strokeWidth={2} />
+            )}
+          </button>
+        </div>
+
+        {/* =====================================================
+            MOBILE NAVIGATION
+        ===================================================== */}
+
+        <div
+          className={`
+            relative
+            z-10
+            overflow-hidden
+            transition-all
+            duration-300
+            ease-in-out
+            lg:hidden
+
+            ${
+              mobileOpen
+                ? "max-h-[520px] border-t border-gray-100 opacity-100"
+                : "max-h-0 border-t border-transparent opacity-0"
+            }
+          `}
+        >
+          <div className="py-4">
+            {/* Mobile navigation links */}
+
+            <div className="space-y-1">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={closeMobileMenu}
+                    className={`
+                      flex
+                      items-center
+                      justify-between
+                      rounded-xl
+                      px-4
+                      py-3
+                      text-sm
+                      font-semibold
+                      transition-all
+                      duration-200
+
+                      ${
+                        active
+                          ? "bg-[#1256af]/[0.07] text-[#1256af]"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-[#1256af]"
+                      }
+                    `}
+                  >
+                    <span>{link.label}</span>
+
+                    {active && (
+                      <span
+                        className="
+                          h-2
+                          w-2
+                          rounded-full
+                          bg-[#1256af]
+                        "
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Mobile actions */}
+
+            <div
+              className="
+                mt-4
+                grid
+                grid-cols-2
+                gap-3
+                border-t
+                border-gray-100
+                pt-4
+              "
+            >
+              <Link
+                href="/login"
+                onClick={closeMobileMenu}
+                className="
+                  inline-flex
+                  min-h-11
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-gray-200
+                  bg-white
+                  px-4
+                  py-2.5
+                  text-sm
+                  font-semibold
+                  text-gray-700
+                  transition-all
+                  duration-200
+                  hover:border-[#1256af]
+                  hover:text-[#1256af]
+                "
+              >
+                Log in
+              </Link>
+
+              <Link
+                href="/register"
+                onClick={closeMobileMenu}
+                className="
+                  inline-flex
+                  min-h-11
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-[#1256af]
+                  px-4
+                  py-2.5
+                  text-sm
+                  font-semibold
+                  text-white
+                  shadow-[0_6px_18px_rgba(18,86,175,0.16)]
+                  transition-all
+                  duration-200
+                  hover:bg-[#0f4b99]
+                "
+              >
+                Join Trailbliz
+              </Link>
+            </div>
+          </div>
         </div>
       </nav>
     </header>

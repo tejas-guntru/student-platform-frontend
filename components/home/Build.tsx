@@ -1,158 +1,104 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-const items = [
+const profileParts = [
   {
     number: "01",
-    title: "Academics",
-    value: "Computer Science Engineering",
-    description: "Your foundation and academic journey.",
-    side: "left",
+    label: "Academics",
+    title: "Your foundation",
+    description:
+      "Show where you studied, what you learned and the academic foundation behind your career journey.",
+    short: "Education & learning",
   },
   {
     number: "02",
-    title: "Skills",
-    value: "Java · React · Spring Boot · AWS",
-    description: "What you know and what you keep improving.",
-    side: "right",
+    label: "Skills",
+    title: "What you can do",
+    description:
+      "Bring together the technical and professional skills you have learned and continue to improve.",
+    short: "Technical abilities",
   },
   {
     number: "03",
-    title: "Projects",
-    value: "Operating System",
-    description: "Proof of what you can actually build.",
-    side: "left",
+    label: "Projects",
+    title: "What you have built",
+    description:
+      "Turn projects into visible proof of your ability to solve problems and create real things.",
+    short: "Practical proof",
   },
   {
     number: "04",
-    title: "Experience",
-    value: "Software Engineering Intern",
-    description: "Where your skills meet real work.",
-    side: "right",
+    label: "Experience",
+    title: "Where you applied it",
+    description:
+      "Add internships, work and practical experience that show how your knowledge performs in the real world.",
+    short: "Real-world work",
   },
 ];
 
 export default function Build() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const updateProgress = () => {
-      const section = sectionRef.current;
-
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const start = windowHeight * 0.75;
-      const end = -rect.height * 0.65;
-
-      const rawProgress =
-        (start - rect.top) / (start - end);
-
-      const nextProgress = Math.min(
-        1,
-        Math.max(0, rawProgress)
-      );
-
-      setProgress(nextProgress);
-    };
-
-    updateProgress();
-
-    window.addEventListener("scroll", updateProgress, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", updateProgress);
-
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, []);
+  const [active, setActive] = useState(0);
 
   return (
     <section
-      ref={sectionRef}
+      id="build"
       className="
         relative
         overflow-hidden
         bg-white
-        px-5
-        py-20
-
-        sm:px-8
-        sm:py-24
-
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
         lg:px-12
-        lg:py-32
+        lg:py-28
       "
     >
-      {/* =====================================================
-          BACKGROUND
-      ===================================================== */}
-
+      {/* Subtle background decoration */}
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -left-40
-          top-[15%]
-          h-[460px]
-          w-[460px]
-          rounded-full
-          bg-[#DDF1FF]
-          blur-[130px]
-        "
-      />
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-1/3
+            h-80
+            w-80
+            rounded-full
+            bg-[#1256af]/[0.035]
+            blur-3xl
+          "
+        />
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-48
-          top-[45%]
-          h-[520px]
-          w-[520px]
-          rounded-full
-          bg-[#CDEAFF]/70
-          blur-[150px]
-        "
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-10
+            h-96
+            w-96
+            rounded-full
+            bg-blue-50/70
+            blur-3xl
+          "
+        />
+      </div>
 
-      {/* Dots */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.38]
-        "
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at center, rgba(8,119,232,0.08) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl">
-        {/* =====================================================
-            INTRO
-        ===================================================== */}
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* =========================================================
+            HEADER
+        ========================================================= */}
 
         <div
           className="
             grid
-            gap-10
-
-            lg:grid-cols-[1fr_0.72fr]
+            gap-6
+            lg:grid-cols-[1fr_0.7fr]
             lg:items-end
+            lg:gap-12
           "
         >
           <div>
@@ -163,32 +109,24 @@ export default function Build() {
                 gap-2
                 rounded-full
                 border
-                border-[#CDE5F8]
-                bg-[#F4FAFF]
+                border-[#1256af]/15
+                bg-[#FAFAFA]
                 px-4
                 py-2
               "
             >
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-[#0877E8]
-                  shadow-[0_0_12px_rgba(8,119,232,0.5)]
-                "
-              />
+              <span className="h-2 w-2 rounded-full bg-[#1256af]" />
 
               <span
                 className="
-                  text-[11px]
+                  text-xs
                   font-semibold
                   uppercase
-                  tracking-[0.16em]
-                  text-[#3977AC]
+                  tracking-[0.14em]
+                  text-[#1256af]
                 "
               >
-                Build your identity
+                Build your profile
               </span>
             </div>
 
@@ -196,26 +134,18 @@ export default function Build() {
               className="
                 mt-6
                 max-w-4xl
-                text-[clamp(3rem,6vw,6rem)]
+                text-3xl
                 font-bold
-                leading-[0.9]
-                tracking-[-0.065em]
-                text-[#102F51]
+                leading-tight
+                tracking-tight
+                text-gray-900
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
               "
             >
-              You&apos;re more than
-
-              <span
-                className="
-                  block
-                  bg-gradient-to-r
-                  from-[#0877E8]
-                  via-[#1294F2]
-                  to-[#3BC3FF]
-                  bg-clip-text
-                  text-transparent
-                "
-              >
+              You&apos;re more than{" "}
+              <span className="text-[#1256af]">
                 a single resume.
               </span>
             </h2>
@@ -226,586 +156,693 @@ export default function Build() {
               max-w-xl
               text-base
               leading-7
-              text-[#5F7690]
-
+              text-gray-600
               sm:text-lg
               sm:leading-8
-
               lg:justify-self-end
             "
           >
-            Your academics, skills, projects and experience
-            tell a much bigger story when they&apos;re
-            connected together.
+            Your academics, skills, projects and experience tell different
+            parts of your story. Trailbliz brings them together into one
+            professional identity.
           </p>
         </div>
 
-        {/* =====================================================
-            SCROLL JOURNEY
-        ===================================================== */}
+        {/* =========================================================
+            MAIN PROFILE BUILDER
+        ========================================================= */}
 
         <div
           className="
-            relative
-            mt-20
-
-            sm:mt-24
-            lg:mt-32
+            mt-14
+            grid
+            gap-8
+            lg:mt-20
+            lg:grid-cols-[0.95fr_1.05fr]
+            lg:items-stretch
+            lg:gap-10
+            xl:gap-14
           "
         >
-          {/* ===============================================
-              CENTER TRAIL
-          =============================================== */}
+          {/* =======================================================
+              LEFT — PROFILE PARTS
+          ======================================================= */}
 
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              bottom-[110px]
-              left-1/2
-              top-[70px]
-              hidden
-              w-[2px]
-              -translate-x-1/2
-              overflow-hidden
-              rounded-full
-              bg-[#D9ECFA]
-
-              lg:block
-            "
-          >
-            {/* Scroll progress */}
-            <div
-              className="
-                absolute
-                left-0
-                top-0
-                w-full
-                rounded-full
-                bg-gradient-to-b
-                from-[#0877E8]
-                via-[#25A9F6]
-                to-[#55D2FF]
-
-                shadow-[0_0_18px_rgba(8,119,232,0.55)]
-              "
-              style={{
-                height: `${progress * 100}%`,
-              }}
-            />
-          </div>
-
-          {/* Trail glow */}
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              left-1/2
-              top-1/2
-              hidden
-              h-[85%]
-              w-24
-              -translate-x-1/2
-              -translate-y-1/2
-              bg-[#55C8FF]/10
-              blur-[60px]
-
-              lg:block
-            "
-          />
-
-          {/* ===============================================
-              ITEMS
-          =============================================== */}
-
-          <div className="relative space-y-8 lg:space-y-24">
-            {items.map((item, index) => {
-              const trigger = index * 0.18 + 0.05;
-
-              const visible = progress >= trigger;
+          <div className="space-y-4">
+            {profileParts.map((part, index) => {
+              const isActive = active === index;
 
               return (
-                <JourneyItem
-                  key={item.number}
-                  item={item}
-                  visible={visible}
-                />
+                <button
+                  key={part.number}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={`
+                    group
+                    flex
+                    w-full
+                    items-start
+                    gap-4
+                    rounded-2xl
+                    border
+                    p-5
+                    text-left
+                    transition-all
+                    duration-300
+                    sm:p-6
+
+                    ${
+                      isActive
+                        ? `
+                            border-[#1256af]/30
+                            bg-[#1256af]/[0.035]
+                            shadow-md
+                          `
+                        : `
+                            border-gray-200
+                            bg-white
+                            shadow-sm
+                            hover:border-[#1256af]/20
+                            hover:shadow-md
+                          `
+                    }
+                  `}
+                >
+                  <div
+                    className={`
+                      flex
+                      h-12
+                      w-12
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      border
+                      text-xs
+                      font-bold
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? `
+                              border-[#1256af]
+                              bg-[#1256af]
+                              text-white
+                            `
+                          : `
+                              border-gray-200
+                              bg-[#FAFAFA]
+                              text-gray-500
+                              group-hover:border-[#1256af]/30
+                              group-hover:text-[#1256af]
+                            `
+                      }
+                    `}
+                  >
+                    {part.number}
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p
+                          className={`
+                            text-[11px]
+                            font-semibold
+                            uppercase
+                            tracking-[0.13em]
+                            transition-colors
+
+                            ${
+                              isActive
+                                ? "text-[#1256af]"
+                                : "text-gray-400"
+                            }
+                          `}
+                        >
+                          {part.label}
+                        </p>
+
+                        <h3
+                          className="
+                            mt-1
+                            text-lg
+                            font-bold
+                            text-gray-900
+                            sm:text-xl
+                          "
+                        >
+                          {part.title}
+                        </h3>
+                      </div>
+
+                      <span
+                        aria-hidden="true"
+                        className={`
+                          hidden
+                          text-xl
+                          transition-all
+                          duration-300
+                          sm:block
+
+                          ${
+                            isActive
+                              ? "translate-x-0 text-[#1256af] opacity-100"
+                              : "-translate-x-1 text-gray-300 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                          }
+                        `}
+                      >
+                        →
+                      </span>
+                    </div>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-gray-500
+                      "
+                    >
+                      {part.description}
+                    </p>
+                  </div>
+                </button>
               );
             })}
           </div>
 
-          {/* =================================================
-              FINAL DESTINATION
-          ================================================= */}
+          {/* =======================================================
+              RIGHT — COMPLETE PROFILE PREVIEW
+          ======================================================= */}
 
           <div
-            className={`
+            className="
               relative
-              mx-auto
-              mt-20
-              max-w-lg
-
-              transition-all
-              duration-1000
-              ease-out
-
-              lg:mt-28
-
-              ${
-                progress > 0.72
-                  ? "translate-y-0 scale-100 opacity-100"
-                  : "translate-y-16 scale-[0.94] opacity-0"
-              }
-            `}
+              overflow-hidden
+              rounded-3xl
+              border
+              border-gray-200
+              bg-[#FAFAFA]
+              p-5
+              shadow-sm
+              sm:p-7
+              lg:p-8
+            "
           >
-            {/* Glow */}
             <div
+              aria-hidden="true"
               className="
+                pointer-events-none
                 absolute
-                inset-4
-                rounded-[32px]
-                bg-[#1AA4F6]/30
-                blur-[55px]
+                -right-28
+                -top-28
+                h-72
+                w-72
+                rounded-full
+                bg-[#1256af]/[0.05]
+                blur-3xl
               "
             />
 
-            <div
-              className="
-                relative
-                overflow-hidden
-                rounded-[30px]
-                bg-gradient-to-r
-                from-[#0877E8]
-                via-[#1294F2]
-                to-[#38BDF8]
-                p-[1px]
+            <div className="relative z-10">
+              {/* Profile header */}
 
-                shadow-[0_30px_80px_rgba(8,119,232,0.28)]
-              "
-            >
               <div
                 className="
-                  relative
-                  overflow-hidden
-                  rounded-[29px]
-                  bg-[#0A83E9]
-                  px-7
-                  py-9
-                  text-center
-                  text-white
+                  rounded-2xl
+                  border
+                  border-gray-200
+                  bg-white
+                  p-5
+                  shadow-sm
+                  sm:p-6
                 "
               >
-                {/* shine */}
                 <div
                   className="
-                    pointer-events-none
-                    absolute
-                    left-1/2
-                    top-[-100px]
-                    h-[180px]
-                    w-[70%]
-                    -translate-x-1/2
-                    rounded-full
-                    bg-white/15
-                    blur-[60px]
+                    flex
+                    flex-col
+                    gap-5
+                    sm:flex-row
+                    sm:items-center
+                    sm:justify-between
                   "
-                />
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="
+                        flex
+                        h-14
+                        w-14
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#1256af]
+                        text-lg
+                        font-bold
+                        text-white
+                      "
+                    >
+                      T
+                    </div>
 
-                <div className="relative">
-                  <div
-                    className="
-                      mx-auto
-                      flex
-                      h-12
-                      w-12
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      bg-white/15
-                      text-xl
-                      backdrop-blur-md
+                    <div>
+                      <p
+                        className="
+                          text-[10px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.14em]
+                          text-[#1256af]
+                        "
+                      >
+                        Trailbliz Profile
+                      </p>
 
-                      transition-transform
-                      duration-500
-
-                      hover:scale-110
-                      hover:rotate-6
-                    "
-                  >
-                    ↗
+                      <h3
+                        className="
+                          mt-1
+                          text-xl
+                          font-bold
+                          text-gray-900
+                          sm:text-2xl
+                        "
+                      >
+                        Your professional story
+                      </h3>
+                    </div>
                   </div>
 
-                  <p
+                  <div
                     className="
-                      mt-5
-                      text-[11px]
+                      inline-flex
+                      w-fit
+                      items-center
+                      gap-2
+                      rounded-full
+                      bg-green-50
+                      px-3
+                      py-1.5
+                      text-xs
                       font-semibold
-                      uppercase
-                      tracking-[0.16em]
-                      text-white/65
+                      text-green-700
                     "
                   >
-                    Your story
-                  </p>
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-600" />
+                    Growing
+                  </div>
+                </div>
+              </div>
 
-                  <h3
+              {/* Profile sections */}
+
+              <div
+                className="
+                  mt-5
+                  grid
+                  gap-4
+                  sm:grid-cols-2
+                "
+              >
+                {profileParts.map((part, index) => {
+                  const isActive = active === index;
+
+                  return (
+                    <button
+                      key={part.number}
+                      type="button"
+                      onClick={() => setActive(index)}
+                      className={`
+                        relative
+                        overflow-hidden
+                        rounded-2xl
+                        border
+                        bg-white
+                        p-5
+                        text-left
+                        transition-all
+                        duration-300
+
+                        ${
+                          isActive
+                            ? `
+                                -translate-y-1
+                                border-[#1256af]/40
+                                shadow-md
+                              `
+                            : `
+                                border-gray-200
+                                shadow-sm
+                                hover:-translate-y-0.5
+                                hover:border-[#1256af]/20
+                                hover:shadow-md
+                              `
+                        }
+                      `}
+                    >
+                      {isActive && (
+                        <div
+                          aria-hidden="true"
+                          className="
+                            absolute
+                            left-0
+                            top-0
+                            h-1
+                            w-full
+                            bg-[#1256af]
+                          "
+                        />
+                      )}
+
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={`
+                            text-xs
+                            font-bold
+
+                            ${
+                              isActive
+                                ? "text-[#1256af]"
+                                : "text-gray-400"
+                            }
+                          `}
+                        >
+                          {part.number}
+                        </span>
+
+                        <span
+                          className={`
+                            h-2
+                            w-2
+                            rounded-full
+
+                            ${
+                              isActive
+                                ? "bg-[#1256af]"
+                                : "bg-gray-200"
+                            }
+                          `}
+                        />
+                      </div>
+
+                      <h4
+                        className="
+                          mt-5
+                          text-lg
+                          font-bold
+                          text-gray-900
+                        "
+                      >
+                        {part.label}
+                      </h4>
+
+                      <p
+                        className="
+                          mt-2
+                          text-sm
+                          leading-6
+                          text-gray-500
+                        "
+                      >
+                        {part.short}
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active detail */}
+
+              <div
+                className="
+                  mt-5
+                  rounded-2xl
+                  border
+                  border-[#1256af]/15
+                  bg-white
+                  p-5
+                  shadow-sm
+                  sm:p-6
+                "
+              >
+                <div
+                  className="
+                    flex
+                    flex-col
+                    gap-4
+                    sm:flex-row
+                    sm:items-start
+                    sm:justify-between
+                  "
+                >
+                  <div className="max-w-xl">
+                    <p
+                      className="
+                        text-[10px]
+                        font-semibold
+                        uppercase
+                        tracking-[0.14em]
+                        text-[#1256af]
+                      "
+                    >
+                      Currently viewing
+                    </p>
+
+                    <h4
+                      className="
+                        mt-2
+                        text-xl
+                        font-bold
+                        text-gray-900
+                      "
+                    >
+                      {profileParts[active].label}
+                    </h4>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-gray-600
+                      "
+                    >
+                      {profileParts[active].description}
+                    </p>
+                  </div>
+
+                  <div
                     className="
-                      mt-2
-                      text-2xl
+                      flex
+                      h-11
+                      w-11
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-[#1256af]/10
+                      text-xs
                       font-bold
-                      tracking-[-0.035em]
-                      text-white
-
-                      sm:text-3xl
+                      text-[#1256af]
                     "
                   >
-                    One profile. Everything about you.
-                  </h3>
-
-                  <p
-                    className="
-                      mx-auto
-                      mt-3
-                      max-w-sm
-                      text-sm
-                      leading-6
-                      text-white/70
-                    "
-                  >
-                    Your complete journey becomes a profile
-                    that grows with you.
-                  </p>
+                    {profileParts[active].number}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-/* =========================================================
-   JOURNEY ITEM
-========================================================= */
+        {/* =========================================================
+            FINAL COMBINATION
+        ========================================================= */}
 
-function JourneyItem({
-  item,
-  visible,
-}: {
-  item: {
-    number: string;
-    title: string;
-    value: string;
-    description: string;
-    side: string;
-  };
-  visible: boolean;
-}) {
-  const isLeft = item.side === "left";
-
-  return (
-    <div
-      className={`
-        relative
-        w-full
-
-        transition-all
-        duration-1000
-        ease-out
-
-        lg:w-[43%]
-
-        ${
-          isLeft
-            ? "lg:mr-auto"
-            : "lg:ml-auto"
-        }
-
-        ${
-          visible
-            ? "translate-x-0 translate-y-0 opacity-100"
-            : isLeft
-              ? "-translate-x-16 translate-y-12 opacity-20"
-              : "translate-x-16 translate-y-12 opacity-20"
-        }
-      `}
-    >
-      {/* ===============================================
-          CONNECTION LINE
-      =============================================== */}
-
-      <div
-        aria-hidden="true"
-        className={`
-          absolute
-          top-1/2
-          hidden
-          h-px
-          w-[16.3%]
-          -translate-y-1/2
-
-          transition-all
-          duration-700
-
-          lg:block
-
-          ${
-            isLeft
-              ? "left-full"
-              : "right-full"
-          }
-
-          ${
-            visible
-              ? "bg-[#7BC8F6]"
-              : "bg-[#D9EAF7]"
-          }
-        `}
-      />
-
-      {/* ===============================================
-          CENTER DOT
-      =============================================== */}
-
-      <div
-        aria-hidden="true"
-        className={`
-          absolute
-          top-1/2
-          hidden
-          h-4
-          w-4
-          -translate-y-1/2
-          rounded-full
-          border-[4px]
-          border-white
-
-          transition-all
-          duration-700
-
-          lg:block
-
-          ${
-            isLeft
-              ? "left-[calc(116.3%-8px)]"
-              : "right-[calc(116.3%-8px)]"
-          }
-
-          ${
-            visible
-              ? `
-                scale-100
-                bg-[#1689F5]
-                shadow-[0_0_0_1px_#83C5F3,0_0_25px_rgba(8,119,232,0.55)]
-              `
-              : `
-                scale-75
-                bg-[#B8D9EF]
-              `
-          }
-        `}
-      />
-
-      {/* ===============================================
-          CARD
-      =============================================== */}
-
-      <div
-        className={`
-          group
-          relative
-          overflow-hidden
-          rounded-[28px]
-          border
-          bg-white/90
-          p-6
-          backdrop-blur-xl
-
-          transition-all
-          duration-700
-
-          sm:p-7
-
-          ${
-            visible
-              ? `
-                border-[#C5E2F5]
-                shadow-[0_20px_60px_rgba(8,119,232,0.11)]
-              `
-              : `
-                border-[#E5EFF6]
-                shadow-[0_10px_30px_rgba(8,119,232,0.04)]
-              `
-          }
-
-          hover:-translate-y-2
-          hover:border-[#8CCEF5]
-          hover:shadow-[0_26px_70px_rgba(8,119,232,0.16)]
-        `}
-      >
-        {/* Card glow */}
         <div
-          aria-hidden="true"
-          className={`
-            pointer-events-none
-            absolute
-            -right-16
-            -top-16
-            h-40
-            w-40
-            rounded-full
-            blur-[45px]
-
-            transition-all
-            duration-700
-
-            ${
-              visible
-                ? "scale-100 bg-[#DDF2FF]"
-                : "scale-75 bg-transparent"
-            }
-
-            group-hover:scale-125
-          `}
-        />
-
-        {/* Top accent */}
-        <div
-          className={`
-            absolute
-            left-8
-            right-8
-            top-0
-            h-[2px]
-
-            bg-gradient-to-r
-            from-transparent
-            via-[#38BDF8]
-            to-transparent
-
-            transition-opacity
-            duration-700
-
-            ${
-              visible
-                ? "opacity-60"
-                : "opacity-0"
-            }
-          `}
-        />
-
-        <div className="relative">
-          <div className="flex items-center justify-between">
-            <span
-              className="
-                inline-flex
-                h-10
-                w-10
-                items-center
-                justify-center
-                rounded-xl
-                bg-[#E7F4FF]
-
-                text-xs
-                font-bold
-                text-[#0877E8]
-
-                transition-all
-                duration-500
-
-                group-hover:scale-110
-                group-hover:bg-[#0877E8]
-                group-hover:text-white
-              "
-            >
-              {item.number}
-            </span>
-
-            <span
-              className={`
-                h-2
-                w-2
-                rounded-full
-
-                transition-all
-                duration-700
-
-                ${
-                  visible
-                    ? `
-                      bg-[#39BDF7]
-                      shadow-[0_0_12px_rgba(57,189,247,0.8)]
-                    `
-                    : "bg-[#C6DFEF]"
-                }
-              `}
-            />
-          </div>
-
-          <p
+          className="
+            relative
+            mt-14
+            overflow-hidden
+            rounded-3xl
+            border
+            border-gray-200
+            bg-[#FAFAFA]
+            px-5
+            py-8
+            sm:mt-16
+            sm:px-8
+            sm:py-10
+            lg:mt-20
+            lg:px-12
+            lg:py-12
+          "
+        >
+          <div
+            aria-hidden="true"
             className="
-              mt-6
-              text-[11px]
-              font-semibold
-              uppercase
-              tracking-[0.15em]
-              text-[#5B8DB5]
+              pointer-events-none
+              absolute
+              -right-24
+              -top-24
+              h-64
+              w-64
+              rounded-full
+              bg-[#1256af]/[0.05]
+              blur-3xl
             "
-          >
-            {item.title}
-          </p>
-
-          <h3
-            className="
-              mt-2
-              text-xl
-              font-bold
-              leading-tight
-              tracking-[-0.03em]
-              text-[#173B63]
-
-              sm:text-2xl
-            "
-          >
-            {item.value}
-          </h3>
-
-          <p
-            className="
-              mt-3
-              text-sm
-              leading-6
-              text-[#6A8198]
-            "
-          >
-            {item.description}
-          </p>
+          />
 
           <div
-            className={`
-              mt-6
-              h-1
-              rounded-full
-              bg-gradient-to-r
-              from-[#0877E8]
-              to-[#45C6FF]
+            className="
+              relative
+              z-10
+              grid
+              gap-8
+              lg:grid-cols-[0.8fr_1.2fr]
+              lg:items-center
+              lg:gap-12
+            "
+          >
+            <div>
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-[0.14em]
+                  text-[#1256af]
+                "
+              >
+                It all comes together
+              </p>
 
-              transition-all
-              duration-700
+              <h3
+                className="
+                  mt-3
+                  text-3xl
+                  font-bold
+                  tracking-tight
+                  text-gray-900
+                  sm:text-4xl
+                "
+              >
+                One profile.
+                <span className="block text-[#1256af]">
+                  Everything about you.
+                </span>
+              </h3>
 
-              ${
-                visible
-                  ? "w-14"
-                  : "w-0"
-              }
+              <p
+                className="
+                  mt-4
+                  max-w-xl
+                  text-base
+                  leading-7
+                  text-gray-600
+                "
+              >
+                Instead of scattering your story across documents,
+                certificates and links, Trailbliz gives your growth one place
+                to live.
+              </p>
+            </div>
 
-              group-hover:w-24
-            `}
-          />
+            <div
+              className="
+                grid
+                grid-cols-2
+                gap-3
+                sm:grid-cols-4
+              "
+            >
+              {profileParts.map((part) => (
+                <div
+                  key={part.number}
+                  className="
+                    rounded-2xl
+                    border
+                    border-gray-200
+                    bg-white
+                    p-4
+                    text-center
+                    shadow-sm
+                  "
+                >
+                  <div
+                    className="
+                      mx-auto
+                      flex
+                      h-9
+                      w-9
+                      items-center
+                      justify-center
+                      rounded-lg
+                      bg-[#1256af]/10
+                      text-[10px]
+                      font-bold
+                      text-[#1256af]
+                    "
+                  >
+                    {part.number}
+                  </div>
+
+                  <p
+                    className="
+                      mt-3
+                      text-sm
+                      font-semibold
+                      text-gray-800
+                    "
+                  >
+                    {part.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================
+            BOTTOM STATEMENT
+        ========================================================= */}
+
+        <div
+          className="
+            mt-12
+            flex
+            flex-col
+            gap-3
+            border-t
+            border-gray-200
+            pt-7
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <p
+            className="
+              text-lg
+              font-semibold
+              text-gray-700
+              sm:text-xl
+            "
+          >
+            Build more than a resume.
+            <span className="text-[#1256af]">
+              {" "}
+              Build your story.
+            </span>
+          </p>
+
+          <p className="text-sm font-medium text-gray-500">
+            Academics • Skills • Projects • Experience
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -4,7 +4,7 @@ export default function AuthLogo() {
   return (
     <div className="mb-8 flex justify-center sm:mb-10">
       <Image
-        src="/trailbliz-logo-v2.png"
+        src="/tbz.png"
         alt="Trailbliz"
         width={260}
         height={80}

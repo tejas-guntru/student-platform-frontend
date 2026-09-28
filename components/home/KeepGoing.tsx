@@ -1,529 +1,551 @@
 import Link from "next/link";
 
+const journeyPoints = [
+  {
+    number: "01",
+    label: "Learn",
+  },
+  {
+    number: "02",
+    label: "Build",
+  },
+  {
+    number: "03",
+    label: "Show",
+  },
+  {
+    number: "04",
+    label: "Discover",
+  },
+  {
+    number: "05",
+    label: "Move",
+  },
+];
+
 export default function KeepGoing() {
   return (
     <section
+      id="keep-going"
       className="
         relative
         overflow-hidden
-        bg-gradient-to-br
-        from-[#065FD1]
-        via-[#0877E8]
-        to-[#35BDF8]
-        px-5
-        py-24
-        text-white
-
-        sm:px-8
-        sm:py-28
-
+        bg-white
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
         lg:px-12
-        lg:py-36
+        lg:py-28
       "
     >
-      {/* =====================================================
-          BACKGROUND EFFECTS
-      ===================================================== */}
+      {/* =========================================================
+          BACKGROUND
+      ========================================================= */}
 
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-40
-          -top-44
-          h-[560px]
-          w-[560px]
-          rounded-full
-          bg-white/25
-          blur-[130px]
-
-          lg:h-[720px]
-          lg:w-[720px]
-        "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -bottom-52
-          -left-44
-          h-[520px]
-          w-[520px]
-          rounded-full
-          bg-[#6DE2FF]/35
-          blur-[140px]
-        "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          left-[35%]
-          top-[25%]
-          h-[400px]
-          w-[400px]
-          rounded-full
-          bg-[#004EBA]/30
-          blur-[120px]
-        "
-      />
-
-      {/* Grid */}
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.12]
-        "
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)
-          `,
-          backgroundSize: "54px 54px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl">
-        {/* =====================================================
-            TOP META
-        ===================================================== */}
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-10
+            h-80
+            w-80
+            rounded-full
+            bg-[#1256af]/[0.035]
+            blur-3xl
+          "
+        />
 
         <div
           className="
-            flex
-            items-center
-            justify-between
-            border-t
-            border-white/20
-            pt-7
+            absolute
+            -right-40
+            bottom-0
+            h-96
+            w-96
+            rounded-full
+            bg-blue-50
+            blur-3xl
           "
-        >
-          <div
-            className="
-              inline-flex
-              items-center
-              gap-2.5
-              rounded-full
-              border
-              border-white/20
-              bg-white/10
-              px-4
-              py-2
-              backdrop-blur-md
-            "
-          >
-            <span
-              className="
-                h-2
-                w-2
-                rounded-full
-                bg-[#B9F1FF]
-                shadow-[0_0_12px_rgba(185,241,255,0.8)]
-              "
-            />
+        />
+      </div>
 
-            <span
-              className="
-                text-[11px]
-                font-semibold
-                uppercase
-                tracking-[0.16em]
-                text-white/85
-              "
-            >
-              Keep going
-            </span>
-          </div>
-
-          <span
-            className="
-              hidden
-              text-xs
-              font-semibold
-              tracking-[0.12em]
-              text-white/45
-
-              sm:block
-            "
-          >
-            07 / 07
-          </span>
-        </div>
-
-        {/* =====================================================
-            MAIN MESSAGE
-        ===================================================== */}
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* =========================================================
+            MAIN FINAL CTA
+        ========================================================= */}
 
         <div
           className="
             relative
-            mt-14
-
-            sm:mt-16
-
-            lg:mt-20
+            overflow-hidden
+            rounded-[28px]
+            bg-[#1256af]
+            px-5
+            py-12
+            text-white
+            shadow-lg
+            sm:px-8
+            sm:py-14
+            md:px-10
+            lg:px-14
+            lg:py-16
+            xl:px-16
           "
         >
-          <h2
-            className="
-              max-w-6xl
-              text-[clamp(3.8rem,9vw,8.5rem)]
-              font-bold
-              leading-[0.86]
-              tracking-[-0.07em]
-              text-white
-            "
-          >
-            Your journey
-            <span
-              className="
-                block
-                text-[#C7F2FF]
-              "
-            >
-              keeps moving.
-            </span>
-          </h2>
+          {/* Decorative glows */}
 
-          {/* Decorative trail */}
-
-          <svg
+          <div
             aria-hidden="true"
-            viewBox="0 0 900 220"
-            fill="none"
             className="
               pointer-events-none
               absolute
-              -right-20
-              top-[42%]
-              hidden
-              h-[180px]
-              w-[650px]
-              overflow-visible
-              opacity-60
+              -right-28
+              -top-32
+              h-80
+              w-80
+              rounded-full
+              bg-white/10
+              blur-3xl
+            "
+          />
 
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              -bottom-40
+              -left-24
+              h-80
+              w-80
+              rounded-full
+              bg-blue-300/10
+              blur-3xl
+            "
+          />
+
+          {/* Decorative outline */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              right-[-90px]
+              top-1/2
+              hidden
+              h-[360px]
+              w-[360px]
+              -translate-y-1/2
+              rounded-full
+              border
+              border-white/10
               lg:block
             "
-          >
-            <path
-              d="
-                M20 120
-                C120 120 120 45 220 65
-                C320 85 300 175 410 150
-                C510 125 490 45 600 70
-                C700 95 720 140 810 90
-                C845 70 865 55 890 35
+          />
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              right-[-25px]
+              top-1/2
+              hidden
+              h-[230px]
+              w-[230px]
+              -translate-y-1/2
+              rounded-full
+              border
+              border-white/10
+              lg:block
+            "
+          />
+
+          <div className="relative z-10">
+            {/* Top meta */}
+
+            <div
+              className="
+                flex
+                items-center
+                justify-between
+                border-b
+                border-white/15
+                pb-7
               "
-              stroke="rgba(255,255,255,0.35)"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+            >
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/10
+                  px-4
+                  py-2
+                "
+              >
+                <span className="h-2 w-2 rounded-full bg-white" />
 
-            <path
-              d="
-                M20 120
-                C120 120 120 45 220 65
-                C320 85 300 175 410 150
-                C510 125 490 45 600 70
-                C700 95 720 140 810 90
-                C845 70 865 55 890 35
+                <span
+                  className="
+                    text-[11px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.15em]
+                    text-white/85
+                  "
+                >
+                  Keep going
+                </span>
+              </div>
+
+              <span
+                className="
+                  hidden
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-[0.14em]
+                  text-white/45
+                  sm:block
+                "
+              >
+                Your journey continues
+              </span>
+            </div>
+
+            {/* =====================================================
+                MESSAGE
+            ===================================================== */}
+
+            <div
+              className="
+                mt-10
+                grid
+                gap-10
+                lg:grid-cols-[1.15fr_0.85fr]
+                lg:items-end
+                lg:gap-16
               "
-              stroke="#BDF0FF"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray="8 12"
-            />
+            >
+              <div>
+                <h2
+                  className="
+                    max-w-4xl
+                    text-4xl
+                    font-bold
+                    leading-[1.02]
+                    tracking-tight
+                    text-white
+                    sm:text-5xl
+                    md:text-6xl
+                    lg:text-7xl
+                  "
+                >
+                  Your journey
+                  <span className="block text-blue-100">
+                    keeps moving.
+                  </span>
+                </h2>
 
-            <circle
-              cx="20"
-              cy="120"
-              r="6"
-              fill="#FFFFFF"
-            />
+                <p
+                  className="
+                    mt-6
+                    max-w-2xl
+                    text-base
+                    leading-7
+                    text-white/75
+                    sm:text-lg
+                    sm:leading-8
+                  "
+                >
+                  Your career is not one destination. Keep learning, keep
+                  building, keep showing what you can do — and keep moving
+                  toward what comes next.
+                </p>
+              </div>
 
-            <circle
-              cx="890"
-              cy="35"
-              r="7"
-              fill="#BDF0FF"
-            />
+              {/* Right statement */}
 
-            <path
-              d="M874 23 L890 35 L873 47"
-              stroke="#BDF0FF"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+              <div
+                className="
+                  border-l-0
+                  border-white/15
+                  lg:border-l
+                  lg:pl-8
+                "
+              >
+                <p
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.14em]
+                    text-white/50
+                  "
+                >
+                  One journey
+                </p>
+
+                <p
+                  className="
+                    mt-3
+                    max-w-sm
+                    text-xl
+                    font-semibold
+                    leading-8
+                    text-white
+                    sm:text-2xl
+                  "
+                >
+                  Learn. Build. Show. Discover. Move forward.
+                </p>
+              </div>
+            </div>
+
+            {/* =====================================================
+                JOURNEY STRIP
+            ===================================================== */}
+
+            <div
+              className="
+                mt-12
+                grid
+                grid-cols-2
+                gap-3
+                sm:grid-cols-5
+                lg:mt-14
+              "
+            >
+              {journeyPoints.map((point, index) => (
+                <div
+                  key={point.number}
+                  className="
+                    relative
+                    rounded-2xl
+                    border
+                    border-white/15
+                    bg-white/[0.07]
+                    px-4
+                    py-4
+                  "
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="
+                        text-[10px]
+                        font-bold
+                        tracking-[0.12em]
+                        text-white/45
+                      "
+                    >
+                      {point.number}
+                    </span>
+
+                    {index < journeyPoints.length - 1 && (
+                      <span
+                        aria-hidden="true"
+                        className="
+                          hidden
+                          text-white/30
+                          sm:block
+                        "
+                      >
+                        →
+                      </span>
+                    )}
+                  </div>
+
+                  <p
+                    className="
+                      mt-4
+                      text-sm
+                      font-semibold
+                      text-white
+                      sm:text-base
+                    "
+                  >
+                    {point.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* =====================================================
-            SUPPORTING COPY
-        ===================================================== */}
+        {/* =========================================================
+            PROFILE CTA
+        ========================================================= */}
 
         <div
           className="
-            mt-10
-            max-w-2xl
+            relative
+            z-20
+            mx-auto
+            -mt-1
+            max-w-6xl
+            px-0
+            sm:-mt-2
+            sm:px-5
+            lg:-mt-3
+            lg:px-8
+          "
+        >
+          <div
+            className="
+              rounded-b-3xl
+              border
+              border-t-0
+              border-gray-200
+              bg-[#FAFAFA]
+              px-5
+              py-8
+              sm:px-8
+              sm:py-9
+              lg:px-10
+            "
+          >
+            <div
+              className="
+                flex
+                flex-col
+                gap-7
+                lg:flex-row
+                lg:items-center
+                lg:justify-between
+              "
+            >
+              <div className="max-w-2xl">
+                <p
+                  className="
+                    text-[11px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.14em]
+                    text-[#1256af]
+                  "
+                >
+                  Build what comes next
+                </p>
 
-            sm:mt-12
+                <h3
+                  className="
+                    mt-3
+                    text-2xl
+                    font-bold
+                    tracking-tight
+                    text-gray-900
+                    sm:text-3xl
+                  "
+                >
+                  Start building your Trailbliz profile.
+                </h3>
+
+                <p
+                  className="
+                    mt-3
+                    max-w-xl
+                    text-sm
+                    leading-6
+                    text-gray-600
+                    sm:text-base
+                    sm:leading-7
+                  "
+                >
+                  Bring your academics, skills, projects and experience
+                  together in one place and keep building your professional
+                  story.
+                </p>
+              </div>
+
+              <Link
+                href="/register"
+                className="
+                  group
+                  inline-flex
+                  min-h-12
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-xl
+                  bg-[#1256af]
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  shadow-sm
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:bg-[#0f4b99]
+                  hover:shadow-md
+                "
+              >
+                Join Trailbliz
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    text-lg
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                >
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================
+            FINAL MESSAGE
+        ========================================================= */}
+
+        <div
+          className="
+            mx-auto
+            mt-12
+            max-w-3xl
+            text-center
+            sm:mt-14
           "
         >
           <p
             className="
-              text-base
-              leading-7
-              text-white/72
-
-              sm:text-lg
-              sm:leading-8
-
-              lg:text-xl
+              text-sm
+              leading-6
+              text-gray-500
+              sm:text-base
             "
           >
-            Your career is not one destination. Keep learning, keep
-            building, keep showing what you can do — and keep moving
-            toward what comes next.
+            Every skill you learn, every project you build and every
+            opportunity you pursue becomes another step in your journey.
           </p>
-        </div>
 
-        {/* =====================================================
-            CTA PANEL
-        ===================================================== */}
-
-        <div
-          className="
-            mt-14
-            overflow-hidden
-            rounded-[30px]
-            border
-            border-white/20
-            bg-white/10
-            p-5
-            shadow-[0_24px_80px_rgba(0,61,138,0.18)]
-            backdrop-blur-xl
-
-            sm:mt-16
-            sm:p-6
-
-            lg:mt-20
-          "
-        >
           <div
             className="
-              flex
-              flex-col
-              gap-8
-              rounded-[24px]
-              bg-white/95
-              px-6
-              py-7
-
-              sm:px-8
-              sm:py-8
-
-              lg:flex-row
-              lg:items-center
-              lg:justify-between
-              lg:px-10
+              mx-auto
+              mt-6
+              h-1
+              w-16
+              rounded-full
+              bg-[#1256af]
             "
-          >
-            <div className="max-w-2xl">
-              <p
-                className="
-                  text-[11px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.15em]
-                  text-[#1689F5]
-                "
-              >
-                Build what comes next
-              </p>
-
-              <h3
-                className="
-                  mt-3
-                  text-2xl
-                  font-bold
-                  tracking-[-0.035em]
-                  text-[#173B63]
-
-                  sm:text-3xl
-                "
-              >
-                Start building your Trailbliz profile.
-              </h3>
-
-              <p
-                className="
-                  mt-3
-                  max-w-xl
-                  text-sm
-                  leading-6
-                  text-[#607890]
-
-                  sm:text-base
-                "
-              >
-                Bring your academics, skills, projects and experience
-                together in one place.
-              </p>
-            </div>
-
-            <Link
-              href="/register"
-              className="
-                group
-                inline-flex
-                min-h-13
-                w-fit
-                shrink-0
-                items-center
-                justify-center
-                gap-3
-                rounded-2xl
-                bg-[#0877E8]
-                px-7
-                py-3.5
-                text-[15px]
-                font-semibold
-                text-white
-
-                shadow-[0_12px_32px_rgba(8,119,232,0.22)]
-
-                transition-all
-                duration-200
-
-                hover:-translate-y-0.5
-                hover:bg-[#126FD0]
-                hover:shadow-[0_16px_40px_rgba(8,119,232,0.28)]
-              "
-            >
-              Join Trailbliz
-
-              <span
-                aria-hidden="true"
-                className="
-                  text-lg
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
-                "
-              >
-                →
-              </span>
-            </Link>
-          </div>
-        </div>
-
-        {/* =====================================================
-            ENDING TRAIL
-        ===================================================== */}
-
-        <div
-          className="
-            relative
-            mt-16
-            h-20
-            overflow-hidden
-
-            sm:mt-20
-          "
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 1200 100"
-            preserveAspectRatio="none"
-            className="h-full w-full"
-            fill="none"
-          >
-            <path
-              d="
-                M0 55
-                C170 55 150 20 310 30
-                C470 40 450 80 610 62
-                C770 44 760 15 900 30
-                C1040 45 1080 65 1200 20
-              "
-              stroke="rgba(255,255,255,0.20)"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-
-            <path
-              d="
-                M0 55
-                C170 55 150 20 310 30
-                C470 40 450 80 610 62
-                C770 44 760 15 900 30
-                C1040 45 1080 65 1200 20
-              "
-              stroke="#B8EFFF"
-              strokeWidth="3"
-              strokeDasharray="6 14"
-              strokeLinecap="round"
-            />
-
-            <circle
-              cx="1200"
-              cy="20"
-              r="6"
-              fill="#FFFFFF"
-            />
-          </svg>
-        </div>
-
-        {/* =====================================================
-            MINI FOOTER
-        ===================================================== */}
-
-        <div
-          className="
-            mt-3
-            flex
-            flex-col
-            gap-3
-            border-t
-            border-white/15
-            pt-6
-
-            sm:flex-row
-            sm:items-center
-            sm:justify-between
-          "
-        >
-          <span
-            className="
-              text-xs
-              font-semibold
-              uppercase
-              tracking-[0.16em]
-              text-white/60
-            "
-          >
-            Trailbliz
-          </span>
-
-          <span
-            className="
-              text-xs
-              font-medium
-              text-white/55
-            "
-          >
-            Build. Show. Discover. Keep moving.
-          </span>
+          />
         </div>
       </div>
     </section>

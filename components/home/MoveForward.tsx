@@ -1,120 +1,107 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const steps = [
   {
     number: "01",
     title: "Apply",
-    description: "Put yourself forward for the opportunity.",
+    short: "Application submitted",
+    description:
+      "Put yourself forward for an opportunity that matches your skills and career direction.",
   },
   {
     number: "02",
     title: "Review",
-    description: "Your application moves into review.",
+    short: "Application under review",
+    description:
+      "Keep track as your application moves into the review process.",
   },
   {
     number: "03",
     title: "Shortlisted",
-    description: "Move forward to the next stage.",
+    short: "Moving to the next stage",
+    description:
+      "See when your application progresses and prepare for the next stage of the process.",
   },
   {
     number: "04",
     title: "Selected",
-    description: "Take the next step in your career.",
+    short: "Opportunity unlocked",
+    description:
+      "Complete the journey and take the next step toward your career.",
   },
 ];
 
 export default function MoveForward() {
   const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((current) => (current + 1) % steps.length);
-    }, 2200);
+  const activeStep = steps[active];
 
-    return () => clearInterval(interval);
-  }, []);
+  const progress = ((active + 1) / steps.length) * 100;
 
   return (
     <section
+      id="move-forward"
       className="
         relative
         overflow-hidden
-        bg-[#F4FAFF]
-        px-5
-        py-20
-
-        sm:px-8
-        sm:py-24
-
+        bg-[#FAFAFA]
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
         lg:px-12
-        lg:py-32
+        lg:py-28
       "
     >
-      {/* =====================================================
-          BACKGROUND EFFECTS
-      ===================================================== */}
+      {/* =========================================================
+          SUBTLE BACKGROUND
+      ========================================================= */}
 
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -left-44
-          top-16
-          h-[500px]
-          w-[500px]
-          rounded-full
-          bg-[#CDEBFF]/70
-          blur-[140px]
-        "
-      />
+        className="pointer-events-none absolute inset-0"
+      >
+        <div
+          className="
+            absolute
+            -left-40
+            top-20
+            h-80
+            w-80
+            rounded-full
+            bg-[#1256af]/[0.035]
+            blur-3xl
+          "
+        />
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          -right-48
-          bottom-0
-          h-[560px]
-          w-[560px]
-          rounded-full
-          bg-[#B7E1FF]/55
-          blur-[150px]
-        "
-      />
+        <div
+          className="
+            absolute
+            -right-40
+            bottom-10
+            h-96
+            w-96
+            rounded-full
+            bg-blue-100/25
+            blur-3xl
+          "
+        />
+      </div>
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.3]
-        "
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(8,119,232,0.045) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(8,119,232,0.045) 1px, transparent 1px)
-          `,
-          backgroundSize: "54px 54px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl">
-        {/* =====================================================
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* =========================================================
             HEADER
-        ===================================================== */}
+        ========================================================= */}
 
         <div
           className="
             grid
-            gap-8
-
-            lg:grid-cols-[1fr_0.7fr]
+            gap-6
+            lg:grid-cols-[1fr_0.72fr]
             lg:items-end
+            lg:gap-12
           "
         >
           <div>
@@ -122,34 +109,25 @@ export default function MoveForward() {
               className="
                 inline-flex
                 items-center
-                gap-2.5
+                gap-2
                 rounded-full
                 border
-                border-[#CBE4F8]
-                bg-white/85
+                border-[#1256af]/15
+                bg-white
                 px-4
                 py-2
                 shadow-sm
-                backdrop-blur-md
               "
             >
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-[#0877E8]
-                  shadow-[0_0_12px_rgba(8,119,232,0.55)]
-                "
-              />
+              <span className="h-2 w-2 rounded-full bg-[#1256af]" />
 
               <span
                 className="
-                  text-[11px]
+                  text-xs
                   font-semibold
                   uppercase
-                  tracking-[0.16em]
-                  text-[#3977AC]
+                  tracking-[0.14em]
+                  text-[#1256af]
                 "
               >
                 Move forward
@@ -160,25 +138,18 @@ export default function MoveForward() {
               className="
                 mt-6
                 max-w-4xl
-                text-[clamp(3rem,6vw,6rem)]
+                text-3xl
                 font-bold
-                leading-[0.9]
-                tracking-[-0.065em]
-                text-[#102F51]
+                leading-tight
+                tracking-tight
+                text-gray-900
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
               "
             >
-              From application
-              <span
-                className="
-                  block
-                  bg-gradient-to-r
-                  from-[#0877E8]
-                  via-[#1294F2]
-                  to-[#38BDF8]
-                  bg-clip-text
-                  text-transparent
-                "
-              >
+              From application{" "}
+              <span className="text-[#1256af]">
                 to opportunity.
               </span>
             </h2>
@@ -186,125 +157,97 @@ export default function MoveForward() {
 
           <p
             className="
-              max-w-md
+              max-w-xl
               text-base
               leading-7
-              text-[#607890]
-
+              text-gray-600
               sm:text-lg
               sm:leading-8
-
               lg:justify-self-end
             "
           >
-            Follow every stage of your application journey in one place,
-            from the moment you apply to the moment you move ahead.
+            Follow every stage of your application journey in one place, from
+            the moment you apply to the moment you move ahead.
           </p>
         </div>
 
-        {/* =====================================================
-            JOURNEY PANEL
-        ===================================================== */}
+        {/* =========================================================
+            DESKTOP JOURNEY
+        ========================================================= */}
 
         <div
           className="
             relative
-            mt-16
-            overflow-hidden
-            rounded-[34px]
+            mt-14
+            hidden
+            rounded-3xl
             border
-            border-[#D2E7F7]
-            bg-white/80
-            p-6
-            shadow-[0_24px_70px_rgba(8,119,232,0.09)]
-            backdrop-blur-xl
-
-            sm:p-8
-
+            border-gray-200
+            bg-white
+            p-7
+            shadow-sm
+            md:block
             lg:mt-20
             lg:p-10
           "
         >
-          {/* Panel glow */}
+          {/* Progress line */}
 
           <div
             aria-hidden="true"
             className="
-              pointer-events-none
               absolute
-              -right-24
-              -top-24
-              h-[320px]
-              w-[320px]
-              rounded-full
-              bg-[#D9F1FF]
-              blur-[80px]
+              left-[calc(12.5%+27px)]
+              right-[calc(12.5%+27px)]
+              top-[67px]
+              h-[2px]
+              bg-gray-200
+              lg:top-[79px]
             "
           />
 
-          {/* ===================================================
-              DESKTOP PROGRESS
-          =================================================== */}
+          <div
+            aria-hidden="true"
+            className="
+              absolute
+              left-[calc(12.5%+27px)]
+              top-[67px]
+              h-[2px]
+              bg-[#1256af]
+              transition-all
+              duration-500
+              ease-out
+              lg:top-[79px]
+            "
+            style={{
+              width:
+                active === 0
+                  ? "0%"
+                  : `calc(${(active / (steps.length - 1)) * 75}% - ${
+                      active === steps.length - 1 ? "54px" : "20px"
+                    })`,
+            }}
+          />
 
-          <div className="relative hidden md:block">
-            {/* Base line */}
+          <div className="relative grid grid-cols-4 gap-5 lg:gap-7">
+            {steps.map((step, index) => {
+              const isActive = index === active;
+              const isPassed = index < active;
 
-            <div
-              aria-hidden="true"
-              className="
-                absolute
-                left-[24px]
-                right-[24px]
-                top-[26px]
-                h-[3px]
-                rounded-full
-                bg-[#DCECF8]
-              "
-            />
+              return (
+                <button
+                  key={step.number}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className="
+                    group
+                    relative
+                    text-left
+                  "
+                >
+                  {/* Number */}
 
-            {/* Active line */}
-
-            <div
-              aria-hidden="true"
-              className="
-                absolute
-                left-[24px]
-                top-[26px]
-                h-[3px]
-                rounded-full
-                bg-gradient-to-r
-                from-[#0877E8]
-                via-[#1498F2]
-                to-[#40C6FF]
-                transition-all
-                duration-700
-                ease-out
-              "
-              style={{
-                width: `calc(${(active / (steps.length - 1)) * 100}% - ${
-                  active === steps.length - 1 ? "48px" : "24px"
-                })`,
-              }}
-            />
-
-            <div className="relative grid grid-cols-4 gap-6">
-              {steps.map((step, index) => {
-                const isActive = active === index;
-                const isPassed = index < active;
-
-                return (
-                  <button
-                    key={step.number}
-                    type="button"
-                    onClick={() => setActive(index)}
-                    className="
-                      group
-                      relative
-                      text-left
-                    "
-                  >
-                    {/* Node */}
-
+                  <div className="flex justify-center">
                     <div
                       className={`
                         relative
@@ -314,438 +257,655 @@ export default function MoveForward() {
                         w-[54px]
                         items-center
                         justify-center
-                        rounded-2xl
+                        rounded-xl
                         border
                         text-xs
                         font-bold
                         transition-all
-                        duration-500
+                        duration-300
 
                         ${
                           isActive
                             ? `
-                              border-[#1689F5]
-                              bg-gradient-to-br
-                              from-[#0877E8]
-                              to-[#36BDF8]
-                              text-white
-                              shadow-[0_10px_28px_rgba(8,119,232,0.28)]
-                            `
+                                border-[#1256af]
+                                bg-[#1256af]
+                                text-white
+                                shadow-md
+                              `
                             : isPassed
                               ? `
-                                border-[#B2D9F5]
-                                bg-[#E6F5FF]
-                                text-[#0877E8]
-                              `
+                                  border-[#1256af]/30
+                                  bg-[#1256af]/10
+                                  text-[#1256af]
+                                `
                               : `
-                                border-[#D6E7F4]
-                                bg-white
-                                text-[#8CA2B6]
-                              `
+                                  border-gray-200
+                                  bg-white
+                                  text-gray-400
+                                  group-hover:border-[#1256af]/30
+                                  group-hover:text-[#1256af]
+                                `
                         }
                       `}
                     >
                       {step.number}
                     </div>
+                  </div>
 
-                    {/* Card */}
+                  {/* Card */}
 
-                    <div
-                      className={`
-                        mt-7
-                        min-h-[170px]
-                        rounded-[24px]
-                        border
-                        p-5
-                        transition-all
-                        duration-500
+                  <div
+                    className={`
+                      mt-6
+                      min-h-[180px]
+                      rounded-2xl
+                      border
+                      p-5
+                      transition-all
+                      duration-300
 
-                        ${
-                          isActive
-                            ? `
+                      ${
+                        isActive
+                          ? `
                               -translate-y-1
-                              border-[#B7DCF7]
+                              border-[#1256af]/30
+                              bg-[#1256af]/[0.035]
+                              shadow-md
+                            `
+                          : `
+                              border-gray-200
                               bg-white
-                              shadow-[0_16px_45px_rgba(8,119,232,0.12)]
+                              group-hover:border-[#1256af]/20
+                              group-hover:shadow-sm
                             `
-                            : `
-                              border-[#E0EDF7]
-                              bg-[#F9FCFF]
-                            `
-                        }
-                      `}
-                    >
-                      <p
-                        className={`
-                          text-[10px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.14em]
-
-                          ${
-                            isActive
-                              ? "text-[#1689F5]"
-                              : "text-[#91A5B7]"
-                          }
-                        `}
-                      >
-                        Stage {step.number}
-                      </p>
-
-                      <h3
-                        className="
-                          mt-3
-                          text-xl
-                          font-bold
-                          tracking-[-0.03em]
-                          text-[#173B63]
-                        "
-                      >
-                        {step.title}
-                      </h3>
-
-                      <p
-                        className="
-                          mt-2
-                          max-w-[200px]
-                          text-sm
-                          leading-6
-                          text-[#6C8297]
-                        "
-                      >
-                        {step.description}
-                      </p>
-
-                      {isActive && (
-                        <div
-                          className="
-                            mt-5
-                            inline-flex
-                            items-center
-                            gap-2
-                            rounded-full
-                            bg-[#E9F6FF]
-                            px-3
-                            py-1.5
-                          "
-                        >
-                          <span
-                            className="
-                              h-1.5
-                              w-1.5
-                              rounded-full
-                              bg-[#0877E8]
-                              shadow-[0_0_8px_rgba(8,119,232,0.5)]
-                            "
-                          />
-
-                          <span
-                            className="
-                              text-[10px]
-                              font-semibold
-                              uppercase
-                              tracking-[0.12em]
-                              text-[#0877E8]
-                            "
-                          >
-                            You&apos;re here
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ===================================================
-              MOBILE JOURNEY
-          =================================================== */}
-
-          <div className="relative md:hidden">
-            <div
-              aria-hidden="true"
-              className="
-                absolute
-                bottom-0
-                left-[23px]
-                top-0
-                w-[2px]
-                bg-[#DCECF8]
-              "
-            />
-
-            <div
-              aria-hidden="true"
-              className="
-                absolute
-                left-[23px]
-                top-0
-                w-[2px]
-                bg-gradient-to-b
-                from-[#0877E8]
-                to-[#40C6FF]
-                transition-all
-                duration-700
-                ease-out
-              "
-              style={{
-                height: `${(active / (steps.length - 1)) * 100}%`,
-              }}
-            />
-
-            <div className="space-y-5">
-              {steps.map((step, index) => {
-                const isActive = active === index;
-                const isPassed = index < active;
-
-                return (
-                  <button
-                    key={step.number}
-                    type="button"
-                    onClick={() => setActive(index)}
-                    className="
-                      relative
-                      flex
-                      w-full
-                      gap-5
-                      text-left
-                    "
+                      }
+                    `}
                   >
-                    <div
+                    <p
                       className={`
-                        relative
-                        z-10
-                        flex
-                        h-12
-                        w-12
-                        shrink-0
-                        items-center
-                        justify-center
-                        rounded-2xl
-                        border
-                        text-xs
+                        text-[10px]
+                        font-semibold
+                        uppercase
+                        tracking-[0.14em]
+
+                        ${
+                          isActive
+                            ? "text-[#1256af]"
+                            : "text-gray-400"
+                        }
+                      `}
+                    >
+                      Stage {step.number}
+                    </p>
+
+                    <h3
+                      className="
+                        mt-3
+                        text-xl
                         font-bold
-                        transition-all
-                        duration-500
-
-                        ${
-                          isActive
-                            ? `
-                              border-[#1689F5]
-                              bg-gradient-to-br
-                              from-[#0877E8]
-                              to-[#38BDF8]
-                              text-white
-                              shadow-[0_9px_24px_rgba(8,119,232,0.25)]
-                            `
-                            : isPassed
-                              ? `
-                                border-[#B5DBF5]
-                                bg-[#E7F5FF]
-                                text-[#0877E8]
-                              `
-                              : `
-                                border-[#D7E8F4]
-                                bg-white
-                                text-[#8CA2B6]
-                              `
-                        }
-                      `}
+                        text-gray-900
+                      "
                     >
-                      {step.number}
-                    </div>
+                      {step.title}
+                    </h3>
 
-                    <div
-                      className={`
-                        flex-1
-                        rounded-[22px]
-                        border
-                        p-5
-                        transition-all
-                        duration-500
-
-                        ${
-                          isActive
-                            ? `
-                              border-[#B8DCF7]
-                              bg-white
-                              shadow-[0_12px_34px_rgba(8,119,232,0.11)]
-                            `
-                            : `
-                              border-[#DFEDF7]
-                              bg-white/75
-                            `
-                        }
-                      `}
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-gray-500
+                      "
                     >
-                      <p
+                      {step.description}
+                    </p>
+
+                    {isActive && (
+                      <div
                         className="
-                          text-[10px]
-                          font-semibold
-                          uppercase
-                          tracking-[0.14em]
-                          text-[#7B98B1]
+                          mt-5
+                          inline-flex
+                          items-center
+                          gap-2
+                          rounded-full
+                          bg-[#1256af]/[0.07]
+                          px-3
+                          py-1.5
                         "
                       >
-                        Stage {step.number}
-                      </p>
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#1256af]" />
 
-                      <h3
-                        className="
-                          mt-2
-                          text-xl
-                          font-bold
-                          tracking-[-0.03em]
-                          text-[#173B63]
-                        "
-                      >
-                        {step.title}
-                      </h3>
-
-                      <p
-                        className="
-                          mt-2
-                          text-sm
-                          leading-6
-                          text-[#6A8196]
-                        "
-                      >
-                        {step.description}
-                      </p>
-
-                      {isActive && (
-                        <p
+                        <span
                           className="
-                            mt-4
-                            text-xs
+                            text-[10px]
                             font-semibold
-                            text-[#0877E8]
+                            uppercase
+                            tracking-[0.12em]
+                            text-[#1256af]
                           "
                         >
-                          Current stage →
-                        </p>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+                          Current stage
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
           </div>
+        </div>
 
-          {/* ===================================================
-              STATUS SUMMARY
-          =================================================== */}
+        {/* =========================================================
+            MOBILE JOURNEY
+        ========================================================= */}
+
+        <div className="relative mt-12 md:hidden">
+          {/* Base rail */}
 
           <div
+            aria-hidden="true"
             className="
-              relative
-              mt-10
-              overflow-hidden
-              rounded-[24px]
-              bg-gradient-to-r
-              from-[#0877E8]
-              via-[#1294F2]
-              to-[#35BDF8]
-              p-[1px]
+              absolute
+              bottom-7
+              left-[23px]
+              top-7
+              w-px
+              bg-gray-200
+            "
+          />
+
+          {/* Active rail */}
+
+          <div
+            aria-hidden="true"
+            className="
+              absolute
+              left-[23px]
+              top-7
+              w-px
+              bg-[#1256af]
+              transition-all
+              duration-500
+            "
+            style={{
+              height:
+                active === 0
+                  ? "0%"
+                  : `${(active / (steps.length - 1)) * 88}%`,
+            }}
+          />
+
+          <div className="relative space-y-5">
+            {steps.map((step, index) => {
+              const isActive = index === active;
+              const isPassed = index < active;
+
+              return (
+                <button
+                  key={step.number}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className="
+                    relative
+                    flex
+                    w-full
+                    gap-4
+                    text-left
+                  "
+                >
+                  <div
+                    className={`
+                      relative
+                      z-10
+                      flex
+                      h-12
+                      w-12
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      border
+                      text-xs
+                      font-bold
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? `
+                              border-[#1256af]
+                              bg-[#1256af]
+                              text-white
+                              shadow-md
+                            `
+                          : isPassed
+                            ? `
+                                border-[#1256af]/30
+                                bg-[#1256af]/10
+                                text-[#1256af]
+                              `
+                            : `
+                                border-gray-200
+                                bg-white
+                                text-gray-400
+                              `
+                      }
+                    `}
+                  >
+                    {step.number}
+                  </div>
+
+                  <div
+                    className={`
+                      flex-1
+                      rounded-2xl
+                      border
+                      p-5
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? `
+                              border-[#1256af]/30
+                              bg-white
+                              shadow-md
+                            `
+                          : `
+                              border-gray-200
+                              bg-white
+                              shadow-sm
+                            `
+                      }
+                    `}
+                  >
+                    <p
+                      className="
+                        text-[10px]
+                        font-semibold
+                        uppercase
+                        tracking-[0.14em]
+                        text-gray-400
+                      "
+                    >
+                      Stage {step.number}
+                    </p>
+
+                    <h3
+                      className="
+                        mt-2
+                        text-xl
+                        font-bold
+                        text-gray-900
+                      "
+                    >
+                      {step.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-6
+                        text-gray-600
+                      "
+                    >
+                      {step.description}
+                    </p>
+
+                    {isActive && (
+                      <p
+                        className="
+                          mt-4
+                          text-xs
+                          font-semibold
+                          text-[#1256af]
+                        "
+                      >
+                        Current stage →
+                      </p>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* =========================================================
+            ACTIVE STAGE SUMMARY
+        ========================================================= */}
+
+        <div
+          className="
+            mt-10
+            overflow-hidden
+            rounded-3xl
+            border
+            border-gray-200
+            bg-white
+            shadow-sm
+          "
+        >
+          <div
+            className="
+              grid
+              gap-0
+              lg:grid-cols-[0.7fr_1.3fr]
             "
           >
+            {/* Left */}
+
+            <div
+              className="
+                bg-[#1256af]
+                p-6
+                text-white
+                sm:p-8
+                lg:p-10
+              "
+            >
+              <p
+                className="
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.14em]
+                  text-white/65
+                "
+              >
+                Application journey
+              </p>
+
+              <div
+                className="
+                  mt-7
+                  flex
+                  items-end
+                  gap-4
+                "
+              >
+                <span
+                  className="
+                    text-6xl
+                    font-bold
+                    leading-none
+                    text-white
+                    sm:text-7xl
+                  "
+                >
+                  {activeStep.number}
+                </span>
+
+                <span
+                  className="
+                    pb-1
+                    text-sm
+                    font-medium
+                    text-white/60
+                  "
+                >
+                  of {steps.length.toString().padStart(2, "0")}
+                </span>
+              </div>
+
+              <h3
+                className="
+                  mt-6
+                  text-2xl
+                  font-bold
+                  sm:text-3xl
+                "
+              >
+                {activeStep.title}
+              </h3>
+
+              <p
+                className="
+                  mt-2
+                  text-sm
+                  font-medium
+                  text-white/70
+                "
+              >
+                {activeStep.short}
+              </p>
+            </div>
+
+            {/* Right */}
+
             <div
               className="
                 flex
                 flex-col
-                gap-5
-                rounded-[23px]
-                bg-white
-                px-6
-                py-5
-
-                sm:flex-row
-                sm:items-center
-                sm:justify-between
+                justify-between
+                p-6
+                sm:p-8
+                lg:p-10
               "
             >
               <div>
                 <p
                   className="
-                    text-[10px]
+                    text-xs
                     font-semibold
                     uppercase
                     tracking-[0.14em]
-                    text-[#1689F5]
+                    text-[#1256af]
                   "
                 >
-                  Application journey
+                  Keep your next step visible
                 </p>
+
+                <h3
+                  className="
+                    mt-3
+                    max-w-xl
+                    text-2xl
+                    font-bold
+                    tracking-tight
+                    text-gray-900
+                    sm:text-3xl
+                  "
+                >
+                  Know where your application stands.
+                </h3>
 
                 <p
                   className="
-                    mt-1
-                    text-lg
-                    font-semibold
-                    tracking-[-0.02em]
-                    text-[#173B63]
+                    mt-4
+                    max-w-2xl
+                    text-sm
+                    leading-6
+                    text-gray-600
+                    sm:text-base
+                    sm:leading-7
                   "
                 >
-                  {steps[active].title}
+                  {activeStep.description} Keeping each stage visible makes it
+                  easier to understand what has happened and what comes next.
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <span
+              {/* Progress */}
+
+              <div className="mt-8">
+                <div
                   className="
-                    text-sm
-                    font-semibold
-                    text-[#5D7891]
+                    mb-3
+                    flex
+                    items-center
+                    justify-between
                   "
                 >
-                  {active + 1} of {steps.length}
-                </span>
+                  <span
+                    className="
+                      text-xs
+                      font-semibold
+                      text-gray-500
+                    "
+                  >
+                    Journey stage
+                  </span>
+
+                  <span
+                    className="
+                      text-xs
+                      font-semibold
+                      text-[#1256af]
+                    "
+                  >
+                    {active + 1} of {steps.length}
+                  </span>
+                </div>
 
                 <div
                   className="
                     h-2
-                    w-24
                     overflow-hidden
                     rounded-full
-                    bg-[#DDEEF9]
+                    bg-gray-100
                   "
                 >
                   <div
                     className="
                       h-full
                       rounded-full
-                      bg-gradient-to-r
-                      from-[#0877E8]
-                      to-[#40C6FF]
+                      bg-[#1256af]
                       transition-all
-                      duration-700
+                      duration-500
+                      ease-out
                     "
                     style={{
-                      width: `${((active + 1) / steps.length) * 100}%`,
+                      width: `${progress}%`,
                     }}
                   />
+                </div>
+
+                <div
+                  className="
+                    mt-6
+                    flex
+                    flex-wrap
+                    gap-3
+                  "
+                >
+                  {active > 0 && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActive((current) =>
+                          Math.max(0, current - 1)
+                        )
+                      }
+                      className="
+                        inline-flex
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        border
+                        border-gray-200
+                        px-5
+                        py-2.5
+                        text-sm
+                        font-semibold
+                        text-gray-600
+                        transition-all
+                        duration-300
+                        hover:border-[#1256af]
+                        hover:text-[#1256af]
+                      "
+                    >
+                      ← Previous
+                    </button>
+                  )}
+
+                  {active < steps.length - 1 ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActive((current) =>
+                          Math.min(
+                            steps.length - 1,
+                            current + 1
+                          )
+                        )
+                      }
+                      className="
+                        group
+                        inline-flex
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        bg-[#1256af]
+                        px-5
+                        py-2.5
+                        text-sm
+                        font-semibold
+                        text-white
+                        transition-all
+                        duration-300
+                        hover:bg-[#0f4b99]
+                      "
+                    >
+                      Next stage
+
+                      <span
+                        aria-hidden="true"
+                        className="
+                          transition-transform
+                          duration-300
+                          group-hover:translate-x-1
+                        "
+                      >
+                        →
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setActive(0)}
+                      className="
+                        inline-flex
+                        items-center
+                        justify-center
+                        rounded-xl
+                        bg-[#1256af]
+                        px-5
+                        py-2.5
+                        text-sm
+                        font-semibold
+                        text-white
+                        transition-colors
+                        duration-300
+                        hover:bg-[#0f4b99]
+                      "
+                    >
+                      View journey again
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* =====================================================
+        {/* =========================================================
             BOTTOM
-        ===================================================== */}
+        ========================================================= */}
 
         <div
           className="
-            mt-16
+            mt-14
             flex
             flex-col
-            gap-5
+            gap-3
             border-t
-            border-[#D7E8F5]
+            border-gray-200
             pt-8
-
+            sm:mt-16
             sm:flex-row
             sm:items-center
             sm:justify-between
@@ -753,33 +913,21 @@ export default function MoveForward() {
         >
           <p
             className="
-              text-xl
+              text-lg
               font-semibold
-              tracking-[-0.03em]
-              text-[#173B63]
-
-              sm:text-2xl
-              lg:text-3xl
+              text-gray-700
+              sm:text-xl
             "
           >
             Apply.
-            <span className="text-[#0877E8]">
+            <span className="text-[#1256af]">
               {" "}
               Move.
-            </span>
-            <span>
-              {" "}
-              Grow.
-            </span>
+            </span>{" "}
+            Grow.
           </p>
 
-          <p
-            className="
-              text-sm
-              font-medium
-              text-[#6B8197]
-            "
-          >
+          <p className="text-sm font-medium text-gray-500">
             Your next step stays visible.
           </p>
         </div>

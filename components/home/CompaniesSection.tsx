@@ -55,79 +55,215 @@ export default function CompaniesSection() {
   return (
     <section
       id="companies"
-      className="relative isolate overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+      className="
+        relative
+        overflow-hidden
+        border-y
+        border-[#dce7f3]
+        bg-[#f7fbff]
+        py-20
+        sm:py-24
+        lg:py-28
+      "
     >
       {/* =====================================================
-          BACKGROUND
+          VERY SUBTLE AMBIENT LIGHT
       ===================================================== */}
 
-      <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-[#0877E8]/10 blur-[150px]" />
-
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-[350px] w-[350px] rounded-full bg-[#38BDF8]/10 blur-[120px]" />
-
-      <div className="pointer-events-none absolute -right-40 top-1/2 h-[350px] w-[350px] rounded-full bg-[#0877E8]/10 blur-[120px]" />
-
-      {/* Dot texture */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.10]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #94A3B8 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-        }}
+        className="
+          pointer-events-none
+          absolute
+          -right-48
+          -top-48
+          h-[500px]
+          w-[500px]
+          rounded-full
+          bg-[#24598a]/[0.045]
+          blur-[100px]
+        "
       />
 
-      {/* Top separator */}
-      <div className="absolute left-1/2 top-0 h-px w-[85%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#0877E8]/20 to-transparent" />
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          -bottom-52
+          -left-44
+          h-[450px]
+          w-[450px]
+          rounded-full
+          bg-[#c9a227]/[0.025]
+          blur-[110px]
+        "
+      />
 
       {/* =====================================================
           CONTENT
       ===================================================== */}
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-7xl
+          px-5
+          sm:px-8
+          lg:px-12
+        "
+      >
         {/* =====================================================
-            HEADING
+            HEADER
         ===================================================== */}
 
         <div className="mx-auto max-w-4xl text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-[#0877E8]/15 bg-[#F8FBFF]/80 px-4 py-2 shadow-sm backdrop-blur">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#38BDF8] opacity-30" />
+          {/* Eyebrow */}
 
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0877E8] shadow-[0_0_10px_rgba(8,119,232,0.5)]" />
-            </span>
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-[#c5d6e8]
+              bg-white
+              px-4
+              py-2
+              shadow-[0_1px_3px_rgba(23,59,99,0.05)]
+            "
+          >
+            <span
+              className="
+                h-1.5
+                w-1.5
+                rounded-full
+                bg-[#c9a227]
+              "
+            />
 
-            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0877E8]">
+            <span
+              className="
+                text-[11px]
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-[#173b63]
+              "
+            >
               Career Outcomes
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="mt-6 text-3xl font-extrabold leading-[1.08] tracking-[-0.045em] text-[#07182E] sm:text-4xl md:text-5xl lg:text-[3.6rem]">
-            Land Your
 
-            <span className="ml-2 bg-gradient-to-r from-[#0877E8] via-[#129CE9] to-[#32BDF7] bg-clip-text text-transparent">
-              Dream Job.
+          <h2
+            className="
+              mt-6
+              text-3xl
+              font-bold
+              leading-[1.05]
+              tracking-[-0.04em]
+              text-[#122a46]
+              sm:text-4xl
+              md:text-5xl
+              lg:text-[3.5rem]
+            "
+          >
+            Proving Potential,
+            <span className="text-[#24598a]">
+              {" "}
+              Placing Pride.
             </span>
           </h2>
 
           {/* Description */}
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg">
-            Our{" "}
-            <span className="font-bold text-[#07182E]">
-              150+ alumni
-            </span>{" "}
-            have got placed in{" "}
-            <span className="font-bold text-[#07182E]">
-              50+ companies
-            </span>{" "}
-            with{" "}
-            <span className="font-bold text-[#07182E]">
-              ₹75 Lakhs
-            </span>{" "}
-            as the highest package.
+
+          <p
+            className="
+              mx-auto
+              mt-5
+              max-w-2xl
+              text-base
+              leading-7
+              text-[#64748b]
+              sm:text-lg
+              sm:leading-8
+            "
+          >
+            Trailbliz graduates are now building at some of
+            the world&apos;s most innovative companies.
+          </p>
+        </div>
+
+        {/* =====================================================
+            IMPACT NUMBERS
+        ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-14
+            grid
+            max-w-4xl
+            grid-cols-3
+            divide-x
+            divide-[#dce7f3]
+            sm:mt-16
+          "
+        >
+          <Stat
+            value="52,000+"
+            label="Trained"
+          />
+
+          <Stat
+            value="19,500+"
+            label="Placed"
+          />
+
+          <Stat
+            value="45+"
+            label="Companies"
+          />
+        </div>
+
+        {/* =====================================================
+            DIVIDER
+        ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            my-14
+            h-px
+            max-w-5xl
+            bg-gradient-to-r
+            from-transparent
+            via-[#c5d6e8]
+            to-transparent
+            sm:my-16
+          "
+        />
+
+        {/* =====================================================
+            LOGO INTRO
+        ===================================================== */}
+
+        <div className="text-center">
+          <p
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-[#94a3b8]
+            "
+          >
+            Where our talent is building
           </p>
         </div>
 
@@ -135,22 +271,86 @@ export default function CompaniesSection() {
             COMPANY LOGOS
         ===================================================== */}
 
-        <div className="relative mx-auto mt-14 max-w-6xl sm:mt-16">
-          {/* Background glow */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[75%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0877E8]/10 blur-[90px]" />
-
-          <div className="relative grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
-            {companies.map((company, index) => (
-              <CompanyLogo
-                key={`${company.src}-${index}`}
-                src={company.src}
-                name={company.name}
-              />
-            ))}
+        <div
+          className="
+            mx-auto
+            mt-8
+            max-w-6xl
+          "
+        >
+          <div
+            className="
+              grid
+              grid-cols-2
+              gap-3
+              sm:grid-cols-3
+              sm:gap-4
+              md:grid-cols-4
+              lg:grid-cols-6
+            "
+          >
+            {companies.map(
+              (company, index) => (
+                <CompanyLogo
+                  key={`${company.src}-${index}`}
+                  src={company.src}
+                  name={company.name}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* =========================================================
+   STAT
+========================================================= */
+
+function Stat({
+  value,
+  label,
+}: {
+  value: string;
+  label: string;
+}) {
+  return (
+    <div
+      className="
+        px-3
+        text-center
+        sm:px-8
+      "
+    >
+      <div
+        className="
+          text-3xl
+          font-bold
+          tracking-[-0.045em]
+          text-[#173b63]
+          sm:text-4xl
+          lg:text-5xl
+        "
+      >
+        {value}
+      </div>
+
+      <p
+        className="
+          mt-2
+          text-[11px]
+          font-bold
+          uppercase
+          tracking-[0.14em]
+          text-[#64748b]
+          sm:text-xs
+        "
+      >
+        {label}
+      </p>
+    </div>
   );
 }
 
@@ -171,40 +371,52 @@ function CompanyLogo({
         group
         relative
         flex
-        h-[110px]
+        h-[105px]
         items-center
         justify-center
         overflow-hidden
-        rounded-[20px]
+        rounded-2xl
         border
-        border-slate-200/80
+        border-[#dce7f3]
         bg-white
-        p-4
-        shadow-[0_8px_30px_rgba(15,23,42,0.05)]
+        p-5
+
+        shadow-[0_1px_3px_rgba(23,59,99,0.05)]
+
         transition-all
-        duration-500
+        duration-300
 
-        hover:-translate-y-2
-        hover:scale-[1.02]
-        hover:border-[#0877E8]/30
-        hover:shadow-[0_20px_50px_rgba(8,119,232,0.15)]
+        hover:-translate-y-1
+        hover:border-[#b8cee4]
+        hover:shadow-[0_10px_30px_rgba(23,59,99,0.09)]
 
-        sm:h-[120px]
-        sm:p-5
-
-        lg:h-[130px]
+        sm:h-[115px]
+        lg:h-[120px]
       "
     >
-      {/* Top blue line */}
-      <div className="absolute left-1/2 top-0 h-[2px] w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent transition-all duration-500 group-hover:w-[65%]" />
+      {/* Gold hover detail */}
 
-      {/* Bottom glow */}
-      <div className="pointer-events-none absolute -bottom-16 left-1/2 h-28 w-28 -translate-x-1/2 rounded-full bg-[#0877E8]/0 blur-2xl transition-all duration-500 group-hover:bg-[#0877E8]/20" />
+      <div
+        aria-hidden="true"
+        className="
+          absolute
+          left-1/2
+          top-0
+          h-[2px]
+          w-0
+          -translate-x-1/2
+          rounded-full
+          bg-[#c9a227]
 
-      {/* Hover tint */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0877E8]/0 to-[#38BDF8]/0 transition-all duration-500 group-hover:from-[#0877E8]/[0.02] group-hover:to-[#38BDF8]/[0.07]" />
+          transition-all
+          duration-300
+
+          group-hover:w-10
+        "
+      />
 
       {/* Logo */}
+
       <img
         src={src}
         alt={name}
@@ -212,18 +424,22 @@ function CompanyLogo({
         className="
           relative
           z-10
-          max-h-[70px]
-          max-w-full
+          max-h-[64px]
+          max-w-[85%]
           object-contain
-          opacity-80
+
+          opacity-75
+          saturate-[0.85]
+
           transition-all
-          duration-500
+          duration-300
 
-          group-hover:scale-110
+          group-hover:scale-[1.04]
           group-hover:opacity-100
+          group-hover:saturate-100
 
-          sm:max-h-[78px]
-          lg:max-h-[85px]
+          sm:max-h-[70px]
+          lg:max-h-[74px]
         "
       />
     </div>
