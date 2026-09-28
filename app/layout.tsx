@@ -44,22 +44,22 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/trailbliz-icon.png",
+        url: "/trailbliz.png",
         type: "image/png",
         sizes: "32x32",
       },
       {
-        url: "/trailbliz-icon.png",
+        url: "/trailbliz.png",
         type: "image/png",
         sizes: "192x192",
       },
     ],
 
-    shortcut: "/trailbliz-icon.png",
+    shortcut: "/trailbliz.png",
 
     apple: [
       {
-        url: "/trailbliz-icon.png",
+        url: "/trailbliz.png",
         sizes: "180x180",
         type: "image/png",
       },
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.png",
+        url: "/trailbliz.png",
         width: 1200,
         height: 630,
         alt: "Trailbliz - Student Career Platform",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     description:
       "Build your profile, showcase your skills and discover internships and job opportunities.",
 
-    images: ["/og-image.png"],
+    images: ["/trailbliz.png"],
   },
 
   robots: {
