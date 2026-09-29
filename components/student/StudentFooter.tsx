@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const links = [
+import {
+  ArrowUpRight,
+  Heart,
+} from "lucide-react";
+
+const exploreLinks = [
   {
     label: "Home",
     href: "/student",
@@ -11,18 +16,68 @@ const links = [
     href: "/student/courses",
   },
   {
+    label: "Opportunities",
+    href: "/opportunities",
+  },
+];
+
+const accountLinks = [
+  {
     label: "Profile",
     href: "/profile",
+  },
+  {
+    label: "Applications",
+    href: "/applications",
+  },
+  {
+    label: "Leaderboard",
+    href: "/leaderboard",
+  },
+  {
+    label: "Membership",
+    href: "/membership",
   },
 ];
 
 export default function StudentFooter() {
-  const year = new Date().getFullYear();
+  const year =
+    new Date().getFullYear();
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+    <footer
+      className="
+        border-t
+        border-slate-200
+        bg-white
+      "
+    >
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-8
+
+          sm:px-6
+          sm:py-10
+
+          lg:px-8
+        "
+      >
+        {/* MAIN */}
+
+        <div
+          className="
+            grid
+            gap-8
+
+            md:grid-cols-[1fr_auto_auto]
+            md:gap-14
+          "
+        >
+          {/* BRAND */}
+
           <div>
             <Link
               href="/student"
@@ -32,50 +87,177 @@ export default function StudentFooter() {
               <Image
                 src="/tbz.png"
                 alt="Trailbliz"
-                width={160}
-                height={44}
-                className="h-9 w-auto object-contain"
+                width={150}
+                height={42}
+                className="
+                  h-8
+                  w-auto
+                  object-contain
+                "
               />
             </Link>
 
-            <p className="mt-3 max-w-sm text-sm leading-6 text-slate-500">
-              Build your skills. Show your progress.
-              Move toward what comes next.
+            <p
+              className="
+                mt-3
+                max-w-xs
+                text-sm
+                leading-6
+                text-slate-500
+              "
+            >
+              Learn. Build. Move
+              forward.
             </p>
           </div>
 
-          <nav
-            className="flex flex-wrap items-center gap-x-6 gap-y-3"
-            aria-label="Student footer navigation"
-          >
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-semibold text-slate-500 transition hover:text-[#1256af]"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {/* EXPLORE */}
+
+          <FooterGroup
+            title="Explore"
+            links={exploreLinks}
+          />
+
+          {/* ACCOUNT */}
+
+          <FooterGroup
+            title="Account"
+            links={accountLinks}
+          />
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} Trailbliz. All rights reserved.
+        {/* BOTTOM */}
+
+        <div
+          className="
+            mt-8
+            flex
+            flex-col
+            gap-4
+            border-t
+            border-slate-100
+            pt-5
+
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <p
+            className="
+              text-xs
+              text-slate-400
+            "
+          >
+            © {year} Trailbliz
           </p>
 
-          <p>
-            Made with love.{" "}
-            <Link
-              href="/developers"
-              className="font-medium text-slate-600 transition hover:text-[#1256af]"
-            >
-              Tejas Guntru
-            </Link>
-          </p>
+          <Link
+            href="/developers"
+            className="
+              group
+              inline-flex
+              w-fit
+              items-center
+              gap-1.5
+              text-xs
+              font-medium
+              text-slate-400
+              transition-colors
+
+              hover:text-[#1256AF]
+            "
+          >
+            Built with
+            <Heart
+              size={11}
+              className="
+                fill-current
+              "
+            />
+            by Tejas Guntru
+
+            <ArrowUpRight
+              size={11}
+              className="
+                ml-0.5
+                transition-transform
+
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+              "
+            />
+          </Link>
         </div>
       </div>
     </footer>
+  );
+}
+
+/* =========================================================
+   FOOTER GROUP
+========================================================= */
+
+interface FooterGroupProps {
+  title: string;
+
+  links: {
+    label: string;
+    href: string;
+  }[];
+}
+
+function FooterGroup({
+  title,
+  links,
+}: FooterGroupProps) {
+  return (
+    <div>
+      <p
+        className="
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.12em]
+          text-slate-400
+        "
+      >
+        {title}
+      </p>
+
+      <nav
+        className="
+          mt-3
+          flex
+          flex-wrap
+          gap-x-5
+          gap-y-2.5
+
+          md:flex-col
+          md:items-start
+          md:gap-2
+        "
+        aria-label={`${title} links`}
+      >
+        {links.map(
+          (link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="
+                text-sm
+                font-medium
+                text-slate-600
+                transition-colors
+
+                hover:text-[#1256AF]
+              "
+            >
+              {link.label}
+            </Link>
+          )
+        )}
+      </nav>
+    </div>
   );
 }

@@ -1,7 +1,10 @@
 import {
   CreditCard,
-  ReceiptText,
 } from "lucide-react";
+
+import type {
+  ReactNode,
+} from "react";
 
 import type {
   PaymentResponse,
@@ -24,7 +27,6 @@ export default function PaymentHistory({
   return (
     <section
       className="
-        mt-6
         overflow-hidden
         rounded-2xl
         border
@@ -33,94 +35,54 @@ export default function PaymentHistory({
         shadow-sm
       "
     >
-      {/* HEADER */}
+      {/* =========================================
+          HEADER
+      ========================================== */}
 
       <div
         className="
           flex
-          flex-col
-          gap-3
+          items-center
+          justify-between
+          gap-4
           border-b
           border-slate-200
           px-5
-          py-5
+          py-4
 
-          sm:flex-row
-          sm:items-center
-          sm:justify-between
           sm:px-6
         "
       >
-        <div
-          className="
-            flex
-            items-start
-            gap-3
-          "
-        >
-          <div
+        <div>
+          <p
             className="
-              flex
-              h-10
-              w-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-xl
-              bg-slate-100
-              text-slate-600
+              text-sm
+              font-bold
+              text-slate-900
             "
           >
-            <ReceiptText size={17} />
-          </div>
+            Transactions
+          </p>
 
-          <div>
-            <p
-              className="
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[0.13em]
-                text-[#1256AF]
-              "
-            >
-              Payments
-            </p>
-
-            <h2
-              className="
-                mt-1
-                text-lg
-                font-bold
-                tracking-[-0.02em]
-                text-slate-900
-              "
-            >
-              Payment History
-            </h2>
-
-            <p
-              className="
-                mt-1
-                text-xs
-                text-slate-500
-              "
-            >
-              Your membership payment records.
-            </p>
-          </div>
+          <p
+            className="
+              mt-0.5
+              text-xs
+              text-slate-500
+            "
+          >
+            Your membership payment records.
+          </p>
         </div>
 
         {payments.length > 0 && (
           <span
             className="
-              w-fit
+              shrink-0
               rounded-full
-              border
-              border-slate-200
-              bg-slate-50
-              px-3
-              py-1.5
+              bg-slate-100
+              px-2.5
+              py-1
               text-[10px]
               font-bold
               text-slate-600
@@ -134,176 +96,423 @@ export default function PaymentHistory({
         )}
       </div>
 
+      {/* =========================================
+          CONTENT
+      ========================================== */}
+
       {payments.length === 0 ? (
         <EmptyPayments />
       ) : (
-        <div className="overflow-x-auto">
-          <table
+        <>
+          {/* =====================================
+              MOBILE
+          ====================================== */}
+
+          <div className="sm:hidden">
+            {payments.map(
+              (payment) => (
+                <MobilePaymentCard
+                  key={
+                    payment.paymentId
+                  }
+                  payment={
+                    payment
+                  }
+                />
+              )
+            )}
+          </div>
+
+          {/* =====================================
+              DESKTOP TABLE
+          ====================================== */}
+
+          <div
             className="
-              w-full
-              min-w-[760px]
-              border-collapse
+              hidden
+              overflow-x-auto
+
+              sm:block
             "
           >
-            <thead>
-              <tr
-                className="
-                  border-b
-                  border-slate-200
-                  bg-slate-50/80
-                  text-left
-                "
-              >
-                <TableHeading>
-                  Date
-                </TableHeading>
+            <table
+              className="
+                w-full
+                min-w-[760px]
+                border-collapse
+              "
+            >
+              <thead>
+                <tr
+                  className="
+                    border-b
+                    border-slate-200
+                    bg-slate-50/80
+                  "
+                >
+                  <TableHeading>
+                    Date
+                  </TableHeading>
 
-                <TableHeading>
-                  Order
-                </TableHeading>
+                  <TableHeading>
+                    Order
+                  </TableHeading>
 
-                <TableHeading>
-                  Payment
-                </TableHeading>
+                  <TableHeading>
+                    Payment
+                  </TableHeading>
 
-                <TableHeading>
-                  Status
-                </TableHeading>
+                  <TableHeading>
+                    Status
+                  </TableHeading>
 
-                <TableHeading right>
-                  Amount
-                </TableHeading>
-              </tr>
-            </thead>
+                  <TableHeading right>
+                    Amount
+                  </TableHeading>
+                </tr>
+              </thead>
 
-            <tbody>
-              {payments.map(
-                (payment) => (
-                  <tr
-                    key={
-                      payment.paymentId
-                    }
-                    className="
-                      border-b
-                      border-slate-100
-                      transition-colors
-                      last:border-b-0
-
-                      hover:bg-slate-50/70
-                    "
-                  >
-                    <td
-                      className="
-                        whitespace-nowrap
-                        px-6
-                        py-4
-                        text-sm
-                        font-medium
-                        text-slate-700
-                      "
-                    >
-                      {formatDate(
-                        payment.paidAt ||
-                          payment.createdAt
-                      )}
-                    </td>
-
-                    <td
-                      className="
-                        max-w-[220px]
-                        px-6
-                        py-4
-                      "
-                    >
-                      <span
-                        className="
-                          block
-                          truncate
-                          font-mono
-                          text-xs
-                          text-slate-500
-                        "
-                        title={
-                          payment.razorpayOrderId
-                        }
-                      >
-                        {payment.razorpayOrderId}
-                      </span>
-                    </td>
-
-                    <td
-                      className="
-                        max-w-[220px]
-                        px-6
-                        py-4
-                      "
-                    >
-                      <span
-                        className="
-                          block
-                          truncate
-                          font-mono
-                          text-xs
-                          text-slate-500
-                        "
-                        title={
-                          payment.razorpayPaymentId ||
-                          undefined
-                        }
-                      >
-                        {payment.razorpayPaymentId ||
-                          "-"}
-                      </span>
-                    </td>
-
-                    <td
-                      className="
-                        px-6
-                        py-4
-                      "
-                    >
-                      <PaymentBadge
-                        status={
-                          payment.status
-                        }
-                      />
-                    </td>
-
-                    <td
-                      className="
-                        whitespace-nowrap
-                        px-6
-                        py-4
-                        text-right
-                        text-sm
-                        font-bold
-                        tabular-nums
-                        text-slate-900
-                      "
-                    >
-                      ₹
-                      {(
-                        payment.amount /
-                        100
-                      ).toFixed(2)}
-                    </td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
+              <tbody>
+                {payments.map(
+                  (payment) => (
+                    <PaymentRow
+                      key={
+                        payment.paymentId
+                      }
+                      payment={
+                        payment
+                      }
+                    />
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </section>
   );
 }
+
+/* =========================================================
+   DESKTOP ROW
+========================================================= */
+
+function PaymentRow({
+  payment,
+}: {
+  payment:
+    PaymentResponse;
+}) {
+  return (
+    <tr
+      className="
+        border-b
+        border-slate-100
+        transition-colors
+        last:border-b-0
+
+        hover:bg-slate-50/70
+      "
+    >
+      {/* DATE */}
+
+      <td
+        className="
+          whitespace-nowrap
+          px-6
+          py-4
+          text-sm
+          font-medium
+          text-slate-700
+        "
+      >
+        {formatDate(
+          payment.paidAt ||
+            payment.createdAt
+        )}
+      </td>
+
+      {/* ORDER */}
+
+      <td
+        className="
+          max-w-[220px]
+          px-6
+          py-4
+        "
+      >
+        <TransactionId
+          value={
+            payment.razorpayOrderId
+          }
+        />
+      </td>
+
+      {/* PAYMENT */}
+
+      <td
+        className="
+          max-w-[220px]
+          px-6
+          py-4
+        "
+      >
+        <TransactionId
+          value={
+            payment.razorpayPaymentId
+          }
+        />
+      </td>
+
+      {/* STATUS */}
+
+      <td
+        className="
+          px-6
+          py-4
+        "
+      >
+        <PaymentBadge
+          status={
+            payment.status
+          }
+        />
+      </td>
+
+      {/* AMOUNT */}
+
+      <td
+        className="
+          whitespace-nowrap
+          px-6
+          py-4
+          text-right
+          text-sm
+          font-bold
+          tabular-nums
+          text-slate-900
+        "
+      >
+        {formatAmount(
+          payment.amount
+        )}
+      </td>
+    </tr>
+  );
+}
+
+/* =========================================================
+   MOBILE PAYMENT CARD
+========================================================= */
+
+function MobilePaymentCard({
+  payment,
+}: {
+  payment:
+    PaymentResponse;
+}) {
+  return (
+    <article
+      className="
+        border-b
+        border-slate-100
+        p-5
+        last:border-b-0
+      "
+    >
+      {/* TOP */}
+
+      <div
+        className="
+          flex
+          items-start
+          justify-between
+          gap-4
+        "
+      >
+        <div>
+          <p
+            className="
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.1em]
+              text-slate-400
+            "
+          >
+            Payment date
+          </p>
+
+          <p
+            className="
+              mt-1
+              text-sm
+              font-bold
+              text-slate-900
+            "
+          >
+            {formatDate(
+              payment.paidAt ||
+                payment.createdAt
+            )}
+          </p>
+        </div>
+
+        <PaymentBadge
+          status={
+            payment.status
+          }
+        />
+      </div>
+
+      {/* AMOUNT */}
+
+      <div className="mt-5">
+        <p
+          className="
+            text-[9px]
+            font-bold
+            uppercase
+            tracking-[0.1em]
+            text-slate-400
+          "
+        >
+          Amount
+        </p>
+
+        <p
+          className="
+            mt-1
+            text-xl
+            font-bold
+            tracking-[-0.03em]
+            tabular-nums
+            text-slate-950
+          "
+        >
+          {formatAmount(
+            payment.amount
+          )}
+        </p>
+      </div>
+
+      {/* IDS */}
+
+      <div
+        className="
+          mt-5
+          grid
+          gap-4
+          rounded-xl
+          bg-slate-50
+          p-4
+        "
+      >
+        <MobileTransactionField
+          label="Order ID"
+          value={
+            payment.razorpayOrderId
+          }
+        />
+
+        <MobileTransactionField
+          label="Payment ID"
+          value={
+            payment.razorpayPaymentId
+          }
+        />
+      </div>
+    </article>
+  );
+}
+
+/* =========================================================
+   MOBILE FIELD
+========================================================= */
+
+function MobileTransactionField({
+  label,
+  value,
+}: {
+  label: string;
+  value:
+    | string
+    | null
+    | undefined;
+}) {
+  return (
+    <div>
+      <p
+        className="
+          text-[9px]
+          font-bold
+          uppercase
+          tracking-[0.1em]
+          text-slate-400
+        "
+      >
+        {label}
+      </p>
+
+      <p
+        className="
+          mt-1
+          break-all
+          font-mono
+          text-[11px]
+          leading-5
+          text-slate-600
+        "
+      >
+        {value || "-"}
+      </p>
+    </div>
+  );
+}
+
+/* =========================================================
+   TRANSACTION ID
+========================================================= */
+
+function TransactionId({
+  value,
+}: {
+  value:
+    | string
+    | null
+    | undefined;
+}) {
+  return (
+    <span
+      title={
+        value || undefined
+      }
+      className="
+        block
+        max-w-[190px]
+        truncate
+        font-mono
+        text-xs
+        text-slate-500
+      "
+    >
+      {value || "-"}
+    </span>
+  );
+}
+
+/* =========================================================
+   TABLE HEADING
+========================================================= */
 
 function TableHeading({
   children,
   right = false,
 }: {
   children:
-    React.ReactNode;
+    ReactNode;
+
   right?: boolean;
 }) {
   return (
@@ -330,6 +539,10 @@ function TableHeading({
   );
 }
 
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
 function EmptyPayments() {
   return (
     <div
@@ -337,6 +550,8 @@ function EmptyPayments() {
         px-6
         py-12
         text-center
+
+        sm:py-14
       "
     >
       <div
@@ -352,7 +567,9 @@ function EmptyPayments() {
           text-slate-500
         "
       >
-        <CreditCard size={19} />
+        <CreditCard
+          size={19}
+        />
       </div>
 
       <h3
@@ -376,9 +593,29 @@ function EmptyPayments() {
           text-slate-500
         "
       >
-        Your completed membership payments
-        will appear here.
+        Your completed membership
+        payments will appear here.
       </p>
     </div>
+  );
+}
+
+/* =========================================================
+   FORMAT AMOUNT
+========================================================= */
+
+function formatAmount(
+  amount: number
+) {
+  return new Intl.NumberFormat(
+    "en-IN",
+    {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }
+  ).format(
+    amount / 100
   );
 }

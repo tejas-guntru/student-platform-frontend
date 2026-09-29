@@ -2,10 +2,6 @@
 
 import Link from "next/link";
 
-import type {
-  ChangeEvent,
-} from "react";
-
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -22,30 +18,16 @@ interface ApplicationsListProps {
   applications:
     ApplicationResponse[];
 
-  selectedFiles:
-    Record<string, File | null>;
-
-  uploadingId:
-    string | null;
-
-  onFileChange:
+  onSelect:
     (
-      applicationId: string,
-      event: ChangeEvent<HTMLInputElement>
-    ) => void;
-
-  onUpload:
-    (
-      applicationId: string
+      application:
+        ApplicationResponse
     ) => void;
 }
 
 export default function ApplicationsList({
   applications,
-  selectedFiles,
-  uploadingId,
-  onFileChange,
-  onUpload,
+  onSelect,
 }: ApplicationsListProps) {
   if (applications.length === 0) {
     return (
@@ -98,8 +80,9 @@ export default function ApplicationsList({
             text-slate-500
           "
         >
-          Once you apply for a job or internship,
-          its progress will appear here.
+          Once you apply for a job or
+          internship, its progress will
+          appear here.
         </p>
 
         <Link
@@ -123,7 +106,9 @@ export default function ApplicationsList({
             hover:bg-[#0E4C9D]
           "
         >
-          <BriefcaseBusiness size={15} />
+          <BriefcaseBusiness
+            size={15}
+          />
 
           Browse Opportunities
 
@@ -143,20 +128,22 @@ export default function ApplicationsList({
     <section>
       <div
         className="
-          mb-5
           flex
-          items-end
-          justify-between
+          flex-col
           gap-4
+
+          sm:flex-row
+          sm:items-end
+          sm:justify-between
         "
       >
         <div>
           <p
             className="
-              text-xs
+              text-[10px]
               font-bold
               uppercase
-              tracking-[0.12em]
+              tracking-[0.15em]
               text-[#1256AF]
             "
           >
@@ -165,11 +152,11 @@ export default function ApplicationsList({
 
           <h2
             className="
-              mt-1
-              text-xl
+              mt-2
+              text-2xl
               font-bold
-              tracking-[-0.025em]
-              text-slate-900
+              tracking-[-0.035em]
+              text-slate-950
             "
           >
             Application progress
@@ -177,18 +164,76 @@ export default function ApplicationsList({
 
           <p
             className="
-              mt-1
+              mt-2
+              max-w-2xl
               text-sm
+              leading-6
               text-slate-500
             "
           >
-            Follow each opportunity from application
-            through the hiring process.
+            Select an application to see
+            its hiring progress and any
+            actions required from you.
           </p>
+        </div>
+
+        <div
+          className="
+            inline-flex
+            w-fit
+            items-center
+            gap-3
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            px-3.5
+            py-2.5
+          "
+        >
+          <FileText
+            size={15}
+            className="text-[#1256AF]"
+          />
+
+          <div>
+            <p
+              className="
+                text-[8px]
+                font-bold
+                uppercase
+                tracking-[0.1em]
+                text-slate-400
+              "
+            >
+              Total
+            </p>
+
+            <p
+              className="
+                text-xs
+                font-bold
+                text-slate-700
+              "
+            >
+              {applications.length}{" "}
+              {applications.length === 1
+                ? "application"
+                : "applications"}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div
+        className="
+          mt-6
+          grid
+          gap-4
+
+          md:grid-cols-2
+        "
+      >
         {applications.map(
           (application) => (
             <ApplicationCard
@@ -198,20 +243,8 @@ export default function ApplicationsList({
               application={
                 application
               }
-              selectedFile={
-                selectedFiles[
-                  application.applicationId
-                ] || null
-              }
-              uploading={
-                uploadingId ===
-                application.applicationId
-              }
-              onFileChange={
-                onFileChange
-              }
-              onUpload={
-                onUpload
+              onSelect={
+                onSelect
               }
             />
           )

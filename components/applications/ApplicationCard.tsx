@@ -1,16 +1,12 @@
 "use client";
 
-import type {
-  ChangeEvent,
-} from "react";
-
 import {
+  ArrowUpRight,
   BriefcaseBusiness,
   Building2,
   CalendarDays,
   CheckCircle2,
-  FileText,
-  XCircle,
+  FileUp,
 } from "lucide-react";
 
 import type {
@@ -18,42 +14,27 @@ import type {
 } from "@/types/application";
 
 import ApplicationStatusBadge from "@/components/applications/ApplicationStatusBadge";
-import ApplicationTimeline from "@/components/applications/ApplicationTimeline";
-import ResumeUploadSection from "@/components/applications/ResumeUploadSection";
 
 import {
   formatApplicationDate,
 } from "@/utils/applicationUtils";
 
 interface ApplicationCardProps {
-  application:
-    ApplicationResponse;
+  application: ApplicationResponse;
 
-  selectedFile:
-    File | null;
-
-  uploading:
-    boolean;
-
-  onFileChange:
-    (
-      applicationId: string,
-      event: ChangeEvent<HTMLInputElement>
-    ) => void;
-
-  onUpload:
-    (
-      applicationId: string
-    ) => void;
+  onSelect: (
+    application: ApplicationResponse
+  ) => void;
 }
 
 export default function ApplicationCard({
   application,
-  selectedFile,
-  uploading,
-  onFileChange,
-  onUpload,
+  onSelect,
 }: ApplicationCardProps) {
+  const needsResume =
+    application.status ===
+    "RESUME_REQUESTED";
+
   const resumeSubmitted =
     application.status ===
       "RESUME_SUBMITTED" ||
@@ -63,309 +44,293 @@ export default function ApplicationCard({
       "SELECTED";
 
   return (
-    <article
+    <button
+      type="button"
+      onClick={() =>
+        onSelect(application)
+      }
       className="
-        overflow-hidden
+        group
+        flex
+        min-h-[270px]
+        w-full
+        flex-col
         rounded-2xl
         border
         border-slate-200
         bg-white
-        shadow-sm
+        p-5
+        text-left
+        transition-all
+        duration-200
+
+        hover:-translate-y-0.5
+        hover:border-slate-300
+        hover:shadow-[0_14px_35px_rgba(15,23,42,0.07)]
+
+        focus:outline-none
+        focus:ring-4
+        focus:ring-[#1256AF]/10
+
+        sm:p-6
       "
     >
+      {/* TOP */}
+
       <div
         className="
-          p-5
-
-          sm:p-6
+          flex
+          items-start
+          justify-between
+          gap-4
         "
       >
         <div
           className="
             flex
-            flex-col
-            gap-5
-
-            sm:flex-row
-            sm:items-start
-            sm:justify-between
+            h-11
+            w-11
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            bg-[#EAF2FF]
+            text-[#1256AF]
           "
         >
-          <div
-            className="
-              flex
-              min-w-0
-              items-start
-              gap-4
-            "
-          >
-            <div
-              className="
-                flex
-                h-11
-                w-11
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-                bg-[#EAF2FF]
-                text-[#1256AF]
-              "
-            >
-              <BriefcaseBusiness
-                size={18}
-              />
-            </div>
-
-            <div className="min-w-0">
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-2
-                  text-sm
-                  text-slate-500
-                "
-              >
-                <Building2
-                  size={13}
-                  className="shrink-0"
-                />
-
-                <span className="truncate">
-                  {application.companyName}
-                </span>
-              </div>
-
-              <h2
-                className="
-                  mt-1.5
-                  break-words
-                  text-xl
-                  font-bold
-                  tracking-[-0.025em]
-                  text-slate-900
-                "
-              >
-                {application.opportunityTitle}
-              </h2>
-
-              <div
-                className="
-                  mt-2
-                  flex
-                  items-center
-                  gap-2
-                  text-xs
-                  text-slate-400
-                "
-              >
-                <CalendarDays
-                  size={13}
-                  className="shrink-0"
-                />
-
-                <span>
-                  Applied{" "}
-                  {formatApplicationDate(
-                    application.appliedAt
-                  )}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <ApplicationStatusBadge
-            status={application.status}
+          <BriefcaseBusiness
+            size={18}
           />
         </div>
 
+        <ApplicationStatusBadge
+          status={application.status}
+        />
+      </div>
+
+      {/* ROLE */}
+
+      <div className="mt-5">
         <div
           className="
-            mt-6
-            border-t
-            border-slate-100
-            pt-5
+            flex
+            items-center
+            gap-2
+            text-sm
+            text-slate-500
           "
         >
-          <div
+          <Building2
+            size={13}
+            className="shrink-0"
+          />
+
+          <span className="truncate">
+            {application.companyName}
+          </span>
+        </div>
+
+        <h3
+          className="
+            mt-2
+            line-clamp-2
+            text-xl
+            font-bold
+            tracking-[-0.03em]
+            text-slate-950
+          "
+        >
+          {application.opportunityTitle}
+        </h3>
+      </div>
+
+      {/* APPLIED DATE */}
+
+      <div
+        className="
+          mt-5
+          flex
+          items-center
+          gap-2
+          border-t
+          border-slate-100
+          pt-4
+        "
+      >
+        <CalendarDays
+          size={14}
+          className="text-[#1256AF]"
+        />
+
+        <div>
+          <p
             className="
-              mb-4
-              flex
-              items-center
-              gap-2
+              text-[8px]
+              font-bold
+              uppercase
+              tracking-[0.1em]
+              text-slate-400
             "
           >
-            <FileText
-              size={13}
-              className="text-[#1256AF]"
-            />
+            Applied
+          </p>
+
+          <p
+            className="
+              mt-0.5
+              text-xs
+              font-semibold
+              text-slate-600
+            "
+          >
+            {formatApplicationDate(
+              application.appliedAt
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* IMPORTANT STATE */}
+
+      {needsResume && (
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            gap-3
+            rounded-xl
+            border
+            border-amber-200
+            bg-amber-50
+            px-3.5
+            py-3
+          "
+        >
+          <FileUp
+            size={15}
+            className="
+              shrink-0
+              text-amber-600
+            "
+          />
+
+          <div>
+            <p
+              className="
+                text-xs
+                font-bold
+                text-amber-800
+              "
+            >
+              Resume requested
+            </p>
 
             <p
               className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.12em]
-                text-[#1256AF]
+                mt-0.5
+                text-[11px]
+                text-amber-700
               "
             >
-              Application progress
+              Action required
             </p>
           </div>
+        </div>
+      )}
 
-          <ApplicationTimeline
-            status={application.status}
+      {resumeSubmitted && (
+        <div
+          className="
+            mt-4
+            flex
+            items-center
+            gap-3
+            rounded-xl
+            bg-emerald-50
+            px-3.5
+            py-3
+          "
+        >
+          <CheckCircle2
+            size={15}
+            className="
+              shrink-0
+              text-emerald-600
+            "
+          />
+
+          <div>
+            <p
+              className="
+                text-xs
+                font-bold
+                text-emerald-800
+              "
+            >
+              Resume submitted
+            </p>
+
+            <p
+              className="
+                mt-0.5
+                text-[11px]
+                text-emerald-700
+              "
+            >
+              No action needed
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* BOTTOM */}
+
+      <div
+        className="
+          mt-auto
+          flex
+          items-center
+          justify-between
+          pt-6
+        "
+      >
+        <span
+          className="
+            text-xs
+            font-semibold
+            text-slate-400
+            transition-colors
+
+            group-hover:text-[#1256AF]
+          "
+        >
+          View application
+        </span>
+
+        <div
+          className="
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-lg
+            border
+            border-slate-200
+            text-slate-500
+            transition-all
+
+            group-hover:border-[#1256AF]
+            group-hover:bg-[#1256AF]
+            group-hover:text-white
+          "
+        >
+          <ArrowUpRight
+            size={15}
           />
         </div>
-
-        {application.status ===
-          "RESUME_REQUESTED" && (
-          <div
-            className="
-              mt-6
-              border-t
-              border-slate-100
-              pt-6
-            "
-          >
-            <ResumeUploadSection
-              applicationId={
-                application.applicationId
-              }
-              selectedFile={
-                selectedFile
-              }
-              uploading={
-                uploading
-              }
-              onFileChange={
-                onFileChange
-              }
-              onUpload={
-                onUpload
-              }
-            />
-          </div>
-        )}
-
-        {resumeSubmitted && (
-          <div
-            className="
-              mt-6
-              flex
-              items-start
-              gap-3
-              rounded-xl
-              border
-              border-emerald-200
-              bg-emerald-50
-              px-4
-              py-3.5
-            "
-          >
-            <div
-              className="
-                flex
-                h-8
-                w-8
-                shrink-0
-                items-center
-                justify-center
-                rounded-lg
-                bg-emerald-100
-                text-emerald-600
-              "
-            >
-              <CheckCircle2
-                size={15}
-              />
-            </div>
-
-            <div>
-              <p
-                className="
-                  text-sm
-                  font-bold
-                  text-emerald-800
-                "
-              >
-                Resume submitted
-              </p>
-
-              <p
-                className="
-                  mt-0.5
-                  text-xs
-                  leading-5
-                  text-emerald-700
-                "
-              >
-                Your resume has been received for
-                this application.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {application.status ===
-          "REJECTED" && (
-          <div
-            className="
-              mt-6
-              flex
-              items-start
-              gap-3
-              rounded-xl
-              border
-              border-red-200
-              bg-red-50
-              px-4
-              py-3.5
-            "
-          >
-            <div
-              className="
-                flex
-                h-8
-                w-8
-                shrink-0
-                items-center
-                justify-center
-                rounded-lg
-                bg-red-100
-                text-red-600
-              "
-            >
-              <XCircle size={15} />
-            </div>
-
-            <div>
-              <p
-                className="
-                  text-sm
-                  font-bold
-                  text-red-700
-                "
-              >
-                Application closed
-              </p>
-
-              <p
-                className="
-                  mt-0.5
-                  text-xs
-                  leading-5
-                  text-red-600
-                "
-              >
-                This application was not selected
-                for further processing.
-              </p>
-            </div>
-          </div>
-        )}
       </div>
-    </article>
+    </button>
   );
 }

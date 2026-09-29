@@ -5,13 +5,8 @@ import {
   Search,
 } from "lucide-react";
 
-import type {
-  Opportunity,
-} from "@/types/opportunity";
-
-import type {
-  ApplicationResponse,
-} from "@/types/application";
+import type { Opportunity } from "@/types/opportunity";
+import type { ApplicationResponse } from "@/types/application";
 
 import OpportunityCard from "@/components/opportunities/OpportunityCard";
 
@@ -20,25 +15,12 @@ import {
 } from "@/utils/opportunityUtils";
 
 interface OpportunitiesListProps {
-  opportunities:
-    Opportunity[];
+  opportunities: Opportunity[];
+  applications: ApplicationResponse[];
 
-  applications:
-    ApplicationResponse[];
+  studentGraduationYear: number | null;
 
-  membershipEligible:
-    boolean;
-
-  profilePercentage:
-    number;
-
-  studentGraduationYear:
-    number | null;
-
-  applyingId:
-    string | null;
-
-  onApply: (
+  onSelect: (
     opportunity: Opportunity
   ) => void;
 }
@@ -46,17 +28,13 @@ interface OpportunitiesListProps {
 export default function OpportunitiesList({
   opportunities,
   applications,
-
-  membershipEligible,
-  profilePercentage,
   studentGraduationYear,
-
-  applyingId,
-  onApply,
+  onSelect,
 }: OpportunitiesListProps) {
   const findApplication = (
     opportunityId:
-      string | undefined
+      | string
+      | undefined
   ) => {
     if (!opportunityId) {
       return null;
@@ -71,9 +49,7 @@ export default function OpportunitiesList({
     );
   };
 
-  if (
-    opportunities.length === 0
-  ) {
+  if (opportunities.length === 0) {
     return (
       <section
         className="
@@ -133,6 +109,8 @@ export default function OpportunitiesList({
 
   return (
     <section>
+      {/* SECTION HEADER */}
+
       <div
         className="
           flex
@@ -178,8 +156,9 @@ export default function OpportunitiesList({
               text-slate-500
             "
           >
-            Review active roles, understand your
-            eligibility and apply when you are ready.
+            Browse available roles and open one to
+            review its requirements and application
+            details.
           </p>
         </div>
 
@@ -231,30 +210,30 @@ export default function OpportunitiesList({
         </div>
       </div>
 
+      {/* CARD GALLERY */}
+
       <div
         className="
-          mt-5
+          mt-6
           grid
-          gap-5
+          gap-4
+
+          md:grid-cols-2
         "
       >
         {opportunities.map(
-          (
-            opportunity,
-            index
-          ) => {
+          (opportunity, index) => {
             const opportunityId =
               getOpportunityId(
                 opportunity
               );
 
-            const key =
-              opportunityId ||
-              String(index);
-
             return (
               <OpportunityCard
-                key={key}
+                key={
+                  opportunityId ||
+                  String(index)
+                }
                 opportunity={
                   opportunity
                 }
@@ -263,21 +242,10 @@ export default function OpportunitiesList({
                     opportunityId
                   )
                 }
-                membershipEligible={
-                  membershipEligible
-                }
-                profilePercentage={
-                  profilePercentage
-                }
                 studentGraduationYear={
                   studentGraduationYear
                 }
-                applyingId={
-                  applyingId
-                }
-                onApply={
-                  onApply
-                }
+                onSelect={onSelect}
               />
             );
           }

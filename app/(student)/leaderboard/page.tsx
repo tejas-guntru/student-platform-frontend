@@ -6,11 +6,8 @@ import {
 
 import LeaderboardHeader from "@/components/leaderboard/LeaderboardHeader";
 import MyRankingSection from "@/components/leaderboard/MyRankingSection";
-import LeaderboardContext from "@/components/leaderboard/LeaderboardContext";
-import PlatformScores from "@/components/leaderboard/PlatformScores";
 import LeaderboardFilters from "@/components/leaderboard/LeaderboardFilters";
 import LeaderboardTable from "@/components/leaderboard/LeaderboardTable";
-import LeaderboardLinks from "@/components/leaderboard/LeaderboardLinks";
 
 import ProfileAlerts from "@/components/profile/ProfileAlerts";
 
@@ -23,7 +20,7 @@ function LeaderboardLoading() {
     <main
       className="
         flex
-        min-h-[70vh]
+        min-h-[65vh]
         items-center
         justify-center
         bg-[#F7F9FC]
@@ -59,7 +56,7 @@ function LeaderboardLoading() {
             mt-4
             text-sm
             font-semibold
-            text-slate-800
+            text-slate-700
           "
         >
           Loading leaderboard
@@ -72,7 +69,7 @@ function LeaderboardLoading() {
             text-slate-500
           "
         >
-          Preparing rankings and coding scores...
+          Preparing your ranking...
         </p>
       </div>
     </main>
@@ -84,7 +81,9 @@ export default function LeaderboardPage() {
     useLeaderboard();
 
   if (leaderboard.loading) {
-    return <LeaderboardLoading />;
+    return (
+      <LeaderboardLoading />
+    );
   }
 
   return (
@@ -98,7 +97,7 @@ export default function LeaderboardPage() {
       <div
         className="
           mx-auto
-          max-w-7xl
+          max-w-6xl
           px-4
           py-8
 
@@ -106,24 +105,39 @@ export default function LeaderboardPage() {
           sm:py-10
 
           lg:px-8
+          lg:py-12
         "
       >
+        {/* =========================
+            PAGE HEADER
+        ========================== */}
+
         <LeaderboardHeader
           myRank={
             leaderboard.myRank
           }
         />
 
-        <div className="mt-6">
-          <ProfileAlerts
-            error={
-              leaderboard.error
-            }
-            success=""
-          />
-        </div>
+        {/* =========================
+            ERROR
+        ========================== */}
 
-        <div className="mt-8">
+        {leaderboard.error && (
+          <div className="mt-6">
+            <ProfileAlerts
+              error={
+                leaderboard.error
+              }
+              success=""
+            />
+          </div>
+        )}
+
+        {/* =========================
+            MY RANKING
+        ========================== */}
+
+        <div className="mt-7">
           <MyRankingSection
             myRank={
               leaderboard.myRank
@@ -131,80 +145,122 @@ export default function LeaderboardPage() {
           />
         </div>
 
-        <div className="mt-8">
-          <LeaderboardContext
-            collegeName={
-              leaderboard.collegeName
-            }
-            graduationYear={
-              leaderboard.graduationYear
-            }
-          />
-        </div>
+        {/* =========================
+            RANKING CONTEXT
+        ========================== */}
 
-        <div className="mt-8">
-          <PlatformScores
-            myRank={
-              leaderboard.myRank
-            }
-          />
-        </div>
+        {leaderboard.myRank && (
+          <section className="mt-10">
+            <div
+              className="
+                flex
+                flex-col
+                gap-5
 
-        <div className="mt-8">
-          <LeaderboardFilters
-            viewMode={
-              leaderboard.viewMode
-            }
-            collegeId={
-              leaderboard.collegeId
-            }
-            selectedYear={
-              leaderboard.selectedYear
-            }
-            onGlobal={
-              leaderboard.showGlobal
-            }
-            onCollege={
-              leaderboard.showCollege
-            }
-            onYear={
-              leaderboard.showGraduationYear
-            }
-          />
-        </div>
+                lg:flex-row
+                lg:items-end
+                lg:justify-between
+              "
+            >
+              {/* TITLE */}
 
-        <div className="mt-6">
-          <LeaderboardTable
-            leaderboard={
-              leaderboard.leaderboard
-            }
-            myRank={
-              leaderboard.myRank
-            }
-            viewMode={
-              leaderboard.viewMode
-            }
-            selectedYear={
-              leaderboard.selectedYear
-            }
-            collegeName={
-              leaderboard.collegeName
-            }
-            tableLoading={
-              leaderboard.tableLoading
-            }
-            tableTitle={
-              leaderboard.getTableTitle()
-            }
-            getEntryRank={
-              leaderboard.getEntryRank
-            }
-          />
-        </div>
+              <div>
+                <p
+                  className="
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.15em]
+                    text-[#1256AF]
+                  "
+                >
+                  Ranking Context
+                </p>
 
-        <div className="mt-8">
-          <LeaderboardLinks />
-        </div>
+                <h2
+                  className="
+                    mt-2
+                    text-2xl
+                    font-bold
+                    tracking-[-0.035em]
+                    text-slate-950
+                  "
+                >
+                  See where you stand
+                </h2>
+
+                <p
+                  className="
+                    mt-2
+                    max-w-xl
+                    text-sm
+                    leading-6
+                    text-slate-500
+                  "
+                >
+                  Compare your position
+                  with students ranked
+                  closest to you.
+                </p>
+              </div>
+
+              {/* FILTERS */}
+
+              <LeaderboardFilters
+                viewMode={
+                  leaderboard.viewMode
+                }
+                collegeId={
+                  leaderboard.collegeId
+                }
+                graduationYear={
+                  leaderboard.graduationYear
+                }
+                onGlobal={
+                  leaderboard.showGlobal
+                }
+                onCollege={
+                  leaderboard.showCollege
+                }
+                onYear={
+                  leaderboard
+                    .showGraduationYear
+                }
+              />
+            </div>
+
+            {/* TABLE */}
+
+            <div className="mt-5">
+              <LeaderboardTable
+                leaderboard={
+                  leaderboard.leaderboard
+                }
+                myRank={
+                  leaderboard.myRank
+                }
+                viewMode={
+                  leaderboard.viewMode
+                }
+                selectedYear={
+                  leaderboard.selectedYear
+                }
+                collegeName={
+                  leaderboard.collegeName
+                }
+                tableLoading={
+                  leaderboard.tableLoading
+                }
+                tableTitle={
+                  leaderboard.getTableTitle()
+                }
+                getEntryRank={
+                  leaderboard.getEntryRank
+                }
+              />
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

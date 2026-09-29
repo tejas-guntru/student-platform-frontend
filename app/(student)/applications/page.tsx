@@ -4,13 +4,22 @@ import {
   LoaderCircle,
 } from "lucide-react";
 
+import {
+  useState,
+} from "react";
+
 import ApplicationsHeader from "@/components/applications/ApplicationsHeader";
 import ApplicationsList from "@/components/applications/ApplicationsList";
+import ApplicationDetails from "@/components/applications/ApplicationDetails";
 import ProfileAlerts from "@/components/profile/ProfileAlerts";
 
 import {
   useApplications,
 } from "@/hooks/useApplications";
+
+import type {
+  ApplicationResponse,
+} from "@/types/application";
 
 function ApplicationsLoading() {
   return (
@@ -66,7 +75,8 @@ function ApplicationsLoading() {
             text-slate-500
           "
         >
-          Preparing your application progress...
+          Preparing your application
+          progress...
         </p>
       </div>
     </main>
@@ -77,9 +87,60 @@ export default function ApplicationsPage() {
   const applications =
     useApplications();
 
+  const [
+    selectedApplicationId,
+    setSelectedApplicationId,
+  ] =
+    useState<string | null>(
+      null
+    );
+
   if (applications.loading) {
     return <ApplicationsLoading />;
   }
+
+  /*
+   * Find from the hook's latest data instead
+   * of storing the complete object.
+   *
+   * This is important after resume upload:
+   * when the hook refreshes the application,
+   * the detail view automatically receives
+   * the newest status.
+   */
+  const selectedApplication =
+    selectedApplicationId
+      ? applications.applications.find(
+          (application) =>
+            application.applicationId ===
+            selectedApplicationId
+        ) || null
+      : null;
+
+  const handleSelect = (
+    application:
+      ApplicationResponse
+  ) => {
+    setSelectedApplicationId(
+      application.applicationId
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleBack = () => {
+    setSelectedApplicationId(
+      null
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <main
@@ -103,40 +164,83 @@ export default function ApplicationsPage() {
           lg:py-12
         "
       >
-        <ApplicationsHeader
-          count={
-            applications.applications.length
-          }
-        />
+        {!selectedApplication && (
+          <ApplicationsHeader
+            count={
+              applications
+                .applications
+                .length
+            }
+          />
+        )}
 
         {(applications.error ||
           applications.success) && (
-          <div className="mt-6">
+          <div
+            className={
+              selectedApplication
+                ? "mb-6"
+                : "mt-6"
+            }
+          >
             <ProfileAlerts
-              error={applications.error}
-              success={applications.success}
+              error={
+                applications.error
+              }
+              success={
+                applications.success
+              }
             />
           </div>
         )}
 
-        <div className="mt-8">
-          <ApplicationsList
-            applications={
-              applications.applications
-            }
-            selectedFiles={
-              applications.selectedFiles
-            }
-            uploadingId={
-              applications.uploadingId
-            }
-            onFileChange={
-              applications.handleFileChange
-            }
-            onUpload={
-              applications.handleResumeUpload
-            }
-          />
+        <div
+          className={
+            selectedApplication
+              ? ""
+              : "mt-8"
+          }
+        >
+          {selectedApplication ? (
+            <ApplicationDetails
+              application={
+                selectedApplication
+              }
+              selectedFile={
+                applications
+                  .selectedFiles[
+                    selectedApplication
+                      .applicationId
+                  ] || null
+              }
+              uploading={
+                applications
+                  .uploadingId ===
+                selectedApplication
+                  .applicationId
+              }
+              onFileChange={
+                applications
+                  .handleFileChange
+              }
+              onUpload={
+                applications
+                  .handleResumeUpload
+              }
+              onBack={
+                handleBack
+              }
+            />
+          ) : (
+            <ApplicationsList
+              applications={
+                applications.applications
+              }
+              onSelect={
+                handleSelect
+              }
+            />
+          )}
         </div>
       </div>
     </main>

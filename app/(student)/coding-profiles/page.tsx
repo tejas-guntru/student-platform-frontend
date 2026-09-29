@@ -17,19 +17,16 @@ import {
   useCodingProfiles,
 } from "@/hooks/useCodingProfiles";
 
-/* =========================================================
-   LOADING
-========================================================= */
-
 function CodingProfilesLoading() {
   return (
-    <div
+    <main
       className="
         flex
-        min-h-[70vh]
+        min-h-[65vh]
         items-center
         justify-center
         bg-[#F7F9FC]
+        px-4
       "
     >
       <div className="text-center">
@@ -41,19 +38,17 @@ function CodingProfilesLoading() {
             w-12
             items-center
             justify-center
-            rounded-2xl
+            rounded-xl
             border
             border-slate-200
             bg-white
+            text-[#1256AF]
             shadow-sm
           "
         >
           <LoaderCircle
             size={20}
-            className="
-              animate-spin
-              text-[#1256AF]
-            "
+            className="animate-spin"
           />
         </div>
 
@@ -63,26 +58,35 @@ function CodingProfilesLoading() {
             mt-4
             text-sm
             font-semibold
-            text-slate-600
+            text-slate-700
           "
         >
-          Loading coding profiles...
+          Loading coding profiles
+        </p>
+
+        <p
+          className="
+            mt-1
+            text-xs
+            text-slate-500
+          "
+        >
+          Preparing your connected
+          accounts...
         </p>
       </div>
-    </div>
+    </main>
   );
 }
-
-/* =========================================================
-   PAGE
-========================================================= */
 
 export default function CodingProfilesPage() {
   const coding =
     useCodingProfiles();
 
   if (coding.loading) {
-    return <CodingProfilesLoading />;
+    return (
+      <CodingProfilesLoading />
+    );
   }
 
   const connectedCount =
@@ -96,9 +100,13 @@ export default function CodingProfilesPage() {
     ).length;
 
   return (
-    <div className="min-h-screen bg-[#F7F9FC]">
-      {/* HEADER */}
-
+    <main
+      className="
+        min-h-screen
+        bg-[#F7F9FC]
+        text-slate-900
+      "
+    >
       <CodingProfilesHeader
         connectedCount={
           connectedCount
@@ -108,8 +116,6 @@ export default function CodingProfilesPage() {
         }
       />
 
-      {/* CONTENT */}
-
       <div
         className="
           mx-auto
@@ -118,25 +124,31 @@ export default function CodingProfilesPage() {
           py-8
 
           sm:px-6
+          sm:py-10
 
           lg:px-8
-          lg:py-10
         "
       >
-        {/* ALERTS */}
+        {(coding.error ||
+          coding.success) && (
+          <ProfileAlerts
+            error={
+              coding.error
+            }
+            success={
+              coding.success
+            }
+          />
+        )}
 
-        <ProfileAlerts
-          error={
-            coding.error
-          }
-          success={
+        <div
+          className={
+            coding.error ||
             coding.success
+              ? "mt-6"
+              : ""
           }
-        />
-
-        {/* CODING PROFILES */}
-
-        <section className="mt-6">
+        >
           <CodingProfilesList
             usernames={
               coding.usernames
@@ -169,8 +181,8 @@ export default function CodingProfilesPage() {
               coding.handleRefresh
             }
           />
-        </section>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
