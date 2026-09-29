@@ -27,16 +27,13 @@ interface ResumeUploadSectionProps {
 
   onFileChange:
     (
-      applicationId:
-        string,
-      event:
-        ChangeEvent<HTMLInputElement>
+      applicationId: string,
+      event: ChangeEvent<HTMLInputElement>
     ) => void;
 
   onUpload:
     (
-      applicationId:
-        string
+      applicationId: string
     ) => void;
 }
 
@@ -50,29 +47,15 @@ export default function ResumeUploadSection({
   return (
     <section
       className="
-        relative
-        overflow-hidden
-        rounded-[20px]
+        rounded-xl
         border
         border-amber-200
-        bg-white
-        p-5
-        shadow-[0_8px_24px_rgba(245,158,11,0.04)]
+        bg-amber-50/50
+        p-4
+
+        sm:p-5
       "
     >
-      {/* ACCENT */}
-
-      <div
-        className="
-          absolute
-          bottom-0
-          left-0
-          top-0
-          w-[3px]
-          bg-amber-400
-        "
-      />
-
       <div
         className="
           flex
@@ -83,17 +66,17 @@ export default function ResumeUploadSection({
         <div
           className="
             flex
-            h-10
-            w-10
+            h-9
+            w-9
             shrink-0
             items-center
             justify-center
-            rounded-xl
-            bg-amber-50
-            text-amber-600
+            rounded-lg
+            bg-amber-100
+            text-amber-700
           "
         >
-          <FileText size={17} />
+          <FileText size={16} />
         </div>
 
         <div>
@@ -102,19 +85,19 @@ export default function ResumeUploadSection({
               text-[10px]
               font-bold
               uppercase
-              tracking-[0.13em]
-              text-amber-600
+              tracking-[0.1em]
+              text-amber-700
             "
           >
-            Action Required
+            Action required
           </p>
 
           <h3
             className="
               mt-1
-              text-base
+              text-sm
               font-bold
-              text-[#173B63]
+              text-slate-900
             "
           >
             Resume requested
@@ -122,36 +105,34 @@ export default function ResumeUploadSection({
 
           <p
             className="
-              mt-2
+              mt-1
               max-w-xl
-              text-sm
-              leading-6
-              text-[#71899D]
+              text-xs
+              leading-5
+              text-slate-600
             "
           >
-            You have been shortlisted. Upload a PDF resume
-            tailored for this opportunity.
+            You have been shortlisted. Upload a PDF
+            resume tailored for this opportunity.
           </p>
         </div>
       </div>
 
-      {/* FILE INPUT */}
-
-      <div className="mt-5">
+      <div className="mt-4">
         <label
           className="
             block
-            rounded-[16px]
+            cursor-pointer
+            rounded-xl
             border
             border-dashed
-            border-[#C8DEED]
-            bg-[#F8FCFF]
+            border-slate-300
+            bg-white
             p-4
-            transition-all
-            duration-200
+            transition
 
-            hover:border-[#9FD2F1]
-            hover:bg-[#F3FAFF]
+            hover:border-[#1256AF]
+            hover:bg-blue-50/30
           "
         >
           <div
@@ -180,20 +161,22 @@ export default function ResumeUploadSection({
                   shrink-0
                   items-center
                   justify-center
-                  rounded-xl
-                  bg-[#EAF6FF]
-                  text-[#0877E8]
+                  rounded-lg
+                  bg-slate-100
+                  text-slate-600
                 "
               >
-                <UploadCloud size={16} />
+                <UploadCloud
+                  size={16}
+                />
               </div>
 
               <div>
                 <p
                   className="
                     text-sm
-                    font-bold
-                    text-[#355E7A]
+                    font-semibold
+                    text-slate-800
                   "
                 >
                   Choose resume
@@ -203,10 +186,10 @@ export default function ResumeUploadSection({
                   className="
                     mt-0.5
                     text-xs
-                    text-[#8AA0B2]
+                    text-slate-500
                   "
                 >
-                  PDF files only
+                  PDF only · Maximum 5 MB
                 </p>
               </div>
             </div>
@@ -217,14 +200,19 @@ export default function ResumeUploadSection({
                 w-fit
                 items-center
                 justify-center
-                rounded-xl
-                bg-[#0877E8]
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
                 px-3.5
                 py-2
                 text-xs
                 font-bold
-                text-white
-                shadow-[0_6px_16px_rgba(8,119,232,0.16)]
+                text-slate-700
+                transition
+
+                hover:border-blue-200
+                hover:text-[#1256AF]
               "
             >
               Select PDF
@@ -234,6 +222,7 @@ export default function ResumeUploadSection({
           <input
             type="file"
             accept=".pdf,application/pdf"
+            disabled={uploading}
             onChange={(event) =>
               onFileChange(
                 applicationId,
@@ -245,47 +234,47 @@ export default function ResumeUploadSection({
         </label>
       </div>
 
-      {/* SELECTED FILE */}
-
       {selectedFile && (
         <div
           className="
-            mt-4
+            mt-3
             flex
             items-center
             gap-3
-            rounded-[16px]
+            rounded-xl
             border
             border-emerald-200
-            bg-emerald-50/60
-            p-4
+            bg-emerald-50
+            p-3
           "
         >
           <div
             className="
               flex
-              h-9
-              w-9
+              h-8
+              w-8
               shrink-0
               items-center
               justify-center
-              rounded-xl
+              rounded-lg
               bg-emerald-100
               text-emerald-600
             "
           >
-            <FileCheck2 size={16} />
+            <FileCheck2
+              size={15}
+            />
           </div>
 
           <div className="min-w-0">
             <p
+              title={selectedFile.name}
               className="
                 truncate
-                text-sm
+                text-xs
                 font-bold
                 text-emerald-800
               "
-              title={selectedFile.name}
             >
               {selectedFile.name}
             </p>
@@ -293,8 +282,8 @@ export default function ResumeUploadSection({
             <p
               className="
                 mt-0.5
-                text-xs
-                text-emerald-700/75
+                text-[11px]
+                text-emerald-700
               "
             >
               {formatFileSize(
@@ -304,8 +293,6 @@ export default function ResumeUploadSection({
           </div>
         </div>
       )}
-
-      {/* UPLOAD */}
 
       <button
         type="button"
@@ -319,37 +306,32 @@ export default function ResumeUploadSection({
           )
         }
         className="
-          mt-5
+          mt-4
           inline-flex
+          min-h-[44px]
           w-full
           items-center
           justify-center
           gap-2
-          rounded-xl
-          bg-gradient-to-r
-          from-[#0877E8]
-          to-[#1294F2]
-          px-5
-          py-3
+          rounded-lg
+          bg-[#1256AF]
+          px-4
           text-sm
           font-bold
           text-white
-          shadow-[0_9px_22px_rgba(8,119,232,0.18)]
-          transition-all
-          duration-200
+          transition
 
-          hover:-translate-y-0.5
-          hover:shadow-[0_13px_28px_rgba(8,119,232,0.24)]
+          hover:bg-[#0E4C9D]
 
           disabled:cursor-not-allowed
-          disabled:opacity-50
-          disabled:hover:translate-y-0
+          disabled:bg-slate-200
+          disabled:text-slate-400
         "
       >
         {uploading ? (
           <>
             <LoaderCircle
-              size={16}
+              size={15}
               className="animate-spin"
             />
 
@@ -357,7 +339,9 @@ export default function ResumeUploadSection({
           </>
         ) : (
           <>
-            <UploadCloud size={16} />
+            <UploadCloud
+              size={15}
+            />
 
             Upload Resume
           </>

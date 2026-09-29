@@ -2,8 +2,7 @@
 
 import {
   BriefcaseBusiness,
-  Plus,
-  Sparkles,
+  Search,
 } from "lucide-react";
 
 import type {
@@ -39,11 +38,9 @@ interface OpportunitiesListProps {
   applyingId:
     string | null;
 
-  onApply:
-    (
-      opportunity:
-        Opportunity
-    ) => void;
+  onApply: (
+    opportunity: Opportunity
+  ) => void;
 }
 
 export default function OpportunitiesList({
@@ -80,116 +77,62 @@ export default function OpportunitiesList({
     return (
       <section
         className="
-          relative
-          overflow-hidden
-          rounded-[26px]
+          rounded-2xl
           border
           border-dashed
-          border-[#C8DEED]
-          bg-white/80
+          border-slate-300
+          bg-white
           px-6
           py-14
           text-center
-          shadow-[0_10px_30px_rgba(8,119,232,0.035)]
         "
       >
-        {/* BACKGROUND GLOW */}
-
         <div
           className="
-            pointer-events-none
-            absolute
-            left-1/2
-            top-0
-            h-44
-            w-44
-            -translate-x-1/2
-            rounded-full
-            bg-[#38BDF8]/10
-            blur-[70px]
+            mx-auto
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
+            rounded-xl
+            bg-slate-100
+            text-slate-500
           "
-        />
-
-        <div className="relative">
-          <div
-            className="
-              mx-auto
-              flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-2xl
-              bg-[#EAF6FF]
-              text-[#0877E8]
-            "
-          >
-            <Plus size={22} />
-          </div>
-
-          <div
-            className="
-              mt-4
-              flex
-              items-center
-              justify-center
-              gap-2
-            "
-          >
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.15em]
-                text-[#0877E8]
-              "
-            >
-              Opportunities
-            </p>
-
-            <Sparkles
-              size={12}
-              className="text-[#38A9EE]"
-            />
-          </div>
-
-          <h2
-            className="
-              mt-2
-              text-xl
-              font-bold
-              tracking-[-0.03em]
-              text-[#173B63]
-            "
-          >
-            No active opportunities
-          </h2>
-
-          <p
-            className="
-              mx-auto
-              mt-2
-              max-w-md
-              text-sm
-              leading-6
-              text-[#71899D]
-            "
-          >
-            New jobs and internships will appear here when
-            they are published on Trailbliz.
-          </p>
+        >
+          <Search size={19} />
         </div>
+
+        <h2
+          className="
+            mt-4
+            text-lg
+            font-bold
+            text-slate-900
+          "
+        >
+          No active opportunities
+        </h2>
+
+        <p
+          className="
+            mx-auto
+            mt-2
+            max-w-md
+            text-sm
+            leading-6
+            text-slate-500
+          "
+        >
+          Jobs and internships will appear here when
+          new opportunities are published on Trailbliz.
+        </p>
       </section>
     );
   }
 
   return (
     <section>
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
-
       <div
         className="
           flex
@@ -202,30 +145,17 @@ export default function OpportunitiesList({
         "
       >
         <div>
-          <div
+          <p
             className="
-              flex
-              items-center
-              gap-2
+              text-[10px]
+              font-bold
+              uppercase
+              tracking-[0.15em]
+              text-[#1256AF]
             "
           >
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.16em]
-                text-[#0877E8]
-              "
-            >
-              Available Now
-            </p>
-
-            <Sparkles
-              size={12}
-              className="text-[#38A9EE]"
-            />
-          </div>
+            Available now
+          </p>
 
           <h2
             className="
@@ -233,7 +163,7 @@ export default function OpportunitiesList({
               text-2xl
               font-bold
               tracking-[-0.035em]
-              text-[#173B63]
+              text-slate-950
             "
           >
             Explore Opportunities
@@ -245,16 +175,13 @@ export default function OpportunitiesList({
               max-w-2xl
               text-sm
               leading-6
-              text-[#71899D]
+              text-slate-500
             "
           >
-            Review active jobs and internships, check your
-            eligibility and apply directly from your
-            Trailbliz workspace.
+            Review active roles, understand your
+            eligibility and apply when you are ready.
           </p>
         </div>
-
-        {/* COUNT */}
 
         <div
           className="
@@ -262,40 +189,27 @@ export default function OpportunitiesList({
             w-fit
             items-center
             gap-3
-            rounded-[16px]
+            rounded-xl
             border
-            border-[#D6E7F3]
+            border-slate-200
             bg-white
-            px-4
-            py-3
-            shadow-[0_8px_22px_rgba(8,119,232,0.04)]
+            px-3.5
+            py-2.5
           "
         >
-          <div
-            className="
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              rounded-xl
-              bg-[#EAF6FF]
-              text-[#0877E8]
-            "
-          >
-            <BriefcaseBusiness
-              size={16}
-            />
-          </div>
+          <BriefcaseBusiness
+            size={15}
+            className="text-[#1256AF]"
+          />
 
           <div>
             <p
               className="
-                text-[9px]
+                text-[8px]
                 font-bold
                 uppercase
-                tracking-[0.12em]
-                text-[#8A9FAF]
+                tracking-[0.1em]
+                text-slate-400
               "
             >
               Active
@@ -303,10 +217,9 @@ export default function OpportunitiesList({
 
             <p
               className="
-                mt-0.5
-                text-sm
+                text-xs
                 font-bold
-                text-[#173B63]
+                text-slate-700
               "
             >
               {opportunities.length}{" "}
@@ -317,10 +230,6 @@ export default function OpportunitiesList({
           </div>
         </div>
       </div>
-
-      {/* =====================================================
-          OPPORTUNITY CARDS
-      ===================================================== */}
 
       <div
         className="

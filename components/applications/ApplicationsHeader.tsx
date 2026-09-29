@@ -1,297 +1,206 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import {
+  ArrowLeft,
   BriefcaseBusiness,
   FileText,
-  LayoutDashboard,
-  Sparkles,
 } from "lucide-react";
 
-export default function ApplicationsHeader() {
+interface ApplicationsHeaderProps {
+  count: number;
+}
+
+export default function ApplicationsHeader({
+  count,
+}: ApplicationsHeaderProps) {
   return (
-    <header
-      className="
-        relative
-        overflow-hidden
-        rounded-[26px]
-        border
-        border-[#DCEAF5]
-        bg-white
-        px-5
-        py-5
-        shadow-[0_10px_32px_rgba(8,119,232,0.05)]
-
-        sm:px-6
-        sm:py-6
-      "
-    >
-      {/* TOP ACCENT */}
-
+    <header>
       <div
         className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-[#0877E8]
-          via-violet-500
-          to-[#38BDF8]
-        "
-      />
-
-      {/* BACKGROUND GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-24
-          -top-24
-          h-64
-          w-64
-          rounded-full
-          bg-violet-500/9
-          blur-[90px]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          right-36
-          top-0
-          h-40
-          w-40
-          rounded-full
-          bg-[#38BDF8]/7
-          blur-[70px]
-        "
-      />
-
-      <div
-        className="
-          relative
           flex
           flex-col
           gap-6
 
           lg:flex-row
-          lg:items-center
+          lg:items-end
           lg:justify-between
         "
       >
-        {/* LEFT */}
+        <div>
+          <Link
+            href="/profile"
+            className="
+              inline-flex
+              items-center
+              gap-2
+              text-sm
+              font-semibold
+              text-slate-500
+              transition-colors
+
+              hover:text-[#1256AF]
+            "
+          >
+            <ArrowLeft size={15} />
+
+            Back to profile
+          </Link>
+
+          <div
+            className="
+              mt-6
+              flex
+              items-start
+              gap-4
+            "
+          >
+            <div
+              className="
+                flex
+                h-12
+                w-12
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#EAF2FF]
+                text-[#1256AF]
+              "
+            >
+              <FileText size={21} />
+            </div>
+
+            <div>
+              <p
+                className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+                  text-[#1256AF]
+                "
+              >
+                Career · Applications
+              </p>
+
+              <h1
+                className="
+                  mt-1
+                  text-3xl
+                  font-bold
+                  tracking-[-0.04em]
+                  text-slate-900
+
+                  sm:text-4xl
+                "
+              >
+                My Applications
+              </h1>
+
+              <p
+                className="
+                  mt-2
+                  max-w-2xl
+                  text-sm
+                  leading-6
+                  text-slate-500
+                "
+              >
+                Track your applications, follow their
+                progress and respond when an employer
+                requests your resume.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div
           className="
             flex
-            items-start
-            gap-4
+            flex-wrap
+            items-center
+            gap-3
           "
         >
           <div
             className="
               flex
-              h-12
-              w-12
-              shrink-0
               items-center
-              justify-center
-              overflow-hidden
-              rounded-2xl
+              gap-3
+              rounded-xl
               border
-              border-[#D7EAF6]
-              bg-[#F8FCFF]
-              shadow-[0_7px_18px_rgba(8,119,232,0.06)]
+              border-slate-200
+              bg-white
+              px-4
+              py-3
+              shadow-sm
             "
           >
-            <Image
-              src="/tbz.png"
-              alt="Trailbliz"
-              width={34}
-              height={34}
-              className="
-                h-8
-                w-8
-                object-contain
-              "
-              priority
-            />
-          </div>
-
-          <div className="min-w-0">
             <div
               className="
                 flex
-                flex-wrap
+                h-9
+                w-9
                 items-center
-                gap-2
+                justify-center
+                rounded-lg
+                bg-slate-100
+                text-slate-600
               "
             >
-              <div
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  border
-                  border-[#CBE5F8]
-                  bg-[#EFF8FF]
-                  px-2.5
-                  py-1
-                "
-              >
-                <FileText
-                  size={12}
-                  className="text-[#0877E8]"
-                />
-
-                <span
-                  className="
-                    text-[9px]
-                    font-bold
-                    uppercase
-                    tracking-[0.14em]
-                    text-[#0877E8]
-                  "
-                >
-                  Applications
-                </span>
-              </div>
-
-              <div
-                className="
-                  hidden
-                  items-center
-                  gap-1.5
-                  text-[9px]
-                  font-semibold
-                  text-[#8AA0B2]
-
-                  sm:flex
-                "
-              >
-                <Sparkles
-                  size={11}
-                  className="text-violet-500"
-                />
-
-                Track your progress
-              </div>
+              <FileText size={16} />
             </div>
 
-            <h1
-              className="
-                mt-3
-                text-3xl
-                font-bold
-                tracking-[-0.045em]
-                text-[#173B63]
+            <div>
+              <p
+                className="
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.1em]
+                  text-slate-400
+                "
+              >
+                Total
+              </p>
 
-                sm:text-[34px]
-              "
-            >
-              My Applications
-            </h1>
-
-            <p
-              className="
-                mt-2
-                max-w-2xl
-                text-sm
-                leading-6
-                text-[#71899D]
-              "
-            >
-              Track every application, follow shortlist
-              updates and respond to resume requests from
-              one workspace.
-            </p>
+              <p
+                className="
+                  text-sm
+                  font-bold
+                  text-slate-800
+                "
+              >
+                {count}{" "}
+                {count === 1
+                  ? "application"
+                  : "applications"}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* RIGHT */}
-
-        <div
-          className="
-            flex
-            flex-col
-            gap-3
-
-            sm:flex-row
-            sm:flex-wrap
-            sm:items-center
-
-            lg:justify-end
-          "
-        >
           <Link
             href="/opportunities"
             className="
-              group
               inline-flex
-              min-h-[42px]
+              min-h-[46px]
               items-center
               justify-center
               gap-2
               rounded-xl
-              border
-              border-[#D5E7F3]
-              bg-[#F8FCFF]
+              bg-[#1256AF]
               px-4
-              py-2.5
-              text-sm
-              font-bold
-              text-[#58748B]
-              transition-all
-              duration-200
-
-              hover:border-[#B9DCF2]
-              hover:bg-white
-              hover:text-[#0877E8]
-            "
-          >
-            <BriefcaseBusiness
-              size={15}
-            />
-
-            Opportunities
-          </Link>
-
-          <Link
-            href="/dashboard"
-            className="
-              inline-flex
-              min-h-[42px]
-              items-center
-              justify-center
-              gap-2
-              rounded-xl
-              bg-gradient-to-r
-              from-[#0877E8]
-              to-[#1294F2]
-              px-4
-              py-2.5
               text-sm
               font-bold
               text-white
-              shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-              transition-all
-              duration-200
+              transition
 
-              hover:-translate-y-0.5
-              hover:shadow-[0_12px_26px_rgba(8,119,232,0.24)]
+              hover:bg-[#0E4C9D]
             "
           >
-            <LayoutDashboard
-              size={15}
-            />
+            <BriefcaseBusiness size={15} />
 
-            Dashboard
+            Opportunities
           </Link>
         </div>
       </div>

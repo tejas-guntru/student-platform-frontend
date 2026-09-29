@@ -14,26 +14,23 @@ import {
 } from "@/utils/applicationUtils";
 
 interface ApplicationTimelineProps {
-  status:
-    ApplicationStatus;
+  status: ApplicationStatus;
 }
 
 export default function ApplicationTimeline({
   status,
 }: ApplicationTimelineProps) {
-  if (
-    status === "REJECTED"
-  ) {
+  if (status === "REJECTED") {
     return (
       <div
         className="
           flex
           items-start
           gap-3
-          rounded-[16px]
+          rounded-xl
           border
           border-red-200
-          bg-red-50/70
+          bg-red-50
           px-4
           py-3.5
         "
@@ -46,14 +43,12 @@ export default function ApplicationTimeline({
             shrink-0
             items-center
             justify-center
-            rounded-xl
+            rounded-lg
             bg-red-100
             text-red-600
           "
         >
-          <XCircle
-            size={15}
-          />
+          <XCircle size={15} />
         </div>
 
         <div>
@@ -72,7 +67,7 @@ export default function ApplicationTimeline({
               mt-1
               text-xs
               leading-5
-              text-red-700/75
+              text-red-600
             "
           >
             This application is no longer progressing
@@ -92,13 +87,13 @@ export default function ApplicationTimeline({
     <div
       className="
         overflow-x-auto
-        pb-1
+        pb-2
       "
     >
       <div
         className="
           flex
-          min-w-[850px]
+          min-w-[820px]
           items-start
         "
       >
@@ -107,14 +102,14 @@ export default function ApplicationTimeline({
             step,
             index
           ) => {
-            const complete =
+            const reached =
               index <=
               currentIndex;
 
             const current =
               step === status;
 
-            const previousComplete =
+            const connectorComplete =
               index <
               currentIndex;
 
@@ -130,8 +125,6 @@ export default function ApplicationTimeline({
                   px-1
                 "
               >
-                {/* CONNECTOR */}
-
                 {index <
                   applicationFlow.length -
                     1 && (
@@ -139,84 +132,76 @@ export default function ApplicationTimeline({
                     className="
                       absolute
                       left-1/2
-                      top-[17px]
+                      top-[15px]
                       h-[2px]
                       w-full
-                      overflow-hidden
-                      bg-[#E1ECF4]
+                      bg-slate-200
                     "
                   >
-                    {previousComplete && (
+                    {connectorComplete && (
                       <div
                         className="
                           h-full
                           w-full
-                          bg-gradient-to-r
-                          from-[#0877E8]
-                          to-[#38BDF8]
+                          bg-[#1256AF]
                         "
                       />
                     )}
                   </div>
                 )}
 
-                {/* STEP */}
-
                 <div
                   className={`
                     relative
                     z-10
                     flex
-                    h-9
-                    w-9
+                    h-8
+                    w-8
                     items-center
                     justify-center
                     rounded-full
                     border
                     text-xs
-                    font-bold
-                    transition-all
-                    duration-200
+                    transition
 
                     ${
                       current
                         ? `
-                          border-[#0877E8]
-                          bg-[#0877E8]
+                          border-[#1256AF]
+                          bg-[#1256AF]
                           text-white
-                          shadow-[0_0_0_5px_rgba(8,119,232,0.10)]
+                          ring-4
+                          ring-blue-50
                         `
-                        : complete
+                        : reached
                           ? `
-                            border-[#B9DCF2]
-                            bg-[#EAF6FF]
-                            text-[#0877E8]
+                            border-blue-200
+                            bg-blue-50
+                            text-[#1256AF]
                           `
                           : `
-                            border-[#D9E6EE]
-                            bg-[#F8FBFD]
-                            text-[#9AAEBC]
+                            border-slate-200
+                            bg-white
+                            text-slate-400
                           `
                     }
                   `}
                 >
-                  {complete ? (
+                  {reached ? (
                     <Check
-                      size={14}
-                      strokeWidth={2.5}
+                      size={13}
+                      strokeWidth={2.6}
                     />
                   ) : (
                     <Clock3
-                      size={13}
+                      size={12}
                     />
                   )}
                 </div>
 
-                {/* LABEL */}
-
                 <p
                   className={`
-                    mt-3
+                    mt-2.5
                     max-w-28
                     text-center
                     text-[10px]
@@ -224,10 +209,10 @@ export default function ApplicationTimeline({
 
                     ${
                       current
-                        ? "font-bold text-[#173B63]"
-                        : complete
-                          ? "font-semibold text-[#58748B]"
-                          : "font-medium text-[#9AAEBC]"
+                        ? "font-bold text-slate-900"
+                        : reached
+                          ? "font-semibold text-slate-600"
+                          : "font-medium text-slate-400"
                     }
                   `}
                 >
@@ -244,7 +229,7 @@ export default function ApplicationTimeline({
                       font-bold
                       uppercase
                       tracking-[0.1em]
-                      text-[#0877E8]
+                      text-[#1256AF]
                     "
                   >
                     Current

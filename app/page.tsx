@@ -6,7 +6,6 @@ import RecognitionComponent from "@/components/home/RecognitionComponent";
 import CollegeSection from "@/components/home/CollegeSection";
 import CompaniesSection from "@/components/home/CompaniesSection";
 
-
 export default function HomePage() {
   return (
     <>

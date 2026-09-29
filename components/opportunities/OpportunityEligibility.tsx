@@ -1,6 +1,6 @@
 import {
-  CheckCircle2,
-  XCircle,
+  Check,
+  X,
 } from "lucide-react";
 
 import type {
@@ -59,13 +59,17 @@ export default function OpportunityEligibility({
   studentGraduationYear,
 }: OpportunityEligibilityProps) {
   return (
-    <div className="space-y-2.5">
-      {/* MEMBERSHIP */}
-
+    <div
+      className="
+        overflow-hidden
+        rounded-xl
+        border
+        border-slate-200
+        bg-white
+      "
+    >
       <EligibilityCheck
-        passed={
-          membershipEligible
-        }
+        passed={membershipEligible}
         label={
           membershipEligible
             ? "Active membership"
@@ -73,12 +77,8 @@ export default function OpportunityEligibility({
         }
       />
 
-      {/* PROFILE */}
-
       <EligibilityCheck
-        passed={
-          profileEligible
-        }
+        passed={profileEligible}
         label={
           profileEligible
             ? "Profile 100% complete"
@@ -86,12 +86,8 @@ export default function OpportunityEligibility({
         }
       />
 
-      {/* GRADUATION YEAR */}
-
       <EligibilityCheck
-        passed={
-          graduationEligible
-        }
+        passed={graduationEligible}
         label={
           getGraduationEligibilityLabel(
             opportunity,
@@ -100,12 +96,8 @@ export default function OpportunityEligibility({
         }
       />
 
-      {/* DEADLINE */}
-
       <EligibilityCheck
-        passed={
-          deadlineOpen
-        }
+        passed={deadlineOpen}
         label={
           deadlineOpen
             ? "Application deadline open"
@@ -113,27 +105,22 @@ export default function OpportunityEligibility({
         }
       />
 
-      {/* OPPORTUNITY STATUS */}
-
       <EligibilityCheck
-        passed={
-          opportunityActive
-        }
+        passed={opportunityActive}
         label={
           opportunityActive
-            ? "Opportunity accepting applications"
-            : "Opportunity not accepting applications"
+            ? "Accepting applications"
+            : "Not accepting applications"
         }
       />
-
-      {/* EXISTING APPLICATION */}
 
       {application && (
         <EligibilityCheck
           passed
-          label={`Already applied • ${formatStatus(
+          label={`Already applied · ${formatStatus(
             application.status
           )}`}
+          last
         />
       )}
     </div>
@@ -143,41 +130,38 @@ export default function OpportunityEligibility({
 function EligibilityCheck({
   passed,
   label,
+  last = false,
 }: {
-  passed: boolean;
-  label: string;
+  passed:
+    boolean;
+
+  label:
+    string;
+
+  last?:
+    boolean;
 }) {
   return (
     <div
       className={`
         flex
-        items-start
-        gap-3
-        rounded-xl
-        border
+        items-center
+        gap-2.5
         px-3
         py-2.5
 
         ${
-          passed
-            ? `
-              border-emerald-100
-              bg-emerald-50/70
-            `
-            : `
-              border-red-100
-              bg-red-50/70
-            `
+          !last
+            ? "border-b border-slate-100"
+            : ""
         }
       `}
     >
-      {/* ICON */}
-
       <div
         className={`
           flex
-          h-6
-          w-6
+          h-5
+          w-5
           shrink-0
           items-center
           justify-center
@@ -185,42 +169,33 @@ function EligibilityCheck({
 
           ${
             passed
-              ? `
-                bg-emerald-100
-                text-emerald-600
-              `
-              : `
-                bg-red-100
-                text-red-600
-              `
+              ? "bg-emerald-50 text-emerald-600"
+              : "bg-red-50 text-red-500"
           }
         `}
       >
         {passed ? (
-          <CheckCircle2
-            size={14}
-            strokeWidth={2.4}
+          <Check
+            size={12}
+            strokeWidth={2.8}
           />
         ) : (
-          <XCircle
-            size={14}
-            strokeWidth={2.4}
+          <X
+            size={12}
+            strokeWidth={2.8}
           />
         )}
       </div>
 
-      {/* LABEL */}
-
       <p
         className={`
-          pt-0.5
           text-xs
           font-semibold
           leading-5
 
           ${
             passed
-              ? "text-emerald-700"
+              ? "text-slate-600"
               : "text-red-600"
           }
         `}

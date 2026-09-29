@@ -16,89 +16,93 @@ export default function PaymentBadge({
 }: PaymentBadgeProps) {
   if (status === "PAID") {
     return (
-      <span
+      <Badge
+        icon={
+          <CheckCircle2
+            size={12}
+            strokeWidth={2.3}
+          />
+        }
         className="
-          inline-flex
-          items-center
-          gap-1.5
-          rounded-full
-          border
           border-emerald-200
           bg-emerald-50
-          px-2.5
-          py-1.5
-          text-[9px]
-          font-bold
-          uppercase
-          tracking-[0.09em]
           text-emerald-700
         "
       >
-        <CheckCircle2
-          size={12}
-          strokeWidth={2.3}
-        />
-
         Paid
-      </span>
+      </Badge>
     );
   }
 
   if (status === "FAILED") {
     return (
-      <span
+      <Badge
+        icon={
+          <XCircle
+            size={12}
+            strokeWidth={2.3}
+          />
+        }
         className="
-          inline-flex
-          items-center
-          gap-1.5
-          rounded-full
-          border
           border-red-200
           bg-red-50
-          px-2.5
-          py-1.5
-          text-[9px]
-          font-bold
-          uppercase
-          tracking-[0.09em]
           text-red-600
         "
       >
-        <XCircle
-          size={12}
-          strokeWidth={2.3}
-        />
-
         Failed
-      </span>
+      </Badge>
     );
   }
 
   return (
-    <span
+    <Badge
+      icon={
+        <Clock3
+          size={12}
+          strokeWidth={2.3}
+        />
+      }
       className="
+        border-slate-200
+        bg-slate-50
+        text-slate-600
+      "
+    >
+      Created
+    </Badge>
+  );
+}
+
+function Badge({
+  icon,
+  children,
+  className,
+}: {
+  icon: React.ReactNode;
+  children: React.ReactNode;
+  className: string;
+}) {
+  return (
+    <span
+      className={`
         inline-flex
         items-center
         gap-1.5
         rounded-full
         border
-        border-[#CBE5F8]
-        bg-[#EFF8FF]
         px-2.5
         py-1.5
         text-[9px]
         font-bold
         uppercase
-        tracking-[0.09em]
-        text-[#0877E8]
-      "
-    >
-      <Clock3
-        size={12}
-        strokeWidth={2.3}
-      />
+        tracking-[0.08em]
 
-      Created
+        ${className}
+      `}
+    >
+      {icon}
+
+      {children}
     </span>
   );
 }

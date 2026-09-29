@@ -27,53 +27,41 @@ import VerificationBadge from "@/components/coding-profiles/VerificationBadge";
 import CodingProfileStats from "@/components/coding-profiles/CodingProfileStats";
 
 interface CodingPlatformCardProps {
-  config:
-    PlatformConfig;
+  config: PlatformConfig;
 
   profile:
-    CodingProfile | undefined;
+    | CodingProfile
+    | undefined;
 
   username: string;
 
   editing: boolean;
   working: boolean;
 
-  onUsernameChange:
-    (
-      platform:
-        CodingPlatform,
-      value: string
-    ) => void;
+  onUsernameChange: (
+    platform: CodingPlatform,
+    value: string
+  ) => void;
 
-  onConnect:
-    (
-      platform:
-        CodingPlatform
-    ) => void;
+  onConnect: (
+    platform: CodingPlatform
+  ) => void;
 
-  onEdit:
-    (
-      profile:
-        CodingProfile
-    ) => void;
+  onEdit: (
+    profile: CodingProfile
+  ) => void;
 
-  onCancel:
-    (
-      profile:
-        CodingProfile
-    ) => void;
+  onCancel: (
+    profile: CodingProfile
+  ) => void;
 
-  onUpdate:
-    (
-      profile:
-        CodingProfile
-    ) => void;
+  onUpdate: (
+    profile: CodingProfile
+  ) => void;
 
-  onRefresh:
-    (
-      platform:
-        CodingPlatform
-    ) => void;
+  onRefresh: (
+    platform: CodingPlatform
+  ) => void;
 }
 
 export default function CodingPlatformCard({
@@ -98,83 +86,40 @@ export default function CodingPlatformCard({
   return (
     <article
       className="
-        group
-        relative
         overflow-hidden
-        rounded-[26px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        shadow-[0_12px_36px_rgba(8,119,232,0.045)]
         transition-all
-        duration-300
+        duration-200
 
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_18px_45px_rgba(8,119,232,0.08)]
+        hover:border-slate-300
+        hover:shadow-[0_12px_32px_rgba(15,23,42,0.055)]
       "
     >
-      {/* TOP ACCENT */}
-
-      <div
-        className={`
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-
-          ${
-            connected
-              ? "from-[#0877E8] via-violet-500 to-[#38BDF8]"
-              : "from-[#B7DAF0] via-[#7CC8F5] to-[#38BDF8]"
-          }
-        `}
-      />
-
-      {/* BACKGROUND GLOW */}
+      {/* =====================================================
+          MAIN
+      ===================================================== */}
 
       <div
         className="
-          pointer-events-none
-          absolute
-          -right-28
-          -top-28
-          h-72
-          w-72
-          rounded-full
-          bg-violet-500/0
-          blur-[100px]
-          transition-all
-          duration-300
-
-          group-hover:bg-violet-500/7
-        "
-      />
-
-      <div
-        className="
-          relative
           p-5
 
-          sm:p-7
+          sm:p-6
         "
       >
-        {/* ===================================================
-            TOP SECTION
-        =================================================== */}
-
         <div
           className="
             grid
-            gap-7
+            gap-6
 
-            lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)]
+            lg:grid-cols-[minmax(0,1fr)_minmax(300px,380px)]
             lg:items-start
           "
         >
           {/* =================================================
-              PLATFORM DETAILS
+              PLATFORM INFORMATION
           ================================================= */}
 
           <div>
@@ -185,25 +130,29 @@ export default function CodingPlatformCard({
                 gap-4
               "
             >
+              {/* ICON */}
+
               <div
                 className={`
                   flex
-                  h-12
-                  w-12
+                  h-11
+                  w-11
                   shrink-0
                   items-center
                   justify-center
-                  rounded-2xl
+                  rounded-xl
 
                   ${
                     connected
-                      ? "bg-[#EAF6FF] text-[#0877E8]"
-                      : "bg-[#F2F7FA] text-[#7B96A9]"
+                      ? "bg-[#1256AF]/[0.07] text-[#1256AF]"
+                      : "bg-slate-100 text-slate-400"
                   }
                 `}
               >
-                <Code2 size={20} />
+                <Code2 size={18} />
               </div>
+
+              {/* DETAILS */}
 
               <div className="min-w-0">
                 <div
@@ -211,15 +160,15 @@ export default function CodingPlatformCard({
                     flex
                     flex-wrap
                     items-center
-                    gap-2.5
+                    gap-2
                   "
                 >
                   <h2
                     className="
-                      text-2xl
+                      text-xl
                       font-bold
-                      tracking-[-0.035em]
-                      text-[#173B63]
+                      tracking-[-0.03em]
+                      text-slate-950
                     "
                   >
                     {config.name}
@@ -240,7 +189,7 @@ export default function CodingPlatformCard({
                     max-w-xl
                     text-sm
                     leading-6
-                    text-[#71899D]
+                    text-slate-500
                   "
                 >
                   {config.description}
@@ -248,7 +197,9 @@ export default function CodingPlatformCard({
               </div>
             </div>
 
-            {/* CONNECTED USER */}
+            {/* ===============================================
+                CONNECTION STATE
+            =============================================== */}
 
             {profile ? (
               <div
@@ -257,12 +208,12 @@ export default function CodingPlatformCard({
                   flex
                   items-center
                   gap-3
-                  rounded-[18px]
+                  rounded-xl
                   border
-                  border-[#DCEAF5]
-                  bg-[#F8FCFF]
+                  border-slate-200
+                  bg-[#F8FAFC]
                   px-4
-                  py-3.5
+                  py-3
                 "
               >
                 <div
@@ -273,9 +224,10 @@ export default function CodingPlatformCard({
                     shrink-0
                     items-center
                     justify-center
-                    rounded-xl
-                    bg-[#EAF6FF]
-                    text-[#0877E8]
+                    rounded-lg
+                    bg-white
+                    text-[#1256AF]
+                    shadow-sm
                   "
                 >
                   <UserRound size={15} />
@@ -288,10 +240,10 @@ export default function CodingPlatformCard({
                       font-bold
                       uppercase
                       tracking-[0.12em]
-                      text-[#8A9FAF]
+                      text-slate-400
                     "
                   >
-                    Connected Account
+                    Connected account
                   </p>
 
                   <p
@@ -300,7 +252,7 @@ export default function CodingPlatformCard({
                       truncate
                       text-sm
                       font-bold
-                      text-[#355E7A]
+                      text-slate-700
                     "
                   >
                     {profile.username}
@@ -312,10 +264,8 @@ export default function CodingPlatformCard({
                     ml-auto
                     hidden
                     items-center
-                    gap-1.5
+                    gap-2
                     rounded-full
-                    border
-                    border-emerald-200
                     bg-emerald-50
                     px-2.5
                     py-1
@@ -349,51 +299,57 @@ export default function CodingPlatformCard({
               <div
                 className="
                   mt-5
-                  flex
-                  items-start
-                  gap-3
-                  rounded-[18px]
+                  rounded-xl
                   border
                   border-dashed
-                  border-[#C9DFED]
-                  bg-[#F8FCFF]
+                  border-slate-300
+                  bg-[#F8FAFC]
                   px-4
                   py-3.5
                 "
               >
                 <div
                   className="
-                    mt-0.5
-                    h-2
-                    w-2
-                    shrink-0
-                    rounded-full
-                    bg-[#8CBAD6]
+                    flex
+                    items-start
+                    gap-3
                   "
-                />
-
-                <div>
-                  <p
+                >
+                  <span
                     className="
-                      text-xs
-                      font-bold
-                      text-[#58748B]
+                      mt-1.5
+                      h-2
+                      w-2
+                      shrink-0
+                      rounded-full
+                      bg-slate-300
                     "
-                  >
-                    Not connected yet
-                  </p>
+                  />
 
-                  <p
-                    className="
-                      mt-1
-                      text-xs
-                      leading-5
-                      text-[#8198AA]
-                    "
-                  >
-                    Enter your username to connect this
-                    coding profile to Trailbliz.
-                  </p>
+                  <div>
+                    <p
+                      className="
+                        text-xs
+                        font-bold
+                        text-slate-700
+                      "
+                    >
+                      Not connected
+                    </p>
+
+                    <p
+                      className="
+                        mt-1
+                        text-xs
+                        leading-5
+                        text-slate-500
+                      "
+                    >
+                      Enter your username to connect
+                      this account to your Trailbliz
+                      profile.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
@@ -405,24 +361,22 @@ export default function CodingPlatformCard({
 
           <div
             className="
-              rounded-[20px]
+              rounded-2xl
               border
-              border-[#E0ECF5]
-              bg-[#F8FCFF]
+              border-slate-200
+              bg-[#F8FAFC]
               p-4
-
-              sm:p-5
             "
           >
             <label
               className="
                 mb-2
                 block
-                text-xs
+                text-[10px]
                 font-bold
                 uppercase
-                tracking-[0.08em]
-                text-[#5F7C92]
+                tracking-[0.1em]
+                text-slate-500
               "
             >
               Username
@@ -449,14 +403,16 @@ export default function CodingPlatformCard({
               }
             />
 
-            {/* ACTIONS */}
+            {/* ===============================================
+                ACTIONS
+            =============================================== */}
 
             <div
               className="
                 mt-4
                 flex
                 flex-wrap
-                gap-2.5
+                gap-2
               "
             >
               {/* NOT CONNECTED */}
@@ -472,35 +428,29 @@ export default function CodingPlatformCard({
                   }
                   className="
                     inline-flex
-                    min-h-[42px]
+                    min-h-[40px]
                     items-center
                     justify-center
                     gap-2
-                    rounded-xl
-                    bg-gradient-to-r
-                    from-[#0877E8]
-                    to-[#1294F2]
+                    rounded-lg
+                    bg-[#1256AF]
                     px-4
-                    py-2.5
+                    py-2
                     text-sm
                     font-bold
                     text-white
-                    shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-                    transition-all
-                    duration-200
+                    transition
 
-                    hover:-translate-y-0.5
-                    hover:shadow-[0_11px_24px_rgba(8,119,232,0.24)]
+                    hover:bg-[#0F4B99]
 
                     disabled:cursor-not-allowed
                     disabled:opacity-60
-                    disabled:hover:translate-y-0
                   "
                 >
                   {working ? (
                     <>
                       <LoaderCircle
-                        size={15}
+                        size={14}
                         className="animate-spin"
                       />
 
@@ -508,7 +458,7 @@ export default function CodingPlatformCard({
                     </>
                   ) : (
                     <>
-                      <Code2 size={15} />
+                      <Code2 size={14} />
 
                       Connect Account
                     </>
@@ -531,31 +481,29 @@ export default function CodingPlatformCard({
                       }
                       className="
                         inline-flex
-                        min-h-[42px]
+                        min-h-[40px]
                         items-center
                         justify-center
                         gap-2
-                        rounded-xl
+                        rounded-lg
                         border
-                        border-[#D5E7F3]
+                        border-slate-200
                         bg-white
                         px-4
-                        py-2.5
+                        py-2
                         text-sm
-                        font-bold
-                        text-[#58748B]
-                        transition-all
-                        duration-200
+                        font-semibold
+                        text-slate-600
+                        transition
 
-                        hover:border-[#B9DCF2]
-                        hover:bg-[#F4FAFF]
-                        hover:text-[#0877E8]
+                        hover:border-slate-300
+                        hover:text-slate-900
 
                         disabled:cursor-not-allowed
                         disabled:opacity-50
                       "
                     >
-                      <Pencil size={14} />
+                      <Pencil size={13} />
 
                       Edit Username
                     </button>
@@ -570,35 +518,29 @@ export default function CodingPlatformCard({
                       }
                       className="
                         inline-flex
-                        min-h-[42px]
+                        min-h-[40px]
                         items-center
                         justify-center
                         gap-2
-                        rounded-xl
-                        bg-gradient-to-r
-                        from-[#0877E8]
-                        to-[#1294F2]
+                        rounded-lg
+                        bg-[#1256AF]
                         px-4
-                        py-2.5
+                        py-2
                         text-sm
                         font-bold
                         text-white
-                        shadow-[0_8px_20px_rgba(8,119,232,0.16)]
-                        transition-all
-                        duration-200
+                        transition
 
-                        hover:-translate-y-0.5
-                        hover:shadow-[0_11px_24px_rgba(8,119,232,0.22)]
+                        hover:bg-[#0F4B99]
 
                         disabled:cursor-not-allowed
                         disabled:opacity-60
-                        disabled:hover:translate-y-0
                       "
                     >
                       {working ? (
                         <>
                           <LoaderCircle
-                            size={15}
+                            size={14}
                             className="animate-spin"
                           />
 
@@ -607,7 +549,7 @@ export default function CodingPlatformCard({
                       ) : (
                         <>
                           <RefreshCw
-                            size={14}
+                            size={13}
                           />
 
                           Refresh Stats
@@ -632,35 +574,29 @@ export default function CodingPlatformCard({
                       }
                       className="
                         inline-flex
-                        min-h-[42px]
+                        min-h-[40px]
                         items-center
                         justify-center
                         gap-2
-                        rounded-xl
-                        bg-gradient-to-r
-                        from-[#0877E8]
-                        to-[#1294F2]
+                        rounded-lg
+                        bg-[#1256AF]
                         px-4
-                        py-2.5
+                        py-2
                         text-sm
                         font-bold
                         text-white
-                        shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-                        transition-all
-                        duration-200
+                        transition
 
-                        hover:-translate-y-0.5
-                        hover:shadow-[0_11px_24px_rgba(8,119,232,0.24)]
+                        hover:bg-[#0F4B99]
 
                         disabled:cursor-not-allowed
                         disabled:opacity-60
-                        disabled:hover:translate-y-0
                       "
                     >
                       {working ? (
                         <>
                           <LoaderCircle
-                            size={15}
+                            size={14}
                             className="animate-spin"
                           />
 
@@ -668,7 +604,7 @@ export default function CodingPlatformCard({
                         </>
                       ) : (
                         <>
-                          <Save size={14} />
+                          <Save size={13} />
 
                           Save Username
                         </>
@@ -685,31 +621,29 @@ export default function CodingPlatformCard({
                       }
                       className="
                         inline-flex
-                        min-h-[42px]
+                        min-h-[40px]
                         items-center
                         justify-center
                         gap-2
-                        rounded-xl
+                        rounded-lg
                         border
-                        border-[#D5E7F3]
+                        border-slate-200
                         bg-white
                         px-4
-                        py-2.5
+                        py-2
                         text-sm
-                        font-bold
-                        text-[#607D92]
-                        transition-all
-                        duration-200
+                        font-semibold
+                        text-slate-600
+                        transition
 
-                        hover:border-[#B9DCF2]
-                        hover:bg-[#F4FAFF]
-                        hover:text-[#0877E8]
+                        hover:border-slate-300
+                        hover:text-slate-900
 
                         disabled:cursor-not-allowed
                         disabled:opacity-50
                       "
                     >
-                      <X size={14} />
+                      <X size={13} />
 
                       Cancel
                     </button>
@@ -719,23 +653,21 @@ export default function CodingPlatformCard({
           </div>
         </div>
 
-        {/* ===================================================
-            PROFILE STATS
-        =================================================== */}
+        {/* =====================================================
+            STATS
+        ===================================================== */}
 
         {profile && (
           <div
             className="
-              mt-7
+              mt-6
               border-t
-              border-[#E7F0F7]
+              border-slate-200
               pt-6
             "
           >
             <CodingProfileStats
-              profile={
-                profile
-              }
+              profile={profile}
             />
           </div>
         )}

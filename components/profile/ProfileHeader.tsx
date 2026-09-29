@@ -1,244 +1,166 @@
-import Image from "next/image";
 import Link from "next/link";
-
 import {
   ArrowLeft,
-  Sparkles,
+  Home,
   UserRound,
 } from "lucide-react";
 
-export default function ProfileHeader() {
+interface ProfileHeaderProps {
+  fullName: string;
+  preferredRole: string;
+  collegeName: string;
+  degree: string;
+  branch: string;
+  graduationYear: string;
+  city: string;
+  percentage?: number;
+}
+
+function getInitials(name: string) {
+  if (!name.trim()) return "ST";
+
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
+}
+
+export default function ProfileHeader({
+  fullName,
+  preferredRole,
+  collegeName,
+  degree,
+  branch,
+  graduationYear,
+  city,
+  percentage,
+}: ProfileHeaderProps) {
+  const initials = getInitials(fullName);
+
+  const academic = [
+    degree,
+    branch,
+    graduationYear,
+  ]
+    .filter(Boolean)
+    .join(" • ");
+
   return (
-    <header
-      className="
-        relative
-        overflow-hidden
-        rounded-[26px]
-        border
-        border-[#DCEAF5]
-        bg-white
-        px-5
-        py-5
-        shadow-[0_10px_32px_rgba(8,119,232,0.05)]
-
-        sm:px-6
-        sm:py-6
-      "
-    >
-      {/* TOP ACCENT */}
+    <section className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-white">
+      {/* background */}
 
       <div
-        className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-[#0877E8]
-          via-[#1294F2]
-          to-[#38BDF8]
-        "
-      />
-
-      {/* SOFT GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-20
-          -top-20
-          h-56
-          w-56
-          rounded-full
-          bg-[#38BDF8]/10
-          blur-[75px]
-        "
-      />
-
-      <div
-        className="
-          relative
-          flex
-          flex-col
-          gap-5
-
-          sm:flex-row
-          sm:items-center
-          sm:justify-between
-        "
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
       >
-        {/* LEFT */}
+        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#1256af]/[0.06] blur-3xl" />
 
-        <div
-          className="
-            flex
-            items-start
-            gap-4
-          "
-        >
-          <div
-            className="
-              flex
-              h-12
-              w-12
-              shrink-0
-              items-center
-              justify-center
-              overflow-hidden
-              rounded-2xl
-              border
-              border-[#D7EAF6]
-              bg-[#F8FCFF]
-              shadow-[0_7px_18px_rgba(8,119,232,0.06)]
-            "
+        <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#1256af] via-[#2783d9] to-[#60a5fa]" />
+      </div>
+
+      <div className="relative p-5 sm:p-7 lg:p-8">
+        {/* top */}
+
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/student"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-[#1256af]"
           >
-            <Image
-              src="/tbz.png"
-              alt="Trailbliz"
-              width={34}
-              height={34}
-              className="
-                h-8
-                w-8
-                object-contain
-              "
-              priority
+            <ArrowLeft
+              size={16}
+              className="transition-transform group-hover:-translate-x-0.5"
             />
+
+            Student home
+          </Link>
+
+          <Link
+            href="/student"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-[#1256af]/30 hover:text-[#1256af]"
+            aria-label="Student home"
+          >
+            <Home size={17} />
+          </Link>
+        </div>
+
+        {/* identity */}
+
+        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] bg-[#1256af] text-xl font-bold tracking-tight text-white shadow-[0_14px_30px_rgba(18,86,175,0.20)]">
+            {initials}
           </div>
 
-          <div>
-            <div
-              className="
-                flex
-                flex-wrap
-                items-center
-                gap-2
-              "
-            >
-              <div
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  border
-                  border-[#CBE5F8]
-                  bg-[#EFF8FF]
-                  px-2.5
-                  py-1
-                "
-              >
-                <UserRound
-                  size={12}
-                  className="text-[#0877E8]"
-                />
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1256af]/[0.07] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#1256af]">
+                <UserRound size={11} />
 
-                <span
-                  className="
-                    text-[9px]
-                    font-bold
-                    uppercase
-                    tracking-[0.14em]
-                    text-[#0877E8]
-                  "
-                >
-                  Student Profile
+                Student profile
+              </span>
+
+              {city && (
+                <span className="text-xs font-medium text-slate-400">
+                  {city}
                 </span>
-              </div>
-
-              <div
-                className="
-                  hidden
-                  items-center
-                  gap-1.5
-                  text-[9px]
-                  font-semibold
-                  text-[#8AA0B2]
-
-                  sm:flex
-                "
-              >
-                <Sparkles
-                  size={11}
-                  className="text-[#38A9EE]"
-                />
-
-                Trailbliz
-              </div>
+              )}
             </div>
 
-            <h1
-              className="
-                mt-3
-                text-3xl
-                font-bold
-                tracking-[-0.045em]
-                text-[#173B63]
-
-                sm:text-[34px]
-              "
-            >
-              My Profile
+            <h1 className="mt-3 break-words text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl">
+              {fullName || "Your Profile"}
             </h1>
 
-            <p
-              className="
-                mt-2
-                max-w-xl
-                text-sm
-                leading-6
-                text-[#71899D]
-              "
-            >
-              Keep your academic, professional and coding
-              profile information ready for opportunities.
+            <p className="mt-2 text-sm font-medium text-slate-600 sm:text-base">
+              {preferredRole ||
+                "Add your preferred career role"}
+            </p>
+
+            <p className="mt-2 text-sm text-slate-400">
+              {collegeName ||
+                "Add your college"}
+
+              {academic && (
+                <>
+                  <span className="mx-2">•</span>
+                  {academic}
+                </>
+              )}
+            </p>
+          </div>
+
+          {/* completion */}
+
+          <div className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:w-[210px]">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-slate-500">
+                Profile strength
+              </span>
+
+              <span className="text-sm font-bold text-[#1256af]">
+                {percentage ?? 0}%
+              </span>
+            </div>
+
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-200">
+              <div
+                className="h-full rounded-full bg-[#1256af] transition-all duration-500"
+                style={{
+                  width: `${Math.min(
+                    100,
+                    Math.max(0, percentage ?? 0)
+                  )}%`,
+                }}
+              />
+            </div>
+
+            <p className="mt-3 text-xs leading-5 text-slate-400">
+              Complete your profile to strengthen your
+              Trailbliz identity.
             </p>
           </div>
         </div>
-
-        {/* BACK TO DASHBOARD */}
-
-        <Link
-          href="/dashboard"
-          className="
-            group
-            inline-flex
-            w-fit
-            items-center
-            justify-center
-            gap-2
-            rounded-xl
-            border
-            border-[#D5E7F3]
-            bg-white
-            px-4
-            py-2.5
-            text-sm
-            font-semibold
-            text-[#58748B]
-            transition-all
-            duration-200
-
-            hover:border-[#B7D9F0]
-            hover:bg-[#F4FAFF]
-            hover:text-[#0877E8]
-            hover:shadow-[0_8px_20px_rgba(8,119,232,0.06)]
-          "
-        >
-          <ArrowLeft
-            size={15}
-            className="
-              transition-transform
-              duration-200
-              group-hover:-translate-x-0.5
-            "
-          />
-
-          Dashboard
-        </Link>
       </div>
-    </header>
+    </section>
   );
 }

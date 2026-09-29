@@ -42,171 +42,195 @@ export default function OpportunitiesAccountSummary({
     profilePercentage === 100;
 
   return (
-    <section
-      className="
-        grid
-        gap-4
-
-        sm:grid-cols-2
-      "
-    >
-      {/* =====================================================
-          MEMBERSHIP
-      ===================================================== */}
-
-      <SummaryCard
-        icon={
-          membershipActive
-            ? BadgeCheck
-            : CircleAlert
-        }
-        label="Membership"
-        title={
-          membershipActive
-            ? "Membership Active"
-            : "Membership Required"
-        }
-        description={
-          membershipActive
-            ? "Your membership gives you access to eligible job and internship applications."
-            : "Activate your membership before applying to available opportunities."
-        }
-        complete={
-          membershipActive
-        }
+    <section>
+      <div
+        className="
+          mb-3
+          flex
+          items-center
+          justify-between
+          gap-4
+        "
       >
-        {!membershipActive && (
-          <Link
-            href="/membership"
+        <div>
+          <p
             className="
-              group
-              mt-4
-              inline-flex
-              items-center
-              gap-1.5
-              text-sm
+              text-[10px]
               font-bold
-              text-[#0877E8]
-              transition-colors
-
-              hover:text-[#1294F2]
+              uppercase
+              tracking-[0.14em]
+              text-slate-400
             "
           >
-            Get Membership
+            Application readiness
+          </p>
 
-            <ArrowRight
-              size={14}
-              className="
-                transition-transform
-                duration-200
-                group-hover:translate-x-0.5
-              "
-            />
-          </Link>
-        )}
-      </SummaryCard>
+          <p
+            className="
+              mt-1
+              text-sm
+              text-slate-500
+            "
+          >
+            Requirements checked before you apply.
+          </p>
+        </div>
+      </div>
 
-      {/* =====================================================
-          PROFILE COMPLETION
-      ===================================================== */}
+      <div
+        className="
+          grid
+          overflow-hidden
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
 
-      <SummaryCard
-        icon={
-          profileComplete
-            ? BadgeCheck
-            : UserRound
-        }
-        label="Profile"
-        title={
-          profileComplete
-            ? "Profile Complete"
-            : `${profilePercentage}% Complete`
-        }
-        description={
-          profileComplete
-            ? "Your profile is complete and ready for opportunity eligibility checks."
-            : "Complete your profile so Trailbliz can evaluate your eligibility accurately."
-        }
-        complete={
-          profileComplete
-        }
+          md:grid-cols-2
+        "
       >
-        {/* PROGRESS */}
+        <SummaryItem
+          icon={
+            membershipActive
+              ? BadgeCheck
+              : CircleAlert
+          }
+          label="Membership"
+          title={
+            membershipActive
+              ? "Membership active"
+              : "Membership required"
+          }
+          description={
+            membershipActive
+              ? "You can apply to opportunities you are eligible for."
+              : "Activate your membership before submitting applications."
+          }
+          complete={
+            membershipActive
+          }
+        >
+          {!membershipActive && (
+            <Link
+              href="/membership"
+              className="
+                group
+                mt-3
+                inline-flex
+                items-center
+                gap-1.5
+                text-xs
+                font-bold
+                text-[#1256AF]
+              "
+            >
+              View Membership
 
-        <div
-          className="
-            mt-4
-            h-2
-            overflow-hidden
-            rounded-full
-            bg-[#E7F1F8]
-          "
+              <ArrowRight
+                size={13}
+                className="
+                  transition-transform
+                  group-hover:translate-x-0.5
+                "
+              />
+            </Link>
+          )}
+        </SummaryItem>
+
+        <SummaryItem
+          icon={
+            profileComplete
+              ? BadgeCheck
+              : UserRound
+          }
+          label="Profile"
+          title={
+            profileComplete
+              ? "Profile complete"
+              : `${profilePercentage}% complete`
+          }
+          description={
+            profileComplete
+              ? "Your profile is ready for eligibility checks."
+              : "Complete your profile before applying to opportunities."
+          }
+          complete={
+            profileComplete
+          }
+          bordered
         >
           <div
-            className={`
-              h-full
-              rounded-full
-              transition-all
-              duration-500
-
-              ${
-                profileComplete
-                  ? "bg-emerald-500"
-                  : "bg-gradient-to-r from-[#0877E8] to-[#38BDF8]"
-              }
-            `}
-            style={{
-              width: `${Math.max(
-                0,
-                Math.min(
-                  profilePercentage,
-                  100
-                )
-              )}%`,
-            }}
-          />
-        </div>
-
-        {!profileComplete && (
-          <Link
-            href="/profile"
             className="
-              group
-              mt-4
-              inline-flex
-              items-center
-              gap-1.5
-              text-sm
-              font-bold
-              text-[#0877E8]
-              transition-colors
-
-              hover:text-[#1294F2]
+              mt-3
+              h-1.5
+              overflow-hidden
+              rounded-full
+              bg-slate-100
             "
           >
-            Complete Profile
+            <div
+              className={`
+                h-full
+                rounded-full
+                transition-all
+                duration-500
 
-            <ArrowRight
-              size={14}
-              className="
-                transition-transform
-                duration-200
-                group-hover:translate-x-0.5
-              "
+                ${
+                  profileComplete
+                    ? "bg-emerald-500"
+                    : "bg-[#1256AF]"
+                }
+              `}
+              style={{
+                width: `${Math.max(
+                  0,
+                  Math.min(
+                    profilePercentage,
+                    100
+                  )
+                )}%`,
+              }}
             />
-          </Link>
-        )}
-      </SummaryCard>
+          </div>
+
+          {!profileComplete && (
+            <Link
+              href="/profile"
+              className="
+                group
+                mt-3
+                inline-flex
+                items-center
+                gap-1.5
+                text-xs
+                font-bold
+                text-[#1256AF]
+              "
+            >
+              Complete Profile
+
+              <ArrowRight
+                size={13}
+                className="
+                  transition-transform
+                  group-hover:translate-x-0.5
+                "
+              />
+            </Link>
+          )}
+        </SummaryItem>
+      </div>
     </section>
   );
 }
 
-function SummaryCard({
+function SummaryItem({
   icon: Icon,
   label,
   title,
   description,
   complete,
+  bordered = false,
   children,
 }: {
   icon: typeof BadgeCheck;
@@ -214,191 +238,118 @@ function SummaryCard({
   title: string;
   description: string;
   complete: boolean;
-  children:
-    ReactNode;
+  bordered?: boolean;
+  children: ReactNode;
 }) {
   return (
     <article
-      className="
-        group
-        relative
-        overflow-hidden
-        rounded-[22px]
-        border
-        border-[#DCEAF5]
-        bg-white
+      className={`
         p-5
-        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
-        transition-all
-        duration-300
 
-        hover:-translate-y-0.5
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_16px_38px_rgba(8,119,232,0.075)]
-      "
+        sm:p-6
+
+        ${
+          bordered
+            ? "border-t border-slate-200 md:border-l md:border-t-0"
+            : ""
+        }
+      `}
     >
-      {/* TOP ACCENT */}
-
       <div
-        className={`
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-
-          ${
-            complete
-              ? "bg-gradient-to-r from-emerald-500 to-[#38BDF8]"
-              : "bg-gradient-to-r from-[#0877E8] to-violet-500"
-          }
-        `}
-      />
-
-      {/* GLOW */}
-
-      <div
-        className={`
-          pointer-events-none
-          absolute
-          -right-20
-          -top-20
-          h-48
-          w-48
-          rounded-full
-          blur-[80px]
-
-          ${
-            complete
-              ? "bg-emerald-500/7"
-              : "bg-[#0877E8]/7"
-          }
-        `}
-      />
-
-      <div className="relative">
+        className="
+          flex
+          items-start
+          gap-3
+        "
+      >
         <div
-          className="
+          className={`
             flex
-            items-start
-            gap-4
-          "
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-lg
+
+            ${
+              complete
+                ? "bg-emerald-50 text-emerald-600"
+                : "bg-amber-50 text-amber-600"
+            }
+          `}
         >
+          <Icon size={16} />
+        </div>
+
+        <div className="min-w-0 flex-1">
           <div
-            className={`
+            className="
               flex
-              h-11
-              w-11
-              shrink-0
+              flex-wrap
               items-center
-              justify-center
-              rounded-2xl
-
-              ${
-                complete
-                  ? "bg-emerald-50 text-emerald-600"
-                  : "bg-[#EAF6FF] text-[#0877E8]"
-              }
-            `}
+              gap-2
+            "
           >
-            <Icon size={18} />
-          </div>
-
-          <div className="min-w-0">
             <p
               className="
                 text-[9px]
                 font-bold
                 uppercase
-                tracking-[0.13em]
-                text-[#879CAD]
+                tracking-[0.12em]
+                text-slate-400
               "
             >
               {label}
             </p>
 
-            <div
-              className="
-                mt-1.5
-                flex
-                flex-wrap
-                items-center
-                gap-2
-              "
+            <span
+              className={`
+                rounded-full
+                px-2
+                py-0.5
+                text-[8px]
+                font-bold
+                uppercase
+                tracking-[0.08em]
+
+                ${
+                  complete
+                    ? "bg-emerald-50 text-emerald-700"
+                    : "bg-amber-50 text-amber-700"
+                }
+              `}
             >
-              <h3
-                className="
-                  text-base
-                  font-bold
-                  text-[#173B63]
-                "
-              >
-                {title}
-              </h3>
-
-              <span
-                className={`
-                  inline-flex
-                  items-center
-                  gap-1.5
-                  rounded-full
-                  border
-                  px-2
-                  py-1
-                  text-[8px]
-                  font-bold
-                  uppercase
-                  tracking-[0.08em]
-
-                  ${
-                    complete
-                      ? `
-                        border-emerald-200
-                        bg-emerald-50
-                        text-emerald-700
-                      `
-                      : `
-                        border-[#CBE5F8]
-                        bg-[#EFF8FF]
-                        text-[#0877E8]
-                      `
-                  }
-                `}
-              >
-                <span
-                  className={`
-                    h-1.5
-                    w-1.5
-                    rounded-full
-
-                    ${
-                      complete
-                        ? "bg-emerald-500"
-                        : "bg-[#38A9EE]"
-                    }
-                  `}
-                />
-
-                {complete
-                  ? "Ready"
-                  : "Action Needed"}
-              </span>
-            </div>
-
-            <p
-              className="
-                mt-2
-                text-sm
-                leading-6
-                text-[#71899D]
-              "
-            >
-              {description}
-            </p>
+              {complete
+                ? "Ready"
+                : "Required"}
+            </span>
           </div>
-        </div>
 
-        {children}
+          <h3
+            className="
+              mt-1.5
+              text-sm
+              font-bold
+              text-slate-900
+            "
+          >
+            {title}
+          </h3>
+
+          <p
+            className="
+              mt-1
+              text-xs
+              leading-5
+              text-slate-500
+            "
+          >
+            {description}
+          </p>
+
+          {children}
+        </div>
       </div>
     </article>
   );

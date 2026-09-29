@@ -54,36 +54,16 @@ export default function LeaderboardFilters({
   return (
     <section
       className="
-        relative
-        overflow-hidden
-        rounded-[24px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
         p-5
-        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
+        shadow-sm
 
         sm:p-6
       "
     >
-      {/* TOP ACCENT */}
-
-      <div
-        className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-[#0877E8]
-          via-violet-500
-          to-[#38BDF8]
-        "
-      />
-
-      {/* HEADER */}
-
       <div
         className="
           flex
@@ -94,18 +74,18 @@ export default function LeaderboardFilters({
         <div
           className="
             flex
-            h-10
-            w-10
+            h-9
+            w-9
             shrink-0
             items-center
             justify-center
-            rounded-xl
-            bg-[#EAF6FF]
-            text-[#0877E8]
+            rounded-lg
+            bg-blue-50
+            text-[#1256AF]
           "
         >
           <SlidersHorizontal
-            size={17}
+            size={16}
           />
         </div>
 
@@ -115,11 +95,11 @@ export default function LeaderboardFilters({
               text-[10px]
               font-bold
               uppercase
-              tracking-[0.14em]
-              text-[#0877E8]
+              tracking-[0.12em]
+              text-[#1256AF]
             "
           >
-            Leaderboard View
+            Leaderboard view
           </p>
 
           <h2
@@ -127,8 +107,7 @@ export default function LeaderboardFilters({
               mt-1
               text-lg
               font-bold
-              tracking-[-0.025em]
-              text-[#173B63]
+              text-slate-900
             "
           >
             Compare Rankings
@@ -138,18 +117,14 @@ export default function LeaderboardFilters({
             className="
               mt-1
               text-sm
-              leading-6
-              text-[#71899D]
+              text-slate-600
             "
           >
-            Switch between global,
-            college and graduation batch
-            rankings.
+            Switch between global, college and
+            graduation batch rankings.
           </p>
         </div>
       </div>
-
-      {/* FILTER CONTROLS */}
 
       <div
         className="
@@ -160,147 +135,117 @@ export default function LeaderboardFilters({
 
           sm:flex-row
           sm:flex-wrap
-          sm:items-center
+          sm:items-end
         "
       >
-        {/* GLOBAL */}
-
         <button
           type="button"
-          onClick={
-            onGlobal
-          }
+          onClick={onGlobal}
           className={
             viewMode === "GLOBAL"
               ? activeButton
               : inactiveButton
           }
         >
-          <Globe2
-            size={14}
-          />
-
+          <Globe2 size={14} />
           Global
         </button>
 
-        {/* COLLEGE */}
-
         <button
           type="button"
-          onClick={
-            onCollege
-          }
-          disabled={
-            !collegeId
-          }
+          onClick={onCollege}
+          disabled={!collegeId}
           className={
             viewMode === "COLLEGE"
               ? activeButton
               : inactiveButton
           }
         >
-          <Building2
-            size={14}
-          />
-
+          <Building2 size={14} />
           My College
         </button>
 
-        {/* BATCH */}
-
         <div
           className="
-            flex
             min-w-0
             flex-1
-            items-center
-            gap-3
 
             sm:ml-auto
-            sm:max-w-[280px]
+            sm:max-w-[250px]
           "
         >
-          <div
+          <label
+            htmlFor="leaderboard-batch"
             className="
+              mb-1.5
               flex
-              h-9
-              w-9
-              shrink-0
               items-center
-              justify-center
-              rounded-xl
-              bg-violet-50
-              text-violet-600
+              gap-1.5
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.1em]
+              text-slate-500
             "
           >
             <GraduationCap
-              size={16}
+              size={12}
             />
-          </div>
 
-          <div
+            Graduation Batch
+          </label>
+
+          <select
+            id="leaderboard-batch"
+            value={
+              selectedYear || ""
+            }
+            onChange={(event) => {
+              const year =
+                Number(
+                  event.target.value
+                );
+
+              if (!year) {
+                return;
+              }
+
+              onYear(year);
+            }}
             className="
-              min-w-0
-              flex-1
+              w-full
+              rounded-lg
+              border
+              border-slate-200
+              bg-white
+              px-3
+              py-2.5
+              text-sm
+              font-semibold
+              text-slate-800
+              outline-none
+              transition
+
+              focus:border-[#1256AF]
+              focus:ring-4
+              focus:ring-blue-50
             "
           >
-            <label
-              htmlFor="leaderboard-batch"
-              className="
-                mb-1.5
-                block
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[0.12em]
-                text-[#879CAD]
-              "
-            >
-              Graduation Batch
-            </label>
+            <option value="">
+              Select Batch
+            </option>
 
-            <select
-              id="leaderboard-batch"
-              value={
-                selectedYear ||
-                ""
-              }
-              onChange={(event) => {
-                const year =
-                  Number(
-                    event.target.value
-                  );
-
-                if (!year) {
-                  return;
-                }
-
-                onYear(
-                  year
-                );
-              }}
-              className={
-                viewMode === "YEAR"
-                  ? activeSelect
-                  : inactiveSelect
-              }
-            >
-              <option value="">
-                Select Batch
-              </option>
-
-              {batchYears.map(
-                (year) => (
-                  <option
-                    key={year}
-                    value={year}
-                  >
-                    {year}
-                  </option>
-                )
-              )}
-            </select>
-          </div>
+            {batchYears.map(
+              (year) => (
+                <option
+                  key={year}
+                  value={year}
+                >
+                  {year}
+                </option>
+              )
+            )}
+          </select>
         </div>
       </div>
 
@@ -310,111 +255,56 @@ export default function LeaderboardFilters({
             mt-4
             text-xs
             leading-5
-            text-[#8AA0B2]
+            text-slate-500
           "
         >
-          Add your college in your
-          profile to enable the college
-          leaderboard.
+          Add your college in your profile to enable
+          the college leaderboard.
         </p>
       )}
     </section>
   );
 }
 
-const activeButton =
-  `
-    inline-flex
-    min-h-[42px]
-    items-center
-    justify-center
-    gap-2
-    rounded-xl
-    bg-gradient-to-r
-    from-[#0877E8]
-    to-[#1294F2]
-    px-4
-    py-2.5
-    text-sm
-    font-bold
-    text-white
-    shadow-[0_8px_20px_rgba(8,119,232,0.17)]
-    transition-all
-    duration-200
+const activeButton = `
+  inline-flex
+  min-h-[42px]
+  items-center
+  justify-center
+  gap-2
+  rounded-lg
+  bg-[#1256AF]
+  px-4
+  py-2.5
+  text-sm
+  font-bold
+  text-white
+  transition
 
-    hover:-translate-y-0.5
-    hover:shadow-[0_11px_24px_rgba(8,119,232,0.22)]
-  `;
+  hover:bg-[#0E4C9D]
+`;
 
-const inactiveButton =
-  `
-    inline-flex
-    min-h-[42px]
-    items-center
-    justify-center
-    gap-2
-    rounded-xl
-    border
-    border-[#D5E7F3]
-    bg-[#F8FCFF]
-    px-4
-    py-2.5
-    text-sm
-    font-bold
-    text-[#58748B]
-    transition-all
-    duration-200
+const inactiveButton = `
+  inline-flex
+  min-h-[42px]
+  items-center
+  justify-center
+  gap-2
+  rounded-lg
+  border
+  border-slate-200
+  bg-white
+  px-4
+  py-2.5
+  text-sm
+  font-bold
+  text-slate-600
+  transition
 
-    hover:border-[#B9DCF2]
-    hover:bg-white
-    hover:text-[#0877E8]
+  hover:border-blue-200
+  hover:bg-blue-50/40
+  hover:text-[#1256AF]
 
-    disabled:cursor-not-allowed
-    disabled:opacity-40
-    disabled:hover:border-[#D5E7F3]
-    disabled:hover:bg-[#F8FCFF]
-    disabled:hover:text-[#58748B]
-  `;
-
-const activeSelect =
-  `
-    w-full
-    rounded-xl
-    border
-    border-[#87C6EE]
-    bg-[#F0F9FF]
-    px-3
-    py-2.5
-    text-sm
-    font-bold
-    text-[#173B63]
-    outline-none
-    transition-all
-
-    focus:border-[#0877E8]
-    focus:ring-4
-    focus:ring-[#0877E8]/10
-  `;
-
-const inactiveSelect =
-  `
-    w-full
-    rounded-xl
-    border
-    border-[#D5E7F3]
-    bg-[#F8FCFF]
-    px-3
-    py-2.5
-    text-sm
-    font-semibold
-    text-[#173B63]
-    outline-none
-    transition-all
-
-    hover:border-[#B9DCF2]
-
-    focus:border-[#0877E8]
-    focus:bg-white
-    focus:ring-4
-    focus:ring-[#0877E8]/10
-  `;
+  disabled:cursor-not-allowed
+  disabled:opacity-40
+`;

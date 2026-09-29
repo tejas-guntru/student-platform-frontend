@@ -4,7 +4,6 @@ import type {
 
 import {
   Code2,
-  Sparkles,
   Trophy,
   Zap,
 } from "lucide-react";
@@ -31,100 +30,42 @@ export default function PlatformScores({
 
   return (
     <section>
-      {/* HEADER */}
-
-      <div
+      <p
         className="
-          flex
-          flex-col
-          gap-4
-
-          sm:flex-row
-          sm:items-end
-          sm:justify-between
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.14em]
+          text-[#1256AF]
         "
       >
-        <div>
-          <div
-            className="
-              flex
-              items-center
-              gap-2
-            "
-          >
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.16em]
-                text-[#0877E8]
-              "
-            >
-              Platform Performance
-            </p>
+        Platform Performance
+      </p>
 
-            <Sparkles
-              size={12}
-              className="text-violet-500"
-            />
-          </div>
+      <h2
+        className="
+          mt-1.5
+          text-xl
+          font-bold
+          tracking-[-0.025em]
+          text-slate-900
+        "
+      >
+        Coding Scores
+      </h2>
 
-          <h2
-            className="
-              mt-2
-              text-2xl
-              font-bold
-              tracking-[-0.035em]
-              text-[#173B63]
-            "
-          >
-            Coding Scores
-          </h2>
-
-          <p
-            className="
-              mt-2
-              max-w-xl
-              text-sm
-              leading-6
-              text-[#71899D]
-            "
-          >
-            See how each connected coding platform
-            contributes to your overall Trailbliz score.
-          </p>
-        </div>
-
-        <div
-          className="
-            inline-flex
-            w-fit
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-[#D6E7F3]
-            bg-white
-            px-3
-            py-1.5
-            text-[10px]
-            font-bold
-            uppercase
-            tracking-[0.1em]
-            text-[#68849A]
-          "
-        >
-          <Trophy
-            size={12}
-            className="text-violet-600"
-          />
-
-          Verified scores
-        </div>
-      </div>
-
-      {/* SCORE CARDS */}
+      <p
+        className="
+          mt-1.5
+          max-w-xl
+          text-sm
+          leading-6
+          text-slate-600
+        "
+      >
+        See how each connected coding platform contributes
+        to your overall Trailbliz score.
+      </p>
 
       <div
         className="
@@ -141,8 +82,6 @@ export default function PlatformScores({
           score={
             myRank.codeforcesScore
           }
-          accent="from-[#0877E8] to-[#38BDF8]"
-          iconClass="bg-[#EAF6FF] text-[#0877E8]"
         />
 
         <ScoreCard
@@ -151,8 +90,6 @@ export default function PlatformScores({
           score={
             myRank.leetcodeScore
           }
-          accent="from-violet-500 to-[#0877E8]"
-          iconClass="bg-violet-50 text-violet-600"
         />
 
         <ScoreCard
@@ -161,8 +98,6 @@ export default function PlatformScores({
           score={
             myRank.codechefScore
           }
-          accent="from-emerald-500 to-cyan-400"
-          iconClass="bg-emerald-50 text-emerald-600"
         />
       </div>
     </section>
@@ -173,51 +108,24 @@ function ScoreCard({
   icon: Icon,
   label,
   score,
-  accent,
-  iconClass,
 }: {
   icon: ElementType;
   label: string;
   score:
     | number
     | null;
-  accent: string;
-  iconClass: string;
 }) {
   return (
     <article
       className="
-        group
-        relative
-        overflow-hidden
-        rounded-[22px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
         p-5
-        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
-        transition-all
-        duration-300
-
-        hover:-translate-y-0.5
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_16px_38px_rgba(8,119,232,0.08)]
+        shadow-sm
       "
     >
-      {/* ACCENT */}
-
-      <div
-        className={`
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          ${accent}
-        `}
-      />
-
       <div
         className="
           flex
@@ -232,8 +140,8 @@ function ScoreCard({
               text-[9px]
               font-bold
               uppercase
-              tracking-[0.12em]
-              text-[#879CAD]
+              tracking-[0.1em]
+              text-slate-500
             "
           >
             {label}
@@ -244,8 +152,8 @@ function ScoreCard({
               mt-3
               text-2xl
               font-bold
-              tracking-[-0.04em]
-              text-[#173B63]
+              tracking-[-0.035em]
+              text-slate-900
             "
           >
             {formatScore(score)}
@@ -255,8 +163,7 @@ function ScoreCard({
             className="
               mt-1
               text-xs
-              font-medium
-              text-[#8AA0B2]
+              text-slate-500
             "
           >
             Platform score
@@ -264,18 +171,19 @@ function ScoreCard({
         </div>
 
         <div
-          className={`
+          className="
             flex
-            h-10
-            w-10
+            h-9
+            w-9
             shrink-0
             items-center
             justify-center
-            rounded-xl
-            ${iconClass}
-          `}
+            rounded-lg
+            bg-blue-50
+            text-[#1256AF]
+          "
         >
-          <Icon size={17} />
+          <Icon size={16} />
         </div>
       </div>
     </article>

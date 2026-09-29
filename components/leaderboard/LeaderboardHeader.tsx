@@ -1,76 +1,70 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import {
-  LayoutDashboard,
-  Sparkles,
+  ArrowLeft,
   Trophy,
 } from "lucide-react";
 
-export default function LeaderboardHeader() {
+import type {
+  LeaderboardEntry,
+} from "@/types/leaderboard";
+
+import {
+  formatRank,
+} from "@/utils/leaderboardFormatters";
+
+interface LeaderboardHeaderProps {
+  myRank:
+    LeaderboardEntry | null;
+}
+
+export default function LeaderboardHeader({
+  myRank,
+}: LeaderboardHeaderProps) {
   return (
     <header
       className="
-        relative
-        overflow-hidden
-        rounded-[26px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        px-5
-        py-5
-        shadow-[0_10px_32px_rgba(8,119,232,0.05)]
+        p-5
+        shadow-sm
 
-        sm:px-6
-        sm:py-6
+        sm:p-6
       "
     >
-      {/* TOP ACCENT */}
-
-      <div
+      <Link
+        href="/student"
         className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-violet-500
-          via-[#0877E8]
-          to-[#38BDF8]
-        "
-      />
+          inline-flex
+          items-center
+          gap-2
+          text-xs
+          font-semibold
+          text-slate-500
+          transition
 
-      {/* BACKGROUND GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-20
-          -top-20
-          h-56
-          w-56
-          rounded-full
-          bg-violet-500/10
-          blur-[80px]
-        "
-      />
-
-      <div
-        className="
-          relative
-          flex
-          flex-col
-          gap-6
-
-          lg:flex-row
-          lg:items-center
-          lg:justify-between
+          hover:text-[#1256AF]
         "
       >
-        {/* LEFT */}
+        <ArrowLeft size={14} />
 
+        Back to home
+      </Link>
+
+      <div
+        className="
+          mt-5
+          flex
+          flex-col
+          gap-5
+
+          sm:flex-row
+          sm:items-center
+          sm:justify-between
+        "
+      >
         <div
           className="
             flex
@@ -81,103 +75,41 @@ export default function LeaderboardHeader() {
           <div
             className="
               flex
-              h-12
-              w-12
+              h-11
+              w-11
               shrink-0
               items-center
               justify-center
-              overflow-hidden
-              rounded-2xl
-              border
-              border-[#D7EAF6]
-              bg-[#F8FCFF]
-              shadow-[0_7px_18px_rgba(8,119,232,0.06)]
+              rounded-xl
+              bg-blue-50
+              text-[#1256AF]
             "
           >
-            <Image
-              src="/tbz.png"
-              alt="Trailbliz"
-              width={34}
-              height={34}
-              className="
-                h-8
-                w-8
-                object-contain
-              "
-              priority
-            />
+            <Trophy size={19} />
           </div>
 
           <div>
-            <div
+            <p
               className="
-                flex
-                flex-wrap
-                items-center
-                gap-2
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.14em]
+                text-[#1256AF]
               "
             >
-              <div
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  border
-                  border-violet-200
-                  bg-violet-50
-                  px-2.5
-                  py-1
-                "
-              >
-                <Trophy
-                  size={12}
-                  className="text-violet-600"
-                />
-
-                <span
-                  className="
-                    text-[9px]
-                    font-bold
-                    uppercase
-                    tracking-[0.14em]
-                    text-violet-600
-                  "
-                >
-                  Coding Rankings
-                </span>
-              </div>
-
-              <div
-                className="
-                  hidden
-                  items-center
-                  gap-1.5
-                  text-[9px]
-                  font-semibold
-                  text-[#8AA0B2]
-
-                  sm:flex
-                "
-              >
-                <Sparkles
-                  size={11}
-                  className="text-[#38A9EE]"
-                />
-
-                Verified performance
-              </div>
-            </div>
+              Career · Rankings
+            </p>
 
             <h1
               className="
-                mt-3
-                text-3xl
+                mt-1.5
+                text-2xl
                 font-bold
-                tracking-[-0.045em]
-                text-[#173B63]
+                tracking-[-0.035em]
+                text-slate-900
 
-                sm:text-[34px]
+                sm:text-3xl
               "
             >
               Leaderboard
@@ -186,50 +118,57 @@ export default function LeaderboardHeader() {
             <p
               className="
                 mt-2
-                max-w-xl
+                max-w-2xl
                 text-sm
                 leading-6
-                text-[#71899D]
+                text-slate-600
               "
             >
               Compare verified coding performance across
-              the Trailbliz community, your college and
-              your graduation batch.
+              Trailbliz, your college and your graduation
+              batch.
             </p>
           </div>
         </div>
 
-        {/* DASHBOARD */}
-
-        <Link
-          href="/dashboard"
+        <div
           className="
-            inline-flex
             w-fit
-            items-center
-            justify-center
-            gap-2
             rounded-xl
-            bg-gradient-to-r
-            from-[#0877E8]
-            to-[#1294F2]
+            border
+            border-slate-200
+            bg-slate-50
             px-4
-            py-2.5
-            text-sm
-            font-bold
-            text-white
-            shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-            transition-all
-            duration-200
-
-            hover:-translate-y-0.5
-            hover:shadow-[0_12px_26px_rgba(8,119,232,0.24)]
+            py-3
           "
         >
-          <LayoutDashboard size={15} />
+          <p
+            className="
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.12em]
+              text-slate-500
+            "
+          >
+            Global rank
+          </p>
 
-          Dashboard
-        </Link>
+          <p
+            className="
+              mt-1
+              text-lg
+              font-bold
+              text-slate-900
+            "
+          >
+            {myRank
+              ? formatRank(
+                  myRank.globalRank
+                )
+              : "Not ranked"}
+          </p>
+        </div>
       </div>
     </header>
   );

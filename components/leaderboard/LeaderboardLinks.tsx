@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Code2,
-  Sparkles,
   UserRound,
 } from "lucide-react";
 
@@ -11,37 +10,18 @@ export default function LeaderboardLinks() {
   return (
     <section
       className="
-        relative
-        overflow-hidden
-        rounded-[24px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
         p-5
-        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
+        shadow-sm
 
         sm:p-6
       "
     >
-      {/* BACKGROUND GLOW */}
-
       <div
         className="
-          pointer-events-none
-          absolute
-          -right-20
-          -top-20
-          h-52
-          w-52
-          rounded-full
-          bg-[#38BDF8]/10
-          blur-[80px]
-        "
-      />
-
-      <div
-        className="
-          relative
           flex
           flex-col
           gap-5
@@ -51,41 +31,25 @@ export default function LeaderboardLinks() {
           sm:justify-between
         "
       >
-        {/* COPY */}
-
         <div>
-          <div
+          <p
             className="
-              flex
-              items-center
-              gap-2
+              text-[10px]
+              font-bold
+              uppercase
+              tracking-[0.12em]
+              text-[#1256AF]
             "
           >
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.15em]
-                text-[#0877E8]
-              "
-            >
-              Keep Improving
-            </p>
-
-            <Sparkles
-              size={12}
-              className="text-violet-500"
-            />
-          </div>
+            Keep improving
+          </p>
 
           <h2
             className="
-              mt-2
-              text-xl
+              mt-1.5
+              text-lg
               font-bold
-              tracking-[-0.03em]
-              text-[#173B63]
+              text-slate-900
             "
           >
             Strengthen your ranking
@@ -93,11 +57,11 @@ export default function LeaderboardLinks() {
 
           <p
             className="
-              mt-2
+              mt-1.5
               max-w-xl
               text-sm
               leading-6
-              text-[#71899D]
+              text-slate-600
             "
           >
             Keep your coding accounts updated and your
@@ -106,13 +70,11 @@ export default function LeaderboardLinks() {
           </p>
         </div>
 
-        {/* LINKS */}
-
         <div
           className="
             flex
             flex-col
-            gap-2.5
+            gap-2
 
             sm:flex-row
           "
@@ -125,21 +87,16 @@ export default function LeaderboardLinks() {
               items-center
               justify-center
               gap-2
-              rounded-xl
-              bg-gradient-to-r
-              from-[#0877E8]
-              to-[#1294F2]
+              rounded-lg
+              bg-[#1256AF]
               px-4
               py-2.5
               text-sm
               font-bold
               text-white
-              shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-              transition-all
-              duration-200
+              transition
 
-              hover:-translate-y-0.5
-              hover:shadow-[0_12px_26px_rgba(8,119,232,0.24)]
+              hover:bg-[#0E4C9D]
             "
           >
             <Code2 size={15} />
@@ -150,7 +107,6 @@ export default function LeaderboardLinks() {
               size={14}
               className="
                 transition-transform
-                duration-200
                 group-hover:translate-x-0.5
               "
             />
@@ -164,21 +120,19 @@ export default function LeaderboardLinks() {
               items-center
               justify-center
               gap-2
-              rounded-xl
+              rounded-lg
               border
-              border-[#D5E7F3]
-              bg-[#F8FCFF]
+              border-slate-200
+              bg-white
               px-4
               py-2.5
               text-sm
               font-bold
-              text-[#58748B]
-              transition-all
-              duration-200
+              text-slate-600
+              transition
 
-              hover:border-[#B9DCF2]
-              hover:bg-white
-              hover:text-[#0877E8]
+              hover:border-blue-200
+              hover:text-[#1256AF]
             "
           >
             <UserRound size={15} />
@@ -189,7 +143,6 @@ export default function LeaderboardLinks() {
               size={14}
               className="
                 transition-transform
-                duration-200
                 group-hover:translate-x-0.5
               "
             />

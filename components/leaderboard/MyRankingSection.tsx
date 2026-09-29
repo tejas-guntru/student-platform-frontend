@@ -9,7 +9,6 @@ import {
   Building2,
   CalendarDays,
   Globe2,
-  Sparkles,
   Trophy,
 } from "lucide-react";
 
@@ -32,40 +31,25 @@ export default function MyRankingSection({
 }: MyRankingSectionProps) {
   return (
     <section>
-      {/* HEADER */}
-
-      <div
+      <p
         className="
-          flex
-          items-center
-          gap-2
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.14em]
+          text-[#1256AF]
         "
       >
-        <p
-          className="
-            text-[10px]
-            font-bold
-            uppercase
-            tracking-[0.16em]
-            text-violet-600
-          "
-        >
-          My Ranking
-        </p>
-
-        <Sparkles
-          size={12}
-          className="text-[#38A9EE]"
-        />
-      </div>
+        My Ranking
+      </p>
 
       <h2
         className="
-          mt-2
-          text-2xl
+          mt-1.5
+          text-xl
           font-bold
-          tracking-[-0.035em]
-          text-[#173B63]
+          tracking-[-0.025em]
+          text-slate-900
         "
       >
         Your Position
@@ -73,155 +57,122 @@ export default function MyRankingSection({
 
       <p
         className="
-          mt-2
+          mt-1.5
           max-w-xl
           text-sm
           leading-6
-          text-[#71899D]
+          text-slate-600
         "
       >
-        Track how your verified coding performance ranks
-        across Trailbliz.
+        Track how your verified coding performance
+        ranks across Trailbliz.
       </p>
-
-      {/* NOT RANKED */}
 
       {!myRank ? (
         <div
           className="
-            relative
             mt-5
-            overflow-hidden
-            rounded-[24px]
+            flex
+            flex-col
+            gap-5
+            rounded-2xl
             border
-            border-[#DCEAF5]
+            border-slate-200
             bg-white
             p-5
-            shadow-[0_12px_34px_rgba(8,119,232,0.045)]
+            shadow-sm
+
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
 
             sm:p-6
           "
         >
           <div
             className="
-              pointer-events-none
-              absolute
-              -right-20
-              -top-20
-              h-52
-              w-52
-              rounded-full
-              bg-violet-500/10
-              blur-[80px]
-            "
-          />
-
-          <div
-            className="
-              relative
               flex
-              flex-col
-              gap-5
-
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
+              items-start
+              gap-4
             "
           >
             <div
               className="
                 flex
-                items-start
-                gap-4
-              "
-            >
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  shrink-0
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-violet-50
-                  text-violet-600
-                "
-              >
-                <Trophy size={20} />
-              </div>
-
-              <div>
-                <h3
-                  className="
-                    text-lg
-                    font-bold
-                    tracking-[-0.025em]
-                    text-[#173B63]
-                  "
-                >
-                  You are not ranked yet
-                </h3>
-
-                <p
-                  className="
-                    mt-2
-                    max-w-xl
-                    text-sm
-                    leading-6
-                    text-[#71899D]
-                  "
-                >
-                  Connect your coding profiles and complete
-                  verification before your score appears on
-                  the leaderboard.
-                </p>
-              </div>
-            </div>
-
-            <Link
-              href="/coding-profiles"
-              className="
-                group
-                inline-flex
-                w-fit
+                h-11
+                w-11
                 shrink-0
                 items-center
                 justify-center
-                gap-2
                 rounded-xl
-                bg-gradient-to-r
-                from-[#0877E8]
-                to-[#1294F2]
-                px-4
-                py-2.5
-                text-sm
-                font-bold
-                text-white
-                shadow-[0_8px_20px_rgba(8,119,232,0.18)]
-                transition-all
-                duration-200
-
-                hover:-translate-y-0.5
-                hover:shadow-[0_12px_26px_rgba(8,119,232,0.24)]
+                bg-slate-100
+                text-slate-600
               "
             >
-              Coding Profiles
+              <Trophy size={18} />
+            </div>
 
-              <ArrowRight
-                size={14}
+            <div>
+              <h3
                 className="
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-0.5
+                  text-base
+                  font-bold
+                  text-slate-900
                 "
-              />
-            </Link>
+              >
+                You are not ranked yet
+              </h3>
+
+              <p
+                className="
+                  mt-1.5
+                  max-w-xl
+                  text-sm
+                  leading-6
+                  text-slate-600
+                "
+              >
+                Connect your coding profiles and complete
+                verification before your score appears on
+                the leaderboard.
+              </p>
+            </div>
           </div>
+
+          <Link
+            href="/coding-profiles"
+            className="
+              group
+              inline-flex
+              w-fit
+              shrink-0
+              items-center
+              justify-center
+              gap-2
+              rounded-lg
+              bg-[#1256AF]
+              px-4
+              py-2.5
+              text-sm
+              font-bold
+              text-white
+              transition
+
+              hover:bg-[#0E4C9D]
+            "
+          >
+            Coding Profiles
+
+            <ArrowRight
+              size={14}
+              className="
+                transition-transform
+                group-hover:translate-x-0.5
+              "
+            />
+          </Link>
         </div>
       ) : (
-        /* RANK CARDS */
-
         <div
           className="
             mt-5
@@ -239,8 +190,6 @@ export default function MyRankingSection({
               myRank.globalRank
             }
             rank
-            accent="from-[#0877E8] to-[#38BDF8]"
-            iconClass="bg-[#EAF6FF] text-[#0877E8]"
           />
 
           <RankCard
@@ -250,8 +199,6 @@ export default function MyRankingSection({
               myRank.collegeRank
             }
             rank
-            accent="from-emerald-500 to-cyan-400"
-            iconClass="bg-emerald-50 text-emerald-600"
           />
 
           <RankCard
@@ -261,8 +208,6 @@ export default function MyRankingSection({
               myRank.graduationYearRank
             }
             rank
-            accent="from-cyan-500 to-[#38BDF8]"
-            iconClass="bg-cyan-50 text-cyan-600"
           />
 
           <RankCard
@@ -271,8 +216,6 @@ export default function MyRankingSection({
             value={
               myRank.overallScore
             }
-            accent="from-violet-500 to-[#0877E8]"
-            iconClass="bg-violet-50 text-violet-600"
           />
         </div>
       )}
@@ -285,8 +228,6 @@ function RankCard({
   label,
   value,
   rank = false,
-  accent,
-  iconClass,
 }: {
   icon: ElementType;
   label: string;
@@ -294,41 +235,18 @@ function RankCard({
     | number
     | null;
   rank?: boolean;
-  accent: string;
-  iconClass: string;
 }) {
   return (
     <article
       className="
-        group
-        relative
-        overflow-hidden
-        rounded-[22px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
         p-5
-        shadow-[0_10px_30px_rgba(8,119,232,0.04)]
-        transition-all
-        duration-300
-
-        hover:-translate-y-0.5
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_16px_38px_rgba(8,119,232,0.08)]
+        shadow-sm
       "
     >
-      <div
-        className={`
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          ${accent}
-        `}
-      />
-
       <div
         className="
           flex
@@ -343,8 +261,8 @@ function RankCard({
               text-[9px]
               font-bold
               uppercase
-              tracking-[0.12em]
-              text-[#879CAD]
+              tracking-[0.1em]
+              text-slate-500
             "
           >
             {label}
@@ -355,8 +273,8 @@ function RankCard({
               mt-3
               text-3xl
               font-bold
-              tracking-[-0.045em]
-              text-[#173B63]
+              tracking-[-0.04em]
+              text-slate-900
             "
           >
             {rank
@@ -366,18 +284,19 @@ function RankCard({
         </div>
 
         <div
-          className={`
+          className="
             flex
-            h-10
-            w-10
+            h-9
+            w-9
             shrink-0
             items-center
             justify-center
-            rounded-xl
-            ${iconClass}
-          `}
+            rounded-lg
+            bg-blue-50
+            text-[#1256AF]
+          "
         >
-          <Icon size={17} />
+          <Icon size={16} />
         </div>
       </div>
     </article>

@@ -2,57 +2,135 @@
 
 import axios from "axios";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import {
+  FormEvent,
+  useState,
+} from "react";
 
 import AuthInput from "@/components/auth/AuthInput";
 import { login } from "@/services/authService";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] =
+    useState("");
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [password, setPassword] =
+    useState("");
+
+  const [error, setError] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
 
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
+    if (loading) {
+      return;
+    }
+
     setError("");
+
+    const normalizedEmail =
+      email.trim().toLowerCase();
+
+    if (!normalizedEmail) {
+      setError("Email is required.");
+      return;
+    }
+
+    if (!password) {
+      setError("Password is required.");
+      return;
+    }
+
     setLoading(true);
 
     try {
       const response = await login({
-        email: email.trim(),
+        email: normalizedEmail,
         password,
       });
 
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("email", response.email);
-      localStorage.setItem("role", response.role);
+      /*
+       * Validate the role before storing
+       * the authenticated session.
+       */
+      if (
+        response.role !== "STUDENT" &&
+        response.role !== "ADMIN"
+      ) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
 
+        setError(
+          "Unknown user role returned by server."
+        );
+
+        return;
+      }
+
+      /*
+       * Store session
+       */
+      localStorage.setItem(
+        "token",
+        response.token
+      );
+
+      localStorage.setItem(
+        "email",
+        response.email
+      );
+
+      localStorage.setItem(
+        "role",
+        response.role
+      );
+
+      /*
+       * Role-based redirect
+       */
       if (response.role === "ADMIN") {
-        window.location.href = "/admin/dashboard";
+        window.location.replace(
+          "/admin/dashboard"
+        );
+
         return;
       }
 
-      if (response.role === "STUDENT") {
-        window.location.href = "/dashboard";
-        return;
-      }
-
-      setError("Unknown user role returned by server.");
+      window.location.replace(
+        "/student"
+      );
     } catch (error: unknown) {
-      console.error("LOGIN ERROR:", error);
+      console.error(
+        "LOGIN ERROR:",
+        error
+      );
 
-      if (axios.isAxiosError(error)) {
+      /*
+       * Make sure a failed login
+       * cannot leave an old session.
+       */
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("role");
+
+      if (
+        axios.isAxiosError(error)
+      ) {
         setError(
           error.response?.data?.message ||
             "Invalid email or password."
         );
       } else {
-        setError("Something went wrong.");
+        setError(
+          "Something went wrong. Please try again."
+        );
       }
     } finally {
       setLoading(false);
@@ -61,6 +139,10 @@ export default function LoginForm() {
 
   return (
     <div>
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
+
       <div className="text-center">
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#1256AF]/15 bg-[#1256AF]/5 px-3.5 py-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-[#1256AF]" />
@@ -75,9 +157,14 @@ export default function LoginForm() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-gray-600">
-          Continue building your profile and moving your career forward.
+          Continue building your profile and
+          moving your career forward.
         </p>
       </div>
+
+      {/* =====================================================
+          ERROR
+      ===================================================== */}
 
       {error && (
         <div
@@ -95,6 +182,10 @@ export default function LoginForm() {
         </div>
       )}
 
+      {/* =====================================================
+          FORM
+      ===================================================== */}
+
       <form
         onSubmit={handleSubmit}
         className="mt-8 space-y-5"
@@ -106,9 +197,15 @@ export default function LoginForm() {
           value={email}
           placeholder="Enter your email"
           autoComplete="email"
-          onChange={(event) =>
-            setEmail(event.target.value)
-          }
+          onChange={(event) => {
+            setEmail(
+              event.target.value
+            );
+
+            if (error) {
+              setError("");
+            }
+          }}
         />
 
         <AuthInput
@@ -118,14 +215,25 @@ export default function LoginForm() {
           value={password}
           placeholder="Enter your password"
           autoComplete="current-password"
-          onChange={(event) =>
-            setPassword(event.target.value)
-          }
+          onChange={(event) => {
+            setPassword(
+              event.target.value
+            );
+
+            if (error) {
+              setError("");
+            }
+          }}
         />
+
+        {/* =================================================
+            SUBMIT
+        ================================================= */}
 
         <button
           type="submit"
           disabled={loading}
+          aria-busy={loading}
           className="
             group
             flex
@@ -146,12 +254,15 @@ export default function LoginForm() {
             shadow-[0_12px_30px_rgba(18,86,175,0.18)]
             transition-all
             duration-200
+
             hover:-translate-y-0.5
             hover:bg-[#0F4994]
             hover:shadow-[0_16px_38px_rgba(18,86,175,0.22)]
+
             focus-visible:outline-none
             focus-visible:ring-4
             focus-visible:ring-[#1256AF]/20
+
             disabled:cursor-not-allowed
             disabled:translate-y-0
             disabled:opacity-60
@@ -160,6 +271,7 @@ export default function LoginForm() {
           {loading ? (
             <>
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
+
               Signing in...
             </>
           ) : (
@@ -176,6 +288,10 @@ export default function LoginForm() {
           )}
         </button>
       </form>
+
+      {/* =====================================================
+          REGISTER
+      ===================================================== */}
 
       <div className="mt-7 border-t border-gray-200 pt-6 text-center">
         <p className="text-sm text-gray-500">

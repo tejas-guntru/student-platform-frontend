@@ -37,16 +37,13 @@ interface ApplicationCardProps {
 
   onFileChange:
     (
-      applicationId:
-        string,
-      event:
-        ChangeEvent<HTMLInputElement>
+      applicationId: string,
+      event: ChangeEvent<HTMLInputElement>
     ) => void;
 
   onUpload:
     (
-      applicationId:
-        string
+      applicationId: string
     ) => void;
 }
 
@@ -68,69 +65,21 @@ export default function ApplicationCard({
   return (
     <article
       className="
-        group
-        relative
         overflow-hidden
-        rounded-[26px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        shadow-[0_14px_40px_rgba(8,119,232,0.05)]
-        transition-all
-        duration-300
-
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_20px_48px_rgba(8,119,232,0.08)]
+        shadow-sm
       "
     >
-      {/* TOP ACCENT */}
-
       <div
         className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-[#0877E8]
-          via-violet-500
-          to-[#38BDF8]
-        "
-      />
-
-      {/* GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-24
-          -top-24
-          h-64
-          w-64
-          rounded-full
-          bg-violet-500/0
-          blur-[90px]
-          transition-all
-          duration-300
-
-          group-hover:bg-violet-500/7
-        "
-      />
-
-      <div
-        className="
-          relative
           p-5
 
-          sm:p-7
+          sm:p-6
         "
       >
-        {/* ===================================================
-            TOP
-        =================================================== */}
-
         <div
           className="
             flex
@@ -158,9 +107,9 @@ export default function ApplicationCard({
                 shrink-0
                 items-center
                 justify-center
-                rounded-2xl
-                bg-[#EAF6FF]
-                text-[#0877E8]
+                rounded-xl
+                bg-[#EAF2FF]
+                text-[#1256AF]
               "
             >
               <BriefcaseBusiness
@@ -174,36 +123,28 @@ export default function ApplicationCard({
                   flex
                   items-center
                   gap-2
+                  text-sm
+                  text-slate-500
                 "
               >
                 <Building2
                   size={13}
-                  className="
-                    shrink-0
-                    text-[#8BB9D6]
-                  "
+                  className="shrink-0"
                 />
 
-                <p
-                  className="
-                    truncate
-                    text-sm
-                    font-semibold
-                    text-[#527087]
-                  "
-                >
+                <span className="truncate">
                   {application.companyName}
-                </p>
+                </span>
               </div>
 
               <h2
                 className="
                   mt-1.5
                   break-words
-                  text-2xl
+                  text-xl
                   font-bold
-                  tracking-[-0.035em]
-                  text-[#173B63]
+                  tracking-[-0.025em]
+                  text-slate-900
                 "
               >
                 {application.opportunityTitle}
@@ -211,12 +152,12 @@ export default function ApplicationCard({
 
               <div
                 className="
-                  mt-3
+                  mt-2
                   flex
                   items-center
                   gap-2
-                  text-sm
-                  text-[#8298AB]
+                  text-xs
+                  text-slate-400
                 "
               >
                 <CalendarDays
@@ -235,27 +176,21 @@ export default function ApplicationCard({
           </div>
 
           <ApplicationStatusBadge
-            status={
-              application.status
-            }
+            status={application.status}
           />
         </div>
 
-        {/* ===================================================
-            TIMELINE
-        =================================================== */}
-
         <div
           className="
-            mt-7
+            mt-6
             border-t
-            border-[#E7F0F7]
-            pt-6
+            border-slate-100
+            pt-5
           "
         >
           <div
             className="
-              mb-5
+              mb-4
               flex
               items-center
               gap-2
@@ -263,7 +198,7 @@ export default function ApplicationCard({
           >
             <FileText
               size={13}
-              className="text-[#0877E8]"
+              className="text-[#1256AF]"
             />
 
             <p
@@ -271,28 +206,29 @@ export default function ApplicationCard({
                 text-[10px]
                 font-bold
                 uppercase
-                tracking-[0.14em]
-                text-[#0877E8]
+                tracking-[0.12em]
+                text-[#1256AF]
               "
             >
-              Application Progress
+              Application progress
             </p>
           </div>
 
           <ApplicationTimeline
-            status={
-              application.status
-            }
+            status={application.status}
           />
         </div>
 
-        {/* ===================================================
-            RESUME REQUEST
-        =================================================== */}
-
         {application.status ===
           "RESUME_REQUESTED" && (
-          <div className="mt-7">
+          <div
+            className="
+              mt-6
+              border-t
+              border-slate-100
+              pt-6
+            "
+          >
             <ResumeUploadSection
               applicationId={
                 application.applicationId
@@ -313,40 +249,36 @@ export default function ApplicationCard({
           </div>
         )}
 
-        {/* ===================================================
-            RESUME SUBMITTED
-        =================================================== */}
-
         {resumeSubmitted && (
           <div
             className="
-              mt-7
+              mt-6
               flex
               items-start
               gap-3
-              rounded-[18px]
+              rounded-xl
               border
               border-emerald-200
-              bg-emerald-50/70
+              bg-emerald-50
               px-4
-              py-4
+              py-3.5
             "
           >
             <div
               className="
                 flex
-                h-9
-                w-9
+                h-8
+                w-8
                 shrink-0
                 items-center
                 justify-center
-                rounded-xl
+                rounded-lg
                 bg-emerald-100
                 text-emerald-600
               "
             >
               <CheckCircle2
-                size={16}
+                size={15}
               />
             </div>
 
@@ -363,53 +295,49 @@ export default function ApplicationCard({
 
               <p
                 className="
-                  mt-1
-                  text-sm
-                  leading-6
-                  text-emerald-700/80
+                  mt-0.5
+                  text-xs
+                  leading-5
+                  text-emerald-700
                 "
               >
-                Your resume has been received for this
-                application.
+                Your resume has been received for
+                this application.
               </p>
             </div>
           </div>
         )}
 
-        {/* ===================================================
-            REJECTED
-        =================================================== */}
-
         {application.status ===
           "REJECTED" && (
           <div
             className="
-              mt-7
+              mt-6
               flex
               items-start
               gap-3
-              rounded-[18px]
+              rounded-xl
               border
               border-red-200
-              bg-red-50/70
+              bg-red-50
               px-4
-              py-4
+              py-3.5
             "
           >
             <div
               className="
                 flex
-                h-9
-                w-9
+                h-8
+                w-8
                 shrink-0
                 items-center
                 justify-center
-                rounded-xl
+                rounded-lg
                 bg-red-100
                 text-red-600
               "
             >
-              <XCircle size={16} />
+              <XCircle size={15} />
             </div>
 
             <div>
@@ -425,14 +353,14 @@ export default function ApplicationCard({
 
               <p
                 className="
-                  mt-1
-                  text-sm
-                  leading-6
-                  text-red-700/75
+                  mt-0.5
+                  text-xs
+                  leading-5
+                  text-red-600
                 "
               >
-                This application was not selected for
-                further processing.
+                This application was not selected
+                for further processing.
               </p>
             </div>
           </div>

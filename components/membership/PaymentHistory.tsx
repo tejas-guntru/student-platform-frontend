@@ -1,3 +1,8 @@
+import {
+  CreditCard,
+  ReceiptText,
+} from "lucide-react";
+
 import type {
   PaymentResponse,
 } from "@/types/payment";
@@ -17,51 +22,157 @@ export default function PaymentHistory({
   payments,
 }: PaymentHistoryProps) {
   return (
-    <section className="mt-8 overflow-hidden rounded-[24px] border border-[#D8D5CC] bg-white shadow-[0_16px_45px_rgba(20,33,61,0.05)]">
-      <div className="border-b border-[#EEECE6] px-6 py-5">
-        <div className="flex items-center gap-3">
-          <span className="h-px w-8 bg-[#C9A227]" />
+    <section
+      className="
+        mt-6
+        overflow-hidden
+        rounded-2xl
+        border
+        border-slate-200
+        bg-white
+        shadow-sm
+      "
+    >
+      {/* HEADER */}
 
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#C9A227]">
-            Payments
-          </p>
+      <div
+        className="
+          flex
+          flex-col
+          gap-3
+          border-b
+          border-slate-200
+          px-5
+          py-5
+
+          sm:flex-row
+          sm:items-center
+          sm:justify-between
+          sm:px-6
+        "
+      >
+        <div
+          className="
+            flex
+            items-start
+            gap-3
+          "
+        >
+          <div
+            className="
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              bg-slate-100
+              text-slate-600
+            "
+          >
+            <ReceiptText size={17} />
+          </div>
+
+          <div>
+            <p
+              className="
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-[#1256AF]
+              "
+            >
+              Payments
+            </p>
+
+            <h2
+              className="
+                mt-1
+                text-lg
+                font-bold
+                tracking-[-0.02em]
+                text-slate-900
+              "
+            >
+              Payment History
+            </h2>
+
+            <p
+              className="
+                mt-1
+                text-xs
+                text-slate-500
+              "
+            >
+              Your membership payment records.
+            </p>
+          </div>
         </div>
 
-        <h2 className="mt-3 text-xl font-bold text-[#14213D]">
-          Payment History
-        </h2>
+        {payments.length > 0 && (
+          <span
+            className="
+              w-fit
+              rounded-full
+              border
+              border-slate-200
+              bg-slate-50
+              px-3
+              py-1.5
+              text-[10px]
+              font-bold
+              text-slate-600
+            "
+          >
+            {payments.length}{" "}
+            {payments.length === 1
+              ? "payment"
+              : "payments"}
+          </span>
+        )}
       </div>
 
       {payments.length === 0 ? (
-        <div className="p-10 text-center">
-          <p className="text-sm text-[#6B707B]">
-            No payments yet.
-          </p>
-        </div>
+        <EmptyPayments />
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[700px]">
-            <thead className="bg-[#F8F7F3]">
-              <tr className="text-left text-xs font-bold uppercase tracking-wider text-[#858994]">
-                <th className="px-6 py-4">
+          <table
+            className="
+              w-full
+              min-w-[760px]
+              border-collapse
+            "
+          >
+            <thead>
+              <tr
+                className="
+                  border-b
+                  border-slate-200
+                  bg-slate-50/80
+                  text-left
+                "
+              >
+                <TableHeading>
                   Date
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Order
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Payment
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4">
+                <TableHeading>
                   Status
-                </th>
+                </TableHeading>
 
-                <th className="px-6 py-4 text-right">
+                <TableHeading right>
                   Amount
-                </th>
+                </TableHeading>
               </tr>
             </thead>
 
@@ -72,25 +183,85 @@ export default function PaymentHistory({
                     key={
                       payment.paymentId
                     }
-                    className="border-t border-[#EEECE6] transition-colors hover:bg-[#FBFAF6]"
+                    className="
+                      border-b
+                      border-slate-100
+                      transition-colors
+                      last:border-b-0
+
+                      hover:bg-slate-50/70
+                    "
                   >
-                    <td className="px-6 py-4 text-sm text-[#5F6470]">
+                    <td
+                      className="
+                        whitespace-nowrap
+                        px-6
+                        py-4
+                        text-sm
+                        font-medium
+                        text-slate-700
+                      "
+                    >
                       {formatDate(
                         payment.paidAt ||
                           payment.createdAt
                       )}
                     </td>
 
-                    <td className="px-6 py-4 text-xs text-[#858994]">
-                      {payment.razorpayOrderId}
+                    <td
+                      className="
+                        max-w-[220px]
+                        px-6
+                        py-4
+                      "
+                    >
+                      <span
+                        className="
+                          block
+                          truncate
+                          font-mono
+                          text-xs
+                          text-slate-500
+                        "
+                        title={
+                          payment.razorpayOrderId
+                        }
+                      >
+                        {payment.razorpayOrderId}
+                      </span>
                     </td>
 
-                    <td className="px-6 py-4 text-xs text-[#858994]">
-                      {payment.razorpayPaymentId ||
-                        "-"}
+                    <td
+                      className="
+                        max-w-[220px]
+                        px-6
+                        py-4
+                      "
+                    >
+                      <span
+                        className="
+                          block
+                          truncate
+                          font-mono
+                          text-xs
+                          text-slate-500
+                        "
+                        title={
+                          payment.razorpayPaymentId ||
+                          undefined
+                        }
+                      >
+                        {payment.razorpayPaymentId ||
+                          "-"}
+                      </span>
                     </td>
 
-                    <td className="px-6 py-4">
+                    <td
+                      className="
+                        px-6
+                        py-4
+                      "
+                    >
                       <PaymentBadge
                         status={
                           payment.status
@@ -98,14 +269,23 @@ export default function PaymentHistory({
                       />
                     </td>
 
-                    <td className="px-6 py-4 text-right font-bold text-[#14213D]">
+                    <td
+                      className="
+                        whitespace-nowrap
+                        px-6
+                        py-4
+                        text-right
+                        text-sm
+                        font-bold
+                        tabular-nums
+                        text-slate-900
+                      "
+                    >
                       ₹
                       {(
                         payment.amount /
                         100
-                      ).toFixed(
-                        2
-                      )}
+                      ).toFixed(2)}
                     </td>
                   </tr>
                 )
@@ -115,5 +295,90 @@ export default function PaymentHistory({
         </div>
       )}
     </section>
+  );
+}
+
+function TableHeading({
+  children,
+  right = false,
+}: {
+  children:
+    React.ReactNode;
+  right?: boolean;
+}) {
+  return (
+    <th
+      className={`
+        whitespace-nowrap
+        px-6
+        py-3.5
+        text-[9px]
+        font-bold
+        uppercase
+        tracking-[0.12em]
+        text-slate-500
+
+        ${
+          right
+            ? "text-right"
+            : "text-left"
+        }
+      `}
+    >
+      {children}
+    </th>
+  );
+}
+
+function EmptyPayments() {
+  return (
+    <div
+      className="
+        px-6
+        py-12
+        text-center
+      "
+    >
+      <div
+        className="
+          mx-auto
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-xl
+          bg-slate-100
+          text-slate-500
+        "
+      >
+        <CreditCard size={19} />
+      </div>
+
+      <h3
+        className="
+          mt-4
+          text-sm
+          font-bold
+          text-slate-900
+        "
+      >
+        No payments yet
+      </h3>
+
+      <p
+        className="
+          mx-auto
+          mt-1.5
+          max-w-sm
+          text-sm
+          leading-6
+          text-slate-500
+        "
+      >
+        Your completed membership payments
+        will appear here.
+      </p>
+    </div>
   );
 }

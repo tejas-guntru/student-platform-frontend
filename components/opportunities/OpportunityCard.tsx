@@ -56,11 +56,9 @@ interface OpportunityCardProps {
   applyingId:
     string | null;
 
-  onApply:
-    (
-      opportunity:
-        Opportunity
-    ) => void;
+  onApply: (
+    opportunity: Opportunity
+  ) => void;
 }
 
 export default function OpportunityCard({
@@ -90,13 +88,11 @@ export default function OpportunityCard({
 
   const deadlineOpen =
     isDeadlineOpen(
-      opportunity
-        .applicationDeadline
+      opportunity.applicationDeadline
     );
 
   const opportunityActive =
-    opportunity.status ===
-    "ACTIVE";
+    opportunity.status === "ACTIVE";
 
   const canApply =
     !application &&
@@ -108,319 +104,225 @@ export default function OpportunityCard({
 
   const applying =
     opportunityId != null &&
-    applyingId ===
-      opportunityId;
+    applyingId === opportunityId;
 
   return (
     <article
       className="
-        group
-        relative
         overflow-hidden
-        rounded-[26px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        shadow-[0_14px_40px_rgba(8,119,232,0.05)]
-        transition-all
+        transition
         duration-300
 
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_20px_48px_rgba(8,119,232,0.085)]
+        hover:border-slate-300
+        hover:shadow-[0_14px_38px_rgba(15,23,42,0.055)]
       "
     >
-      {/* =====================================================
-          TOP ACCENT
-      ===================================================== */}
-
       <div
         className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-[#0877E8]
-          via-[#1294F2]
-          to-[#38BDF8]
-        "
-      />
+          grid
 
-      {/* BACKGROUND GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-28
-          -top-28
-          h-72
-          w-72
-          rounded-full
-          bg-[#38BDF8]/0
-          blur-[100px]
-          transition-all
-          duration-300
-
-          group-hover:bg-[#38BDF8]/8
-        "
-      />
-
-      <div
-        className="
-          relative
-          p-5
-
-          sm:p-7
+          lg:grid-cols-[minmax(0,1fr)_340px]
         "
       >
+        {/* =========================================
+            MAIN OPPORTUNITY INFORMATION
+        ========================================= */}
+
         <div
           className="
-            grid
-            gap-8
+            min-w-0
+            p-5
 
-            lg:grid-cols-[minmax(0,1fr)_360px]
+            sm:p-6
+
+            lg:p-7
           "
         >
-          {/* =================================================
-              MAIN CONTENT
-          ================================================= */}
+          {/* BADGES */}
 
-          <div className="min-w-0">
-            {/* BADGES */}
+          <div
+            className="
+              flex
+              flex-wrap
+              items-center
+              gap-2
+            "
+          >
+            <Badge>
+              <BriefcaseBusiness
+                size={11}
+                className="text-[#1256AF]"
+              />
 
-            <div
-              className="
-                flex
-                flex-wrap
-                gap-2
-              "
-            >
+              {opportunity.opportunityType}
+            </Badge>
+
+            <Badge>
+              {opportunity.workMode}
+            </Badge>
+
+            {opportunity.location && (
               <Badge>
-                <BriefcaseBusiness
+                <MapPin
                   size={11}
-                  className="text-[#0877E8]"
+                  className="text-[#1256AF]"
                 />
 
-                {opportunity.opportunityType}
+                {opportunity.location}
               </Badge>
+            )}
 
-              <Badge>
-                {opportunity.workMode}
-              </Badge>
-
-              {opportunity.location && (
-                <Badge>
-                  <MapPin
-                    size={11}
-                    className="text-[#0877E8]"
-                  />
-
-                  {opportunity.location}
-                </Badge>
-              )}
-
-              {application && (
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    rounded-full
-                    border
-                    border-emerald-200
-                    bg-emerald-50
-                    px-3
-                    py-1.5
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.08em]
-                    text-emerald-700
-                  "
-                >
-                  <CheckCircle2
-                    size={11}
-                  />
-
-                  Applied
-                </span>
-              )}
-            </div>
-
-            {/* TITLE */}
-
-            <div
-              className="
-                mt-5
-                flex
-                items-start
-                gap-4
-              "
-            >
-              <div
+            {application && (
+              <span
                 className="
-                  hidden
-                  h-11
-                  w-11
-                  shrink-0
+                  inline-flex
                   items-center
-                  justify-center
-                  rounded-2xl
-                  bg-[#EAF6FF]
-                  text-[#0877E8]
-
-                  sm:flex
+                  gap-1.5
+                  rounded-full
+                  bg-emerald-50
+                  px-2.5
+                  py-1.5
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.08em]
+                  text-emerald-700
                 "
               >
-                <BriefcaseBusiness
-                  size={18}
+                <CheckCircle2
+                  size={11}
                 />
-              </div>
 
-              <div className="min-w-0">
-                <h2
-                  className="
-                    break-words
-                    text-2xl
-                    font-bold
-                    tracking-[-0.035em]
-                    text-[#173B63]
-
-                    sm:text-[26px]
-                  "
-                >
-                  {opportunity.title}
-                </h2>
-
-                <div
-                  className="
-                    mt-2
-                    flex
-                    items-center
-                    gap-2
-                  "
-                >
-                  <Building2
-                    size={14}
-                    className="
-                      shrink-0
-                      text-[#8BB9D6]
-                    "
-                  />
-
-                  <p
-                    className="
-                      break-words
-                      text-base
-                      font-semibold
-                      text-[#527087]
-                    "
-                  >
-                    {opportunity.companyName}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* DESCRIPTION */}
-
-            <div
-              className="
-                mt-6
-                rounded-[18px]
-                border
-                border-[#E3EDF5]
-                bg-[#F8FCFF]
-                px-4
-                py-4
-              "
-            >
-              <p
-                className="
-                  whitespace-pre-line
-                  text-sm
-                  leading-7
-                  text-[#607C91]
-                "
-              >
-                {opportunity.description}
-              </p>
-            </div>
-
-            {/* COMPANY ELIGIBILITY */}
-
-            {opportunity.eligibility && (
-              <div
-                className="
-                  mt-6
-                  rounded-[18px]
-                  border
-                  border-[#DCEAF5]
-                  bg-white
-                  px-4
-                  py-4
-                "
-              >
-                <div
-                  className="
-                    flex
-                    items-center
-                    gap-2
-                  "
-                >
-                  <GraduationCap
-                    size={14}
-                    className="text-[#0877E8]"
-                  />
-
-                  <p
-                    className="
-                      text-[10px]
-                      font-bold
-                      uppercase
-                      tracking-[0.13em]
-                      text-[#0877E8]
-                    "
-                  >
-                    Company Eligibility
-                  </p>
-                </div>
-
-                <p
-                  className="
-                    mt-2
-                    whitespace-pre-line
-                    text-sm
-                    leading-6
-                    text-[#607C91]
-                  "
-                >
-                  {opportunity.eligibility}
-                </p>
-              </div>
+                Applied
+              </span>
             )}
           </div>
 
-          {/* =================================================
-              SIDE PANEL
-          ================================================= */}
+          {/* TITLE */}
 
-          <aside
+          <div
             className="
-              space-y-4
+              mt-5
+              flex
+              items-start
+              gap-4
             "
           >
-            {/* OPPORTUNITY DETAILS */}
-
             <div
               className="
-                rounded-[20px]
+                hidden
+                h-11
+                w-11
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#1256AF]/[0.07]
+                text-[#1256AF]
+
+                sm:flex
+              "
+            >
+              <BriefcaseBusiness
+                size={18}
+              />
+            </div>
+
+            <div className="min-w-0">
+              <h2
+                className="
+                  break-words
+                  text-xl
+                  font-bold
+                  tracking-[-0.03em]
+                  text-slate-950
+
+                  sm:text-2xl
+                "
+              >
+                {opportunity.title}
+              </h2>
+
+              <div
+                className="
+                  mt-2
+                  flex
+                  items-center
+                  gap-2
+                "
+              >
+                <Building2
+                  size={14}
+                  className="
+                    shrink-0
+                    text-slate-400
+                  "
+                />
+
+                <p
+                  className="
+                    break-words
+                    text-sm
+                    font-semibold
+                    text-slate-600
+                  "
+                >
+                  {opportunity.companyName}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* DESCRIPTION */}
+
+          <div
+            className="
+              mt-6
+              border-t
+              border-slate-100
+              pt-5
+            "
+          >
+            <p
+              className="
+                mb-2
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-slate-400
+              "
+            >
+              About the opportunity
+            </p>
+
+            <p
+              className="
+                whitespace-pre-line
+                text-sm
+                leading-7
+                text-slate-600
+              "
+            >
+              {opportunity.description}
+            </p>
+          </div>
+
+          {/* COMPANY ELIGIBILITY */}
+
+          {opportunity.eligibility && (
+            <div
+              className="
+                mt-6
+                rounded-xl
                 border
-                border-[#DCEAF5]
-                bg-[#F8FCFF]
-                p-5
+                border-slate-200
+                bg-[#F8FAFC]
+                p-4
               "
             >
               <div
@@ -430,133 +332,350 @@ export default function OpportunityCard({
                   gap-2
                 "
               >
-                <BriefcaseBusiness
+                <GraduationCap
                   size={14}
-                  className="text-[#0877E8]"
+                  className="text-[#1256AF]"
                 />
 
                 <p
                   className="
-                    text-[10px]
+                    text-[9px]
                     font-bold
                     uppercase
                     tracking-[0.13em]
-                    text-[#0877E8]
+                    text-[#1256AF]
                   "
                 >
-                  Opportunity Details
+                  Company Eligibility
                 </p>
               </div>
 
-              <div
+              <p
                 className="
-                  mt-4
-                  space-y-4
+                  mt-2
+                  whitespace-pre-line
+                  text-sm
+                  leading-6
+                  text-slate-600
                 "
               >
-                <OpportunityDetail
-                  icon={
-                    <GraduationCap
-                      size={14}
-                    />
-                  }
-                  label="Graduation Year"
-                  value={
-                    formatGraduationYears(
-                      opportunity
-                    )
-                  }
-                />
-
-                <OpportunityDetail
-                  icon={
-                    <GraduationCap
-                      size={14}
-                    />
-                  }
-                  label="Your Graduation Year"
-                  value={
-                    studentGraduationYear
-                      ? String(
-                          studentGraduationYear
-                        )
-                      : "Not added"
-                  }
-                />
-
-                <OpportunityDetail
-                  icon={
-                    <CalendarDays
-                      size={14}
-                    />
-                  }
-                  label="Deadline"
-                  value={
-                    formatOpportunityDate(
-                      opportunity
-                        .applicationDeadline
-                    )
-                  }
-                />
-
-                <OpportunityDetail
-                  icon={
-                    <BriefcaseBusiness
-                      size={14}
-                    />
-                  }
-                  label="Status"
-                  value={
-                    opportunity.status
-                  }
-                />
-              </div>
+                {opportunity.eligibility}
+              </p>
             </div>
+          )}
+        </div>
 
-            {/* ELIGIBILITY */}
+        {/* =========================================
+            APPLICATION PANEL
+        ========================================= */}
+
+        <aside
+          className="
+            border-t
+            border-slate-200
+            bg-[#FAFBFC]
+            p-5
+
+            sm:p-6
+
+            lg:border-l
+            lg:border-t-0
+          "
+        >
+          {/* OPPORTUNITY DETAILS */}
+
+          <div>
+            <p
+              className="
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.14em]
+                text-slate-400
+              "
+            >
+              Opportunity details
+            </p>
 
             <div
               className="
-                rounded-[20px]
-                border
-                border-[#DCEAF5]
-                bg-white
-                p-5
-                shadow-[0_8px_24px_rgba(8,119,232,0.035)]
+                mt-4
+                grid
+                gap-4
               "
             >
-              <div>
-                <p
-                  className="
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.13em]
-                    text-[#0877E8]
-                  "
-                >
-                  Your Eligibility
-                </p>
-
-                <h3
-                  className="
-                    mt-1
-                    font-bold
-                    text-[#173B63]
-                  "
-                >
-                  Application Readiness
-                </h3>
-              </div>
-
-              <div className="mt-4">
-                <OpportunityEligibility
-                  opportunity={
+              <OpportunityDetail
+                icon={
+                  <GraduationCap
+                    size={14}
+                  />
+                }
+                label="Eligible graduation"
+                value={
+                  formatGraduationYears(
                     opportunity
-                  }
-                  application={
-                    application
-                  }
+                  )
+                }
+              />
+
+              <OpportunityDetail
+                icon={
+                  <GraduationCap
+                    size={14}
+                  />
+                }
+                label="Your graduation year"
+                value={
+                  studentGraduationYear
+                    ? String(
+                        studentGraduationYear
+                      )
+                    : "Not added"
+                }
+              />
+
+              <OpportunityDetail
+                icon={
+                  <CalendarDays
+                    size={14}
+                  />
+                }
+                label="Application deadline"
+                value={
+                  formatOpportunityDate(
+                    opportunity
+                      .applicationDeadline
+                  )
+                }
+              />
+
+              <OpportunityDetail
+                icon={
+                  <BriefcaseBusiness
+                    size={14}
+                  />
+                }
+                label="Opportunity status"
+                value={
+                  opportunity.status
+                }
+              />
+            </div>
+          </div>
+
+          {/* READINESS */}
+
+          <div
+            className="
+              mt-6
+              border-t
+              border-slate-200
+              pt-5
+            "
+          >
+            <div>
+              <p
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.14em]
+                  text-[#1256AF]
+                "
+              >
+                Your eligibility
+              </p>
+
+              <h3
+                className="
+                  mt-1
+                  text-sm
+                  font-bold
+                  text-slate-900
+                "
+              >
+                Application readiness
+              </h3>
+            </div>
+
+            <div className="mt-4">
+              <OpportunityEligibility
+                opportunity={
+                  opportunity
+                }
+                application={
+                  application
+                }
+                membershipEligible={
+                  membershipEligible
+                }
+                profileEligible={
+                  profileEligible
+                }
+                graduationEligible={
+                  graduationEligible
+                }
+                deadlineOpen={
+                  deadlineOpen
+                }
+                opportunityActive={
+                  opportunityActive
+                }
+                profilePercentage={
+                  profilePercentage
+                }
+                studentGraduationYear={
+                  studentGraduationYear
+                }
+              />
+            </div>
+
+            {/* EXISTING APPLICATION */}
+
+            {application ? (
+              <div className="mt-5">
+                <div
+                  className="
+                    rounded-xl
+                    border
+                    border-emerald-200
+                    bg-emerald-50/60
+                    p-4
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                    "
+                  >
+                    <CheckCircle2
+                      size={15}
+                      className="text-emerald-600"
+                    />
+
+                    <p
+                      className="
+                        text-[9px]
+                        font-bold
+                        uppercase
+                        tracking-[0.11em]
+                        text-emerald-700
+                      "
+                    >
+                      Application submitted
+                    </p>
+                  </div>
+
+                  <p
+                    className="
+                      mt-2
+                      text-sm
+                      font-bold
+                      text-emerald-800
+                    "
+                  >
+                    {formatStatus(
+                      application.status
+                    )}
+                  </p>
+                </div>
+
+                <Link
+                  href="/applications"
+                  className="
+                    group
+                    mt-3
+                    inline-flex
+                    min-h-[42px]
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-lg
+                    border
+                    border-slate-200
+                    bg-white
+                    px-4
+                    text-sm
+                    font-semibold
+                    text-slate-700
+                    transition
+
+                    hover:border-slate-300
+                    hover:bg-slate-50
+                    hover:text-slate-950
+                  "
+                >
+                  View Application
+
+                  <ArrowRight
+                    size={14}
+                    className="
+                      transition-transform
+                      group-hover:translate-x-0.5
+                    "
+                  />
+                </Link>
+              </div>
+            ) : canApply ? (
+              /* APPLY */
+
+              <button
+                type="button"
+                disabled={applying}
+                onClick={() =>
+                  onApply(
+                    opportunity
+                  )
+                }
+                className="
+                  mt-5
+                  inline-flex
+                  min-h-[44px]
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-lg
+                  bg-[#1256AF]
+                  px-5
+                  text-sm
+                  font-bold
+                  text-white
+                  transition
+
+                  hover:bg-[#0E4C9D]
+
+                  disabled:cursor-not-allowed
+                  disabled:opacity-60
+                "
+              >
+                {applying ? (
+                  <>
+                    <LoaderCircle
+                      size={16}
+                      className="animate-spin"
+                    />
+
+                    Applying...
+                  </>
+                ) : (
+                  <>
+                    Apply Now
+
+                    <ArrowRight
+                      size={15}
+                    />
+                  </>
+                )}
+              </button>
+            ) : (
+              /* BLOCKED */
+
+              <div className="mt-5">
+                <BlockedAction
                   membershipEligible={
                     membershipEligible
                   }
@@ -572,181 +691,11 @@ export default function OpportunityCard({
                   opportunityActive={
                     opportunityActive
                   }
-                  profilePercentage={
-                    profilePercentage
-                  }
-                  studentGraduationYear={
-                    studentGraduationYear
-                  }
                 />
               </div>
-
-              {/* =============================================
-                  EXISTING APPLICATION
-              ============================================= */}
-
-              {application ? (
-                <div className="mt-6">
-                  <div
-                    className="
-                      rounded-[16px]
-                      border
-                      border-[#CBE5F8]
-                      bg-[#EFF8FF]
-                      p-4
-                    "
-                  >
-                    <p
-                      className="
-                        text-[9px]
-                        font-bold
-                        uppercase
-                        tracking-[0.11em]
-                        text-[#71899D]
-                      "
-                    >
-                      Application Status
-                    </p>
-
-                    <p
-                      className="
-                        mt-1.5
-                        font-bold
-                        text-[#0877E8]
-                      "
-                    >
-                      {formatStatus(
-                        application.status
-                      )}
-                    </p>
-                  </div>
-
-                  <Link
-                    href="/applications"
-                    className="
-                      group
-                      mt-3
-                      inline-flex
-                      w-full
-                      items-center
-                      justify-center
-                      gap-2
-                      rounded-xl
-                      border
-                      border-[#CBE5F8]
-                      bg-white
-                      px-5
-                      py-3
-                      text-sm
-                      font-bold
-                      text-[#0877E8]
-                      transition-all
-                      duration-200
-
-                      hover:border-[#9FD2F1]
-                      hover:bg-[#F4FAFF]
-                    "
-                  >
-                    View Application
-
-                    <ArrowRight
-                      size={14}
-                      className="
-                        transition-transform
-                        duration-200
-                        group-hover:translate-x-0.5
-                      "
-                    />
-                  </Link>
-                </div>
-              ) : canApply ? (
-                /* ===========================================
-                    APPLY
-                =========================================== */
-
-                <button
-                  type="button"
-                  disabled={applying}
-                  onClick={() =>
-                    onApply(
-                      opportunity
-                    )
-                  }
-                  className="
-                    mt-6
-                    inline-flex
-                    w-full
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    bg-gradient-to-r
-                    from-[#0877E8]
-                    to-[#1294F2]
-                    px-5
-                    py-3
-                    text-sm
-                    font-bold
-                    text-white
-                    shadow-[0_9px_22px_rgba(8,119,232,0.2)]
-                    transition-all
-                    duration-200
-
-                    hover:-translate-y-0.5
-                    hover:shadow-[0_13px_28px_rgba(8,119,232,0.26)]
-
-                    disabled:cursor-not-allowed
-                    disabled:opacity-60
-                    disabled:hover:translate-y-0
-                  "
-                >
-                  {applying ? (
-                    <>
-                      <LoaderCircle
-                        size={16}
-                        className="animate-spin"
-                      />
-
-                      Applying...
-                    </>
-                  ) : (
-                    <>
-                      Apply Now
-
-                      <ArrowRight
-                        size={15}
-                      />
-                    </>
-                  )}
-                </button>
-              ) : (
-                /* ===========================================
-                    BLOCKED
-                =========================================== */
-
-                <div className="mt-6">
-                  <BlockedAction
-                    membershipEligible={
-                      membershipEligible
-                    }
-                    profileEligible={
-                      profileEligible
-                    }
-                    graduationEligible={
-                      graduationEligible
-                    }
-                    deadlineOpen={
-                      deadlineOpen
-                    }
-                    opportunityActive={
-                      opportunityActive
-                    }
-                  />
-                </div>
-              )}
-            </div>
-          </aside>
-        </div>
+            )}
+          </div>
+        </aside>
       </div>
     </article>
   );
@@ -766,13 +715,13 @@ function Badge({
         gap-1.5
         rounded-full
         border
-        border-[#D5E7F3]
-        bg-[#F5FAFE]
-        px-3
+        border-slate-200
+        bg-slate-50
+        px-2.5
         py-1.5
-        text-[10px]
+        text-[9px]
         font-bold
-        text-[#52748D]
+        text-slate-600
       "
     >
       {children}
@@ -787,8 +736,12 @@ function OpportunityDetail({
 }: {
   icon:
     ReactNode;
-  label: string;
-  value: string;
+
+  label:
+    string;
+
+  value:
+    string;
 }) {
   return (
     <div
@@ -800,7 +753,6 @@ function OpportunityDetail({
     >
       <div
         className="
-          mt-0.5
           flex
           h-8
           w-8
@@ -808,8 +760,10 @@ function OpportunityDetail({
           items-center
           justify-center
           rounded-lg
-          bg-[#EAF6FF]
-          text-[#0877E8]
+          border
+          border-slate-200
+          bg-white
+          text-[#1256AF]
         "
       >
         {icon}
@@ -818,11 +772,11 @@ function OpportunityDetail({
       <div className="min-w-0">
         <p
           className="
-            text-[9px]
+            text-[8px]
             font-bold
             uppercase
             tracking-[0.1em]
-            text-[#879CAD]
+            text-slate-400
           "
         >
           {label}
@@ -833,8 +787,8 @@ function OpportunityDetail({
             mt-1
             break-words
             text-sm
-            font-bold
-            text-[#355E7A]
+            font-semibold
+            text-slate-700
           "
         >
           {value}

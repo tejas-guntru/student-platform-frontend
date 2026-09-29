@@ -52,409 +52,328 @@ export default function ExperienceCard({
     <article
       className="
         group
-        relative
-        overflow-hidden
-        rounded-[24px]
+        rounded-[22px]
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        shadow-[0_12px_34px_rgba(8,119,232,0.045)]
-        transition-all
+        p-5
+        transition
         duration-300
 
-        hover:-translate-y-0.5
-        hover:border-[#B8DCF3]
-        hover:shadow-[0_18px_42px_rgba(8,119,232,0.085)]
+        hover:border-[#1256AF]/20
+        hover:shadow-[0_16px_45px_rgba(15,23,42,0.06)]
+
+        sm:p-6
       "
     >
-      {/* TOP ACCENT */}
+      {/* HEADER */}
 
       <div
         className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-emerald-500
-          via-[#0877E8]
-          to-[#38BDF8]
-        "
-      />
+          flex
+          flex-col
+          gap-5
 
-      {/* BACKGROUND GLOW */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -right-24
-          -top-24
-          h-64
-          w-64
-          rounded-full
-          bg-emerald-500/0
-          blur-[90px]
-          transition-all
-          duration-300
-
-          group-hover:bg-emerald-500/8
-        "
-      />
-
-      <div
-        className="
-          relative
-          p-5
-
-          sm:p-6
+          sm:flex-row
+          sm:items-start
+          sm:justify-between
         "
       >
-        {/* ===================================================
-            HEADER
-        =================================================== */}
-
         <div
           className="
             flex
-            flex-col
-            gap-5
-
-            sm:flex-row
-            sm:items-start
-            sm:justify-between
+            min-w-0
+            items-start
+            gap-4
           "
         >
           <div
             className="
               flex
-              min-w-0
-              items-start
-              gap-4
-            "
-          >
-            <div
-              className="
-                flex
-                h-11
-                w-11
-                shrink-0
-                items-center
-                justify-center
-                rounded-2xl
-                bg-emerald-50
-                text-emerald-600
-              "
-            >
-              <BriefcaseBusiness
-                size={19}
-              />
-            </div>
-
-            <div className="min-w-0">
-              <p
-                className="
-                  text-[9px]
-                  font-bold
-                  uppercase
-                  tracking-[0.13em]
-                  text-[#8A9FAF]
-                "
-              >
-                Professional Experience
-              </p>
-
-              <h3
-                className="
-                  mt-1.5
-                  break-words
-                  text-xl
-                  font-bold
-                  tracking-[-0.03em]
-                  text-[#173B63]
-
-                  sm:text-[22px]
-                "
-              >
-                {experience.roleTitle}
-              </h3>
-
-              <div
-                className="
-                  mt-1.5
-                  flex
-                  items-center
-                  gap-2
-                "
-              >
-                <Building2
-                  size={14}
-                  className="
-                    shrink-0
-                    text-[#8BB9D6]
-                  "
-                />
-
-                <p
-                  className="
-                    break-words
-                    text-sm
-                    font-semibold
-                    text-[#527087]
-                  "
-                >
-                  {experience.companyName}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* ACTIONS */}
-
-          <div
-            className="
-              flex
+              h-11
+              w-11
               shrink-0
               items-center
-              gap-2
+              justify-center
+              rounded-xl
+              bg-[#1256AF]/[0.07]
+              text-[#1256AF]
             "
           >
-            <button
-              type="button"
-              onClick={() =>
-                onEdit(
-                  experience
-                )
-              }
-              disabled={deleting}
-              className="
-                inline-flex
-                items-center
-                justify-center
-                gap-1.5
-                rounded-xl
-                border
-                border-[#D5E7F3]
-                bg-[#F8FCFF]
-                px-3
-                py-2
-                text-xs
-                font-bold
-                text-[#58748B]
-                transition-all
-                duration-200
-
-                hover:border-[#B9DCF2]
-                hover:bg-white
-                hover:text-[#0877E8]
-
-                disabled:cursor-not-allowed
-                disabled:opacity-50
-              "
-            >
-              <Pencil size={13} />
-
-              Edit
-            </button>
-
-            <button
-              type="button"
-              disabled={deleting}
-              onClick={() =>
-                onDelete(
-                  experience
-                )
-              }
-              className="
-                inline-flex
-                items-center
-                justify-center
-                gap-1.5
-                rounded-xl
-                border
-                border-red-200
-                bg-red-50
-                px-3
-                py-2
-                text-xs
-                font-bold
-                text-red-600
-                transition-all
-                duration-200
-
-                hover:border-red-300
-                hover:bg-red-100
-
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-              "
-            >
-              {deleting ? (
-                <>
-                  <LoaderCircle
-                    size={13}
-                    className="animate-spin"
-                  />
-
-                  Deleting...
-                </>
-              ) : (
-                <>
-                  <Trash2 size={13} />
-
-                  Delete
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* ===================================================
-            BADGES
-        =================================================== */}
-
-        <div
-          className="
-            mt-5
-            flex
-            flex-wrap
-            gap-2
-          "
-        >
-          <Badge>
             <BriefcaseBusiness
-              size={11}
-              className="text-[#0877E8]"
+              size={18}
             />
+          </div>
 
-            {formatEmploymentType(
-              experience.employmentType
-            )}
-          </Badge>
-
-          {experience.location && (
-            <Badge>
-              <MapPin
-                size={11}
-                className="text-[#0877E8]"
-              />
-
-              {experience.location}
-            </Badge>
-          )}
-
-          {experience.currentlyWorking && (
-            <span
+          <div className="min-w-0">
+            <p
               className="
-                inline-flex
-                items-center
-                gap-1.5
-                rounded-full
-                border
-                border-emerald-200
-                bg-emerald-50
-                px-3
-                py-1.5
-                text-[10px]
+                text-[9px]
                 font-bold
                 uppercase
-                tracking-[0.08em]
-                text-emerald-700
+                tracking-[0.13em]
+                text-slate-400
               "
             >
-              <span
+              Professional experience
+            </p>
+
+            <h3
+              className="
+                mt-1.5
+                break-words
+                text-xl
+                font-bold
+                tracking-[-0.03em]
+                text-slate-900
+              "
+            >
+              {experience.roleTitle}
+            </h3>
+
+            <div
+              className="
+                mt-1.5
+                flex
+                items-center
+                gap-2
+              "
+            >
+              <Building2
+                size={13}
                 className="
-                  h-1.5
-                  w-1.5
-                  rounded-full
-                  bg-emerald-500
+                  shrink-0
+                  text-slate-400
                 "
               />
 
-              Current
-            </span>
-          )}
+              <p
+                className="
+                  break-words
+                  text-sm
+                  font-semibold
+                  text-slate-600
+                "
+              >
+                {experience.companyName}
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* ===================================================
-            TIMELINE
-        =================================================== */}
+        {/* ACTIONS */}
 
         <div
           className="
-            mt-5
-            inline-flex
+            flex
+            shrink-0
             items-center
             gap-2
-            rounded-xl
-            border
-            border-[#E0ECF5]
-            bg-[#F8FCFF]
-            px-3.5
-            py-2.5
           "
         >
-          <CalendarDays
-            size={13}
+          <button
+            type="button"
+            onClick={() =>
+              onEdit(experience)
+            }
+            disabled={deleting}
             className="
-              shrink-0
-              text-[#8BB9D6]
-            "
-          />
-
-          <span
-            className="
+              inline-flex
+              min-h-9
+              items-center
+              justify-center
+              gap-1.5
+              rounded-lg
+              border
+              border-slate-200
+              bg-white
+              px-3
               text-xs
               font-semibold
-              text-[#68849A]
+              text-slate-600
+              transition
+
+              hover:border-[#1256AF]/20
+              hover:bg-[#1256AF]/[0.03]
+              hover:text-[#1256AF]
+
+              disabled:cursor-not-allowed
+              disabled:opacity-50
             "
           >
-            {formatMonth(
-              experience.startDate
-            )}
+            <Pencil size={12} />
 
-            {" → "}
+            Edit
+          </button>
 
-            {experience.currentlyWorking
-              ? "Present"
-              : experience.endDate
-                ? formatMonth(
-                    experience.endDate
-                  )
-                : "-"}
-          </span>
-        </div>
-
-        {/* ===================================================
-            DESCRIPTION
-        =================================================== */}
-
-        {experience.description && (
-          <div
+          <button
+            type="button"
+            onClick={() =>
+              onDelete(experience)
+            }
+            disabled={deleting}
             className="
-              mt-5
-              rounded-[18px]
+              inline-flex
+              min-h-9
+              items-center
+              justify-center
+              gap-1.5
+              rounded-lg
               border
-              border-[#E1ECF5]
-              bg-[#F8FCFF]
-              px-4
-              py-4
+              border-red-100
+              bg-white
+              px-3
+              text-xs
+              font-semibold
+              text-red-600
+              transition
+
+              hover:border-red-200
+              hover:bg-red-50
+
+              disabled:cursor-not-allowed
+              disabled:opacity-50
             "
           >
-            <p
+            {deleting ? (
+              <>
+                <LoaderCircle
+                  size={12}
+                  className="animate-spin"
+                />
+
+                Deleting...
+              </>
+            ) : (
+              <>
+                <Trash2 size={12} />
+
+                Delete
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* META */}
+
+      <div
+        className="
+          mt-5
+          flex
+          flex-wrap
+          gap-2
+        "
+      >
+        <Badge>
+          <BriefcaseBusiness
+            size={10}
+            className="text-[#1256AF]"
+          />
+
+          {formatEmploymentType(
+            experience.employmentType
+          )}
+        </Badge>
+
+        {experience.location && (
+          <Badge>
+            <MapPin
+              size={10}
+              className="text-[#1256AF]"
+            />
+
+            {experience.location}
+          </Badge>
+        )}
+
+        {experience.currentlyWorking && (
+          <span
+            className="
+              inline-flex
+              items-center
+              gap-1.5
+              rounded-full
+              border
+              border-emerald-200
+              bg-emerald-50
+              px-2.5
+              py-1
+              text-[10px]
+              font-bold
+              text-emerald-700
+            "
+          >
+            <span
               className="
-                whitespace-pre-line
-                text-sm
-                leading-6
-                text-[#607C91]
+                h-1.5
+                w-1.5
+                rounded-full
+                bg-emerald-500
               "
-            >
-              {experience.description}
-            </p>
-          </div>
+            />
+
+            Current
+          </span>
         )}
       </div>
+
+      {/* TIMELINE */}
+
+      <div
+        className="
+          mt-4
+          flex
+          items-center
+          gap-2
+          text-xs
+          font-medium
+          text-slate-500
+        "
+      >
+        <CalendarDays
+          size={13}
+          className="
+            shrink-0
+            text-[#1256AF]
+          "
+        />
+
+        <span>
+          {formatMonth(
+            experience.startDate
+          )}
+
+          {" → "}
+
+          {experience.currentlyWorking
+            ? "Present"
+            : experience.endDate
+              ? formatMonth(
+                  experience.endDate
+                )
+              : "-"}
+        </span>
+      </div>
+
+      {/* DESCRIPTION */}
+
+      {experience.description && (
+        <p
+          className="
+            mt-5
+            whitespace-pre-line
+            border-t
+            border-slate-100
+            pt-5
+            text-sm
+            leading-6
+            text-slate-600
+          "
+        >
+          {experience.description}
+        </p>
+      )}
     </article>
   );
 }
@@ -472,13 +391,13 @@ function Badge({
         gap-1.5
         rounded-full
         border
-        border-[#D5E7F3]
-        bg-[#F5FAFE]
-        px-3
-        py-1.5
+        border-slate-200
+        bg-slate-50
+        px-2.5
+        py-1
         text-[10px]
-        font-bold
-        text-[#52748D]
+        font-semibold
+        text-slate-600
       "
     >
       {children}

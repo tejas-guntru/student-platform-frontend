@@ -8,7 +8,6 @@ import {
   Building2,
   GraduationCap,
   LoaderCircle,
-  Sparkles,
   Trophy,
   UserRound,
   Users,
@@ -52,8 +51,7 @@ interface LeaderboardTableProps {
 
   getEntryRank:
     (
-      entry:
-        LeaderboardEntry
+      entry: LeaderboardEntry
     ) =>
       | number
       | null;
@@ -72,36 +70,15 @@ export default function LeaderboardTable({
   return (
     <section
       className="
-        relative
         overflow-hidden
-        rounded-[26px]
+        rounded-2xl
         border
-        border-[#DCEAF5]
+        border-slate-200
         bg-white
-        shadow-[0_14px_40px_rgba(8,119,232,0.05)]
+        shadow-sm
       "
     >
-      {/* =====================================================
-          TOP ACCENT
-      ===================================================== */}
-
-      <div
-        className="
-          absolute
-          left-0
-          right-0
-          top-0
-          h-[3px]
-          bg-gradient-to-r
-          from-violet-500
-          via-[#0877E8]
-          to-[#38BDF8]
-        "
-      />
-
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+      {/* HEADER */}
 
       <div
         className="
@@ -109,7 +86,7 @@ export default function LeaderboardTable({
           flex-col
           gap-4
           border-b
-          border-[#E7F0F7]
+          border-slate-200
           px-5
           py-5
 
@@ -135,46 +112,33 @@ export default function LeaderboardTable({
               items-center
               justify-center
               rounded-xl
-              bg-violet-50
-              text-violet-600
+              bg-blue-50
+              text-[#1256AF]
             "
           >
             <Trophy size={17} />
           </div>
 
           <div>
-            <div
+            <p
               className="
-                flex
-                items-center
-                gap-2
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.12em]
+                text-[#1256AF]
               "
             >
-              <p
-                className="
-                  text-[9px]
-                  font-bold
-                  uppercase
-                  tracking-[0.13em]
-                  text-violet-600
-                "
-              >
-                Rankings
-              </p>
-
-              <Sparkles
-                size={11}
-                className="text-[#38A9EE]"
-              />
-            </div>
+              Rankings
+            </p>
 
             <h2
               className="
                 mt-1
                 text-lg
                 font-bold
-                tracking-[-0.025em]
-                text-[#173B63]
+                tracking-[-0.02em]
+                text-slate-900
               "
             >
               {tableTitle}
@@ -187,7 +151,7 @@ export default function LeaderboardTable({
                 items-center
                 gap-1.5
                 text-xs
-                text-[#879CAD]
+                text-slate-500
               "
             >
               <Users size={12} />
@@ -212,8 +176,7 @@ export default function LeaderboardTable({
             gap-2
           "
         >
-          {viewMode ===
-            "COLLEGE" &&
+          {viewMode === "COLLEGE" &&
             collegeName && (
               <ContextBadge
                 icon={
@@ -226,8 +189,7 @@ export default function LeaderboardTable({
               </ContextBadge>
             )}
 
-          {viewMode ===
-            "YEAR" &&
+          {viewMode === "YEAR" &&
             selectedYear && (
               <ContextBadge
                 icon={
@@ -243,64 +205,11 @@ export default function LeaderboardTable({
         </div>
       </div>
 
-      {/* =====================================================
-          LOADING
-      ===================================================== */}
+      {/* CONTENT */}
 
       {tableLoading ? (
-        <div
-          className="
-            flex
-            min-h-[280px]
-            flex-col
-            items-center
-            justify-center
-            px-6
-            py-12
-            text-center
-          "
-        >
-          <div
-            className="
-              flex
-              h-12
-              w-12
-              items-center
-              justify-center
-              rounded-2xl
-              bg-[#EAF6FF]
-              text-[#0877E8]
-            "
-          >
-            <LoaderCircle
-              size={22}
-              className="animate-spin"
-            />
-          </div>
-
-          <p
-            className="
-              mt-4
-              text-sm
-              font-semibold
-              text-[#527087]
-            "
-          >
-            Loading leaderboard...
-          </p>
-
-          <p
-            className="
-              mt-1
-              text-xs
-              text-[#8AA0B2]
-            "
-          >
-            Fetching the latest rankings.
-          </p>
-        </div>
-      ) : leaderboard.length ===
-        0 ? (
+        <LeaderboardLoading />
+      ) : leaderboard.length === 0 ? (
         <EmptyLeaderboard
           viewMode={
             viewMode
@@ -310,10 +219,6 @@ export default function LeaderboardTable({
           }
         />
       ) : (
-        /* ===================================================
-            TABLE
-        =================================================== */
-
         <div
           className="
             overflow-x-auto
@@ -332,8 +237,8 @@ export default function LeaderboardTable({
               <tr
                 className="
                   border-b
-                  border-[#E7F0F7]
-                  bg-[#F7FBFE]
+                  border-slate-200
+                  bg-slate-50/80
                   text-left
                 "
               >
@@ -398,15 +303,14 @@ export default function LeaderboardTable({
                       }
                       className={`
                         border-b
-                        border-[#EDF3F8]
+                        border-slate-100
                         transition-colors
-                        duration-200
                         last:border-b-0
 
                         ${
                           isMe
-                            ? "bg-[#F1FAFF]"
-                            : "bg-white hover:bg-[#F8FCFF]"
+                            ? "bg-blue-50/60"
+                            : "bg-white hover:bg-slate-50/70"
                         }
                       `}
                     >
@@ -419,12 +323,8 @@ export default function LeaderboardTable({
                         "
                       >
                         <RankDisplay
-                          rank={
-                            rank
-                          }
-                          index={
-                            index
-                          }
+                          rank={rank}
+                          index={index}
                         />
                       </td>
 
@@ -451,12 +351,12 @@ export default function LeaderboardTable({
                               shrink-0
                               items-center
                               justify-center
-                              rounded-xl
+                              rounded-lg
 
                               ${
                                 isMe
-                                  ? "bg-[#0877E8] text-white"
-                                  : "bg-[#EAF6FF] text-[#0877E8]"
+                                  ? "bg-[#1256AF] text-white"
+                                  : "bg-slate-100 text-slate-500"
                               }
                             `}
                           >
@@ -468,8 +368,10 @@ export default function LeaderboardTable({
                           <div>
                             <p
                               className="
+                                whitespace-nowrap
+                                text-sm
                                 font-bold
-                                text-[#173B63]
+                                text-slate-900
                               "
                             >
                               {entry.fullName ||
@@ -484,7 +386,7 @@ export default function LeaderboardTable({
                                   items-center
                                   rounded-full
                                   border
-                                  border-[#B9DCF2]
+                                  border-blue-200
                                   bg-white
                                   px-2
                                   py-0.5
@@ -492,7 +394,7 @@ export default function LeaderboardTable({
                                   font-bold
                                   uppercase
                                   tracking-[0.08em]
-                                  text-[#0877E8]
+                                  text-[#1256AF]
                                 "
                               >
                                 You
@@ -517,7 +419,7 @@ export default function LeaderboardTable({
                             items-start
                             gap-2
                             text-sm
-                            text-[#607C91]
+                            text-slate-600
                           "
                         >
                           <Building2
@@ -525,7 +427,7 @@ export default function LeaderboardTable({
                             className="
                               mt-0.5
                               shrink-0
-                              text-[#9AB4C6]
+                              text-slate-400
                             "
                           />
 
@@ -548,7 +450,7 @@ export default function LeaderboardTable({
                           py-4
                           text-sm
                           font-semibold
-                          text-[#607C91]
+                          text-slate-600
                         "
                       >
                         {entry.graduationYear ||
@@ -600,7 +502,7 @@ export default function LeaderboardTable({
                         />
                       </td>
 
-                      {/* OVERALL SCORE */}
+                      {/* OVERALL */}
 
                       <td
                         className="
@@ -608,27 +510,11 @@ export default function LeaderboardTable({
                           py-4
                         "
                       >
-                        <span
-                          className="
-                            inline-flex
-                            min-w-[72px]
-                            justify-center
-                            rounded-xl
-                            bg-gradient-to-r
-                            from-[#0877E8]
-                            to-[#1294F2]
-                            px-3
-                            py-2
-                            text-sm
-                            font-bold
-                            text-white
-                            shadow-[0_6px_15px_rgba(8,119,232,0.15)]
-                          "
-                        >
-                          {formatScore(
+                        <OverallScore
+                          value={
                             entry.overallScore
-                          )}
-                        </span>
+                          }
+                        />
                       </td>
                     </tr>
                   );
@@ -642,9 +528,71 @@ export default function LeaderboardTable({
   );
 }
 
-// =========================================================
-// TABLE HEADING
-// =========================================================
+/* =========================================================
+   LOADING
+========================================================= */
+
+function LeaderboardLoading() {
+  return (
+    <div
+      className="
+        flex
+        min-h-[280px]
+        flex-col
+        items-center
+        justify-center
+        px-6
+        py-12
+        text-center
+      "
+    >
+      <div
+        className="
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          rounded-xl
+          border
+          border-slate-200
+          bg-slate-50
+          text-[#1256AF]
+        "
+      >
+        <LoaderCircle
+          size={20}
+          className="animate-spin"
+        />
+      </div>
+
+      <p
+        className="
+          mt-4
+          text-sm
+          font-semibold
+          text-slate-700
+        "
+      >
+        Loading leaderboard...
+      </p>
+
+      <p
+        className="
+          mt-1
+          text-xs
+          text-slate-500
+        "
+      >
+        Fetching the latest rankings.
+      </p>
+    </div>
+  );
+}
+
+/* =========================================================
+   TABLE HEADING
+========================================================= */
 
 function TableHeading({
   children,
@@ -656,12 +604,12 @@ function TableHeading({
       className="
         whitespace-nowrap
         px-6
-        py-4
+        py-3.5
         text-[9px]
         font-bold
         uppercase
-        tracking-[0.13em]
-        text-[#8298AA]
+        tracking-[0.12em]
+        text-slate-500
       "
     >
       {children}
@@ -669,9 +617,9 @@ function TableHeading({
   );
 }
 
-// =========================================================
-// RANK
-// =========================================================
+/* =========================================================
+   RANK
+========================================================= */
 
 function RankDisplay({
   rank,
@@ -719,23 +667,21 @@ function RankDisplay({
       <span
         className="
           whitespace-nowrap
-          text-lg
+          text-base
           font-bold
-          tracking-[-0.025em]
-          text-[#173B63]
+          tracking-[-0.02em]
+          text-slate-900
         "
       >
-        {formatRank(
-          rank
-        )}
+        {formatRank(rank)}
       </span>
     </div>
   );
 }
 
-// =========================================================
-// SCORE
-// =========================================================
+/* =========================================================
+   PLATFORM SCORE
+========================================================= */
 
 function ScoreValue({
   value,
@@ -748,20 +694,51 @@ function ScoreValue({
     <span
       className="
         text-sm
-        font-bold
-        text-[#355E7A]
+        font-semibold
+        tabular-nums
+        text-slate-600
       "
     >
-      {formatScore(
-        value
-      )}
+      {formatScore(value)}
     </span>
   );
 }
 
-// =========================================================
-// CONTEXT BADGE
-// =========================================================
+/* =========================================================
+   OVERALL SCORE
+========================================================= */
+
+function OverallScore({
+  value,
+}: {
+  value:
+    | number
+    | null;
+}) {
+  return (
+    <span
+      className="
+        inline-flex
+        min-w-[68px]
+        justify-center
+        rounded-lg
+        bg-blue-50
+        px-3
+        py-2
+        text-sm
+        font-bold
+        tabular-nums
+        text-[#1256AF]
+      "
+    >
+      {formatScore(value)}
+    </span>
+  );
+}
+
+/* =========================================================
+   CONTEXT BADGE
+========================================================= */
 
 function ContextBadge({
   icon,
@@ -779,16 +756,20 @@ function ContextBadge({
         gap-1.5
         rounded-full
         border
-        border-[#CBE5F8]
-        bg-[#EFF8FF]
+        border-slate-200
+        bg-slate-50
         px-3
         py-1.5
         text-[10px]
         font-bold
-        text-[#52748D]
+        text-slate-600
       "
     >
-      <span className="text-[#0877E8]">
+      <span
+        className="
+          text-[#1256AF]
+        "
+      >
         {icon}
       </span>
 
@@ -797,9 +778,9 @@ function ContextBadge({
   );
 }
 
-// =========================================================
-// EMPTY
-// =========================================================
+/* =========================================================
+   EMPTY
+========================================================= */
 
 function EmptyLeaderboard({
   viewMode,
@@ -825,14 +806,14 @@ function EmptyLeaderboard({
     viewMode === "YEAR"
   ) {
     message =
-      `No verified students from the ${selectedYear} batch are currently ranked.`;
+      selectedYear
+        ? `No verified students from the ${selectedYear} batch are currently ranked.`
+        : "No verified students from this graduation batch are currently ranked.";
   }
 
   return (
     <div
       className="
-        relative
-        overflow-hidden
         px-6
         py-14
         text-center
@@ -840,61 +821,43 @@ function EmptyLeaderboard({
     >
       <div
         className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-0
-          h-40
-          w-40
-          -translate-x-1/2
-          rounded-full
-          bg-violet-500/8
-          blur-[70px]
+          mx-auto
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-xl
+          bg-slate-100
+          text-slate-500
         "
-      />
-
-      <div className="relative">
-        <div
-          className="
-            mx-auto
-            flex
-            h-14
-            w-14
-            items-center
-            justify-center
-            rounded-2xl
-            bg-violet-50
-            text-violet-600
-          "
-        >
-          <Trophy size={22} />
-        </div>
-
-        <h3
-          className="
-            mt-4
-            text-lg
-            font-bold
-            tracking-[-0.02em]
-            text-[#173B63]
-          "
-        >
-          No ranked students found
-        </h3>
-
-        <p
-          className="
-            mx-auto
-            mt-2
-            max-w-md
-            text-sm
-            leading-6
-            text-[#71899D]
-          "
-        >
-          {message}
-        </p>
+      >
+        <Trophy size={20} />
       </div>
+
+      <h3
+        className="
+          mt-4
+          text-base
+          font-bold
+          text-slate-900
+        "
+      >
+        No ranked students found
+      </h3>
+
+      <p
+        className="
+          mx-auto
+          mt-2
+          max-w-md
+          text-sm
+          leading-6
+          text-slate-600
+        "
+      >
+        {message}
+      </p>
     </div>
   );
 }

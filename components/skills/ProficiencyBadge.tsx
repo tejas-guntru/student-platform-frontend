@@ -13,8 +13,7 @@ import {
 } from "@/utils/skillFormatters";
 
 interface ProficiencyBadgeProps {
-  proficiency:
-    SkillProficiency;
+  proficiency: SkillProficiency;
 }
 
 export default function ProficiencyBadge({
@@ -23,13 +22,13 @@ export default function ProficiencyBadge({
   const config = {
     BEGINNER: {
       className:
-        "border-[#D8E7F2] bg-[#F5FAFE] text-[#68849A]",
+        "border-slate-200 bg-slate-50 text-slate-600",
       icon: Circle,
     },
 
     INTERMEDIATE: {
       className:
-        "border-[#BFE0F5] bg-[#EAF6FF] text-[#0877E8]",
+        "border-blue-100 bg-blue-50 text-[#1256AF]",
       icon: CircleDot,
     },
 
@@ -53,16 +52,15 @@ export default function ProficiencyBadge({
         border
         px-2.5
         py-1.5
-        text-[10px]
+        text-[9px]
         font-bold
         uppercase
         tracking-[0.08em]
-
         ${config.className}
       `}
     >
       <Icon
-        size={11}
+        size={10}
         strokeWidth={2.2}
       />
 

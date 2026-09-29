@@ -20,20 +20,16 @@ import {
 } from "@/utils/applicationUtils";
 
 interface ApplicationStatusBadgeProps {
-  status:
-    ApplicationStatus;
+  status: ApplicationStatus;
 }
 
 export default function ApplicationStatusBadge({
   status,
 }: ApplicationStatusBadgeProps) {
   const config =
-    getStatusConfig(
-      status
-    );
+    getStatusConfig(status);
 
-  const Icon =
-    config.icon;
+  const Icon = config.icon;
 
   return (
     <span
@@ -45,12 +41,12 @@ export default function ApplicationStatusBadge({
         gap-1.5
         rounded-full
         border
-        px-3
+        px-2.5
         py-1.5
-        text-[9px]
+        text-[10px]
         font-bold
         uppercase
-        tracking-[0.08em]
+        tracking-[0.06em]
         ${config.className}
       `}
     >
@@ -67,15 +63,12 @@ export default function ApplicationStatusBadge({
 }
 
 function getStatusConfig(
-  status:
-    ApplicationStatus
+  status: ApplicationStatus
 ): {
   icon: ElementType;
   className: string;
 } {
-  if (
-    status === "SELECTED"
-  ) {
+  if (status === "SELECTED") {
     return {
       icon: CheckCircle2,
       className:
@@ -83,9 +76,7 @@ function getStatusConfig(
     };
   }
 
-  if (
-    status === "REJECTED"
-  ) {
+  if (status === "REJECTED") {
     return {
       icon: XCircle,
       className:
@@ -111,7 +102,7 @@ function getStatusConfig(
     return {
       icon: CheckCircle2,
       className:
-        "border-cyan-200 bg-cyan-50 text-cyan-700",
+        "border-sky-200 bg-sky-50 text-sky-700",
     };
   }
 
@@ -132,13 +123,13 @@ function getStatusConfig(
     return {
       icon: Sparkles,
       className:
-        "border-[#B9DCF2] bg-[#EFF8FF] text-[#0877E8]",
+        "border-blue-200 bg-blue-50 text-[#1256AF]",
     };
   }
 
   return {
     icon: Clock3,
     className:
-      "border-[#D5E7F3] bg-[#F8FCFF] text-[#58748B]",
+      "border-slate-200 bg-slate-50 text-slate-600",
   };
 }

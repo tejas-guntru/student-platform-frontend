@@ -2,7 +2,6 @@
 
 import {
   Code2,
-  Sparkles,
 } from "lucide-react";
 
 import {
@@ -28,47 +27,40 @@ interface CodingProfilesListProps {
 
   getProfile:
     (
-      platform:
-        CodingPlatform
+      platform: CodingPlatform
     ) =>
       | CodingProfile
       | undefined;
 
   onUsernameChange:
     (
-      platform:
-        CodingPlatform,
+      platform: CodingPlatform,
       value: string
     ) => void;
 
   onConnect:
     (
-      platform:
-        CodingPlatform
+      platform: CodingPlatform
     ) => void;
 
   onEdit:
     (
-      profile:
-        CodingProfile
+      profile: CodingProfile
     ) => void;
 
   onCancel:
     (
-      profile:
-        CodingProfile
+      profile: CodingProfile
     ) => void;
 
   onUpdate:
     (
-      profile:
-        CodingProfile
+      profile: CodingProfile
     ) => void;
 
   onRefresh:
     (
-      platform:
-        CodingPlatform
+      platform: CodingPlatform
     ) => void;
 }
 
@@ -88,156 +80,111 @@ export default function CodingProfilesList({
   onUpdate,
   onRefresh,
 }: CodingProfilesListProps) {
-  const connectedCount =
-    codingPlatforms.filter(
-      (config) =>
-        Boolean(
-          getProfile(
-            config.platform
-          )
-        )
-    ).length;
-
   return (
     <section>
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+      {/* SECTION HEADER */}
+
+      <div>
+        <p
+          className="
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.17em]
+            text-[#1256AF]
+          "
+        >
+          Coding platforms
+        </p>
+
+        <h2
+          className="
+            mt-2
+            text-2xl
+            font-bold
+            tracking-[-0.035em]
+            text-slate-950
+          "
+        >
+          Connected Accounts
+        </h2>
+
+        <p
+          className="
+            mt-2
+            max-w-2xl
+            text-sm
+            leading-6
+            text-slate-500
+          "
+        >
+          Connect your accounts, update usernames
+          and refresh your latest competitive
+          programming statistics.
+        </p>
+      </div>
+
+      {/* INFO */}
 
       <div
         className="
+          mt-6
           flex
-          flex-col
-          gap-4
-
-          sm:flex-row
-          sm:items-end
-          sm:justify-between
+          items-start
+          gap-3
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
+          px-4
+          py-4
         "
       >
+        <div
+          className="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            bg-[#1256AF]/[0.07]
+            text-[#1256AF]
+          "
+        >
+          <Code2 size={15} />
+        </div>
+
         <div>
-          <div
+          <p
             className="
-              flex
-              items-center
-              gap-2
-            "
-          >
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.16em]
-                text-[#0877E8]
-              "
-            >
-              Coding Platforms
-            </p>
-
-            <Sparkles
-              size={12}
-              className="text-violet-500"
-            />
-          </div>
-
-          <h2
-            className="
-              mt-2
-              text-2xl
+              text-sm
               font-bold
-              tracking-[-0.035em]
-              text-[#173B63]
+              text-slate-800
             "
           >
-            Connected Accounts
-          </h2>
+            Keep your usernames current
+          </p>
 
           <p
             className="
-              mt-2
-              max-w-2xl
-              text-sm
-              leading-6
-              text-[#71899D]
+              mt-1
+              text-xs
+              leading-5
+              text-slate-500
             "
           >
-            Connect your competitive programming
-            accounts, keep usernames current and refresh
-            your latest coding statistics.
+            Trailbliz uses your connected accounts
+            to keep your coding profile and available
+            statistics up to date.
           </p>
-        </div>
-
-        {/* CONNECTION COUNT */}
-
-        <div
-          className="
-            inline-flex
-            w-fit
-            items-center
-            gap-3
-            rounded-[16px]
-            border
-            border-[#D6E7F3]
-            bg-white
-            px-4
-            py-3
-            shadow-[0_8px_22px_rgba(8,119,232,0.04)]
-          "
-        >
-          <div
-            className="
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              rounded-xl
-              bg-[#EAF6FF]
-              text-[#0877E8]
-            "
-          >
-            <Code2 size={16} />
-          </div>
-
-          <div>
-            <p
-              className="
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[0.12em]
-                text-[#8A9FAF]
-              "
-            >
-              Connected
-            </p>
-
-            <p
-              className="
-                mt-0.5
-                text-sm
-                font-bold
-                text-[#173B63]
-              "
-            >
-              {connectedCount} /{" "}
-              {codingPlatforms.length}
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* =====================================================
-          PLATFORM CARDS
-      ===================================================== */}
+      {/* PLATFORM CARDS */}
 
-      <div
-        className="
-          mt-5
-          space-y-5
-        "
-      >
+      <div className="mt-6 space-y-5">
         {codingPlatforms.map(
           (config) => {
             const profile =

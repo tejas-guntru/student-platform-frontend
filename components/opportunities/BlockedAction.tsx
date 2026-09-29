@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+import type {
+  ReactNode,
+} from "react";
+
 import {
   ArrowRight,
   CalendarX2,
@@ -32,9 +36,7 @@ export default function BlockedAction({
   deadlineOpen,
   opportunityActive,
 }: BlockedActionProps) {
-  if (
-    !membershipEligible
-  ) {
+  if (!membershipEligible) {
     return (
       <ActionLink
         href="/membership"
@@ -49,9 +51,7 @@ export default function BlockedAction({
     );
   }
 
-  if (
-    !profileEligible
-  ) {
+  if (!profileEligible) {
     return (
       <ActionLink
         href="/profile"
@@ -66,56 +66,22 @@ export default function BlockedAction({
     );
   }
 
-  if (
-    !graduationEligible
-  ) {
+  if (!graduationEligible) {
     return (
-      <Link
+      <WarningLink
         href="/profile"
-        className="
-          group
-          inline-flex
-          w-full
-          items-center
-          justify-center
-          gap-2
-          rounded-xl
-          border
-          border-red-200
-          bg-red-50
-          px-5
-          py-3
-          text-sm
-          font-bold
-          text-red-600
-          transition-all
-          duration-200
-
-          hover:border-red-300
-          hover:bg-red-100
-        "
+        icon={
+          <CircleAlert
+            size={15}
+          />
+        }
       >
-        <CircleAlert
-          size={15}
-        />
-
         Check Graduation Year
-
-        <ArrowRight
-          size={14}
-          className="
-            transition-transform
-            duration-200
-            group-hover:translate-x-0.5
-          "
-        />
-      </Link>
+      </WarningLink>
     );
   }
 
-  if (
-    !deadlineOpen
-  ) {
+  if (!deadlineOpen) {
     return (
       <DisabledAction
         icon={
@@ -129,9 +95,7 @@ export default function BlockedAction({
     );
   }
 
-  if (
-    !opportunityActive
-  ) {
+  if (!opportunityActive) {
     return (
       <DisabledAction
         icon={
@@ -153,11 +117,14 @@ function ActionLink({
   icon,
   children,
 }: {
-  href: string;
+  href:
+    string;
+
   icon:
-    React.ReactNode;
+    ReactNode;
+
   children:
-    React.ReactNode;
+    ReactNode;
 }) {
   return (
     <Link
@@ -165,25 +132,20 @@ function ActionLink({
       className="
         group
         inline-flex
+        min-h-[44px]
         w-full
         items-center
         justify-center
         gap-2
-        rounded-xl
-        bg-gradient-to-r
-        from-[#0877E8]
-        to-[#1294F2]
-        px-5
-        py-3
+        rounded-lg
+        bg-[#1256AF]
+        px-4
         text-sm
         font-bold
         text-white
-        shadow-[0_9px_22px_rgba(8,119,232,0.18)]
-        transition-all
-        duration-200
+        transition
 
-        hover:-translate-y-0.5
-        hover:shadow-[0_13px_28px_rgba(8,119,232,0.24)]
+        hover:bg-[#0E4C9D]
       "
     >
       {icon}
@@ -194,7 +156,60 @@ function ActionLink({
         size={14}
         className="
           transition-transform
-          duration-200
+          group-hover:translate-x-0.5
+        "
+      />
+    </Link>
+  );
+}
+
+function WarningLink({
+  href,
+  icon,
+  children,
+}: {
+  href:
+    string;
+
+  icon:
+    ReactNode;
+
+  children:
+    ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="
+        group
+        inline-flex
+        min-h-[44px]
+        w-full
+        items-center
+        justify-center
+        gap-2
+        rounded-lg
+        border
+        border-amber-200
+        bg-amber-50
+        px-4
+        text-sm
+        font-bold
+        text-amber-700
+        transition
+
+        hover:border-amber-300
+        hover:bg-amber-100
+      "
+    >
+      {icon}
+
+      {children}
+
+      <ArrowRight
+        size={14}
+        className="
+          transition-transform
           group-hover:translate-x-0.5
         "
       />
@@ -207,35 +222,35 @@ function DisabledAction({
   children,
 }: {
   icon:
-    React.ReactNode;
+    ReactNode;
+
   children:
-    React.ReactNode;
+    ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      disabled
+    <div
+      aria-disabled="true"
       className="
-        inline-flex
+        flex
+        min-h-[44px]
         w-full
         cursor-not-allowed
         items-center
         justify-center
         gap-2
-        rounded-xl
+        rounded-lg
         border
-        border-[#DCE7EF]
-        bg-[#F3F7FA]
-        px-5
-        py-3
+        border-slate-200
+        bg-slate-100
+        px-4
         text-sm
-        font-bold
-        text-[#91A5B5]
+        font-semibold
+        text-slate-400
       "
     >
       {icon}
 
       {children}
-    </button>
+    </div>
   );
 }
