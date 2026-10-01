@@ -1,6 +1,7 @@
 import { api } from "@/lib/api";
 
 import type {
+  GoogleLoginRequest,
   LoginRequest,
   LoginResponse,
   RegisterRequest,
@@ -16,6 +17,21 @@ export const login = async (
 ): Promise<LoginResponse> => {
   const response = await api.post<LoginResponse>(
     "/api/v1/auth/login",
+    request
+  );
+
+  return response.data;
+};
+
+// =========================================================
+// GOOGLE LOGIN
+// =========================================================
+
+export const googleLogin = async (
+  request: GoogleLoginRequest
+): Promise<LoginResponse> => {
+  const response = await api.post<LoginResponse>(
+    "/api/v1/auth/google",
     request
   );
 

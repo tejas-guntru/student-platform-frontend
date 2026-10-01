@@ -2,7 +2,9 @@ export type UserRole =
   | "STUDENT"
   | "ADMIN";
 
-
+export interface GoogleLoginRequest {
+  credential: string;
+}
 export interface LoginRequest {
   email: string;
   password: string;

@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import AuthBackground from "@/components/auth/AuthBackground";
 import AuthLogo from "@/components/auth/AuthLogo";
 import LoginForm from "@/components/auth/LoginForm";
@@ -5,6 +7,11 @@ import LoginForm from "@/components/auth/LoginForm";
 export default function LoginPage() {
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F8F7F3] px-6 py-12">
+      <Script
+        src="https://accounts.google.com/gsi/client"
+        strategy="afterInteractive"
+      />
+
       <AuthBackground />
 
       <div className="relative z-10 w-full max-w-md">
