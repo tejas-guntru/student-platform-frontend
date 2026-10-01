@@ -6,8 +6,8 @@ import {
   FormEvent,
   useState,
 } from "react";
+
 import AuthInput from "@/components/auth/AuthInput";
-import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
 import { login } from "@/services/authService";
 
 export default function LoginForm() {
@@ -288,27 +288,7 @@ export default function LoginForm() {
           )}
         </button>
       </form>
-{/* =====================================================
-    OR
-===================================================== */}
 
-<div className="my-6 flex items-center gap-4">
-  <div className="h-px flex-1 bg-gray-200" />
-
-  <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-400">
-    Or
-  </span>
-
-  <div className="h-px flex-1 bg-gray-200" />
-</div>
-
-{/* =====================================================
-    GOOGLE LOGIN
-===================================================== */}
-
-<GoogleLoginButton
-  onError={setError}
-/>
       {/* =====================================================
           REGISTER
       ===================================================== */}
