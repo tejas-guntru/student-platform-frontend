@@ -1,14 +1,14 @@
 import { api } from "@/lib/api";
 
 import type {
+  GoogleLoginRequest,
   LoginRequest,
   LoginResponse,
-  RegisterRequest,
-  RegisterResponse,
 } from "@/types/auth";
 
 // =========================================================
-// LOGIN
+// PASSWORD LOGIN
+// Instructor / Recruiter / Admin
 // =========================================================
 
 export const login = async (
@@ -23,14 +23,15 @@ export const login = async (
 };
 
 // =========================================================
-// REGISTER
+// GOOGLE LOGIN
+// Student only
 // =========================================================
 
-export const register = async (
-  request: RegisterRequest
-): Promise<RegisterResponse> => {
-  const response = await api.post<RegisterResponse>(
-    "/api/v1/auth/register",
+export const googleLogin = async (
+  request: GoogleLoginRequest
+): Promise<LoginResponse> => {
+  const response = await api.post<LoginResponse>(
+    "/api/v1/auth/google",
     request
   );
 

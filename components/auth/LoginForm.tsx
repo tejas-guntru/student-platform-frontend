@@ -1,25 +1,37 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
-import {
-  FormEvent,
-  useState,
-} from "react";
+import { FormEvent, useState } from "react";
 
 import AuthInput from "@/components/auth/AuthInput";
+import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
 import { login } from "@/services/authService";
 
-export default function LoginForm() {
-  const [email, setEmail] =
-    useState("");
+type StaffRole =
+  | "INSTRUCTOR"
+  | "RECRUITER"
+  | "ADMIN";
 
+function isStaffRole(role: string): role is StaffRole {
+  return (
+    role === "INSTRUCTOR" ||
+    role === "RECRUITER" ||
+    role === "ADMIN"
+  );
+}
+
+function clearSession() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  localStorage.removeItem("role");
+}
+
+export default function LoginForm() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] =
     useState("");
 
-  const [error, setError] =
-    useState("");
-
+  const [error, setError] = useState("");
   const [loading, setLoading] =
     useState(false);
 
@@ -34,8 +46,9 @@ export default function LoginForm() {
 
     setError("");
 
-    const normalizedEmail =
-      email.trim().toLowerCase();
+    const normalizedEmail = email
+      .trim()
+      .toLowerCase();
 
     if (!normalizedEmail) {
       setError("Email is required.");
@@ -56,27 +69,19 @@ export default function LoginForm() {
       });
 
       /*
-       * Validate the role before storing
-       * the authenticated session.
+       * Password login is strictly for
+       * Instructor, Recruiter, and Admin.
        */
-      if (
-        response.role !== "STUDENT" &&
-        response.role !== "ADMIN"
-      ) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("email");
-        localStorage.removeItem("role");
+      if (!isStaffRole(response.role)) {
+        clearSession();
 
         setError(
-          "Unknown user role returned by server."
+          "Students must sign in with Google."
         );
 
         return;
       }
 
-      /*
-       * Store session
-       */
       localStorage.setItem(
         "token",
         response.token
@@ -93,36 +98,36 @@ export default function LoginForm() {
       );
 
       /*
-       * Role-based redirect
+       * Role-based staff redirect.
        */
-      if (response.role === "ADMIN") {
-        window.location.replace(
-          "/admin/dashboard"
-        );
+      switch (response.role) {
+        case "ADMIN":
+          window.location.replace(
+            "/admin/dashboard"
+          );
+          return;
 
-        return;
+        case "INSTRUCTOR":
+          window.location.replace(
+            "/instructor"
+          );
+          return;
+
+        case "RECRUITER":
+          window.location.replace(
+            "/recruiter"
+          );
+          return;
       }
-
-      window.location.replace(
-        "/student"
-      );
     } catch (error: unknown) {
       console.error(
         "LOGIN ERROR:",
         error
       );
 
-      /*
-       * Make sure a failed login
-       * cannot leave an old session.
-       */
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("role");
+      clearSession();
 
-      if (
-        axios.isAxiosError(error)
-      ) {
+      if (axios.isAxiosError(error)) {
         setError(
           error.response?.data?.message ||
             "Invalid email or password."
@@ -157,8 +162,8 @@ export default function LoginForm() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-gray-600">
-          Continue building your profile and
-          moving your career forward.
+          Choose how you access your
+          workspace.
         </p>
       </div>
 
@@ -183,126 +188,148 @@ export default function LoginForm() {
       )}
 
       {/* =====================================================
-          FORM
+          STUDENT LOGIN
       ===================================================== */}
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-8 space-y-5"
-      >
-        <AuthInput
-          id="email"
-          label="Email"
-          type="email"
-          value={email}
-          placeholder="Enter your email"
-          autoComplete="email"
-          onChange={(event) => {
-            setEmail(
-              event.target.value
-            );
+      <div className="mt-8">
+        <div className="text-center">
+          <p className="text-sm font-semibold text-gray-900">
+            Student
+          </p>
 
-            if (error) {
-              setError("");
-            }
-          }}
+          <p className="mt-1 text-xs leading-5 text-gray-500">
+            Students sign in securely with
+            their Google account.
+          </p>
+        </div>
+
+        <GoogleLoginButton
+          onError={setError}
         />
-
-        <AuthInput
-          id="password"
-          label="Password"
-          type="password"
-          value={password}
-          placeholder="Enter your password"
-          autoComplete="current-password"
-          onChange={(event) => {
-            setPassword(
-              event.target.value
-            );
-
-            if (error) {
-              setError("");
-            }
-          }}
-        />
-
-        {/* =================================================
-            SUBMIT
-        ================================================= */}
-
-        <button
-          type="submit"
-          disabled={loading}
-          aria-busy={loading}
-          className="
-            group
-            flex
-            min-h-[52px]
-            w-full
-            items-center
-            justify-center
-            gap-3
-            rounded-2xl
-            border
-            border-[#1256AF]
-            bg-[#1256AF]
-            px-5
-            py-3.5
-            text-[14px]
-            font-semibold
-            text-white
-            shadow-[0_12px_30px_rgba(18,86,175,0.18)]
-            transition-all
-            duration-200
-
-            hover:-translate-y-0.5
-            hover:bg-[#0F4994]
-            hover:shadow-[0_16px_38px_rgba(18,86,175,0.22)]
-
-            focus-visible:outline-none
-            focus-visible:ring-4
-            focus-visible:ring-[#1256AF]/20
-
-            disabled:cursor-not-allowed
-            disabled:translate-y-0
-            disabled:opacity-60
-          "
-        >
-          {loading ? (
-            <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
-
-              Signing in...
-            </>
-          ) : (
-            <>
-              Continue
-
-              <span
-                aria-hidden="true"
-                className="text-base transition-transform duration-200 group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </>
-          )}
-        </button>
-      </form>
+      </div>
 
       {/* =====================================================
-          REGISTER
+          DIVIDER
       ===================================================== */}
 
-      <div className="mt-7 border-t border-gray-200 pt-6 text-center">
-        <p className="text-sm text-gray-500">
-          Don&apos;t have an account?{" "}
-          <Link
-            href="/register"
-            className="font-semibold text-[#1256AF] transition-colors duration-200 hover:text-[#0F4994]"
+      <div className="my-8 flex items-center gap-4">
+        <span className="h-px flex-1 bg-gray-200" />
+
+        <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-gray-400">
+          Staff access
+        </span>
+
+        <span className="h-px flex-1 bg-gray-200" />
+      </div>
+
+      {/* =====================================================
+          STAFF LOGIN
+      ===================================================== */}
+
+      <div>
+        <div className="text-center">
+          <p className="text-sm font-semibold text-gray-900">
+            Instructor, Recruiter or Admin
+          </p>
+
+          <p className="mt-1 text-xs leading-5 text-gray-500">
+            Sign in using your approved
+            account credentials.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="mt-6 space-y-5"
+        >
+          <AuthInput
+            id="email"
+            label="Email"
+            type="email"
+            value={email}
+            placeholder="Enter your email"
+            autoComplete="email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+
+              if (error) {
+                setError("");
+              }
+            }}
+          />
+
+          <AuthInput
+            id="password"
+            label="Password"
+            type="password"
+            value={password}
+            placeholder="Enter your password"
+            autoComplete="current-password"
+            onChange={(event) => {
+              setPassword(
+                event.target.value
+              );
+
+              if (error) {
+                setError("");
+              }
+            }}
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            aria-busy={loading}
+            className="
+              group
+              flex
+              min-h-[52px]
+              w-full
+              items-center
+              justify-center
+              gap-3
+              rounded-2xl
+              border
+              border-[#1256AF]
+              bg-[#1256AF]
+              px-5
+              py-3.5
+              text-[14px]
+              font-semibold
+              text-white
+              shadow-[0_12px_30px_rgba(18,86,175,0.18)]
+              transition-all
+              duration-200
+              hover:-translate-y-0.5
+              hover:bg-[#0F4994]
+              hover:shadow-[0_16px_38px_rgba(18,86,175,0.22)]
+              focus-visible:outline-none
+              focus-visible:ring-4
+              focus-visible:ring-[#1256AF]/20
+              disabled:cursor-not-allowed
+              disabled:translate-y-0
+              disabled:opacity-60
+            "
           >
-            Create an account
-          </Link>
-        </p>
+            {loading ? (
+              <>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
+                Signing in...
+              </>
+            ) : (
+              <>
+                Sign in
+
+                <span
+                  aria-hidden="true"
+                  className="text-base transition-transform duration-200 group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </>
+            )}
+          </button>
+        </form>
       </div>
     </div>
   );

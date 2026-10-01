@@ -1,21 +1,17 @@
 export type UserRole =
   | "STUDENT"
+  | "INSTRUCTOR"
+  | "RECRUITER"
   | "ADMIN";
-
 
 export interface LoginRequest {
   email: string;
   password: string;
 }
 
-
-export interface RegisterRequest {
-  email: string;
-  password: string;
-  fullName: string;
-  role: UserRole;
+export interface GoogleLoginRequest {
+  credential: string;
 }
-
 
 export interface AuthResponse {
   token: string;
@@ -24,11 +20,4 @@ export interface AuthResponse {
   role: UserRole;
 }
 
-
-// Keeping this alias so existing login code
-// continues working without changes.
-export type LoginResponse =
-  AuthResponse;
-
-export type RegisterResponse =
-  AuthResponse;
+export type LoginResponse = AuthResponse;
