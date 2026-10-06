@@ -16,6 +16,10 @@ const exploreLinks = [
     href: "/student/courses",
   },
   {
+    label: "Batches",
+    href: "/student/batches",
+  },
+  {
     label: "Opportunities",
     href: "/opportunities",
   },
@@ -171,9 +175,7 @@ export default function StudentFooter() {
             Built with
             <Heart
               size={11}
-              className="
-                fill-current
-              "
+              className="fill-current"
             />
             by Tejas Guntru
 
@@ -239,24 +241,22 @@ function FooterGroup({
         "
         aria-label={`${title} links`}
       >
-        {links.map(
-          (link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="
-                text-sm
-                font-medium
-                text-slate-600
-                transition-colors
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="
+              text-sm
+              font-medium
+              text-slate-600
+              transition-colors
 
-                hover:text-[#1256AF]
-              "
-            >
-              {link.label}
-            </Link>
-          )
-        )}
+              hover:text-[#1256AF]
+            "
+          >
+            {link.label}
+          </Link>
+        ))}
       </nav>
     </div>
   );

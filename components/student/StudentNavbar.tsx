@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   usePathname,
   useRouter,
@@ -10,6 +11,7 @@ import {
 import {
   BriefcaseBusiness,
   ChevronDown,
+  ClipboardCheck,
   Code2,
   FileText,
   GraduationCap,
@@ -27,9 +29,9 @@ import {
   useState,
 } from "react";
 
-// =========================================================
-// NAVIGATION
-// =========================================================
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 const primaryLinks = [
   {
@@ -41,6 +43,11 @@ const primaryLinks = [
     label: "Courses",
     href: "/student/courses",
     icon: GraduationCap,
+  },
+  {
+    label: "Batches",
+    href: "/student/batches",
+    icon: ClipboardCheck,
   },
 ];
 
@@ -83,17 +90,16 @@ const accountLinks = [
   },
 ];
 
-// =========================================================
-// HELPERS
-// =========================================================
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function getInitials(email: string) {
   if (!email) {
     return "ST";
   }
 
-  const name =
-    email.split("@")[0];
+  const name = email.split("@")[0];
 
   return name
     .split(/[._-]/)
@@ -105,16 +111,13 @@ function getInitials(email: string) {
     .join("");
 }
 
-// =========================================================
-// NAVBAR
-// =========================================================
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 export default function StudentNavbar() {
-  const pathname =
-    usePathname();
-
-  const router =
-    useRouter();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const accountRef =
     useRef<HTMLDivElement>(null);
@@ -142,22 +145,20 @@ export default function StudentNavbar() {
     setMobileOpen,
   ] = useState(false);
 
-  // =======================================================
-  // EMAIL
-  // =======================================================
+  /* =======================================================
+     EMAIL
+  ======================================================= */
 
   useEffect(() => {
     const storedEmail =
-      localStorage.getItem(
-        "email"
-      ) ?? "";
+      localStorage.getItem("email") ?? "";
 
     setEmail(storedEmail);
   }, []);
 
-  // =======================================================
-  // CLOSE ON ROUTE CHANGE
-  // =======================================================
+  /* =======================================================
+     CLOSE ON ROUTE CHANGE
+  ======================================================= */
 
   useEffect(() => {
     setMobileOpen(false);
@@ -165,9 +166,9 @@ export default function StudentNavbar() {
     setCareerOpen(false);
   }, [pathname]);
 
-  // =======================================================
-  // OUTSIDE CLICK
-  // =======================================================
+  /* =======================================================
+     OUTSIDE CLICK
+  ======================================================= */
 
   useEffect(() => {
     function handleOutsideClick(
@@ -178,18 +179,14 @@ export default function StudentNavbar() {
 
       if (
         accountRef.current &&
-        !accountRef.current.contains(
-          target
-        )
+        !accountRef.current.contains(target)
       ) {
         setAccountOpen(false);
       }
 
       if (
         careerRef.current &&
-        !careerRef.current.contains(
-          target
-        )
+        !careerRef.current.contains(target)
       ) {
         setCareerOpen(false);
       }
@@ -208,24 +205,18 @@ export default function StudentNavbar() {
     };
   }, []);
 
-  // =======================================================
-  // ACTIVE STATE
-  // =======================================================
+  /* =======================================================
+     ACTIVE STATE
+  ======================================================= */
 
   function isActive(
     href: string
   ) {
-    if (
-      href === "/student"
-    ) {
-      return (
-        pathname === "/student"
-      );
+    if (href === "/student") {
+      return pathname === "/student";
     }
 
-    return pathname.startsWith(
-      href
-    );
+    return pathname.startsWith(href);
   }
 
   const careerActive =
@@ -234,32 +225,20 @@ export default function StudentNavbar() {
     );
 
   const profileActive =
-    pathname.startsWith(
-      "/profile"
-    ) ||
+    pathname.startsWith("/profile") ||
     pathname.startsWith(
       "/coding-profiles"
     ) ||
-    pathname.startsWith(
-      "/membership"
-    );
+    pathname.startsWith("/membership");
 
-  // =======================================================
-  // LOGOUT
-  // =======================================================
+  /* =======================================================
+     LOGOUT
+  ======================================================= */
 
   function handleLogout() {
-    localStorage.removeItem(
-      "token"
-    );
-
-    localStorage.removeItem(
-      "role"
-    );
-
-    localStorage.removeItem(
-      "email"
-    );
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
 
     router.replace("/login");
   }
@@ -267,9 +246,9 @@ export default function StudentNavbar() {
   const initials =
     getInitials(email);
 
-  // =======================================================
-  // RENDER
-  // =======================================================
+  /* =======================================================
+     RENDER
+  ======================================================= */
 
   return (
     <header
@@ -345,21 +324,13 @@ export default function StudentNavbar() {
           {primaryLinks.map(
             (link) => {
               const active =
-                isActive(
-                  link.href
-                );
+                isActive(link.href);
 
               return (
                 <NavLink
-                  key={
-                    link.href
-                  }
-                  href={
-                    link.href
-                  }
-                  active={
-                    active
-                  }
+                  key={link.href}
+                  href={link.href}
+                  active={active}
                 >
                   {link.label}
                 </NavLink>
@@ -377,13 +348,10 @@ export default function StudentNavbar() {
               type="button"
               onClick={() => {
                 setCareerOpen(
-                  (current) =>
-                    !current
+                  (current) => !current
                 );
 
-                setAccountOpen(
-                  false
-                );
+                setAccountOpen(false);
               }}
               className={`
                 flex
@@ -399,19 +367,17 @@ export default function StudentNavbar() {
                 ${
                   careerActive
                     ? `
-                      bg-blue-50
-                      text-[#1256AF]
-                    `
+                        bg-blue-50
+                        text-[#1256AF]
+                      `
                     : `
-                      text-slate-600
-                      hover:bg-slate-50
-                      hover:text-slate-950
-                    `
+                        text-slate-600
+                        hover:bg-slate-50
+                        hover:text-slate-950
+                      `
                 }
               `}
-              aria-expanded={
-                careerOpen
-              }
+              aria-expanded={careerOpen}
             >
               Career
 
@@ -452,13 +418,10 @@ export default function StudentNavbar() {
             type="button"
             onClick={() => {
               setAccountOpen(
-                (current) =>
-                  !current
+                (current) => !current
               );
 
-              setCareerOpen(
-                false
-              );
+              setCareerOpen(false);
             }}
             className={`
               flex
@@ -475,19 +438,17 @@ export default function StudentNavbar() {
                 profileActive ||
                 accountOpen
                   ? `
-                    border-[#1256AF]/20
-                    bg-blue-50/70
-                  `
+                      border-[#1256AF]/20
+                      bg-blue-50/70
+                    `
                   : `
-                    border-slate-200
-                    bg-white
-                    hover:bg-slate-50
-                  `
+                      border-slate-200
+                      bg-white
+                      hover:bg-slate-50
+                    `
               }
             `}
-            aria-expanded={
-              accountOpen
-            }
+            aria-expanded={accountOpen}
           >
             <span
               className="
@@ -534,8 +495,7 @@ export default function StudentNavbar() {
                   text-slate-500
                 "
               >
-                {email ||
-                  "Student"}
+                {email || "Student"}
               </span>
             </span>
 
@@ -557,12 +517,8 @@ export default function StudentNavbar() {
           {accountOpen && (
             <AccountDropdown
               email={email}
-              initials={
-                initials
-              }
-              onLogout={
-                handleLogout
-              }
+              initials={initials}
+              onLogout={handleLogout}
             />
           )}
         </div>
@@ -575,8 +531,7 @@ export default function StudentNavbar() {
           type="button"
           onClick={() =>
             setMobileOpen(
-              (current) =>
-                !current
+              (current) => !current
             )
           }
           className="
@@ -598,9 +553,7 @@ export default function StudentNavbar() {
               ? "Close navigation"
               : "Open navigation"
           }
-          aria-expanded={
-            mobileOpen
-          }
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? (
             <X size={19} />
@@ -626,15 +579,15 @@ export default function StudentNavbar() {
           ${
             mobileOpen
               ? `
-                max-h-[800px]
-                border-t
-                border-slate-200
-                opacity-100
-              `
+                  max-h-[900px]
+                  border-t
+                  border-slate-200
+                  opacity-100
+                `
               : `
-                max-h-0
-                opacity-0
-              `
+                  max-h-0
+                  opacity-0
+                `
           }
         `}
       >
@@ -648,7 +601,7 @@ export default function StudentNavbar() {
             sm:px-6
           "
         >
-          {/* MAIN */}
+          {/* WORKSPACE */}
 
           <p
             className="
@@ -672,18 +625,10 @@ export default function StudentNavbar() {
             {primaryLinks.map(
               (link) => (
                 <MobileLink
-                  key={
-                    link.href
-                  }
-                  href={
-                    link.href
-                  }
-                  label={
-                    link.label
-                  }
-                  icon={
-                    link.icon
-                  }
+                  key={link.href}
+                  href={link.href}
+                  label={link.label}
+                  icon={link.icon}
                   active={isActive(
                     link.href
                   )}
@@ -724,18 +669,10 @@ export default function StudentNavbar() {
             {careerLinks.map(
               (link) => (
                 <MobileLink
-                  key={
-                    link.href
-                  }
-                  href={
-                    link.href
-                  }
-                  label={
-                    link.label
-                  }
-                  icon={
-                    link.icon
-                  }
+                  key={link.href}
+                  href={link.href}
+                  label={link.label}
+                  icon={link.icon}
                   active={isActive(
                     link.href
                   )}
@@ -776,18 +713,10 @@ export default function StudentNavbar() {
             {accountLinks.map(
               (link) => (
                 <MobileLink
-                  key={
-                    link.href
-                  }
-                  href={
-                    link.href
-                  }
-                  label={
-                    link.label
-                  }
-                  icon={
-                    link.icon
-                  }
+                  key={link.href}
+                  href={link.href}
+                  label={link.label}
+                  icon={link.icon}
                   active={isActive(
                     link.href
                   )}
@@ -859,9 +788,7 @@ export default function StudentNavbar() {
 
             <button
               type="button"
-              onClick={
-                handleLogout
-              }
+              onClick={handleLogout}
               className="
                 flex
                 w-full
@@ -889,9 +816,9 @@ export default function StudentNavbar() {
   );
 }
 
-// =========================================================
-// DESKTOP NAV LINK
-// =========================================================
+/* =========================================================
+   DESKTOP NAV LINK
+========================================================= */
 
 function NavLink({
   href,
@@ -900,8 +827,7 @@ function NavLink({
 }: {
   href: string;
   active: boolean;
-  children:
-    React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
     <Link
@@ -920,14 +846,14 @@ function NavLink({
         ${
           active
             ? `
-              bg-blue-50
-              text-[#1256AF]
-            `
+                bg-blue-50
+                text-[#1256AF]
+              `
             : `
-              text-slate-600
-              hover:bg-slate-50
-              hover:text-slate-950
-            `
+                text-slate-600
+                hover:bg-slate-50
+                hover:text-slate-950
+              `
         }
       `}
     >
@@ -950,9 +876,9 @@ function NavLink({
   );
 }
 
-// =========================================================
-// CAREER DROPDOWN
-// =========================================================
+/* =========================================================
+   CAREER DROPDOWN
+========================================================= */
 
 function CareerDropdown() {
   return (
@@ -1010,17 +936,12 @@ function CareerDropdown() {
       >
         {careerLinks.map(
           (link) => {
-            const Icon =
-              link.icon;
+            const Icon = link.icon;
 
             return (
               <Link
-                key={
-                  link.href
-                }
-                href={
-                  link.href
-                }
+                key={link.href}
+                href={link.href}
                 className="
                   group
                   flex
@@ -1051,9 +972,7 @@ function CareerDropdown() {
                     group-hover:text-[#1256AF]
                   "
                 >
-                  <Icon
-                    size={16}
-                  />
+                  <Icon size={16} />
                 </span>
 
                 <span>
@@ -1076,9 +995,7 @@ function CareerDropdown() {
                       text-slate-500
                     "
                   >
-                    {
-                      link.description
-                    }
+                    {link.description}
                   </span>
                 </span>
               </Link>
@@ -1090,9 +1007,9 @@ function CareerDropdown() {
   );
 }
 
-// =========================================================
-// ACCOUNT DROPDOWN
-// =========================================================
+/* =========================================================
+   ACCOUNT DROPDOWN
+========================================================= */
 
 function AccountDropdown({
   email,
@@ -1101,8 +1018,7 @@ function AccountDropdown({
 }: {
   email: string;
   initials: string;
-  onLogout:
-    () => void;
+  onLogout: () => void;
 }) {
   return (
     <div
@@ -1185,17 +1101,12 @@ function AccountDropdown({
       >
         {accountLinks.map(
           (link) => {
-            const Icon =
-              link.icon;
+            const Icon = link.icon;
 
             return (
               <Link
-                key={
-                  link.href
-                }
-                href={
-                  link.href
-                }
+                key={link.href}
+                href={link.href}
                 className="
                   flex
                   items-center
@@ -1212,9 +1123,7 @@ function AccountDropdown({
                   hover:text-[#1256AF]
                 "
               >
-                <Icon
-                  size={16}
-                />
+                <Icon size={16} />
 
                 {link.label}
               </Link>
@@ -1235,9 +1144,7 @@ function AccountDropdown({
       >
         <button
           type="button"
-          onClick={
-            onLogout
-          }
+          onClick={onLogout}
           className="
             flex
             w-full
@@ -1264,9 +1171,9 @@ function AccountDropdown({
   );
 }
 
-// =========================================================
-// MOBILE LINK
-// =========================================================
+/* =========================================================
+   MOBILE LINK
+========================================================= */
 
 function MobileLink({
   href,
@@ -1296,13 +1203,13 @@ function MobileLink({
         ${
           active
             ? `
-              bg-blue-50
-              text-[#1256AF]
-            `
+                bg-blue-50
+                text-[#1256AF]
+              `
             : `
-              text-slate-700
-              hover:bg-slate-50
-            `
+                text-slate-700
+                hover:bg-slate-50
+              `
         }
       `}
     >
@@ -1319,13 +1226,13 @@ function MobileLink({
           ${
             active
               ? `
-                bg-white
-                text-[#1256AF]
-              `
+                  bg-white
+                  text-[#1256AF]
+                `
               : `
-                bg-slate-100
-                text-slate-500
-              `
+                  bg-slate-100
+                  text-slate-500
+                `
           }
         `}
       >
