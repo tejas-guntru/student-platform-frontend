@@ -79,10 +79,13 @@ export default function CourseModuleList({
   );
 
   return (
-    <section>
-      <div>
+    <section className="min-w-0">
+      {/* SECTION HEADER */}
+
+      <div className="min-w-0">
         <p
           className="
+            break-words
             text-xs
             font-bold
             uppercase
@@ -96,19 +99,25 @@ export default function CourseModuleList({
         <h2
           className="
             mt-2
-            text-2xl
+            break-words
+            text-xl
             font-bold
             tracking-tight
             text-slate-950
+
+            sm:text-2xl
           "
         >
-          Modules & Lessons
+          Modules &amp; Lessons
         </h2>
 
         <p
           className="
             mt-1
+            max-w-2xl
+            break-words
             text-sm
+            leading-6
             text-slate-500
           "
         >
@@ -117,11 +126,14 @@ export default function CourseModuleList({
         </p>
       </div>
 
+      {/* EMPTY STATE */}
+
       {orderedModules.length === 0 ? (
         <div
           className="
             mt-5
             flex
+            min-w-0
             flex-col
             items-center
             justify-center
@@ -130,9 +142,12 @@ export default function CourseModuleList({
             border-dashed
             border-slate-300
             bg-white
-            px-6
-            py-12
+            px-4
+            py-10
             text-center
+
+            sm:px-6
+            sm:py-12
           "
         >
           <div
@@ -140,6 +155,7 @@ export default function CourseModuleList({
               flex
               h-12
               w-12
+              shrink-0
               items-center
               justify-center
               rounded-2xl
@@ -147,12 +163,16 @@ export default function CourseModuleList({
               text-slate-400
             "
           >
-            <Layers3 size={21} />
+            <Layers3
+              size={21}
+              aria-hidden="true"
+            />
           </div>
 
           <h3
             className="
               mt-4
+              break-words
               font-semibold
               text-slate-900
             "
@@ -164,6 +184,7 @@ export default function CourseModuleList({
             className="
               mt-1
               max-w-sm
+              break-words
               text-sm
               leading-6
               text-slate-500
@@ -175,10 +196,15 @@ export default function CourseModuleList({
           </p>
         </div>
       ) : (
+        /* MODULES */
+
         <div
           className="
             mt-5
-            space-y-5
+            min-w-0
+            space-y-4
+
+            sm:space-y-5
           "
         >
           {orderedModules.map(
@@ -189,55 +215,59 @@ export default function CourseModuleList({
               },
               index
             ) => (
-              <CourseModuleCard
+              <div
                 key={module.id}
-                module={module}
-                lessons={lessons}
-                moduleNumber={
-                  index + 1
-                }
-                editable={editable}
-                lessonFormOpen={
-                  activeModuleId ===
-                  module.id
-                }
-                lessonTitle={
-                  lessonTitle
-                }
-                lessonContent={
-                  lessonContent
-                }
-                lessonType={
-                  lessonType
-                }
-                resourceUrl={
-                  resourceUrl
-                }
-                creatingLesson={
-                  creatingLesson
-                }
-                onOpenLessonForm={
-                  onOpenLessonForm
-                }
-                onCloseLessonForm={
-                  onCloseLessonForm
-                }
-                onLessonTitleChange={
-                  onLessonTitleChange
-                }
-                onLessonContentChange={
-                  onLessonContentChange
-                }
-                onLessonTypeChange={
-                  onLessonTypeChange
-                }
-                onResourceUrlChange={
-                  onResourceUrlChange
-                }
-                onCreateLesson={
-                  onCreateLesson
-                }
-              />
+                className="min-w-0"
+              >
+                <CourseModuleCard
+                  module={module}
+                  lessons={lessons}
+                  moduleNumber={
+                    index + 1
+                  }
+                  editable={editable}
+                  lessonFormOpen={
+                    activeModuleId ===
+                    module.id
+                  }
+                  lessonTitle={
+                    lessonTitle
+                  }
+                  lessonContent={
+                    lessonContent
+                  }
+                  lessonType={
+                    lessonType
+                  }
+                  resourceUrl={
+                    resourceUrl
+                  }
+                  creatingLesson={
+                    creatingLesson
+                  }
+                  onOpenLessonForm={
+                    onOpenLessonForm
+                  }
+                  onCloseLessonForm={
+                    onCloseLessonForm
+                  }
+                  onLessonTitleChange={
+                    onLessonTitleChange
+                  }
+                  onLessonContentChange={
+                    onLessonContentChange
+                  }
+                  onLessonTypeChange={
+                    onLessonTypeChange
+                  }
+                  onResourceUrlChange={
+                    onResourceUrlChange
+                  }
+                  onCreateLesson={
+                    onCreateLesson
+                  }
+                />
+              </div>
             )
           )}
         </div>

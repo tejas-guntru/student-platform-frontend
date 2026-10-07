@@ -41,10 +41,16 @@ export default function ProficiencyBadge({
 
   const Icon = config.icon;
 
+  const label =
+    formatProficiency(
+      proficiency
+    );
+
   return (
     <span
       className={`
         inline-flex
+        max-w-full
         shrink-0
         items-center
         gap-1.5
@@ -55,18 +61,29 @@ export default function ProficiencyBadge({
         text-[9px]
         font-bold
         uppercase
+        leading-none
         tracking-[0.08em]
+
         ${config.className}
       `}
+      aria-label={`Proficiency: ${label}`}
     >
       <Icon
         size={10}
         strokeWidth={2.2}
+        className="shrink-0"
+        aria-hidden="true"
       />
 
-      {formatProficiency(
-        proficiency
-      )}
+      <span
+        className="
+          min-w-0
+          break-words
+          [overflow-wrap:anywhere]
+        "
+      >
+        {label}
+      </span>
     </span>
   );
 }

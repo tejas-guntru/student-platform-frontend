@@ -28,20 +28,30 @@ export default function CreateModuleForm({
   onDescriptionChange,
   onSubmit,
 }: CreateModuleFormProps) {
+  const canSubmit =
+    title.trim().length > 0 &&
+    !creating;
+
   return (
     <section
       className="
+        min-w-0
+        overflow-hidden
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
+
         sm:p-6
       "
     >
+      {/* HEADER */}
+
       <div
         className="
           flex
+          min-w-0
           items-start
           gap-3
         "
@@ -59,12 +69,16 @@ export default function CreateModuleForm({
             text-[#1256AF]
           "
         >
-          <Layers3 size={18} />
+          <Layers3
+            size={18}
+            aria-hidden="true"
+          />
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h2
             className="
+              break-words
               text-lg
               font-bold
               text-slate-950
@@ -76,34 +90,52 @@ export default function CreateModuleForm({
           <p
             className="
               mt-1
+              max-w-2xl
+              break-words
               text-sm
               leading-6
               text-slate-500
             "
           >
             Group related lessons into a
-            structured section of the course.
+            structured section of the
+            course.
           </p>
         </div>
       </div>
 
+      {/* FORM */}
+
       <form
         className="
-          mt-6
+          mt-5
           grid
+          min-w-0
+          grid-cols-1
           gap-4
+
+          sm:mt-6
+
           lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)_auto]
           lg:items-end
         "
         onSubmit={(event) => {
           event.preventDefault();
+
+          if (!canSubmit) {
+            return;
+          }
+
           onSubmit();
         }}
       >
-        <div>
+        {/* TITLE */}
+
+        <div className="min-w-0">
           <label
             htmlFor="module-title"
             className="
+              block
               text-sm
               font-semibold
               text-slate-700
@@ -114,109 +146,182 @@ export default function CreateModuleForm({
 
           <input
             id="module-title"
+            type="text"
             value={title}
             onChange={(event) =>
               onTitleChange(
                 event.target.value
               )
             }
+            disabled={creating}
+            required
             maxLength={150}
+            autoComplete="off"
             placeholder="Getting Started"
             className="
               mt-2
+              min-h-11
+              min-w-0
               w-full
+              max-w-full
               rounded-xl
               border
               border-slate-300
+              bg-white
               px-4
               py-3
               text-sm
               text-slate-950
               outline-none
               transition
+
               placeholder:text-slate-400
+
               focus:border-[#1256AF]
               focus:ring-4
               focus:ring-blue-50
+
+              disabled:cursor-not-allowed
+              disabled:bg-slate-50
+              disabled:text-slate-500
+              disabled:opacity-80
             "
           />
+
+          <p
+            className="
+              mt-1.5
+              text-xs
+              text-slate-400
+            "
+          >
+            {title.length} / 150
+          </p>
         </div>
 
-        <div>
+        {/* DESCRIPTION */}
+
+        <div className="min-w-0">
           <label
             htmlFor="module-description"
             className="
+              block
               text-sm
               font-semibold
               text-slate-700
             "
           >
-            Description
+            Description{" "}
+            <span
+              className="
+                font-normal
+                text-slate-400
+              "
+            >
+              (optional)
+            </span>
           </label>
 
           <input
             id="module-description"
+            type="text"
             value={description}
             onChange={(event) =>
               onDescriptionChange(
                 event.target.value
               )
             }
+            disabled={creating}
             maxLength={5000}
+            autoComplete="off"
             placeholder="What students will learn in this module"
             className="
               mt-2
+              min-h-11
+              min-w-0
               w-full
+              max-w-full
               rounded-xl
               border
               border-slate-300
+              bg-white
               px-4
               py-3
               text-sm
               text-slate-950
               outline-none
               transition
+
               placeholder:text-slate-400
+
               focus:border-[#1256AF]
               focus:ring-4
               focus:ring-blue-50
+
+              disabled:cursor-not-allowed
+              disabled:bg-slate-50
+              disabled:text-slate-500
+              disabled:opacity-80
             "
           />
         </div>
 
+        {/* SUBMIT */}
+
         <button
           type="submit"
-          disabled={creating}
+          disabled={!canSubmit}
           className="
             inline-flex
-            h-[46px]
+            min-h-[46px]
+            w-full
             items-center
             justify-center
             gap-2
             rounded-xl
             bg-slate-950
             px-5
+            py-3
             text-sm
             font-semibold
             text-white
             transition
+
             hover:bg-[#1256AF]
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/30
+            focus-visible:ring-offset-2
+
             disabled:cursor-not-allowed
             disabled:opacity-50
+
+            lg:w-auto
           "
         >
           {creating ? (
             <>
               <LoaderCircle
                 size={15}
-                className="animate-spin"
+                className="
+                  shrink-0
+                  animate-spin
+                "
+                aria-hidden="true"
               />
-              Adding...
+
+              <span>Adding...</span>
             </>
           ) : (
             <>
-              <Plus size={15} />
-              Add Module
+              <Plus
+                size={15}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+
+              <span>Add Module</span>
             </>
           )}
         </button>

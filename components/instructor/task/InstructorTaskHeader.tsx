@@ -22,49 +22,92 @@ export default function InstructorTaskHeader({
   submissionCount,
 }: InstructorTaskHeaderProps) {
   return (
-    <section>
+    <section className="min-w-0">
+      {/* BACK */}
+
       <Link
         href={`/instructor/batches/${batchId}`}
         className="
           inline-flex
+          min-h-10
           items-center
           gap-2
+          rounded-lg
           text-sm
           font-semibold
           text-slate-500
           transition
+
           hover:text-[#1256AF]
+
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[#1256AF]/25
+          focus-visible:ring-offset-2
         "
       >
-        <ArrowLeft size={16} />
-        Back to Batch
+        <ArrowLeft
+          size={16}
+          className="shrink-0"
+          aria-hidden="true"
+        />
+
+        <span>Back to Batch</span>
       </Link>
+
+      {/* HEADER CARD */}
 
       <div
         className="
-          mt-5
+          mt-4
+          min-w-0
           overflow-hidden
-          rounded-3xl
+          rounded-2xl
           border
           border-slate-200
           bg-white
+
+          sm:mt-5
+          sm:rounded-3xl
         "
       >
-        <div className="p-6 sm:p-8">
+        <div
+          className="
+            min-w-0
+            p-4
+
+            sm:p-6
+
+            lg:p-8
+          "
+        >
           <div
             className="
               flex
+              min-w-0
               flex-col
-              gap-6
+              gap-5
+
+              sm:gap-6
+
               lg:flex-row
               lg:items-start
               lg:justify-between
             "
           >
-            <div className="max-w-3xl">
+            {/* TASK DETAILS */}
+
+            <div
+              className="
+                min-w-0
+                max-w-3xl
+                flex-1
+              "
+            >
               <div
                 className="
                   inline-flex
+                  max-w-full
                   items-center
                   gap-2
                   rounded-full
@@ -76,18 +119,31 @@ export default function InstructorTaskHeader({
                   text-[#1256AF]
                 "
               >
-                <ClipboardList size={14} />
-                Batch Task
+                <ClipboardList
+                  size={14}
+                  className="shrink-0"
+                  aria-hidden="true"
+                />
+
+                <span className="break-words">
+                  Batch Task
+                </span>
               </div>
 
               <h1
                 className="
                   mt-4
+                  break-words
                   text-2xl
                   font-bold
                   tracking-tight
                   text-slate-950
+
+                  [overflow-wrap:anywhere]
+
                   sm:text-3xl
+
+                  lg:text-4xl
                 "
               >
                 {task.title}
@@ -97,10 +153,14 @@ export default function InstructorTaskHeader({
                 <p
                   className="
                     mt-4
+                    max-w-full
                     whitespace-pre-wrap
+                    break-words
                     text-sm
                     leading-7
                     text-slate-600
+
+                    [overflow-wrap:anywhere]
                   "
                 >
                   {task.description}
@@ -108,18 +168,25 @@ export default function InstructorTaskHeader({
               )}
             </div>
 
+            {/* SUBMISSION COUNT */}
+
             <div
               className="
-                shrink-0
+                min-w-0
                 rounded-2xl
                 bg-slate-50
-                px-5
+                px-4
                 py-4
+
+                sm:px-5
+
                 lg:min-w-40
+                lg:shrink-0
               "
             >
               <p
                 className="
+                  break-words
                   text-xs
                   font-semibold
                   text-slate-400
@@ -131,8 +198,10 @@ export default function InstructorTaskHeader({
               <p
                 className="
                   mt-1
+                  break-words
                   text-3xl
                   font-bold
+                  leading-tight
                   text-slate-950
                 "
               >
@@ -141,31 +210,49 @@ export default function InstructorTaskHeader({
             </div>
           </div>
 
+          {/* TASK META */}
+
           <div
             className="
-              mt-6
+              mt-5
               flex
-              flex-wrap
-              gap-3
+              min-w-0
+              flex-col
+              gap-2
               border-t
               border-slate-100
               pt-5
+
+              sm:mt-6
+              sm:flex-row
+              sm:flex-wrap
+              sm:gap-3
             "
           >
             <InfoTag
               icon={
-                <CalendarDays size={14} />
+                <CalendarDays
+                  size={14}
+                  aria-hidden="true"
+                />
               }
               label="Due"
               value={
                 task.dueAt
-                  ? formatDateTime(task.dueAt)
+                  ? formatDateTime(
+                      task.dueAt
+                    )
                   : "No due date"
               }
             />
 
             <InfoTag
-              icon={<Clock3 size={14} />}
+              icon={
+                <Clock3
+                  size={14}
+                  aria-hidden="true"
+                />
+              }
               label="Created"
               value={formatDateTime(
                 task.createdAt
@@ -190,8 +277,10 @@ function InfoTag({
   return (
     <div
       className="
-        inline-flex
-        items-center
+        flex
+        min-w-0
+        max-w-full
+        items-start
         gap-2
         rounded-xl
         border
@@ -200,18 +289,39 @@ function InfoTag({
         px-3
         py-2
         text-xs
+        leading-5
         text-slate-600
+
+        sm:w-fit
       "
     >
-      <span className="text-[#1256AF]">
+      <span
+        className="
+          mt-0.5
+          shrink-0
+          text-[#1256AF]
+        "
+      >
         {icon}
       </span>
 
-      <span className="font-semibold">
-        {label}:
-      </span>
-
-      <span>{value}</span>
+      <div
+        className="
+          min-w-0
+          break-words
+        "
+      >
+        <span className="font-semibold">
+          {label}:
+        </span>{" "}
+        <span
+          className="
+            [overflow-wrap:anywhere]
+          "
+        >
+          {value}
+        </span>
+      </div>
     </div>
   );
 }
@@ -219,5 +329,11 @@ function InfoTag({
 function formatDateTime(
   value: string
 ) {
-  return new Date(value).toLocaleString();
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+  return date.toLocaleString();
 }

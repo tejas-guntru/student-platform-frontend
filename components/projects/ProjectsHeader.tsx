@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {
   ArrowLeft,
   FolderGit2,
@@ -11,54 +12,241 @@ interface ProjectsHeaderProps {
 export default function ProjectsHeader({
   count,
 }: ProjectsHeaderProps) {
+  const safeCount =
+    Number.isFinite(count) && count >= 0
+      ? count
+      : 0;
+
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+    <header
+      className="
+        min-w-0
+        border-b
+        border-slate-200
+        bg-white
+      "
+    >
+      <div
+        className="
+          mx-auto
+          w-full
+          max-w-6xl
+          min-w-0
+          px-4
+          py-6
+
+          sm:px-6
+          sm:py-10
+
+          lg:px-8
+          lg:py-12
+        "
+      >
+        {/* BACK */}
+
         <Link
           href="/profile"
-          className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-[#1256AF]"
+          className="
+            group
+            inline-flex
+            min-h-10
+            items-center
+            gap-2
+            rounded-lg
+            text-sm
+            font-semibold
+            text-slate-500
+            transition-colors
+
+            hover:text-[#1256AF]
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/25
+            focus-visible:ring-offset-2
+          "
         >
           <ArrowLeft
             size={15}
-            className="transition-transform group-hover:-translate-x-1"
+            className="
+              shrink-0
+              transition-transform
+
+              group-hover:-translate-x-1
+            "
+            aria-hidden="true"
           />
 
-          Back to profile
+          <span>
+            Back to profile
+          </span>
         </Link>
 
-        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#1256AF]/[0.07] text-[#1256AF]">
-              <FolderGit2 size={19} />
+        {/* HEADER CONTENT */}
+
+        <div
+          className="
+            mt-5
+            flex
+            min-w-0
+            flex-col
+            gap-5
+
+            sm:mt-7
+            sm:gap-6
+
+            md:flex-row
+            md:items-end
+            md:justify-between
+          "
+        >
+          {/* TITLE */}
+
+          <div
+            className="
+              min-w-0
+              max-w-2xl
+            "
+          >
+            <div
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#1256AF]/[0.07]
+                text-[#1256AF]
+
+                sm:h-11
+                sm:w-11
+              "
+            >
+              <FolderGit2
+                size={19}
+                aria-hidden="true"
+              />
             </div>
 
-            <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.17em] text-[#1256AF]">
+            <p
+              className="
+                mt-4
+                break-words
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.17em]
+                text-[#1256AF]
+
+                sm:mt-5
+              "
+            >
               Profile · Projects
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl">
+            <h1
+              className="
+                mt-2
+                break-words
+                text-3xl
+                font-bold
+                tracking-[-0.04em]
+                text-slate-950
+
+                [overflow-wrap:anywhere]
+
+                sm:text-4xl
+              "
+            >
               Projects
             </h1>
 
-            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
+            <p
+              className="
+                mt-3
+                max-w-xl
+                break-words
+                text-sm
+                leading-6
+                text-slate-500
+
+                [overflow-wrap:anywhere]
+              "
+            >
               Showcase the work you have built,
               the technologies you used and the
               contribution you made.
             </p>
           </div>
 
-          <div className="w-fit rounded-2xl border border-slate-200 bg-[#F8FAFC] px-5 py-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+          {/* PROJECT COUNT */}
+
+          <div
+            className="
+              w-full
+              min-w-0
+              rounded-2xl
+              border
+              border-slate-200
+              bg-[#F8FAFC]
+              px-4
+              py-4
+
+              sm:px-5
+
+              md:w-auto
+              md:min-w-44
+            "
+            aria-label={`${safeCount} ${
+              safeCount === 1
+                ? "portfolio project"
+                : "portfolio projects"
+            }`}
+          >
+            <p
+              className="
+                break-words
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-slate-400
+              "
+            >
               Portfolio
             </p>
 
-            <div className="mt-1 flex items-end gap-2">
-              <span className="text-3xl font-bold tracking-[-0.05em] text-[#1256AF]">
-                {count}
+            <div
+              className="
+                mt-1
+                flex
+                min-w-0
+                items-end
+                gap-2
+              "
+            >
+              <span
+                className="
+                  break-words
+                  text-3xl
+                  font-bold
+                  tracking-[-0.05em]
+                  text-[#1256AF]
+                "
+              >
+                {safeCount}
               </span>
 
-              <span className="pb-1 text-xs font-semibold text-slate-500">
-                {count === 1
+              <span
+                className="
+                  pb-1
+                  text-xs
+                  font-semibold
+                  text-slate-500
+                "
+              >
+                {safeCount === 1
                   ? "project"
                   : "projects"}
               </span>

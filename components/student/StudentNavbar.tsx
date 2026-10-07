@@ -125,10 +125,8 @@ export default function StudentNavbar() {
   const careerRef =
     useRef<HTMLDivElement>(null);
 
-  const [
-    email,
-    setEmail,
-  ] = useState("");
+  const [email, setEmail] =
+    useState("");
 
   const [
     accountOpen,
@@ -270,25 +268,31 @@ export default function StudentNavbar() {
           max-w-7xl
           items-center
           justify-between
-          gap-4
+          gap-3
           px-4
 
+          sm:gap-4
           sm:px-6
 
           lg:px-8
         "
       >
-        {/* ============================================= */}
         {/* LOGO */}
-        {/* ============================================= */}
 
         <Link
           href="/student"
           aria-label="Trailbliz student home"
           className="
             flex
+            min-w-0
             shrink-0
             items-center
+            rounded-lg
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/25
+            focus-visible:ring-offset-2
           "
         >
           <Image
@@ -307,14 +311,13 @@ export default function StudentNavbar() {
           />
         </Link>
 
-        {/* ============================================= */}
         {/* DESKTOP NAVIGATION */}
-        {/* ============================================= */}
 
         <nav
           aria-label="Student navigation"
           className="
             hidden
+            min-w-0
             items-center
             gap-1
 
@@ -359,10 +362,17 @@ export default function StudentNavbar() {
                 items-center
                 gap-1.5
                 rounded-lg
-                px-3.5
+                px-3
                 text-sm
                 font-semibold
                 transition-colors
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#1256AF]/25
+                focus-visible:ring-offset-2
+
+                lg:px-3.5
 
                 ${
                   careerActive
@@ -377,13 +387,17 @@ export default function StudentNavbar() {
                       `
                 }
               `}
+              aria-haspopup="menu"
               aria-expanded={careerOpen}
+              aria-controls="student-career-menu"
             >
-              Career
+              <span>Career</span>
 
               <ChevronDown
                 size={14}
+                aria-hidden="true"
                 className={`
+                  shrink-0
                   transition-transform
 
                   ${
@@ -401,15 +415,14 @@ export default function StudentNavbar() {
           </div>
         </nav>
 
-        {/* ============================================= */}
-        {/* ACCOUNT */}
-        {/* ============================================= */}
+        {/* DESKTOP ACCOUNT */}
 
         <div
           ref={accountRef}
           className="
             relative
             hidden
+            shrink-0
 
             md:block
           "
@@ -434,6 +447,11 @@ export default function StudentNavbar() {
               pr-2.5
               transition-colors
 
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/25
+              focus-visible:ring-offset-2
+
               ${
                 profileActive ||
                 accountOpen
@@ -448,13 +466,16 @@ export default function StudentNavbar() {
                     `
               }
             `}
+            aria-haspopup="menu"
             aria-expanded={accountOpen}
+            aria-controls="student-account-menu"
           >
             <span
               className="
                 flex
                 h-8
                 w-8
+                shrink-0
                 items-center
                 justify-center
                 rounded-lg
@@ -463,6 +484,7 @@ export default function StudentNavbar() {
                 font-bold
                 text-white
               "
+              aria-hidden="true"
             >
               {initials}
             </span>
@@ -470,6 +492,7 @@ export default function StudentNavbar() {
             <span
               className="
                 hidden
+                min-w-0
                 max-w-[125px]
                 text-left
 
@@ -494,6 +517,9 @@ export default function StudentNavbar() {
                   text-[10px]
                   text-slate-500
                 "
+                title={
+                  email || "Student"
+                }
               >
                 {email || "Student"}
               </span>
@@ -501,7 +527,9 @@ export default function StudentNavbar() {
 
             <ChevronDown
               size={14}
+              aria-hidden="true"
               className={`
+                shrink-0
                 text-slate-400
                 transition-transform
 
@@ -523,9 +551,7 @@ export default function StudentNavbar() {
           )}
         </div>
 
-        {/* ============================================= */}
         {/* MOBILE BUTTON */}
-        {/* ============================================= */}
 
         <button
           type="button"
@@ -536,8 +562,9 @@ export default function StudentNavbar() {
           }
           className="
             flex
-            h-10
-            w-10
+            h-11
+            w-11
+            shrink-0
             items-center
             justify-center
             rounded-lg
@@ -545,6 +572,14 @@ export default function StudentNavbar() {
             border-slate-200
             bg-white
             text-slate-700
+            transition-colors
+
+            hover:bg-slate-50
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/25
+            focus-visible:ring-offset-2
 
             md:hidden
           "
@@ -554,20 +589,26 @@ export default function StudentNavbar() {
               : "Open navigation"
           }
           aria-expanded={mobileOpen}
+          aria-controls="student-mobile-navigation"
         >
           {mobileOpen ? (
-            <X size={19} />
+            <X
+              size={19}
+              aria-hidden="true"
+            />
           ) : (
-            <Menu size={19} />
+            <Menu
+              size={19}
+              aria-hidden="true"
+            />
           )}
         </button>
       </div>
 
-      {/* =============================================== */}
       {/* MOBILE NAVIGATION */}
-      {/* =============================================== */}
 
       <div
+        id="student-mobile-navigation"
         className={`
           overflow-hidden
           bg-white
@@ -579,7 +620,7 @@ export default function StudentNavbar() {
           ${
             mobileOpen
               ? `
-                  max-h-[900px]
+                  max-h-[calc(100dvh-68px)]
                   border-t
                   border-slate-200
                   opacity-100
@@ -593,222 +634,231 @@ export default function StudentNavbar() {
       >
         <div
           className="
-            mx-auto
-            max-w-7xl
-            px-4
-            py-4
-
-            sm:px-6
+            max-h-[calc(100dvh-68px)]
+            overflow-y-auto
+            overscroll-contain
           "
         >
-          {/* WORKSPACE */}
-
-          <p
-            className="
-              px-3
-              text-[9px]
-              font-bold
-              uppercase
-              tracking-[0.13em]
-              text-slate-400
-            "
-          >
-            Workspace
-          </p>
-
           <div
             className="
-              mt-2
-              space-y-1
+              mx-auto
+              max-w-7xl
+              px-4
+              py-4
+
+              sm:px-6
             "
           >
-            {primaryLinks.map(
-              (link) => (
-                <MobileLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  icon={link.icon}
-                  active={isActive(
-                    link.href
-                  )}
-                />
-              )
-            )}
-          </div>
+            {/* WORKSPACE */}
 
-          {/* CAREER */}
-
-          <div
-            className="
-              my-4
-              border-t
-              border-slate-100
-            "
-          />
-
-          <p
-            className="
-              px-3
-              text-[9px]
-              font-bold
-              uppercase
-              tracking-[0.13em]
-              text-slate-400
-            "
-          >
-            Career
-          </p>
-
-          <div
-            className="
-              mt-2
-              space-y-1
-            "
-          >
-            {careerLinks.map(
-              (link) => (
-                <MobileLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  icon={link.icon}
-                  active={isActive(
-                    link.href
-                  )}
-                />
-              )
-            )}
-          </div>
-
-          {/* ACCOUNT */}
-
-          <div
-            className="
-              my-4
-              border-t
-              border-slate-100
-            "
-          />
-
-          <p
-            className="
-              px-3
-              text-[9px]
-              font-bold
-              uppercase
-              tracking-[0.13em]
-              text-slate-400
-            "
-          >
-            Account
-          </p>
-
-          <div
-            className="
-              mt-2
-              space-y-1
-            "
-          >
-            {accountLinks.map(
-              (link) => (
-                <MobileLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  icon={link.icon}
-                  active={isActive(
-                    link.href
-                  )}
-                />
-              )
-            )}
-          </div>
-
-          {/* USER */}
-
-          <div
-            className="
-              mt-4
-              border-t
-              border-slate-100
-              pt-4
-            "
-          >
-            <div
+            <p
               className="
-                flex
-                items-center
-                gap-3
                 px-3
-                pb-3
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-slate-400
               "
             >
-              <span
-                className="
-                  flex
-                  h-9
-                  w-9
-                  shrink-0
-                  items-center
-                  justify-center
-                  rounded-lg
-                  bg-[#1256AF]
-                  text-[11px]
-                  font-bold
-                  text-white
-                "
-              >
-                {initials}
-              </span>
+              Workspace
+            </p>
 
-              <div className="min-w-0">
-                <p
-                  className="
-                    text-sm
-                    font-semibold
-                    text-slate-900
-                  "
-                >
-                  Student
-                </p>
-
-                <p
-                  className="
-                    truncate
-                    text-xs
-                    text-slate-500
-                  "
-                >
-                  {email ||
-                    "Trailbliz Student"}
-                </p>
-              </div>
+            <div className="mt-2 space-y-1">
+              {primaryLinks.map(
+                (link) => (
+                  <MobileLink
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    icon={link.icon}
+                    active={isActive(
+                      link.href
+                    )}
+                  />
+                )
+              )}
             </div>
 
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="
-                flex
-                w-full
-                items-center
-                gap-3
-                rounded-lg
-                px-3
-                py-2.5
-                text-sm
-                font-semibold
-                text-red-600
-                transition-colors
+            {/* CAREER */}
 
-                hover:bg-red-50
+            <div
+              className="
+                my-4
+                border-t
+                border-slate-100
+              "
+            />
+
+            <p
+              className="
+                px-3
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-slate-400
               "
             >
-              <LogOut size={16} />
+              Career
+            </p>
 
-              Log out
-            </button>
+            <div className="mt-2 space-y-1">
+              {careerLinks.map(
+                (link) => (
+                  <MobileLink
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    icon={link.icon}
+                    active={isActive(
+                      link.href
+                    )}
+                  />
+                )
+              )}
+            </div>
+
+            {/* ACCOUNT */}
+
+            <div
+              className="
+                my-4
+                border-t
+                border-slate-100
+              "
+            />
+
+            <p
+              className="
+                px-3
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-slate-400
+              "
+            >
+              Account
+            </p>
+
+            <div className="mt-2 space-y-1">
+              {accountLinks.map(
+                (link) => (
+                  <MobileLink
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    icon={link.icon}
+                    active={isActive(
+                      link.href
+                    )}
+                  />
+                )
+              )}
+            </div>
+
+            {/* USER */}
+
+            <div
+              className="
+                mt-4
+                border-t
+                border-slate-100
+                pt-4
+              "
+            >
+              <div
+                className="
+                  flex
+                  min-w-0
+                  items-center
+                  gap-3
+                  px-3
+                  pb-3
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-9
+                    w-9
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-lg
+                    bg-[#1256AF]
+                    text-[11px]
+                    font-bold
+                    text-white
+                  "
+                  aria-hidden="true"
+                >
+                  {initials}
+                </span>
+
+                <div
+                  className="
+                    min-w-0
+                    flex-1
+                  "
+                >
+                  <p
+                    className="
+                      text-sm
+                      font-semibold
+                      text-slate-900
+                    "
+                  >
+                    Student
+                  </p>
+
+                  <p
+                    className="
+                      break-all
+                      text-xs
+                      leading-5
+                      text-slate-500
+                    "
+                  >
+                    {email ||
+                      "Trailbliz Student"}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="
+                  flex
+                  min-h-11
+                  w-full
+                  items-center
+                  gap-3
+                  rounded-lg
+                  px-3
+                  py-2.5
+                  text-sm
+                  font-semibold
+                  text-red-600
+                  transition-colors
+
+                  hover:bg-red-50
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-red-200
+                "
+              >
+                <LogOut
+                  size={16}
+                  aria-hidden="true"
+                />
+
+                Log out
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -832,16 +882,26 @@ function NavLink({
   return (
     <Link
       href={href}
+      aria-current={
+        active ? "page" : undefined
+      }
       className={`
         relative
         flex
         h-10
         items-center
         rounded-lg
-        px-3.5
+        px-3
         text-sm
         font-semibold
         transition-colors
+
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/25
+        focus-visible:ring-offset-2
+
+        lg:px-3.5
 
         ${
           active
@@ -861,6 +921,7 @@ function NavLink({
 
       {active && (
         <span
+          aria-hidden="true"
           className="
             absolute
             -bottom-[15px]
@@ -883,11 +944,14 @@ function NavLink({
 function CareerDropdown() {
   return (
     <div
+      id="student-career-menu"
+      role="menu"
       className="
         absolute
         left-1/2
         top-[calc(100%+12px)]
         w-[290px]
+        max-w-[calc(100vw-32px)]
         -translate-x-1/2
         rounded-2xl
         border
@@ -920,6 +984,7 @@ function CareerDropdown() {
           className="
             mt-1
             text-xs
+            leading-5
             text-slate-500
           "
         >
@@ -928,12 +993,7 @@ function CareerDropdown() {
         </p>
       </div>
 
-      <div
-        className="
-          mt-1
-          space-y-1
-        "
-      >
+      <div className="mt-1 space-y-1">
         {careerLinks.map(
           (link) => {
             const Icon = link.icon;
@@ -942,9 +1002,11 @@ function CareerDropdown() {
               <Link
                 key={link.href}
                 href={link.href}
+                role="menuitem"
                 className="
                   group
                   flex
+                  min-w-0
                   items-center
                   gap-3
                   rounded-xl
@@ -953,6 +1015,10 @@ function CareerDropdown() {
                   transition-colors
 
                   hover:bg-slate-50
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#1256AF]/20
                 "
               >
                 <span
@@ -972,13 +1038,22 @@ function CareerDropdown() {
                     group-hover:text-[#1256AF]
                   "
                 >
-                  <Icon size={16} />
+                  <Icon
+                    size={16}
+                    aria-hidden="true"
+                  />
                 </span>
 
-                <span>
+                <span
+                  className="
+                    min-w-0
+                    flex-1
+                  "
+                >
                   <span
                     className="
                       block
+                      break-words
                       text-sm
                       font-semibold
                       text-slate-800
@@ -991,7 +1066,9 @@ function CareerDropdown() {
                     className="
                       mt-0.5
                       block
+                      break-words
                       text-[11px]
+                      leading-4
                       text-slate-500
                     "
                   >
@@ -1022,11 +1099,14 @@ function AccountDropdown({
 }) {
   return (
     <div
+      id="student-account-menu"
+      role="menu"
       className="
         absolute
         right-0
         top-[calc(100%+12px)]
         w-[270px]
+        max-w-[calc(100vw-32px)]
         rounded-2xl
         border
         border-slate-200
@@ -1040,6 +1120,7 @@ function AccountDropdown({
       <div
         className="
           flex
+          min-w-0
           items-center
           gap-3
           px-3
@@ -1061,11 +1142,17 @@ function AccountDropdown({
             font-bold
             text-white
           "
+          aria-hidden="true"
         >
           {initials}
         </span>
 
-        <div className="min-w-0">
+        <div
+          className="
+            min-w-0
+            flex-1
+          "
+        >
           <p
             className="
               text-sm
@@ -1083,6 +1170,10 @@ function AccountDropdown({
               text-[11px]
               text-slate-500
             "
+            title={
+              email ||
+              "Trailbliz Student"
+            }
           >
             {email ||
               "Trailbliz Student"}
@@ -1107,8 +1198,10 @@ function AccountDropdown({
               <Link
                 key={link.href}
                 href={link.href}
+                role="menuitem"
                 className="
                   flex
+                  min-h-10
                   items-center
                   gap-3
                   rounded-xl
@@ -1121,11 +1214,21 @@ function AccountDropdown({
 
                   hover:bg-slate-50
                   hover:text-[#1256AF]
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#1256AF]/20
                 "
               >
-                <Icon size={16} />
+                <Icon
+                  size={16}
+                  className="shrink-0"
+                  aria-hidden="true"
+                />
 
-                {link.label}
+                <span className="break-words">
+                  {link.label}
+                </span>
               </Link>
             );
           }
@@ -1145,8 +1248,10 @@ function AccountDropdown({
         <button
           type="button"
           onClick={onLogout}
+          role="menuitem"
           className="
             flex
+            min-h-10
             w-full
             items-center
             gap-3
@@ -1160,9 +1265,17 @@ function AccountDropdown({
             transition-colors
 
             hover:bg-red-50
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-red-200
           "
         >
-          <LogOut size={16} />
+          <LogOut
+            size={16}
+            className="shrink-0"
+            aria-hidden="true"
+          />
 
           Log out
         </button>
@@ -1189,8 +1302,13 @@ function MobileLink({
   return (
     <Link
       href={href}
+      aria-current={
+        active ? "page" : undefined
+      }
       className={`
         flex
+        min-h-11
+        min-w-0
         items-center
         gap-3
         rounded-xl
@@ -1199,6 +1317,10 @@ function MobileLink({
         text-sm
         font-semibold
         transition-colors
+
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/20
 
         ${
           active
@@ -1236,10 +1358,20 @@ function MobileLink({
           }
         `}
       >
-        <Icon size={15} />
+        <Icon
+          size={15}
+          aria-hidden="true"
+        />
       </span>
 
-      {label}
+      <span
+        className="
+          min-w-0
+          break-words
+        "
+      >
+        {label}
+      </span>
     </Link>
   );
 }

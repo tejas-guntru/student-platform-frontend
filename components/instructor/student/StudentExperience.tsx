@@ -20,24 +20,39 @@ export default function StudentExperience({
     <section
       id="experience"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
+
         sm:p-6
       "
     >
+      {/* HEADER */}
+
       <div
         className="
           flex
+          min-w-0
           items-start
           justify-between
-          gap-4
+          gap-3
+
+          sm:gap-4
         "
       >
-        <div className="flex items-start gap-3">
+        <div
+          className="
+            flex
+            min-w-0
+            flex-1
+            items-start
+            gap-3
+          "
+        >
           <div
             className="
               flex
@@ -53,15 +68,37 @@ export default function StudentExperience({
           >
             <BriefcaseBusiness
               size={18}
+              aria-hidden="true"
             />
           </div>
 
-          <div>
-            <h2 className="text-lg font-bold text-slate-950">
+          <div
+            className="
+              min-w-0
+              flex-1
+            "
+          >
+            <h2
+              className="
+                break-words
+                text-lg
+                font-bold
+                text-slate-950
+              "
+            >
               Experience
             </h2>
 
-            <p className="mt-1 text-sm text-slate-500">
+            <p
+              className="
+                mt-1
+                max-w-2xl
+                break-words
+                text-sm
+                leading-6
+                text-slate-500
+              "
+            >
               Internships and professional
               experience.
             </p>
@@ -71,10 +108,18 @@ export default function StudentExperience({
         <Count value={experiences.length} />
       </div>
 
+      {/* EXPERIENCE LIST */}
+
       {experiences.length === 0 ? (
         <EmptyState text="No experience added by this student." />
       ) : (
-        <div className="mt-5 space-y-4">
+        <div
+          className="
+            mt-5
+            min-w-0
+            space-y-4
+          "
+        >
           {experiences.map(
             (experience) => (
               <article
@@ -82,28 +127,44 @@ export default function StudentExperience({
                   experience.experienceId
                 }
                 className="
+                  min-w-0
                   rounded-xl
                   border
                   border-slate-200
                   p-4
+
                   sm:p-5
                 "
               >
+                {/* ROLE / COMPANY / DATES */}
+
                 <div
                   className="
                     flex
+                    min-w-0
                     flex-col
                     gap-3
+
                     sm:flex-row
                     sm:items-start
                     sm:justify-between
+                    sm:gap-4
                   "
                 >
-                  <div>
+                  <div
+                    className="
+                      min-w-0
+                      flex-1
+                    "
+                  >
                     <h3
                       className="
+                        break-words
                         font-bold
+                        leading-6
                         text-slate-950
+
+                        [overflow-wrap:anywhere]
                       "
                     >
                       {
@@ -114,9 +175,13 @@ export default function StudentExperience({
                     <p
                       className="
                         mt-1
+                        break-words
                         text-sm
                         font-semibold
+                        leading-6
                         text-[#1256AF]
+
+                        [overflow-wrap:anywhere]
                       "
                     >
                       {
@@ -127,61 +192,97 @@ export default function StudentExperience({
 
                   <div
                     className="
-                      inline-flex
-                      items-center
+                      flex
+                      min-w-0
+                      items-start
                       gap-1.5
                       text-xs
+                      leading-5
                       text-slate-400
+
+                      sm:shrink-0
+                      sm:items-center
+                      sm:text-right
                     "
                   >
                     <CalendarDays
                       size={13}
+                      className="
+                        mt-0.5
+                        shrink-0
+
+                        sm:mt-0
+                      "
+                      aria-hidden="true"
                     />
 
-                    {formatDate(
-                      experience.startDate
-                    )}{" "}
-                    →{" "}
-                    {experience.currentlyWorking
-                      ? "Present"
-                      : formatDate(
-                          experience.endDate
-                        )}
+                    <span className="break-words">
+                      {formatDate(
+                        experience.startDate
+                      )}{" "}
+                      <span aria-hidden="true">
+                        →
+                      </span>{" "}
+                      {experience.currentlyWorking
+                        ? "Present"
+                        : formatDate(
+                            experience.endDate
+                          )}
+                    </span>
                   </div>
                 </div>
 
-                <div
-                  className="
-                    mt-4
-                    flex
-                    flex-wrap
-                    gap-2
-                  "
-                >
-                  {experience.employmentType && (
-                    <Tag>
-                      {formatEnum(
-                        experience.employmentType
-                      )}
-                    </Tag>
-                  )}
+                {/* META */}
 
-                  {experience.location && (
-                    <Tag>
-                      <MapPin size={12} />
-                      {experience.location}
-                    </Tag>
-                  )}
-                </div>
+                {(experience.employmentType ||
+                  experience.location) && (
+                  <div
+                    className="
+                      mt-4
+                      flex
+                      min-w-0
+                      flex-wrap
+                      gap-2
+                    "
+                  >
+                    {experience.employmentType && (
+                      <Tag>
+                        {formatEnum(
+                          experience.employmentType
+                        )}
+                      </Tag>
+                    )}
+
+                    {experience.location && (
+                      <Tag>
+                        <MapPin
+                          size={12}
+                          className="shrink-0"
+                          aria-hidden="true"
+                        />
+
+                        {
+                          experience.location
+                        }
+                      </Tag>
+                    )}
+                  </div>
+                )}
+
+                {/* DESCRIPTION */}
 
                 {experience.description && (
                   <p
                     className="
                       mt-4
+                      max-w-full
                       whitespace-pre-wrap
+                      break-words
                       text-sm
                       leading-6
                       text-slate-600
+
+                      [overflow-wrap:anywhere]
                     "
                   >
                     {
@@ -207,6 +308,8 @@ function Tag({
     <span
       className="
         inline-flex
+        min-w-0
+        max-w-full
         items-center
         gap-1
         rounded-full
@@ -215,10 +318,21 @@ function Tag({
         py-1
         text-xs
         font-medium
+        leading-5
         text-slate-600
       "
     >
-      {children}
+      <span
+        className="
+          min-w-0
+          max-w-full
+          break-words
+
+          [overflow-wrap:anywhere]
+        "
+      >
+        {children}
+      </span>
     </span>
   );
 }
@@ -231,6 +345,11 @@ function Count({
   return (
     <span
       className="
+        inline-flex
+        min-w-7
+        shrink-0
+        items-center
+        justify-center
         rounded-full
         bg-amber-50
         px-2.5
@@ -239,6 +358,7 @@ function Count({
         font-bold
         text-amber-700
       "
+      aria-label={`${value} experience entries`}
     >
       {value}
     </span>
@@ -254,18 +374,30 @@ function EmptyState({
     <div
       className="
         mt-5
+        min-w-0
         rounded-xl
         border
         border-dashed
         border-slate-200
         bg-slate-50
-        p-6
+        px-4
+        py-6
         text-center
-        text-sm
-        text-slate-500
+
+        sm:px-6
       "
     >
-      {text}
+      <p
+        className="
+          break-words
+          text-sm
+          font-medium
+          leading-6
+          text-slate-500
+        "
+      >
+        {text}
+      </p>
     </div>
   );
 }
@@ -291,7 +423,11 @@ function formatDate(
     return "—";
   }
 
-  return new Date(
-    value
-  ).toLocaleDateString();
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+  return date.toLocaleDateString();
 }

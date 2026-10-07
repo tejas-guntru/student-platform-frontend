@@ -1,7 +1,6 @@
 import {
   CheckCircle2,
   ClipboardCheck,
-  Clock3,
 } from "lucide-react";
 
 import type {
@@ -20,12 +19,14 @@ export default function StudentAssessmentProgress({
     <section
       id="assessments"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
+
         sm:p-6
       "
     >
@@ -34,7 +35,13 @@ export default function StudentAssessmentProgress({
       {assessments.length === 0 ? (
         <EmptyState />
       ) : (
-        <div className="mt-5 space-y-3">
+        <div
+          className="
+            mt-5
+            min-w-0
+            space-y-3
+          "
+        >
           {assessments.map(
             (assessment) => (
               <article
@@ -42,27 +49,44 @@ export default function StudentAssessmentProgress({
                   assessment.attemptId
                 }
                 className="
+                  min-w-0
                   rounded-xl
                   border
                   border-slate-200
                   p-4
+
+                  sm:p-5
                 "
               >
                 <div
                   className="
                     flex
+                    min-w-0
                     flex-col
                     gap-4
+
                     sm:flex-row
                     sm:items-center
                     sm:justify-between
+                    sm:gap-6
                   "
                 >
-                  <div>
+                  {/* ASSESSMENT */}
+
+                  <div
+                    className="
+                      min-w-0
+                      flex-1
+                    "
+                  >
                     <h3
                       className="
+                        break-words
                         font-semibold
+                        leading-6
                         text-slate-950
+
+                        [overflow-wrap:anywhere]
                       "
                     >
                       {assessment.title}
@@ -72,6 +96,8 @@ export default function StudentAssessmentProgress({
                       className="
                         mt-2
                         inline-flex
+                        max-w-full
+                        items-center
                         rounded-full
                         bg-slate-100
                         px-2.5
@@ -79,25 +105,46 @@ export default function StudentAssessmentProgress({
                         text-[10px]
                         font-bold
                         uppercase
+                        leading-4
                         tracking-wide
                         text-slate-600
                       "
                     >
-                      {formatEnum(
-                        assessment.attemptStatus
-                      )}
+                      <span
+                        className="
+                          break-words
+
+                          [overflow-wrap:anywhere]
+                        "
+                      >
+                        {formatEnum(
+                          assessment.attemptStatus
+                        )}
+                      </span>
                     </span>
                   </div>
 
+                  {/* SCORE */}
+
                   <div
                     className="
+                      min-w-0
+                      border-t
+                      border-slate-100
+                      pt-3
+
+                      sm:shrink-0
+                      sm:border-t-0
+                      sm:pt-0
                       sm:text-right
                     "
                   >
                     <p
                       className="
+                        break-words
                         text-lg
                         font-bold
+                        leading-6
                         text-slate-950
                       "
                     >
@@ -111,21 +158,32 @@ export default function StudentAssessmentProgress({
                       <p
                         className="
                           mt-1
-                          inline-flex
-                          items-center
-                          gap-1
+                          flex
+                          min-w-0
+                          items-start
+                          gap-1.5
                           text-xs
+                          leading-5
                           text-slate-400
+
+                          sm:justify-end
                         "
                       >
                         <CheckCircle2
                           size={12}
+                          className="
+                            mt-1
+                            shrink-0
+                          "
+                          aria-hidden="true"
                         />
 
-                        Graded{" "}
-                        {formatDateTime(
-                          assessment.gradedAt
-                        )}
+                        <span className="break-words">
+                          Graded{" "}
+                          {formatDateTime(
+                            assessment.gradedAt
+                          )}
+                        </span>
                       </p>
                     )}
                   </div>
@@ -148,12 +206,23 @@ function Header({
     <div
       className="
         flex
+        min-w-0
         items-start
         justify-between
-        gap-4
+        gap-3
+
+        sm:gap-4
       "
     >
-      <div className="flex items-start gap-3">
+      <div
+        className="
+          flex
+          min-w-0
+          flex-1
+          items-start
+          gap-3
+        "
+      >
         <div
           className="
             flex
@@ -169,15 +238,37 @@ function Header({
         >
           <ClipboardCheck
             size={18}
+            aria-hidden="true"
           />
         </div>
 
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">
+        <div
+          className="
+            min-w-0
+            flex-1
+          "
+        >
+          <h2
+            className="
+              break-words
+              text-lg
+              font-bold
+              text-slate-950
+            "
+          >
             Assessments
           </h2>
 
-          <p className="mt-1 text-sm text-slate-500">
+          <p
+            className="
+              mt-1
+              max-w-2xl
+              break-words
+              text-sm
+              leading-6
+              text-slate-500
+            "
+          >
             Assessment attempts and grading
             performance.
           </p>
@@ -186,6 +277,11 @@ function Header({
 
       <span
         className="
+          inline-flex
+          min-w-7
+          shrink-0
+          items-center
+          justify-center
           rounded-full
           bg-violet-50
           px-2.5
@@ -194,6 +290,7 @@ function Header({
           font-bold
           text-violet-700
         "
+        aria-label={`${count} assessment attempts`}
       >
         {count}
       </span>
@@ -206,18 +303,30 @@ function EmptyState() {
     <div
       className="
         mt-5
+        min-w-0
         rounded-xl
         border
         border-dashed
         border-slate-200
         bg-slate-50
-        p-6
+        px-4
+        py-6
         text-center
-        text-sm
-        text-slate-500
+
+        sm:px-6
       "
     >
-      No assessment attempts in this batch.
+      <p
+        className="
+          break-words
+          text-sm
+          font-medium
+          leading-6
+          text-slate-500
+        "
+      >
+        No assessment attempts in this batch.
+      </p>
     </div>
   );
 }
@@ -243,7 +352,11 @@ function formatDateTime(
     return "—";
   }
 
-  return new Date(
-    value
-  ).toLocaleString();
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+  return date.toLocaleString();
 }

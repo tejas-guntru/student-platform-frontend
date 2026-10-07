@@ -14,10 +14,12 @@ interface TaskSubmissionCardProps {
   submission: InstructorTaskSubmissionResponse;
   feedback: string;
   reviewing: boolean;
+
   onFeedbackChange: (
     submissionId: string,
     value: string
   ) => void;
+
   onReview: (
     submissionId: string
   ) => void;
@@ -36,6 +38,7 @@ export default function TaskSubmissionCard({
   return (
     <article
       className="
+        min-w-0
         overflow-hidden
         rounded-2xl
         border
@@ -48,18 +51,30 @@ export default function TaskSubmissionCard({
       <div
         className="
           flex
+          min-w-0
           flex-col
           gap-4
           border-b
           border-slate-100
-          p-5
+          p-4
+
           sm:flex-row
           sm:items-center
           sm:justify-between
           sm:p-6
         "
       >
-        <div className="flex items-center gap-3">
+        <div
+          className="
+            flex
+            min-w-0
+            flex-1
+            items-start
+            gap-3
+
+            sm:items-center
+          "
+        >
           <div
             className="
               flex
@@ -73,14 +88,26 @@ export default function TaskSubmissionCard({
               text-[#1256AF]
             "
           >
-            <UserRound size={18} />
+            <UserRound
+              size={18}
+              aria-hidden="true"
+            />
           </div>
 
-          <div>
+          <div
+            className="
+              min-w-0
+              flex-1
+            "
+          >
             <h3
               className="
+                break-words
                 font-bold
+                leading-6
                 text-slate-950
+
+                [overflow-wrap:anywhere]
               "
             >
               {submission.studentName}
@@ -89,7 +116,9 @@ export default function TaskSubmissionCard({
             <p
               className="
                 mt-1
+                break-words
                 text-xs
+                leading-5
                 text-slate-400
               "
             >
@@ -104,12 +133,24 @@ export default function TaskSubmissionCard({
         <StatusBadge reviewed={reviewed} />
       </div>
 
-      <div className="p-5 sm:p-6">
+      <div
+        className="
+          min-w-0
+          p-4
+
+          sm:p-6
+        "
+      >
         {/* SUBMISSION CONTENT */}
 
-        <div>
+        <div className="min-w-0">
           <SectionLabel
-            icon={<FileText size={13} />}
+            icon={
+              <FileText
+                size={13}
+                aria-hidden="true"
+              />
+            }
           >
             Submission
           </SectionLabel>
@@ -118,17 +159,24 @@ export default function TaskSubmissionCard({
             <div
               className="
                 mt-3
+                min-w-0
                 rounded-xl
                 bg-slate-50
-                p-4
+                p-3
+
+                sm:p-4
               "
             >
               <p
                 className="
+                  max-w-full
                   whitespace-pre-wrap
+                  break-words
                   text-sm
                   leading-7
                   text-slate-700
+
+                  [overflow-wrap:anywhere]
                 "
               >
                 {submission.content}
@@ -138,7 +186,9 @@ export default function TaskSubmissionCard({
             <p
               className="
                 mt-3
+                break-words
                 text-sm
+                leading-6
                 text-slate-400
               "
             >
@@ -150,10 +200,18 @@ export default function TaskSubmissionCard({
         {/* RESOURCE */}
 
         {submission.resourceUrl && (
-          <div className="mt-5">
+          <div
+            className="
+              mt-5
+              min-w-0
+            "
+          >
             <SectionLabel
               icon={
-                <ExternalLink size={13} />
+                <ExternalLink
+                  size={13}
+                  aria-hidden="true"
+                />
               }
             >
               Resource
@@ -165,30 +223,52 @@ export default function TaskSubmissionCard({
               rel="noopener noreferrer"
               className="
                 mt-3
-                inline-flex
-                max-w-full
+                flex
+                min-h-11
+                w-full
+                min-w-0
                 items-center
                 gap-2
-                break-all
                 rounded-lg
                 border
                 border-blue-200
                 bg-blue-50
                 px-3
-                py-2
+                py-2.5
                 text-sm
                 font-semibold
                 text-[#1256AF]
                 transition
+
                 hover:bg-blue-100
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#1256AF]/25
+                focus-visible:ring-offset-2
+
+                sm:w-fit
+                sm:max-w-full
               "
             >
               <ExternalLink
                 className="shrink-0"
                 size={14}
+                aria-hidden="true"
               />
 
-              {submission.resourceUrl}
+              <span
+                className="
+                  min-w-0
+                  break-all
+                "
+              >
+                {submission.resourceUrl}
+              </span>
+
+              <span className="sr-only">
+                (opens in a new tab)
+              </span>
             </a>
           </div>
         )}
@@ -198,6 +278,7 @@ export default function TaskSubmissionCard({
         <div
           className="
             mt-6
+            min-w-0
             border-t
             border-slate-100
             pt-5
@@ -207,11 +288,20 @@ export default function TaskSubmissionCard({
             icon={
               <MessageSquareText
                 size={13}
+                aria-hidden="true"
               />
             }
           >
             Instructor Feedback
           </SectionLabel>
+
+          <label
+            htmlFor={`feedback-${submission.id}`}
+            className="sr-only"
+          >
+            Feedback for{" "}
+            {submission.studentName}
+          </label>
 
           <textarea
             id={`feedback-${submission.id}`}
@@ -223,25 +313,36 @@ export default function TaskSubmissionCard({
               )
             }
             rows={4}
+            disabled={reviewing}
             placeholder="Give the student feedback on their work."
             className="
               mt-3
+              min-h-28
               w-full
-              resize-none
+              min-w-0
+              resize-y
               rounded-xl
               border
               border-slate-300
               bg-white
-              px-4
+              px-3
               py-3
               text-sm
+              leading-6
               text-slate-950
               outline-none
               transition
               placeholder:text-slate-400
+
               focus:border-[#1256AF]
               focus:ring-4
               focus:ring-blue-50
+
+              disabled:cursor-not-allowed
+              disabled:bg-slate-50
+              disabled:text-slate-500
+
+              sm:px-4
             "
           />
 
@@ -249,30 +350,49 @@ export default function TaskSubmissionCard({
             className="
               mt-3
               flex
+              min-w-0
               flex-col
               gap-3
+
               sm:flex-row
               sm:items-center
               sm:justify-between
+              sm:gap-4
             "
           >
-            <div>
+            <div
+              className="
+                min-w-0
+                flex-1
+              "
+            >
               {submission.reviewedAt && (
                 <p
                   className="
-                    inline-flex
-                    items-center
+                    flex
+                    min-w-0
+                    items-start
                     gap-1.5
                     text-xs
+                    leading-5
                     text-slate-400
                   "
                 >
-                  <CheckCircle2 size={13} />
+                  <CheckCircle2
+                    size={13}
+                    className="
+                      mt-1
+                      shrink-0
+                    "
+                    aria-hidden="true"
+                  />
 
-                  Last reviewed{" "}
-                  {formatDateTime(
-                    submission.reviewedAt
-                  )}
+                  <span className="break-words">
+                    Last reviewed{" "}
+                    {formatDateTime(
+                      submission.reviewedAt
+                    )}
+                  </span>
                 </p>
               )}
             </div>
@@ -285,6 +405,9 @@ export default function TaskSubmissionCard({
               }
               className="
                 inline-flex
+                min-h-11
+                w-full
+                shrink-0
                 items-center
                 justify-center
                 rounded-xl
@@ -295,9 +418,18 @@ export default function TaskSubmissionCard({
                 font-semibold
                 text-white
                 transition
+
                 hover:bg-[#0E478F]
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#1256AF]/30
+                focus-visible:ring-offset-2
+
                 disabled:cursor-not-allowed
                 disabled:opacity-50
+
+                sm:w-auto
               "
             >
               {reviewing
@@ -323,6 +455,8 @@ function StatusBadge({
       className={`
         inline-flex
         w-fit
+        max-w-full
+        shrink-0
         items-center
         gap-1.5
         rounded-full
@@ -339,12 +473,18 @@ function StatusBadge({
       `}
     >
       {reviewed && (
-        <CheckCircle2 size={13} />
+        <CheckCircle2
+          size={13}
+          className="shrink-0"
+          aria-hidden="true"
+        />
       )}
 
-      {reviewed
-        ? "Reviewed"
-        : "Submitted"}
+      <span className="break-words">
+        {reviewed
+          ? "Reviewed"
+          : "Submitted"}
+      </span>
     </span>
   );
 }
@@ -360,17 +500,24 @@ function SectionLabel({
     <p
       className="
         flex
+        min-w-0
         items-center
         gap-1.5
         text-[11px]
         font-bold
         uppercase
+        leading-4
         tracking-[0.1em]
         text-slate-400
       "
     >
-      {icon}
-      {children}
+      <span className="shrink-0">
+        {icon}
+      </span>
+
+      <span className="break-words">
+        {children}
+      </span>
     </p>
   );
 }
@@ -378,5 +525,11 @@ function SectionLabel({
 function formatDateTime(
   value: string
 ) {
-  return new Date(value).toLocaleString();
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
+  }
+
+  return date.toLocaleString();
 }

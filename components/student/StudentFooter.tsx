@@ -51,6 +51,7 @@ export default function StudentFooter() {
   return (
     <footer
       className="
+        min-w-0
         border-t
         border-slate-200
         bg-white
@@ -74,19 +75,40 @@ export default function StudentFooter() {
         <div
           className="
             grid
+            min-w-0
+            grid-cols-1
             gap-8
 
-            md:grid-cols-[1fr_auto_auto]
+            sm:grid-cols-2
+            sm:gap-x-10
+
+            md:grid-cols-[minmax(0,1fr)_auto_auto]
             md:gap-14
           "
         >
           {/* BRAND */}
 
-          <div>
+          <div
+            className="
+              min-w-0
+
+              sm:col-span-2
+
+              md:col-span-1
+            "
+          >
             <Link
               href="/student"
               aria-label="Trailbliz student home"
-              className="inline-flex"
+              className="
+                inline-flex
+                rounded-lg
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#1256AF]/25
+                focus-visible:ring-offset-2
+              "
             >
               <Image
                 src="/tbz.png"
@@ -105,13 +127,13 @@ export default function StudentFooter() {
               className="
                 mt-3
                 max-w-xs
+                break-words
                 text-sm
                 leading-6
                 text-slate-500
               "
             >
-              Learn. Build. Move
-              forward.
+              Learn. Build. Move forward.
             </p>
           </div>
 
@@ -136,8 +158,9 @@ export default function StudentFooter() {
           className="
             mt-8
             flex
+            min-w-0
             flex-col
-            gap-4
+            gap-3
             border-t
             border-slate-100
             pt-5
@@ -145,11 +168,14 @@ export default function StudentFooter() {
             sm:flex-row
             sm:items-center
             sm:justify-between
+            sm:gap-4
           "
         >
           <p
             className="
+              shrink-0
               text-xs
+              leading-5
               text-slate-400
             "
           >
@@ -161,28 +187,49 @@ export default function StudentFooter() {
             className="
               group
               inline-flex
+              min-h-10
               w-fit
+              max-w-full
               items-center
               gap-1.5
+              rounded-lg
               text-xs
               font-medium
+              leading-5
               text-slate-400
               transition-colors
 
               hover:text-[#1256AF]
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/25
+              focus-visible:ring-offset-2
             "
           >
-            Built with
+            <span className="break-words">
+              Built with
+            </span>
+
             <Heart
               size={11}
-              className="fill-current"
+              className="
+                shrink-0
+                fill-current
+              "
+              aria-hidden="true"
             />
-            by Tejas Guntru
+
+            <span className="break-words">
+              by Tejas Guntru
+            </span>
 
             <ArrowUpRight
               size={11}
+              aria-hidden="true"
               className="
                 ml-0.5
+                shrink-0
                 transition-transform
 
                 group-hover:-translate-y-0.5
@@ -214,7 +261,7 @@ function FooterGroup({
   links,
 }: FooterGroupProps) {
   return (
-    <div>
+    <div className="min-w-0">
       <p
         className="
           text-[10px]
@@ -231,13 +278,14 @@ function FooterGroup({
         className="
           mt-3
           flex
+          min-w-0
           flex-wrap
-          gap-x-5
-          gap-y-2.5
+          gap-x-4
+          gap-y-1
 
           md:flex-col
           md:items-start
-          md:gap-2
+          md:gap-1
         "
         aria-label={`${title} links`}
       >
@@ -246,15 +294,28 @@ function FooterGroup({
             key={link.href}
             href={link.href}
             className="
+              inline-flex
+              min-h-10
+              max-w-full
+              items-center
+              rounded-lg
+              py-1
               text-sm
               font-medium
               text-slate-600
               transition-colors
 
               hover:text-[#1256AF]
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/20
+              focus-visible:ring-offset-1
             "
           >
-            {link.label}
+            <span className="break-words">
+              {link.label}
+            </span>
           </Link>
         ))}
       </nav>

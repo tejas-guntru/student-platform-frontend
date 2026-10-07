@@ -48,31 +48,48 @@ export default function CreateLessonForm({
   onSubmit,
   onCancel,
 }: CreateLessonFormProps) {
+  const canSubmit =
+    title.trim().length > 0 &&
+    !creating;
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
+
+        if (!canSubmit) {
+          return;
+        }
+
         onSubmit();
       }}
       className="
+        min-w-0
         border-b
         border-blue-100
         bg-blue-50/50
-        p-5
+        p-4
+
         sm:p-6
       "
     >
+      {/* HEADER */}
+
       <div
         className="
           flex
-          items-center
+          min-w-0
+          items-start
           justify-between
-          gap-4
+          gap-3
+
+          sm:gap-4
         "
       >
-        <div>
+        <div className="min-w-0">
           <p
             className="
+              break-words
               text-xs
               font-bold
               uppercase
@@ -86,6 +103,7 @@ export default function CreateLessonForm({
           <h3
             className="
               mt-1
+              break-words
               font-bold
               text-slate-950
             "
@@ -97,11 +115,13 @@ export default function CreateLessonForm({
         <button
           type="button"
           onClick={onCancel}
+          disabled={creating}
           aria-label="Close lesson form"
           className="
             flex
-            h-9
-            w-9
+            h-10
+            w-10
+            shrink-0
             items-center
             justify-center
             rounded-lg
@@ -110,47 +130,91 @@ export default function CreateLessonForm({
             bg-white
             text-slate-500
             transition
+
             hover:bg-slate-50
             hover:text-slate-950
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/25
+            focus-visible:ring-offset-2
+
+            disabled:cursor-not-allowed
+            disabled:opacity-50
           "
         >
-          <X size={16} />
+          <X
+            size={16}
+            aria-hidden="true"
+          />
         </button>
       </div>
+
+      {/* BASIC DETAILS */}
 
       <div
         className="
           mt-5
           grid
+          min-w-0
+          grid-cols-1
           gap-4
+
           md:grid-cols-2
         "
       >
-        <div>
-          <label
-            htmlFor="lesson-title"
+        <div className="min-w-0">
+          <div
             className="
-              text-sm
-              font-semibold
-              text-slate-700
+              flex
+              items-center
+              justify-between
+              gap-3
             "
           >
-            Lesson Title
-          </label>
+            <label
+              htmlFor="lesson-title"
+              className="
+                block
+                text-sm
+                font-semibold
+                text-slate-700
+              "
+            >
+              Lesson Title
+            </label>
+
+            <span
+              className="
+                shrink-0
+                text-xs
+                text-slate-400
+              "
+            >
+              {title.length}/150
+            </span>
+          </div>
 
           <input
             id="lesson-title"
+            type="text"
             value={title}
             onChange={(event) =>
               onTitleChange(
                 event.target.value
               )
             }
+            disabled={creating}
+            required
             maxLength={150}
+            autoComplete="off"
             placeholder="Introduction to REST APIs"
             className="
               mt-2
+              min-h-11
+              min-w-0
               w-full
+              max-w-full
               rounded-xl
               border
               border-slate-300
@@ -161,18 +225,26 @@ export default function CreateLessonForm({
               text-slate-950
               outline-none
               transition
+
               placeholder:text-slate-400
+
               focus:border-[#1256AF]
               focus:ring-4
               focus:ring-blue-100
+
+              disabled:cursor-not-allowed
+              disabled:bg-slate-50
+              disabled:text-slate-500
+              disabled:opacity-80
             "
           />
         </div>
 
-        <div>
+        <div className="min-w-0">
           <label
             htmlFor="lesson-type"
             className="
+              block
               text-sm
               font-semibold
               text-slate-700
@@ -190,9 +262,13 @@ export default function CreateLessonForm({
                   .value as LessonType
               )
             }
+            disabled={creating}
             className="
               mt-2
+              min-h-11
+              min-w-0
               w-full
+              max-w-full
               rounded-xl
               border
               border-slate-300
@@ -203,9 +279,15 @@ export default function CreateLessonForm({
               text-slate-950
               outline-none
               transition
+
               focus:border-[#1256AF]
               focus:ring-4
               focus:ring-blue-100
+
+              disabled:cursor-not-allowed
+              disabled:bg-slate-50
+              disabled:text-slate-500
+              disabled:opacity-80
             "
           >
             <option value="TEXT">
@@ -231,12 +313,21 @@ export default function CreateLessonForm({
         </div>
       </div>
 
-      <div className="mt-4">
+      {/* CONTENT */}
+
+      <div
+        className="
+          mt-4
+          min-w-0
+        "
+      >
         <div
           className="
             flex
+            flex-wrap
             items-center
             justify-between
+            gap-2
           "
         >
           <label
@@ -252,6 +343,7 @@ export default function CreateLessonForm({
 
           <span
             className="
+              shrink-0
               text-xs
               text-slate-400
             "
@@ -268,12 +360,16 @@ export default function CreateLessonForm({
               event.target.value
             )
           }
+          disabled={creating}
           maxLength={50000}
           rows={6}
           placeholder="Write the lesson content..."
           className="
             mt-2
+            min-h-40
+            min-w-0
             w-full
+            max-w-full
             resize-y
             rounded-xl
             border
@@ -282,28 +378,46 @@ export default function CreateLessonForm({
             px-4
             py-3
             text-sm
-            leading-7
+            leading-6
             text-slate-950
             outline-none
             transition
+
+            sm:leading-7
+
             placeholder:text-slate-400
+
             focus:border-[#1256AF]
             focus:ring-4
             focus:ring-blue-100
+
+            disabled:cursor-not-allowed
+            disabled:bg-slate-50
+            disabled:text-slate-500
+            disabled:opacity-80
           "
         />
       </div>
 
-      <div className="mt-4">
+      {/* RESOURCE */}
+
+      <div
+        className="
+          mt-4
+          min-w-0
+        "
+      >
         <label
           htmlFor="lesson-resource-url"
           className="
+            block
             text-sm
             font-semibold
             text-slate-700
           "
         >
           Resource URL
+
           <span
             className="
               ml-1
@@ -324,11 +438,17 @@ export default function CreateLessonForm({
               event.target.value
             )
           }
+          disabled={creating}
           maxLength={2000}
+          autoComplete="url"
+          inputMode="url"
           placeholder="https://..."
           className="
             mt-2
+            min-h-11
+            min-w-0
             w-full
+            max-w-full
             rounded-xl
             border
             border-slate-300
@@ -339,27 +459,41 @@ export default function CreateLessonForm({
             text-slate-950
             outline-none
             transition
+
             placeholder:text-slate-400
+
             focus:border-[#1256AF]
             focus:ring-4
             focus:ring-blue-100
+
+            disabled:cursor-not-allowed
+            disabled:bg-slate-50
+            disabled:text-slate-500
+            disabled:opacity-80
           "
         />
       </div>
+
+      {/* ACTIONS */}
 
       <div
         className="
           mt-5
           flex
-          flex-wrap
+          flex-col
           gap-3
+
+          sm:flex-row
+          sm:flex-wrap
         "
       >
         <button
           type="submit"
-          disabled={creating}
+          disabled={!canSubmit}
           className="
             inline-flex
+            min-h-11
+            w-full
             items-center
             justify-center
             gap-2
@@ -371,23 +505,46 @@ export default function CreateLessonForm({
             font-semibold
             text-white
             transition
+
             hover:bg-[#0E478F]
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/30
+            focus-visible:ring-offset-2
+
             disabled:cursor-not-allowed
             disabled:opacity-50
+
+            sm:w-auto
           "
         >
           {creating ? (
             <>
               <LoaderCircle
                 size={15}
-                className="animate-spin"
+                className="
+                  shrink-0
+                  animate-spin
+                "
+                aria-hidden="true"
               />
-              Creating...
+
+              <span>
+                Creating...
+              </span>
             </>
           ) : (
             <>
-              <Plus size={15} />
-              Create Lesson
+              <Plus
+                size={15}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+
+              <span>
+                Create Lesson
+              </span>
             </>
           )}
         </button>
@@ -397,6 +554,11 @@ export default function CreateLessonForm({
           onClick={onCancel}
           disabled={creating}
           className="
+            inline-flex
+            min-h-11
+            w-full
+            items-center
+            justify-center
             rounded-xl
             border
             border-slate-300
@@ -407,8 +569,19 @@ export default function CreateLessonForm({
             font-semibold
             text-slate-700
             transition
+
             hover:bg-slate-50
+            hover:text-slate-950
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-slate-300
+            focus-visible:ring-offset-2
+
+            disabled:cursor-not-allowed
             disabled:opacity-50
+
+            sm:w-auto
           "
         >
           Cancel

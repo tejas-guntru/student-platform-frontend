@@ -24,19 +24,23 @@ export default function StudentBasicInfo({
     <section
       id="profile"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
 
         sm:p-6
       "
     >
-      <div>
+      {/* HEADER */}
+
+      <div className="min-w-0">
         <p
           className="
+            break-words
             text-xs
             font-bold
             uppercase
@@ -50,6 +54,7 @@ export default function StudentBasicInfo({
         <h2
           className="
             mt-2
+            break-words
             text-xl
             font-bold
             text-slate-950
@@ -61,7 +66,10 @@ export default function StudentBasicInfo({
         <p
           className="
             mt-1
+            max-w-2xl
+            break-words
             text-sm
+            leading-6
             text-slate-500
           "
         >
@@ -70,14 +78,22 @@ export default function StudentBasicInfo({
         </p>
       </div>
 
+      {/* INFORMATION GRID */}
+
       <div
         className="
-          mt-6
+          mt-5
           grid
-          gap-x-8
+          min-w-0
+          grid-cols-1
+          gap-x-6
           gap-y-5
 
+          sm:mt-6
           sm:grid-cols-2
+
+          lg:gap-x-8
+
           xl:grid-cols-3
         "
       >
@@ -91,6 +107,7 @@ export default function StudentBasicInfo({
           icon={Mail}
           label="Email"
           value={student.email}
+          breakAll
         />
 
         <InfoItem
@@ -150,13 +167,18 @@ export default function StudentBasicInfo({
         />
       </div>
 
+      {/* EMPTY BIO */}
+
       {!student.bio && (
         <div
           className="
-            mt-6
+            mt-5
+            min-w-0
             border-t
             border-slate-100
             pt-5
+
+            sm:mt-6
           "
         >
           <p
@@ -174,7 +196,9 @@ export default function StudentBasicInfo({
           <p
             className="
               mt-2
+              break-words
               text-sm
+              leading-6
               text-slate-500
             "
           >
@@ -190,10 +214,12 @@ function InfoItem({
   icon: Icon,
   label,
   value,
+  breakAll = false,
 }: {
   icon: typeof UserRound;
   label: string;
   value: string | null;
+  breakAll?: boolean;
 }) {
   return (
     <div
@@ -217,12 +243,21 @@ function InfoItem({
           text-slate-500
         "
       >
-        <Icon size={16} />
+        <Icon
+          size={16}
+          aria-hidden="true"
+        />
       </div>
 
-      <div className="min-w-0">
+      <div
+        className="
+          min-w-0
+          flex-1
+        "
+      >
         <p
           className="
+            break-words
             text-[11px]
             font-semibold
             uppercase
@@ -234,13 +269,20 @@ function InfoItem({
         </p>
 
         <p
-          className="
+          className={`
             mt-1
-            break-words
+            min-w-0
             text-sm
             font-semibold
+            leading-5
             text-slate-800
-          "
+
+            ${
+              breakAll
+                ? "break-all"
+                : "break-words [overflow-wrap:anywhere]"
+            }
+          `}
         >
           {value || "Not provided"}
         </p>
@@ -256,7 +298,11 @@ function formatDateTime(
     return "Not provided";
   }
 
-  return new Date(
-    value
-  ).toLocaleString();
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Not provided";
+  }
+
+  return date.toLocaleString();
 }

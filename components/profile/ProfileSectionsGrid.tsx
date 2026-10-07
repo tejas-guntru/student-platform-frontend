@@ -10,7 +10,9 @@ import {
   UserRound,
 } from "lucide-react";
 
-import type { ElementType } from "react";
+import type {
+  ElementType,
+} from "react";
 
 const sections = [
   {
@@ -57,32 +59,97 @@ const sections = [
 
 export default function ProfileSectionsGrid() {
   return (
-    <section>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#1256af]">
+    <section
+      className="min-w-0"
+      aria-labelledby="profile-sections-title"
+    >
+      {/* HEADING */}
+
+      <div
+        className="
+          flex
+          min-w-0
+          flex-col
+          gap-3
+
+          sm:flex-row
+          sm:items-end
+          sm:justify-between
+        "
+      >
+        <div className="min-w-0">
+          <p
+            className="
+              text-[10px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-[#1256AF]
+            "
+          >
             Your profile
           </p>
 
-          <h2 className="mt-2 text-2xl font-bold tracking-[-0.035em] text-slate-950">
+          <h2
+            id="profile-sections-title"
+            className="
+              mt-2
+              break-words
+              text-xl
+              font-bold
+              tracking-[-0.035em]
+              text-slate-950
+
+              sm:text-2xl
+            "
+          >
             Build your career identity
           </h2>
 
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
-            Each section contributes to the profile you
-            build on Trailbliz.
+          <p
+            className="
+              mt-2
+              max-w-2xl
+              break-words
+              text-sm
+              leading-6
+              text-slate-500
+            "
+          >
+            Each section contributes to the
+            profile you build on Trailbliz.
           </p>
         </div>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-[24px] border border-slate-200 bg-white">
-        {sections.map((section, index) => (
-          <ProfileSection
-            key={section.title}
-            {...section}
-            last={index === sections.length - 1}
-          />
-        ))}
+      {/* SECTIONS */}
+
+      <div
+        className="
+          mt-5
+          min-w-0
+          overflow-hidden
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
+
+          sm:mt-6
+          sm:rounded-[24px]
+        "
+      >
+        {sections.map(
+          (section, index) => (
+            <ProfileSection
+              key={section.title}
+              {...section}
+              last={
+                index ===
+                sections.length - 1
+              }
+            />
+          )
+        )}
       </div>
     </section>
   );
@@ -109,42 +176,134 @@ function ProfileSection({
       className={`
         group
         flex
+        min-w-0
         flex-col
         gap-4
-        p-5
-        transition
-        hover:bg-[#1256af]/[0.025]
+        p-4
+        transition-colors
+
+        hover:bg-[#1256AF]/[0.025]
+
+        focus-visible:relative
+        focus-visible:z-10
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-inset
+        focus-visible:ring-[#1256AF]/25
 
         sm:flex-row
         sm:items-center
+        sm:p-5
 
-        ${!last ? "border-b border-slate-100" : ""}
+        ${
+          !last
+            ? "border-b border-slate-100"
+            : ""
+        }
       `}
     >
-      <div className="flex min-w-0 flex-1 items-start gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#1256af]/[0.07] text-[#1256af]">
-          <Icon size={19} />
+      {/* INFORMATION */}
+
+      <div
+        className="
+          flex
+          min-w-0
+          flex-1
+          items-start
+          gap-3
+
+          sm:gap-4
+        "
+      >
+        <div
+          className="
+            flex
+            h-10
+            w-10
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            bg-[#1256AF]/[0.07]
+            text-[#1256AF]
+
+            sm:h-11
+            sm:w-11
+          "
+        >
+          <Icon
+            size={18}
+            aria-hidden="true"
+          />
         </div>
 
         <div className="min-w-0">
-          <h3 className="font-bold text-slate-900">
+          <h3
+            className="
+              break-words
+              font-bold
+              text-slate-900
+
+              [overflow-wrap:anywhere]
+            "
+          >
             {title}
           </h3>
 
-          <p className="mt-1 text-sm leading-6 text-slate-500">
+          <p
+            className="
+              mt-1
+              max-w-2xl
+              break-words
+              text-sm
+              leading-6
+              text-slate-500
+
+              [overflow-wrap:anywhere]
+            "
+          >
             {description}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 self-start text-sm font-semibold text-[#1256af] sm:self-auto">
-        <Pencil size={14} />
+      {/* ACTION */}
 
-        {action}
+      <div
+        className="
+          flex
+          min-h-10
+          shrink-0
+          items-center
+          gap-2
+          self-start
+          rounded-lg
+          text-sm
+          font-semibold
+          text-[#1256AF]
+
+          sm:self-auto
+        "
+      >
+        <Pencil
+          size={14}
+          className="shrink-0"
+          aria-hidden="true"
+        />
+
+        <span>
+          {action}
+        </span>
 
         <ArrowRight
           size={14}
-          className="transition-transform group-hover:translate-x-1"
+          className="
+            shrink-0
+            transition-transform
+
+            group-hover:translate-x-1
+          "
+          aria-hidden="true"
         />
       </div>
     </Link>

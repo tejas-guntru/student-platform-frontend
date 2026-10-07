@@ -12,22 +12,31 @@ export default function ProfileField({
   children,
 }: ProfileFieldProps) {
   return (
-    <div>
-      <label
+    <div
+      className="
+        min-w-0
+        w-full
+      "
+    >
+      <div
         className="
           mb-2
-          block
+          break-words
           text-xs
           font-bold
           uppercase
           tracking-[0.08em]
           text-[#5F7C92]
+
+          [overflow-wrap:anywhere]
         "
       >
         {label}
-      </label>
+      </div>
 
-      {children}
+      <div className="min-w-0">
+        {children}
+      </div>
     </div>
   );
 }

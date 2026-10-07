@@ -26,13 +26,18 @@ export default function CourseLessonList({
       <div
         className="
           flex
-          items-center
+          min-w-0
+          items-start
           gap-3
-          px-5
-          py-6
+          px-4
+          py-5
           text-sm
+          leading-6
           text-slate-500
+
+          sm:items-center
           sm:px-6
+          sm:py-6
         "
       >
         <div
@@ -48,52 +53,77 @@ export default function CourseLessonList({
             text-slate-400
           "
         >
-          <FileText size={16} />
+          <FileText
+            size={16}
+            aria-hidden="true"
+          />
         </div>
 
-        No lessons in this module yet.
+        <p
+          className="
+            min-w-0
+            break-words
+          "
+        >
+          No lessons in this module yet.
+        </p>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="min-w-0">
       {orderedLessons.map(
         (lesson, index) => (
           <article
             key={lesson.id}
             className="
+              min-w-0
               border-b
               border-slate-100
-              p-5
+              p-4
               last:border-b-0
+
               sm:p-6
             "
           >
             <div
               className="
                 flex
+                min-w-0
                 items-start
-                gap-4
+                gap-3
+
+                sm:gap-4
               "
             >
+              {/* LESSON NUMBER */}
+
               <div
                 className="
                   flex
-                  h-9
-                  w-9
+                  h-8
+                  w-8
                   shrink-0
                   items-center
                   justify-center
-                  rounded-xl
+                  rounded-lg
                   bg-slate-100
-                  text-sm
+                  text-xs
                   font-bold
                   text-slate-600
+
+                  sm:h-9
+                  sm:w-9
+                  sm:rounded-xl
+                  sm:text-sm
                 "
+                aria-label={`Lesson ${index + 1}`}
               >
                 {index + 1}
               </div>
+
+              {/* LESSON DETAILS */}
 
               <div
                 className="
@@ -104,6 +134,7 @@ export default function CourseLessonList({
                 <div
                   className="
                     flex
+                    min-w-0
                     flex-wrap
                     items-center
                     gap-2
@@ -111,7 +142,10 @@ export default function CourseLessonList({
                 >
                   <h3
                     className="
+                      min-w-0
+                      break-words
                       font-semibold
+                      leading-6
                       text-slate-900
                     "
                   >
@@ -120,6 +154,10 @@ export default function CourseLessonList({
 
                   <span
                     className="
+                      inline-flex
+                      w-fit
+                      shrink-0
+                      items-center
                       rounded-full
                       bg-blue-50
                       px-2.5
@@ -137,19 +175,29 @@ export default function CourseLessonList({
                   </span>
                 </div>
 
+                {/* CONTENT */}
+
                 {lesson.content && (
                   <p
                     className="
                       mt-3
+                      max-w-full
                       whitespace-pre-wrap
+                      break-words
                       text-sm
-                      leading-7
+                      leading-6
                       text-slate-600
+
+                      sm:leading-7
+
+                      [overflow-wrap:anywhere]
                     "
                   >
                     {lesson.content}
                   </p>
                 )}
+
+                {/* RESOURCE */}
 
                 {lesson.resourceUrl && (
                   <a
@@ -161,20 +209,40 @@ export default function CourseLessonList({
                     className="
                       mt-4
                       inline-flex
+                      min-h-10
+                      max-w-full
                       items-center
                       gap-2
+                      rounded-lg
                       text-sm
                       font-semibold
                       text-[#1256AF]
                       transition
+
                       hover:underline
+
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#1256AF]/25
+                      focus-visible:ring-offset-2
                     "
                   >
                     <ExternalLink
                       size={14}
+                      className="shrink-0"
+                      aria-hidden="true"
                     />
 
-                    Open resource
+                    <span className="break-words">
+                      Open resource
+                    </span>
+
+                    <span className="sr-only">
+                      {" "}
+                      for {lesson.title}
+                      {" "}
+                      (opens in a new tab)
+                    </span>
                   </a>
                 )}
               </div>

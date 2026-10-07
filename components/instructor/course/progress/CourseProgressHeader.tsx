@@ -15,50 +15,86 @@ export default function CourseProgressHeader({
   courseTitle,
 }: CourseProgressHeaderProps) {
   return (
-    <section>
+    <section className="min-w-0">
+      {/* BACK */}
+
       <Link
         href={`/instructor/batches/${batchId}`}
         className="
           inline-flex
+          min-h-10
           items-center
           gap-2
+          rounded-lg
           text-sm
           font-semibold
           text-slate-500
           transition
+
           hover:text-[#1256AF]
+
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[#1256AF]/25
+          focus-visible:ring-offset-2
         "
       >
-        <ArrowLeft size={16} />
-        Back to batch
+        <ArrowLeft
+          size={16}
+          className="shrink-0"
+          aria-hidden="true"
+        />
+
+        <span>Back to batch</span>
       </Link>
+
+      {/* HEADER CARD */}
 
       <div
         className="
-          mt-5
+          mt-4
+          min-w-0
           overflow-hidden
-          rounded-3xl
+          rounded-2xl
           border
           border-slate-200
           bg-white
-          p-6
-          sm:p-8
+          p-4
+
+          sm:mt-5
+          sm:rounded-3xl
+          sm:p-6
+
+          lg:p-8
         "
       >
         <div
           className="
             flex
+            min-w-0
             flex-col
             gap-5
+
             sm:flex-row
             sm:items-start
             sm:justify-between
+            sm:gap-6
           "
         >
-          <div className="max-w-3xl">
+          {/* DETAILS */}
+
+          <div
+            className="
+              min-w-0
+              flex-1
+              sm:max-w-3xl
+            "
+          >
             <div
               className="
                 inline-flex
+                w-fit
+                max-w-full
                 items-center
                 gap-2
                 rounded-full
@@ -70,18 +106,28 @@ export default function CourseProgressHeader({
                 text-emerald-700
               "
             >
-              <BarChart3 size={14} />
-              Course Progress
+              <BarChart3
+                size={14}
+                className="shrink-0"
+                aria-hidden="true"
+              />
+
+              <span className="truncate">
+                Course Progress
+              </span>
             </div>
 
             <h1
               className="
                 mt-4
-                text-3xl
+                break-words
+                text-2xl
                 font-bold
                 tracking-tight
                 text-slate-950
-                sm:text-4xl
+
+                sm:text-3xl
+                lg:text-4xl
               "
             >
               {courseTitle}
@@ -91,10 +137,13 @@ export default function CourseProgressHeader({
               className="
                 mt-3
                 max-w-2xl
+                break-words
                 text-sm
-                leading-7
+                leading-6
                 text-slate-500
+
                 sm:text-base
+                sm:leading-7
               "
             >
               Track lesson completion and
@@ -103,20 +152,29 @@ export default function CourseProgressHeader({
             </p>
           </div>
 
+          {/* ICON */}
+
           <div
             className="
               flex
-              h-12
-              w-12
+              h-11
+              w-11
               shrink-0
               items-center
               justify-center
-              rounded-2xl
+              rounded-xl
               bg-blue-50
               text-[#1256AF]
+
+              sm:h-12
+              sm:w-12
+              sm:rounded-2xl
             "
           >
-            <BookOpen size={21} />
+            <BookOpen
+              size={21}
+              aria-hidden="true"
+            />
           </div>
         </div>
       </div>

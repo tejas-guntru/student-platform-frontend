@@ -73,6 +73,7 @@ export default function CourseModuleCard({
   return (
     <article
       className="
+        min-w-0
         overflow-hidden
         rounded-2xl
         border
@@ -80,51 +81,75 @@ export default function CourseModuleCard({
         bg-white
       "
     >
+      {/* MODULE HEADER */}
+
       <header
         className="
+          min-w-0
           border-b
           border-slate-100
-          p-5
+          p-4
+
           sm:p-6
         "
       >
         <div
           className="
             flex
+            min-w-0
             flex-col
             gap-4
+
             sm:flex-row
             sm:items-start
             sm:justify-between
+            sm:gap-5
           "
         >
+          {/* MODULE DETAILS */}
+
           <div
             className="
               flex
               min-w-0
+              flex-1
               items-start
-              gap-4
+              gap-3
+
+              sm:gap-4
             "
           >
             <div
               className="
                 flex
-                h-11
-                w-11
+                h-10
+                w-10
                 shrink-0
                 items-center
                 justify-center
                 rounded-xl
                 bg-blue-50
                 text-[#1256AF]
+
+                sm:h-11
+                sm:w-11
               "
             >
-              <BookOpen size={19} />
+              <BookOpen
+                size={19}
+                aria-hidden="true"
+              />
             </div>
 
-            <div className="min-w-0">
+            <div
+              className="
+                min-w-0
+                flex-1
+              "
+            >
               <p
                 className="
+                  break-words
                   text-[11px]
                   font-bold
                   uppercase
@@ -138,9 +163,13 @@ export default function CourseModuleCard({
               <h2
                 className="
                   mt-1
-                  text-xl
+                  break-words
+                  text-lg
                   font-bold
+                  leading-7
                   text-slate-950
+
+                  sm:text-xl
                 "
               >
                 {module.title}
@@ -151,6 +180,7 @@ export default function CourseModuleCard({
                   className="
                     mt-2
                     max-w-3xl
+                    break-words
                     text-sm
                     leading-6
                     text-slate-500
@@ -176,6 +206,8 @@ export default function CourseModuleCard({
             </div>
           </div>
 
+          {/* ADD LESSON */}
+
           {editable &&
             !lessonFormOpen && (
               <button
@@ -187,6 +219,8 @@ export default function CourseModuleCard({
                 }
                 className="
                   inline-flex
+                  min-h-11
+                  w-full
                   shrink-0
                   items-center
                   justify-center
@@ -201,17 +235,34 @@ export default function CourseModuleCard({
                   font-semibold
                   text-slate-700
                   transition
+
                   hover:border-blue-200
                   hover:bg-blue-50
                   hover:text-[#1256AF]
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#1256AF]/25
+                  focus-visible:ring-offset-2
+
+                  sm:w-auto
                 "
               >
-                <Plus size={15} />
-                Add Lesson
+                <Plus
+                  size={15}
+                  className="shrink-0"
+                  aria-hidden="true"
+                />
+
+                <span>
+                  Add Lesson
+                </span>
               </button>
             )}
         </div>
       </header>
+
+      {/* CREATE LESSON FORM */}
 
       {editable &&
         lessonFormOpen && (
@@ -242,9 +293,13 @@ export default function CourseModuleCard({
           />
         )}
 
-      <CourseLessonList
-        lessons={lessons}
-      />
+      {/* LESSONS */}
+
+      <div className="min-w-0">
+        <CourseLessonList
+          lessons={lessons}
+        />
+      </div>
     </article>
   );
 }

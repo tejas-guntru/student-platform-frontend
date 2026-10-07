@@ -3,6 +3,14 @@
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+
+import {
+  ArrowLeft,
+  ClipboardCheck,
+  Info,
+  LoaderCircle,
+} from "lucide-react";
+
 import {
   useCallback,
   useEffect,
@@ -38,14 +46,13 @@ export default function StudentAssessmentPage() {
   const params = useParams();
 
   const assessmentId =
-    typeof params.assessmentId ===
-    "string"
+    typeof params.assessmentId === "string"
       ? params.assessmentId
       : "";
 
-  // =========================================================
-  // DATA
-  // =========================================================
+  /* =========================================================
+     DATA
+  ========================================================= */
 
   const [assessment, setAssessment] =
     useState<StudentAssessmentDetailResponse | null>(
@@ -57,13 +64,12 @@ export default function StudentAssessmentPage() {
       null
     );
 
-  const [answers, setAnswers] =
-    useState<
-      Record<
-        string,
-        StudentLocalAnswer
-      >
-    >({});
+  const [answers, setAnswers] = useState<
+    Record<
+      string,
+      StudentLocalAnswer
+    >
+  >({});
 
   const [
     savedQuestionIds,
@@ -72,9 +78,9 @@ export default function StudentAssessmentPage() {
     () => new Set()
   );
 
-  // =========================================================
-  // PAGE STATE
-  // =========================================================
+  /* =========================================================
+     PAGE STATE
+  ========================================================= */
 
   const [loading, setLoading] =
     useState(true);
@@ -96,9 +102,9 @@ export default function StudentAssessmentPage() {
   const [message, setMessage] =
     useState("");
 
-  // =========================================================
-  // AUTH
-  // =========================================================
+  /* =========================================================
+     AUTH
+  ========================================================= */
 
   const handleAuthFailure =
     useCallback(() => {
@@ -111,9 +117,9 @@ export default function StudentAssessmentPage() {
       );
     }, []);
 
-  // =========================================================
-  // ANSWER MAP
-  // =========================================================
+  /* =========================================================
+     ANSWER MAP
+  ========================================================= */
 
   const createEmptyAnswerMap =
     useCallback(
@@ -141,9 +147,9 @@ export default function StudentAssessmentPage() {
       []
     );
 
-  // =========================================================
-  // RESTORE SAVED ANSWERS
-  // =========================================================
+  /* =========================================================
+     RESTORE SAVED ANSWERS
+  ========================================================= */
 
   const applySavedAnswers =
     useCallback(
@@ -193,9 +199,9 @@ export default function StudentAssessmentPage() {
       [createEmptyAnswerMap]
     );
 
-  // =========================================================
-  // LOAD PAGE
-  // =========================================================
+  /* =========================================================
+     LOAD PAGE
+  ========================================================= */
 
   const loadPage = useCallback(
     async () => {
@@ -248,8 +254,7 @@ export default function StudentAssessmentPage() {
         const existingAttempt =
           activeAttempt ??
           matchingAttempts[
-            matchingAttempts.length -
-              1
+            matchingAttempts.length - 1
           ];
 
         setAttempt(
@@ -312,9 +317,9 @@ export default function StudentAssessmentPage() {
     loadPage();
   }, [loadPage]);
 
-  // =========================================================
-  // START ATTEMPT
-  // =========================================================
+  /* =========================================================
+     START ATTEMPT
+  ========================================================= */
 
   const handleStartAttempt =
     async () => {
@@ -385,9 +390,9 @@ export default function StudentAssessmentPage() {
       }
     };
 
-  // =========================================================
-  // UPDATE LOCAL ANSWER
-  // =========================================================
+  /* =========================================================
+     UPDATE LOCAL ANSWER
+  ========================================================= */
 
   const updateAnswer = (
     questionId: string,
@@ -428,9 +433,9 @@ export default function StudentAssessmentPage() {
     );
   };
 
-  // =========================================================
-  // SAVE NORMAL ANSWER
-  // =========================================================
+  /* =========================================================
+     SAVE NORMAL ANSWER
+  ========================================================= */
 
   const handleSaveAnswer =
     async (
@@ -440,6 +445,7 @@ export default function StudentAssessmentPage() {
         setError(
           "Start the assessment first."
         );
+
         return;
       }
 
@@ -450,6 +456,7 @@ export default function StudentAssessmentPage() {
         setError(
           "This attempt can no longer be edited."
         );
+
         return;
       }
 
@@ -470,6 +477,7 @@ export default function StudentAssessmentPage() {
         setError(
           "Use Submit code for coding questions."
         );
+
         return;
       }
 
@@ -493,6 +501,7 @@ export default function StudentAssessmentPage() {
           setError(
             "Select an option before saving."
           );
+
           return;
         }
 
@@ -513,6 +522,7 @@ export default function StudentAssessmentPage() {
           setError(
             "Select True or False before saving."
           );
+
           return;
         }
 
@@ -530,6 +540,7 @@ export default function StudentAssessmentPage() {
           setError(
             "Enter an answer before saving."
           );
+
           return;
         }
 
@@ -606,9 +617,9 @@ export default function StudentAssessmentPage() {
       }
     };
 
-  // =========================================================
-  // CODING SUBMITTED
-  // =========================================================
+  /* =========================================================
+     CODING SUBMITTED
+  ========================================================= */
 
   const handleCodingSubmitted = (
     questionId: string
@@ -631,9 +642,9 @@ export default function StudentAssessmentPage() {
     );
   };
 
-  // =========================================================
-  // SUBMIT ASSESSMENT
-  // =========================================================
+  /* =========================================================
+     SUBMIT ASSESSMENT
+  ========================================================= */
 
   const handleSubmit =
     async () => {
@@ -733,38 +744,131 @@ export default function StudentAssessmentPage() {
       }
     };
 
-  // =========================================================
-  // LOADING
-  // =========================================================
+  /* =========================================================
+     LOADING
+  ========================================================= */
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-slate-50 px-6 py-10">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-slate-500">
-            Loading assessment...
-          </p>
+      <main
+        className="
+          min-h-screen
+          min-w-0
+          bg-slate-50
+          px-4
+          py-8
+
+          sm:px-6
+          sm:py-10
+        "
+      >
+        <div
+          className="
+            mx-auto
+            flex
+            min-w-0
+            max-w-5xl
+            items-center
+            gap-3
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            p-5
+            text-sm
+            text-slate-500
+
+            sm:p-6
+          "
+          role="status"
+        >
+          <LoaderCircle
+            size={18}
+            className="
+              shrink-0
+              animate-spin
+            "
+            aria-hidden="true"
+          />
+
+          Loading assessment...
         </div>
       </main>
     );
   }
 
-  // =========================================================
-  // NOT FOUND
-  // =========================================================
+  /* =========================================================
+     NOT FOUND
+  ========================================================= */
 
   if (!assessment) {
     return (
-      <main className="min-h-screen bg-slate-50 px-6 py-10">
-        <div className="mx-auto max-w-5xl">
+      <main
+        className="
+          min-h-screen
+          min-w-0
+          bg-slate-50
+          px-4
+          py-8
+
+          sm:px-6
+          sm:py-10
+        "
+      >
+        <div
+          className="
+            mx-auto
+            min-w-0
+            max-w-5xl
+          "
+        >
           <Link
             href="/student/batches"
-            className="text-sm font-semibold text-blue-700"
+            className="
+              inline-flex
+              min-h-10
+              items-center
+              gap-2
+              rounded-lg
+              text-sm
+              font-semibold
+              text-blue-700
+              transition-colors
+
+              hover:text-blue-800
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-blue-200
+              focus-visible:ring-offset-2
+            "
           >
-            ← Back to batches
+            <ArrowLeft
+              size={15}
+              aria-hidden="true"
+            />
+
+            Back to batches
           </Link>
 
-          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-5 text-red-700">
+          <div
+            className="
+              mt-6
+              min-w-0
+              break-words
+              rounded-xl
+              border
+              border-red-200
+              bg-red-50
+              p-5
+              text-sm
+              leading-6
+              text-red-700
+
+              [overflow-wrap:anywhere]
+            "
+            role="alert"
+          >
             {error ||
               "Assessment not found."}
           </div>
@@ -773,9 +877,9 @@ export default function StudentAssessmentPage() {
     );
   }
 
-  // =========================================================
-  // DERIVED STATE
-  // =========================================================
+  /* =========================================================
+     DERIVED STATE
+  ========================================================= */
 
   const attemptStarted =
     attempt !== null;
@@ -792,90 +896,246 @@ export default function StudentAssessmentPage() {
         )
     ).length;
 
-  // =========================================================
-  // PAGE
-  // =========================================================
+  /* =========================================================
+     PAGE
+  ========================================================= */
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-5xl">
+    <main
+      className="
+        min-h-screen
+        min-w-0
+        bg-slate-50
+        px-4
+        py-8
+
+        sm:px-6
+        sm:py-10
+      "
+    >
+      <div
+        className="
+          mx-auto
+          min-w-0
+          max-w-5xl
+        "
+      >
+        {/* BACK */}
+
         <Link
           href={`/student/batches/${assessment.batchId}`}
-          className="text-sm font-semibold text-blue-700"
+          className="
+            inline-flex
+            min-h-10
+            items-center
+            gap-2
+            rounded-lg
+            text-sm
+            font-semibold
+            text-blue-700
+            transition-colors
+
+            hover:text-blue-800
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-blue-200
+            focus-visible:ring-offset-2
+          "
         >
-          ← Back to batch
+          <ArrowLeft
+            size={15}
+            aria-hidden="true"
+          />
+
+          Back to batch
         </Link>
 
-        <StudentAssessmentHeader
-          assessment={assessment}
-          attempt={attempt}
-          savedCount={savedCount}
-          starting={starting}
-          onStart={
-            handleStartAttempt
-          }
-        />
+        {/* HEADER */}
 
-        <AssessmentMessages
-          error={error}
-          message={message}
-        />
+        <div
+          className="
+            mt-5
+            min-w-0
+
+            sm:mt-6
+          "
+        >
+          <StudentAssessmentHeader
+            assessment={assessment}
+            attempt={attempt}
+            savedCount={savedCount}
+            starting={starting}
+            onStart={
+              handleStartAttempt
+            }
+          />
+        </div>
+
+        {/* MESSAGES */}
+
+        <div className="min-w-0">
+          <AssessmentMessages
+            error={error}
+            message={message}
+          />
+        </div>
+
+        {/* BEFORE START */}
 
         {!attemptStarted && (
-          <section className="mt-8 rounded-xl border border-slate-200 bg-white p-6">
-            <h2 className="text-lg font-semibold text-slate-950">
-              Before you start
-            </h2>
+          <section
+            className="
+              mt-8
+              min-w-0
+              rounded-2xl
+              border
+              border-slate-200
+              bg-white
+              p-4
 
-            <p className="mt-2 text-sm text-slate-600">
-              The questions will become
-              available after you start
-              the assessment.
-            </p>
+              sm:p-6
+            "
+          >
+            <div
+              className="
+                flex
+                min-w-0
+                items-start
+                gap-3
+              "
+            >
+              <div
+                className="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-blue-50
+                  text-blue-700
+                "
+              >
+                <Info
+                  size={18}
+                  aria-hidden="true"
+                />
+              </div>
+
+              <div className="min-w-0">
+                <h2
+                  className="
+                    break-words
+                    text-lg
+                    font-semibold
+                    text-slate-950
+                  "
+                >
+                  Before you start
+                </h2>
+
+                <p
+                  className="
+                    mt-2
+                    max-w-2xl
+                    break-words
+                    text-sm
+                    leading-6
+                    text-slate-600
+                  "
+                >
+                  The questions will become
+                  available after you start
+                  the assessment.
+                </p>
+
+                <div
+                  className="
+                    mt-4
+                    flex
+                    min-w-0
+                    items-start
+                    gap-2
+                    rounded-xl
+                    bg-slate-50
+                    p-3
+                    text-sm
+                    leading-6
+                    text-slate-600
+                  "
+                >
+                  <ClipboardCheck
+                    size={16}
+                    className="
+                      mt-1
+                      shrink-0
+                      text-slate-400
+                    "
+                    aria-hidden="true"
+                  />
+
+                  <span className="break-words">
+                    Once started, save each
+                    answer before submitting
+                    the full assessment.
+                  </span>
+                </div>
+              </div>
+            </div>
           </section>
         )}
 
+        {/* QUESTIONS */}
+
         {attemptStarted &&
           attempt && (
-            <StudentAssessmentQuestionList
-              assessment={assessment}
-              attemptId={attempt.id}
-              editable={
-                attemptEditable
-              }
-              answers={answers}
-              savedQuestionIds={
-                savedQuestionIds
-              }
-              savingQuestionId={
-                savingQuestionId
-              }
-              onUpdate={
-                updateAnswer
-              }
-              onSave={
-                handleSaveAnswer
-              }
-              onCodingSubmitted={
-                handleCodingSubmitted
-              }
-            />
+            <div className="min-w-0">
+              <StudentAssessmentQuestionList
+                assessment={assessment}
+                attemptId={attempt.id}
+                editable={
+                  attemptEditable
+                }
+                answers={answers}
+                savedQuestionIds={
+                  savedQuestionIds
+                }
+                savingQuestionId={
+                  savingQuestionId
+                }
+                onUpdate={
+                  updateAnswer
+                }
+                onSave={
+                  handleSaveAnswer
+                }
+                onCodingSubmitted={
+                  handleCodingSubmitted
+                }
+              />
+            </div>
           )}
 
+        {/* FINAL SUBMISSION */}
+
         {attemptEditable && (
-          <AssessmentSubmitCard
-            savedCount={savedCount}
-            totalQuestions={
-              assessment.questions
-                .length
-            }
-            submitting={
-              submitting
-            }
-            onSubmit={
-              handleSubmit
-            }
-          />
+          <div className="min-w-0">
+            <AssessmentSubmitCard
+              savedCount={savedCount}
+              totalQuestions={
+                assessment.questions
+                  .length
+              }
+              submitting={
+                submitting
+              }
+              onSubmit={
+                handleSubmit
+              }
+            />
+          </div>
         )}
       </div>
     </main>

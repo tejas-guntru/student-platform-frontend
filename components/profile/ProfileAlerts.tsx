@@ -12,16 +12,30 @@ export default function ProfileAlerts({
   error,
   success,
 }: ProfileAlertsProps) {
+  if (!error && !success) {
+    return null;
+  }
+
   return (
-    <div className="space-y-3">
+    <div
+      className="
+        min-w-0
+        space-y-3
+      "
+      aria-live="polite"
+    >
+      {/* ERROR */}
+
       {error && (
         <div
           role="alert"
+          aria-live="assertive"
           className="
             flex
+            min-w-0
             items-start
             gap-3
-            rounded-[18px]
+            rounded-2xl
             border
             border-red-200
             bg-white
@@ -46,13 +60,18 @@ export default function ProfileAlerts({
               text-red-600
             "
           >
-            <AlertCircle size={17} />
+            <AlertCircle
+              size={17}
+              aria-hidden="true"
+            />
           </div>
 
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p
               className="
+                break-words
                 font-bold
+                leading-5
                 text-red-700
               "
             >
@@ -65,6 +84,8 @@ export default function ProfileAlerts({
                 break-words
                 leading-6
                 text-red-600/85
+
+                [overflow-wrap:anywhere]
               "
             >
               {error}
@@ -73,14 +94,17 @@ export default function ProfileAlerts({
         </div>
       )}
 
+      {/* SUCCESS */}
+
       {success && (
         <div
           role="status"
           className="
             flex
+            min-w-0
             items-start
             gap-3
-            rounded-[18px]
+            rounded-2xl
             border
             border-emerald-200
             bg-white
@@ -105,13 +129,18 @@ export default function ProfileAlerts({
               text-emerald-600
             "
           >
-            <CheckCircle2 size={17} />
+            <CheckCircle2
+              size={17}
+              aria-hidden="true"
+            />
           </div>
 
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p
               className="
+                break-words
                 font-bold
+                leading-5
                 text-emerald-700
               "
             >
@@ -124,6 +153,8 @@ export default function ProfileAlerts({
                 break-words
                 leading-6
                 text-emerald-600/85
+
+                [overflow-wrap:anywhere]
               "
             >
               {success}

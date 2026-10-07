@@ -17,13 +17,16 @@ export default function CourseLockedNotice({
     <section
       className="
         flex
+        min-w-0
         items-start
-        gap-4
+        gap-3
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
+
+        sm:gap-4
         sm:p-6
       "
     >
@@ -40,12 +43,21 @@ export default function CourseLockedNotice({
           text-slate-500
         "
       >
-        <LockKeyhole size={18} />
+        <LockKeyhole
+          size={18}
+          aria-hidden="true"
+        />
       </div>
 
-      <div>
+      <div
+        className="
+          min-w-0
+          flex-1
+        "
+      >
         <h2
           className="
+            break-words
             font-bold
             text-slate-950
           "
@@ -57,6 +69,7 @@ export default function CourseLockedNotice({
           className="
             mt-1
             max-w-2xl
+            break-words
             text-sm
             leading-6
             text-slate-500

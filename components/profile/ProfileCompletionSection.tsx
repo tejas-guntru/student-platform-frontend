@@ -23,18 +23,28 @@ export default function ProfileCompletionSection({
     return null;
   }
 
+  const rawPercentage =
+    completion.percentage;
+
   const percentage =
-    Math.min(
-      100,
-      Math.max(
-        0,
-        completion.percentage
-      )
-    );
+    Number.isFinite(rawPercentage)
+      ? Math.min(
+          100,
+          Math.max(
+            0,
+            rawPercentage
+          )
+        )
+      : 0;
+
+  const roundedPercentage =
+    Math.round(percentage);
+
+  const missingCount =
+    completion.missingItems.length;
 
   const isComplete =
-    completion.missingItems.length ===
-    0;
+    missingCount === 0;
 
   const nextStep =
     getNextStep(completion);
@@ -42,30 +52,39 @@ export default function ProfileCompletionSection({
   return (
     <section
       className="
+        min-w-0
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
 
         sm:p-6
       "
+      aria-labelledby="profile-progress-title"
     >
       {/* TOP */}
 
       <div
         className="
           flex
-          items-center
+          min-w-0
+          items-start
           justify-between
-          gap-4
+          gap-3
+
+          sm:items-center
+          sm:gap-4
         "
       >
         <div
           className="
             flex
-            items-center
+            min-w-0
+            items-start
             gap-3
+
+            sm:items-center
           "
         >
           <div
@@ -94,17 +113,21 @@ export default function ProfileCompletionSection({
             {isComplete ? (
               <CheckCircle2
                 size={16}
+                aria-hidden="true"
               />
             ) : (
               <CircleUserRound
                 size={16}
+                aria-hidden="true"
               />
             )}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2
+              id="profile-progress-title"
               className="
+                break-words
                 text-sm
                 font-bold
                 text-slate-900
@@ -116,20 +139,16 @@ export default function ProfileCompletionSection({
             <p
               className="
                 mt-0.5
+                break-words
                 text-xs
+                leading-5
                 text-slate-500
               "
             >
               {isComplete
                 ? "You're all set."
-                : `${
-                    completion
-                      .missingItems
-                      .length
-                  } ${
-                    completion
-                      .missingItems
-                      .length === 1
+                : `${missingCount} ${
+                    missingCount === 1
                       ? "thing"
                       : "things"
                   } left`}
@@ -141,9 +160,12 @@ export default function ProfileCompletionSection({
 
         <p
           className={`
-            text-xl
+            shrink-0
+            text-lg
             font-bold
             tracking-[-0.03em]
+
+            sm:text-xl
 
             ${
               isComplete
@@ -152,7 +174,7 @@ export default function ProfileCompletionSection({
             }
           `}
         >
-          {percentage}%
+          {roundedPercentage}%
         </p>
       </div>
 
@@ -166,12 +188,20 @@ export default function ProfileCompletionSection({
           rounded-full
           bg-slate-100
         "
+        role="progressbar"
+        aria-label="Profile completion"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={
+          roundedPercentage
+        }
+        aria-valuetext={`${roundedPercentage}% complete`}
       >
         <div
           className={`
             h-full
             rounded-full
-            transition-all
+            transition-[width]
             duration-500
 
             ${
@@ -194,15 +224,25 @@ export default function ProfileCompletionSection({
             className="
               mt-4
               flex
-              items-center
-              justify-between
-              gap-4
+              min-w-0
+              flex-col
+              gap-3
+              border-t
+              border-slate-100
+              pt-4
+
+              sm:flex-row
+              sm:items-center
+              sm:justify-between
+              sm:gap-4
             "
           >
             <p
               className="
-                truncate
+                min-w-0
+                break-words
                 text-xs
+                leading-5
                 text-slate-500
               "
             >
@@ -218,21 +258,32 @@ export default function ProfileCompletionSection({
             </p>
 
             <Link
-              href={
-                nextStep.href
-              }
+              href={nextStep.href}
               className="
                 group
                 inline-flex
+                min-h-10
+                w-full
                 shrink-0
                 items-center
+                justify-center
                 gap-1.5
+                rounded-lg
                 text-xs
                 font-bold
                 text-[#1256AF]
                 transition-colors
 
+                hover:bg-[#1256AF]/[0.05]
                 hover:text-[#0F4B99]
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#1256AF]/25
+                focus-visible:ring-offset-2
+
+                sm:w-auto
+                sm:px-3
               "
             >
               Continue
@@ -240,9 +291,12 @@ export default function ProfileCompletionSection({
               <ArrowRight
                 size={13}
                 className="
+                  shrink-0
                   transition-transform
+
                   group-hover:translate-x-0.5
                 "
+                aria-hidden="true"
               />
             </Link>
           </div>

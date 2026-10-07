@@ -19,19 +19,33 @@ export default function CourseProgressStats({
     <section
       className="
         grid
-        gap-4
+        min-w-0
+        grid-cols-1
+        gap-3
+
         sm:grid-cols-3
+        sm:gap-4
       "
     >
       <StatCard
-        icon={<Users size={19} />}
+        icon={
+          <Users
+            size={19}
+            aria-hidden="true"
+          />
+        }
         label="Students"
         value={studentCount.toString()}
         description="Students in progress"
       />
 
       <StatCard
-        icon={<TrendingUp size={19} />}
+        icon={
+          <TrendingUp
+            size={19}
+            aria-hidden="true"
+          />
+        }
         label="Average Progress"
         value={`${Math.round(
           averageProgress
@@ -41,7 +55,10 @@ export default function CourseProgressStats({
 
       <StatCard
         icon={
-          <CheckCircle2 size={19} />
+          <CheckCircle2
+            size={19}
+            aria-hidden="true"
+          />
         }
         label="Completed"
         value={completedCount.toString()}
@@ -65,11 +82,14 @@ function StatCard({
   return (
     <article
       className="
+        min-w-0
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
+
+        sm:p-5
       "
     >
       <div
@@ -77,6 +97,7 @@ function StatCard({
           flex
           h-10
           w-10
+          shrink-0
           items-center
           justify-center
           rounded-xl
@@ -87,38 +108,48 @@ function StatCard({
         {icon}
       </div>
 
-      <p
-        className="
-          mt-5
-          text-sm
-          font-medium
-          text-slate-500
-        "
-      >
-        {label}
-      </p>
+      <div className="min-w-0">
+        <p
+          className="
+            mt-4
+            break-words
+            text-sm
+            font-medium
+            text-slate-500
 
-      <p
-        className="
-          mt-1
-          text-3xl
-          font-bold
-          tracking-tight
-          text-slate-950
-        "
-      >
-        {value}
-      </p>
+            sm:mt-5
+          "
+        >
+          {label}
+        </p>
 
-      <p
-        className="
-          mt-1
-          text-xs
-          text-slate-400
-        "
-      >
-        {description}
-      </p>
+        <p
+          className="
+            mt-1
+            break-words
+            text-2xl
+            font-bold
+            tracking-tight
+            text-slate-950
+
+            sm:text-3xl
+          "
+        >
+          {value}
+        </p>
+
+        <p
+          className="
+            mt-1
+            break-words
+            text-xs
+            leading-5
+            text-slate-400
+          "
+        >
+          {description}
+        </p>
+      </div>
     </article>
   );
 }

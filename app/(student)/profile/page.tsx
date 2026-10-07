@@ -58,8 +58,7 @@ export default function ProfilePage() {
   const [
     showEditConfirmation,
     setShowEditConfirmation,
-  ] =
-    useState(false);
+  ] = useState(false);
 
   if (profile.loading) {
     return <ProfileLoading />;
@@ -70,26 +69,36 @@ export default function ProfilePage() {
       <main
         className="
           min-h-screen
+          min-w-0
           bg-[#F7F9FC]
         "
       >
         <div
           className="
             mx-auto
+            min-w-0
             max-w-7xl
             px-4
-            py-8
+            py-6
 
             sm:px-6
+            sm:py-8
 
             lg:px-8
             lg:py-10
           "
         >
-          <div className="space-y-7">
+          <div
+            className="
+              min-w-0
+              space-y-6
+
+              sm:space-y-7
+            "
+          >
             {/* PROFILE HEADER */}
 
-            
+            <ProfileHeader />
 
             {/* ALERTS */}
 
@@ -125,6 +134,10 @@ export default function ProfilePage() {
 
             <section
               id="basic-profile"
+              className="
+                min-w-0
+                scroll-mt-24
+              "
             >
               {basicProfileMode ===
                 "CARD" && (
@@ -185,7 +198,7 @@ export default function ProfilePage() {
 
               {basicProfileMode ===
                 "EDIT" && (
-                <div>
+                <div className="min-w-0">
                   <button
                     type="button"
                     disabled={
@@ -199,8 +212,10 @@ export default function ProfilePage() {
                     className="
                       mb-4
                       inline-flex
+                      min-h-10
                       items-center
                       gap-2
+                      rounded-lg
                       text-sm
                       font-semibold
                       text-slate-500
@@ -208,103 +223,111 @@ export default function ProfilePage() {
 
                       hover:text-slate-900
 
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#1256AF]/25
+                      focus-visible:ring-offset-2
+
                       disabled:cursor-not-allowed
                       disabled:opacity-50
                     "
                   >
                     <ArrowLeft
                       size={15}
+                      aria-hidden="true"
                     />
 
                     Back
                   </button>
 
-                  <BasicProfileForm
-                    fullName={
-                      profile.fullName
-                    }
-                    phone={
-                      profile.phone
-                    }
-                    degree={
-                      profile.degree
-                    }
-                    branch={
-                      profile.branch
-                    }
-                    graduationYear={
-                      profile.graduationYear
-                    }
-                    city={
-                      profile.city
-                    }
-                    preferredRole={
-                      profile.preferredRole
-                    }
-                    bio={
-                      profile.bio
-                    }
-                    collegeId={
-                      profile.collegeId
-                    }
-                    collegeName={
-                      profile.collegeName
-                    }
-                    collegeSearch={
-                      profile.collegeSearch
-                    }
-                    colleges={
-                      profile.colleges
-                    }
-                    searchingColleges={
-                      profile.searchingColleges
-                    }
-                    showCollegeResults={
-                      profile.showCollegeResults
-                    }
-                    saving={
-                      profile.saving
-                    }
-                    setFullName={
-                      profile.setFullName
-                    }
-                    setPhone={
-                      profile.setPhone
-                    }
-                    setDegree={
-                      profile.setDegree
-                    }
-                    setBranch={
-                      profile.setBranch
-                    }
-                    setGraduationYear={
-                      profile.setGraduationYear
-                    }
-                    setCity={
-                      profile.setCity
-                    }
-                    setPreferredRole={
-                      profile.setPreferredRole
-                    }
-                    setBio={
-                      profile.setBio
-                    }
-                    setShowCollegeResults={
-                      profile.setShowCollegeResults
-                    }
-                    updateCollegeSearch={
-                      profile.updateCollegeSearch
-                    }
-                    selectCollege={
-                      profile.selectCollege
-                    }
-                    clearCollege={
-                      profile.clearCollege
-                    }
-                    saveProfile={
-                      profile.saveProfile
-                    }
-                  />
+                  <div className="min-w-0">
+                    <BasicProfileForm
+                      fullName={
+                        profile.fullName
+                      }
+                      phone={
+                        profile.phone
+                      }
+                      degree={
+                        profile.degree
+                      }
+                      branch={
+                        profile.branch
+                      }
+                      graduationYear={
+                        profile.graduationYear
+                      }
+                      city={
+                        profile.city
+                      }
+                      preferredRole={
+                        profile.preferredRole
+                      }
+                      bio={
+                        profile.bio
+                      }
+                      collegeId={
+                        profile.collegeId
+                      }
+                      collegeName={
+                        profile.collegeName
+                      }
+                      collegeSearch={
+                        profile.collegeSearch
+                      }
+                      colleges={
+                        profile.colleges
+                      }
+                      searchingColleges={
+                        profile.searchingColleges
+                      }
+                      showCollegeResults={
+                        profile.showCollegeResults
+                      }
+                      saving={
+                        profile.saving
+                      }
+                      setFullName={
+                        profile.setFullName
+                      }
+                      setPhone={
+                        profile.setPhone
+                      }
+                      setDegree={
+                        profile.setDegree
+                      }
+                      setBranch={
+                        profile.setBranch
+                      }
+                      setGraduationYear={
+                        profile.setGraduationYear
+                      }
+                      setCity={
+                        profile.setCity
+                      }
+                      setPreferredRole={
+                        profile.setPreferredRole
+                      }
+                      setBio={
+                        profile.setBio
+                      }
+                      setShowCollegeResults={
+                        profile.setShowCollegeResults
+                      }
+                      updateCollegeSearch={
+                        profile.updateCollegeSearch
+                      }
+                      selectCollege={
+                        profile.selectCollege
+                      }
+                      clearCollege={
+                        profile.clearCollege
+                      }
+                      saveProfile={
+                        profile.saveProfile
+                      }
+                    />
+                  </div>
                 </div>
               )}
             </section>
@@ -342,16 +365,23 @@ export default function ProfilePage() {
 
 function ProfileLoading() {
   return (
-    <div
+    <main
       className="
         flex
         min-h-[70vh]
+        min-w-0
         items-center
         justify-center
         bg-[#F7F9FC]
+        px-4
+        py-10
       "
     >
-      <div className="text-center">
+      <div
+        className="text-center"
+        role="status"
+        aria-live="polite"
+      >
         <div
           className="
             mx-auto
@@ -371,6 +401,7 @@ function ProfileLoading() {
           <LoaderCircle
             size={19}
             className="animate-spin"
+            aria-hidden="true"
           />
         </div>
 
@@ -385,7 +416,7 @@ function ProfileLoading() {
           Loading profile...
         </p>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -400,6 +431,9 @@ function BasicInformationCard({
   fullName: string;
   onOpen: () => void;
 }) {
+  const name =
+    fullName?.trim();
+
   return (
     <button
       type="button"
@@ -407,20 +441,28 @@ function BasicInformationCard({
       className="
         group
         flex
+        min-h-20
         w-full
+        min-w-0
         items-center
-        gap-4
+        gap-3
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
         text-left
         transition-all
 
         hover:border-[#1256AF]/30
         hover:shadow-[0_10px_30px_rgba(15,23,42,0.05)]
 
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/25
+        focus-visible:ring-offset-2
+
+        sm:gap-4
         sm:p-6
       "
     >
@@ -429,18 +471,22 @@ function BasicInformationCard({
       <div
         className="
           flex
-          h-11
-          w-11
+          h-10
+          w-10
           shrink-0
           items-center
           justify-center
           rounded-xl
           bg-[#1256AF]/[0.07]
           text-[#1256AF]
+
+          sm:h-11
+          sm:w-11
         "
       >
         <UserRound
           size={18}
+          aria-hidden="true"
         />
       </div>
 
@@ -454,6 +500,7 @@ function BasicInformationCard({
       >
         <h2
           className="
+            break-words
             text-sm
             font-bold
             text-slate-900
@@ -465,13 +512,16 @@ function BasicInformationCard({
         <p
           className="
             mt-1
-            truncate
+            break-words
             text-xs
+            leading-5
             text-slate-500
+
+            [overflow-wrap:anywhere]
           "
         >
-          {fullName?.trim()
-            ? `${fullName} · Personal & academic details`
+          {name
+            ? `${name} · Personal & academic details`
             : "Personal & academic details"}
         </p>
       </div>
@@ -499,6 +549,7 @@ function BasicInformationCard({
       >
         <ArrowRight
           size={14}
+          aria-hidden="true"
         />
       </div>
     </button>
@@ -538,7 +589,7 @@ function BasicInformationView({
   onEdit,
 }: BasicInformationViewProps) {
   return (
-    <div>
+    <div className="min-w-0">
       {/* BACK */}
 
       <button
@@ -546,18 +597,26 @@ function BasicInformationView({
         onClick={onBack}
         className="
           inline-flex
+          min-h-10
           items-center
           gap-2
+          rounded-lg
           text-sm
           font-semibold
           text-slate-500
           transition-colors
 
           hover:text-slate-900
+
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[#1256AF]/25
+          focus-visible:ring-offset-2
         "
       >
         <ArrowLeft
           size={15}
+          aria-hidden="true"
         />
 
         Back
@@ -568,6 +627,7 @@ function BasicInformationView({
       <article
         className="
           mt-4
+          min-w-0
           overflow-hidden
           rounded-2xl
           border
@@ -580,11 +640,12 @@ function BasicInformationView({
         <div
           className="
             flex
+            min-w-0
             flex-col
             gap-4
             border-b
             border-slate-100
-            p-5
+            p-4
 
             sm:flex-row
             sm:items-center
@@ -595,6 +656,7 @@ function BasicInformationView({
           <div
             className="
               flex
+              min-w-0
               items-center
               gap-3
             "
@@ -614,12 +676,14 @@ function BasicInformationView({
             >
               <UserRound
                 size={17}
+                aria-hidden="true"
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h2
                 className="
+                  break-words
                   text-lg
                   font-bold
                   text-slate-900
@@ -631,6 +695,7 @@ function BasicInformationView({
               <p
                 className="
                   mt-0.5
+                  break-words
                   text-xs
                   text-slate-500
                 "
@@ -645,15 +710,16 @@ function BasicInformationView({
             onClick={onEdit}
             className="
               inline-flex
-              w-fit
+              min-h-11
+              w-full
               items-center
+              justify-center
               gap-2
               rounded-lg
               border
               border-slate-200
               bg-white
-              px-3.5
-              py-2
+              px-4
               text-sm
               font-semibold
               text-slate-700
@@ -662,10 +728,18 @@ function BasicInformationView({
               hover:border-[#1256AF]/30
               hover:bg-[#1256AF]/[0.04]
               hover:text-[#1256AF]
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/25
+              focus-visible:ring-offset-2
+
+              sm:w-auto
             "
           >
             <Pencil
-              size={13}
+              size={14}
+              aria-hidden="true"
             />
 
             Edit
@@ -677,10 +751,13 @@ function BasicInformationView({
         <div
           className="
             grid
-            gap-4
-            p-5
+            min-w-0
+            grid-cols-1
+            gap-3
+            p-4
 
             sm:grid-cols-2
+            sm:gap-4
             sm:p-6
 
             lg:grid-cols-3
@@ -701,12 +778,10 @@ function BasicInformationView({
           <InfoItem
             icon={GraduationCap}
             label="Education"
-            value={
-              buildEducation(
-                degree,
-                branch
-              )
-            }
+            value={buildEducation(
+              degree,
+              branch
+            )}
           />
 
           <InfoItem
@@ -735,10 +810,12 @@ function BasicInformationView({
           <div
             className="
               grid
+              min-w-0
+              grid-cols-1
               gap-5
               border-t
               border-slate-100
-              px-5
+              px-4
               py-5
 
               sm:px-6
@@ -747,7 +824,7 @@ function BasicInformationView({
             "
           >
             {phone?.trim() && (
-              <div>
+              <div className="min-w-0">
                 <div
                   className="
                     flex
@@ -758,6 +835,8 @@ function BasicInformationView({
                 >
                   <Phone
                     size={13}
+                    className="shrink-0"
+                    aria-hidden="true"
                   />
 
                   <span
@@ -775,9 +854,13 @@ function BasicInformationView({
                 <p
                   className="
                     mt-2
+                    break-words
                     text-sm
                     font-medium
+                    leading-6
                     text-slate-700
+
+                    [overflow-wrap:anywhere]
                   "
                 >
                   {phone}
@@ -786,7 +869,7 @@ function BasicInformationView({
             )}
 
             {bio?.trim() && (
-              <div>
+              <div className="min-w-0">
                 <p
                   className="
                     text-[10px]
@@ -802,10 +885,13 @@ function BasicInformationView({
                 <p
                   className="
                     mt-2
-                    line-clamp-3
+                    whitespace-pre-wrap
+                    break-words
                     text-sm
                     leading-6
                     text-slate-600
+
+                    [overflow-wrap:anywhere]
                   "
                 >
                   {bio}
@@ -867,7 +953,10 @@ function InfoItem({
           shadow-sm
         "
       >
-        <Icon size={13} />
+        <Icon
+          size={13}
+          aria-hidden="true"
+        />
       </div>
 
       <div className="min-w-0">
@@ -889,6 +978,9 @@ function InfoItem({
             break-words
             text-sm
             font-semibold
+            leading-5
+
+            [overflow-wrap:anywhere]
 
             ${
               displayValue ===
@@ -925,23 +1017,30 @@ function EditConfirmation({
         flex
         items-center
         justify-center
+        overflow-y-auto
         bg-slate-950/30
         px-4
+        py-6
         backdrop-blur-[2px]
       "
       role="dialog"
       aria-modal="true"
+      aria-labelledby="edit-profile-dialog-title"
+      aria-describedby="edit-profile-dialog-description"
     >
       <div
         className="
           w-full
+          min-w-0
           max-w-sm
           rounded-2xl
           border
           border-slate-200
           bg-white
-          p-6
+          p-5
           shadow-[0_24px_70px_rgba(15,23,42,0.18)]
+
+          sm:p-6
         "
       >
         <div
@@ -956,12 +1055,17 @@ function EditConfirmation({
             text-[#1256AF]
           "
         >
-          <Pencil size={16} />
+          <Pencil
+            size={16}
+            aria-hidden="true"
+          />
         </div>
 
         <h2
+          id="edit-profile-dialog-title"
           className="
             mt-4
+            break-words
             text-lg
             font-bold
             tracking-[-0.02em]
@@ -972,23 +1076,28 @@ function EditConfirmation({
         </h2>
 
         <p
+          id="edit-profile-dialog-description"
           className="
             mt-2
+            break-words
             text-sm
             leading-6
             text-slate-500
           "
         >
-          Your profile fields will
-          become editable.
+          Your profile fields will become
+          editable.
         </p>
 
         <div
           className="
             mt-6
             flex
-            justify-end
+            flex-col-reverse
             gap-2
+
+            sm:flex-row
+            sm:justify-end
           "
         >
           <button
@@ -996,22 +1105,34 @@ function EditConfirmation({
             onClick={onCancel}
             className="
               inline-flex
+              min-h-11
+              w-full
               items-center
+              justify-center
               gap-1.5
               rounded-lg
               border
               border-slate-200
-              px-3.5
-              py-2
+              px-4
               text-sm
               font-semibold
               text-slate-600
               transition
 
               hover:bg-slate-50
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-slate-300
+              focus-visible:ring-offset-2
+
+              sm:w-auto
             "
           >
-            <X size={13} />
+            <X
+              size={14}
+              aria-hidden="true"
+            />
 
             Cancel
           </button>
@@ -1021,21 +1142,33 @@ function EditConfirmation({
             onClick={onConfirm}
             className="
               inline-flex
+              min-h-11
+              w-full
               items-center
+              justify-center
               gap-1.5
               rounded-lg
               bg-[#1256AF]
-              px-3.5
-              py-2
+              px-4
               text-sm
               font-bold
               text-white
               transition
 
               hover:bg-[#0F4B99]
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/30
+              focus-visible:ring-offset-2
+
+              sm:w-auto
             "
           >
-            <Pencil size={13} />
+            <Pencil
+              size={14}
+              aria-hidden="true"
+            />
 
             Edit
           </button>

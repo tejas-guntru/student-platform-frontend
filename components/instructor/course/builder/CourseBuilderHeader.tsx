@@ -32,49 +32,90 @@ export default function CourseBuilderHeader({
     course.status === "DRAFT";
 
   return (
-    <section>
+    <section className="min-w-0">
+      {/* BACK */}
+
       <Link
         href="/instructor/courses"
         className="
           inline-flex
+          min-h-10
           items-center
           gap-2
+          rounded-lg
           text-sm
           font-semibold
           text-slate-500
           transition
+
           hover:text-[#1256AF]
+
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[#1256AF]/25
+          focus-visible:ring-offset-2
         "
       >
-        <ArrowLeft size={16} />
-        Courses
+        <ArrowLeft
+          size={16}
+          className="shrink-0"
+          aria-hidden="true"
+        />
+
+        <span>Courses</span>
       </Link>
+
+      {/* HEADER CARD */}
 
       <div
         className="
-          mt-5
+          mt-4
+          min-w-0
           overflow-hidden
-          rounded-3xl
+          rounded-2xl
           border
           border-slate-200
           bg-white
+
+          sm:mt-5
+          sm:rounded-3xl
         "
       >
-        <div className="p-6 sm:p-8">
+        <div
+          className="
+            min-w-0
+            p-4
+
+            sm:p-6
+            lg:p-8
+          "
+        >
           <div
             className="
               flex
+              min-w-0
               flex-col
-              gap-6
+              gap-5
+
               lg:flex-row
               lg:items-start
               lg:justify-between
+              lg:gap-8
             "
           >
-            <div className="max-w-3xl">
+            {/* COURSE DETAILS */}
+
+            <div
+              className="
+                min-w-0
+                flex-1
+                lg:max-w-3xl
+              "
+            >
               <div
                 className="
                   flex
+                  min-w-0
                   flex-wrap
                   items-center
                   gap-2
@@ -83,6 +124,8 @@ export default function CourseBuilderHeader({
                 <div
                   className="
                     inline-flex
+                    w-fit
+                    max-w-full
                     items-center
                     gap-2
                     rounded-full
@@ -94,9 +137,15 @@ export default function CourseBuilderHeader({
                     text-[#1256AF]
                   "
                 >
-                  <BookOpen size={14} />
+                  <BookOpen
+                    size={14}
+                    className="shrink-0"
+                    aria-hidden="true"
+                  />
 
-                  Course Builder
+                  <span className="truncate">
+                    Course Builder
+                  </span>
                 </div>
 
                 <StatusBadge
@@ -107,11 +156,14 @@ export default function CourseBuilderHeader({
               <h1
                 className="
                   mt-4
-                  text-3xl
+                  break-words
+                  text-2xl
                   font-bold
                   tracking-tight
                   text-slate-950
-                  sm:text-4xl
+
+                  sm:text-3xl
+                  lg:text-4xl
                 "
               >
                 {course.title}
@@ -122,16 +174,21 @@ export default function CourseBuilderHeader({
                   className="
                     mt-3
                     max-w-2xl
+                    break-words
                     text-sm
-                    leading-7
+                    leading-6
                     text-slate-500
+
                     sm:text-base
+                    sm:leading-7
                   "
                 >
                   {course.description}
                 </p>
               )}
             </div>
+
+            {/* PUBLISH */}
 
             {editable && (
               <button
@@ -140,6 +197,8 @@ export default function CourseBuilderHeader({
                 disabled={publishing}
                 className="
                   inline-flex
+                  min-h-11
+                  w-full
                   shrink-0
                   items-center
                   justify-center
@@ -152,48 +211,88 @@ export default function CourseBuilderHeader({
                   font-semibold
                   text-white
                   transition
+
                   hover:bg-emerald-700
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-emerald-500/30
+                  focus-visible:ring-offset-2
+
                   disabled:cursor-not-allowed
                   disabled:opacity-50
+
+                  sm:w-auto
                 "
               >
                 {publishing ? (
                   <>
                     <LoaderCircle
                       size={16}
-                      className="animate-spin"
+                      className="
+                        shrink-0
+                        animate-spin
+                      "
+                      aria-hidden="true"
                     />
-                    Publishing...
+
+                    <span>
+                      Publishing...
+                    </span>
                   </>
                 ) : (
                   <>
-                    <Rocket size={16} />
-                    Publish Course
+                    <Rocket
+                      size={16}
+                      className="shrink-0"
+                      aria-hidden="true"
+                    />
+
+                    <span>
+                      Publish Course
+                    </span>
                   </>
                 )}
               </button>
             )}
           </div>
 
+          {/* STATS */}
+
           <div
             className="
-              mt-7
+              mt-6
               grid
+              min-w-0
+              grid-cols-1
               gap-3
               border-t
               border-slate-100
-              pt-6
+              pt-5
+
               sm:grid-cols-3
+              sm:pt-6
+              lg:mt-7
             "
           >
             <Stat
-              icon={<Layers3 size={17} />}
+              icon={
+                <Layers3
+                  size={17}
+                  aria-hidden="true"
+                />
+              }
               label="Modules"
               value={moduleCount}
             />
 
             <Stat
-              icon={<Boxes size={17} />}
+              icon={
+                <Boxes
+                  size={17}
+                  aria-hidden="true"
+                />
+              }
               label="Lessons"
               value={lessonCount}
             />
@@ -202,6 +301,7 @@ export default function CourseBuilderHeader({
               icon={
                 <CheckCircle2
                   size={17}
+                  aria-hidden="true"
                 />
               }
               label="Status"
@@ -231,12 +331,17 @@ function Stat({
     <div
       className="
         flex
+        min-w-0
         items-center
         gap-3
-        rounded-2xl
+        rounded-xl
         bg-slate-50
-        px-4
-        py-4
+        px-3.5
+        py-3.5
+
+        sm:rounded-2xl
+        sm:px-4
+        sm:py-4
       "
     >
       <div
@@ -256,9 +361,10 @@ function Stat({
         {icon}
       </div>
 
-      <div>
+      <div className="min-w-0">
         <p
           className="
+            truncate
             text-xs
             font-medium
             text-slate-400
@@ -270,6 +376,7 @@ function Stat({
         <p
           className="
             mt-0.5
+            break-words
             text-sm
             font-bold
             text-slate-950
@@ -297,6 +404,10 @@ function StatusBadge({
   return (
     <span
       className={`
+        inline-flex
+        w-fit
+        shrink-0
+        items-center
         rounded-full
         px-3
         py-1.5
@@ -304,6 +415,7 @@ function StatusBadge({
         font-bold
         uppercase
         tracking-wide
+
         ${classes}
       `}
     >

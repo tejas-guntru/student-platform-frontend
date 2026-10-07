@@ -106,16 +106,21 @@ export default function BasicProfileForm({
   return (
     <section
       id="basic-profile"
-      className="scroll-mt-8"
+      className="
+        min-w-0
+        scroll-mt-24
+      "
+      aria-labelledby="basic-profile-form-title"
     >
       {/* =====================================================
           SECTION HEADER
       ===================================================== */}
 
-      <div>
+      <div className="min-w-0">
         <div
           className="
             inline-flex
+            max-w-full
             items-center
             gap-2
             rounded-full
@@ -128,11 +133,16 @@ export default function BasicProfileForm({
         >
           <UserRound
             size={13}
-            className="text-[#0877E8]"
+            className="
+              shrink-0
+              text-[#0877E8]
+            "
+            aria-hidden="true"
           />
 
           <p
             className="
+              truncate
               text-[9px]
               font-bold
               uppercase
@@ -145,24 +155,33 @@ export default function BasicProfileForm({
         </div>
 
         <h2
+          id="basic-profile-form-title"
           className="
             mt-4
-            text-2xl
+            break-words
+            text-xl
             font-bold
             tracking-[-0.035em]
             text-[#173B63]
+
+            [overflow-wrap:anywhere]
+
+            sm:text-2xl
           "
         >
-          Personal & Academic Details
+          Personal &amp; Academic Details
         </h2>
 
         <p
           className="
             mt-2
             max-w-2xl
+            break-words
             text-sm
             leading-6
             text-[#71899D]
+
+            [overflow-wrap:anywhere]
           "
         >
           Keep your personal, academic and career
@@ -179,30 +198,37 @@ export default function BasicProfileForm({
         className="
           relative
           mt-5
+          min-w-0
           overflow-visible
-          rounded-[28px]
+          rounded-2xl
           border
           border-[#DCEAF5]
           bg-white
           shadow-[0_14px_42px_rgba(8,119,232,0.055)]
+
+          sm:rounded-[28px]
         "
       >
         {/* TOP ACCENT */}
 
         <div
           className="
+            pointer-events-none
             absolute
             left-0
             right-0
             top-0
             h-[3px]
             overflow-hidden
-            rounded-t-[28px]
+            rounded-t-2xl
             bg-gradient-to-r
             from-[#0877E8]
             via-[#1294F2]
             to-[#38BDF8]
+
+            sm:rounded-t-[28px]
           "
+          aria-hidden="true"
         />
 
         {/* SOFT GLOW */}
@@ -211,22 +237,31 @@ export default function BasicProfileForm({
           className="
             pointer-events-none
             absolute
-            -right-24
-            -top-24
-            h-64
-            w-64
+            -right-20
+            -top-20
+            h-48
+            w-48
             rounded-full
             bg-[#38BDF8]/8
-            blur-[90px]
+            blur-[70px]
+
+            sm:-right-24
+            sm:-top-24
+            sm:h-64
+            sm:w-64
+            sm:blur-[90px]
           "
+          aria-hidden="true"
         />
 
         <div
           className="
             relative
-            p-5
+            min-w-0
+            p-4
 
             sm:p-7
+
             lg:p-8
           "
         >
@@ -244,6 +279,8 @@ export default function BasicProfileForm({
             className="
               mt-5
               grid
+              min-w-0
+              grid-cols-1
               gap-5
 
               md:grid-cols-2
@@ -260,6 +297,8 @@ export default function BasicProfileForm({
                 }
                 placeholder="Your full name"
                 maxLength={150}
+                autoComplete="name"
+                disabled={saving}
                 className={
                   profileInputClass
                 }
@@ -268,7 +307,7 @@ export default function BasicProfileForm({
 
             <ProfileField label="Phone">
               <input
-                type="text"
+                type="tel"
                 value={phone}
                 onChange={(event) =>
                   setPhone(
@@ -277,6 +316,9 @@ export default function BasicProfileForm({
                 }
                 placeholder="+91..."
                 maxLength={20}
+                autoComplete="tel"
+                inputMode="tel"
+                disabled={saving}
                 className={
                   profileInputClass
                 }
@@ -294,6 +336,8 @@ export default function BasicProfileForm({
                 }
                 placeholder="Hyderabad"
                 maxLength={100}
+                autoComplete="address-level2"
+                disabled={saving}
                 className={
                   profileInputClass
                 }
@@ -307,10 +351,14 @@ export default function BasicProfileForm({
 
           <div
             className="
-              mt-8
+              mt-7
+              min-w-0
               border-t
               border-[#E7F0F7]
-              pt-7
+              pt-6
+
+              sm:mt-8
+              sm:pt-7
             "
           >
             <FormGroupHeader
@@ -323,6 +371,8 @@ export default function BasicProfileForm({
               className="
                 mt-5
                 grid
+                min-w-0
+                grid-cols-1
                 gap-5
 
                 md:grid-cols-2
@@ -339,6 +389,7 @@ export default function BasicProfileForm({
                   }
                   placeholder="B.Tech"
                   maxLength={100}
+                  disabled={saving}
                   className={
                     profileInputClass
                   }
@@ -356,6 +407,7 @@ export default function BasicProfileForm({
                   }
                   placeholder="Computer Science"
                   maxLength={100}
+                  disabled={saving}
                   className={
                     profileInputClass
                   }
@@ -374,13 +426,21 @@ export default function BasicProfileForm({
                   placeholder="2027"
                   min={2000}
                   max={2100}
+                  inputMode="numeric"
+                  disabled={saving}
                   className={
                     profileInputClass
                   }
                 />
               </ProfileField>
 
-              <div className="md:col-span-2">
+              <div
+                className="
+                  min-w-0
+
+                  md:col-span-2
+                "
+              >
                 <CollegeSearch
                   collegeId={collegeId}
                   collegeName={
@@ -421,10 +481,14 @@ export default function BasicProfileForm({
 
           <div
             className="
-              mt-8
+              mt-7
+              min-w-0
               border-t
               border-[#E7F0F7]
-              pt-7
+              pt-6
+
+              sm:mt-8
+              sm:pt-7
             "
           >
             <FormGroupHeader
@@ -437,6 +501,8 @@ export default function BasicProfileForm({
               className="
                 mt-5
                 grid
+                min-w-0
+                grid-cols-1
                 gap-5
               "
             >
@@ -451,6 +517,7 @@ export default function BasicProfileForm({
                   }
                   placeholder="Java Backend Developer"
                   maxLength={150}
+                  disabled={saving}
                   className={
                     profileInputClass
                   }
@@ -467,7 +534,12 @@ export default function BasicProfileForm({
                   }
                   rows={5}
                   placeholder="Tell employers about yourself..."
-                  className={`${profileInputClass} resize-none`}
+                  disabled={saving}
+                  className={`
+                    ${profileInputClass}
+                    min-h-32
+                    resize-y
+                  `}
                 />
               </ProfileField>
             </div>
@@ -479,34 +551,42 @@ export default function BasicProfileForm({
 
           <div
             className="
-              mt-8
+              mt-7
               flex
+              min-w-0
               flex-col
               gap-4
               border-t
               border-[#E7F0F7]
               pt-6
 
+              sm:mt-8
               sm:flex-row
               sm:items-center
               sm:justify-between
             "
           >
-            <div>
+            <div className="min-w-0">
               <div
                 className="
                   flex
+                  min-w-0
                   items-center
                   gap-2
                 "
               >
                 <Sparkles
                   size={14}
-                  className="text-[#38A9EE]"
+                  className="
+                    shrink-0
+                    text-[#38A9EE]
+                  "
+                  aria-hidden="true"
                 />
 
                 <p
                   className="
+                    break-words
                     text-xs
                     font-semibold
                     text-[#698399]
@@ -519,6 +599,7 @@ export default function BasicProfileForm({
               <p
                 className="
                   mt-1
+                  break-words
                   text-xs
                   leading-5
                   text-[#94A6B5]
@@ -531,33 +612,42 @@ export default function BasicProfileForm({
             <div
               className="
                 flex
+                min-w-0
                 flex-col
                 gap-3
 
                 sm:flex-row
                 sm:items-center
+                sm:justify-end
               "
             >
               {saving && (
                 <div
                   className="
                     flex
+                    min-w-0
                     items-center
                     gap-2
                     text-sm
                     font-medium
                     text-[#71899D]
                   "
+                  role="status"
+                  aria-live="polite"
                 >
                   <LoaderCircle
                     size={16}
                     className="
+                      shrink-0
                       animate-spin
                       text-[#0877E8]
                     "
+                    aria-hidden="true"
                   />
 
-                  Saving profile...
+                  <span className="break-words">
+                    Saving profile...
+                  </span>
                 </div>
               )}
 
@@ -568,7 +658,8 @@ export default function BasicProfileForm({
                 className="
                   group
                   inline-flex
-                  min-h-[46px]
+                  min-h-12
+                  w-full
                   items-center
                   justify-center
                   gap-2
@@ -585,36 +676,55 @@ export default function BasicProfileForm({
                   transition-all
                   duration-200
 
-                  hover:-translate-y-0.5
                   hover:shadow-[0_14px_30px_rgba(8,119,232,0.28)]
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#0877E8]/30
+                  focus-visible:ring-offset-2
 
                   disabled:cursor-not-allowed
                   disabled:opacity-60
-                  disabled:hover:translate-y-0
+
+                  sm:w-auto
+
+                  lg:hover:-translate-y-0.5
+                  lg:disabled:hover:translate-y-0
                 "
               >
                 {saving ? (
                   <>
                     <LoaderCircle
                       size={16}
-                      className="animate-spin"
+                      className="
+                        shrink-0
+                        animate-spin
+                      "
+                      aria-hidden="true"
                     />
 
                     Saving...
                   </>
                 ) : (
                   <>
-                    <Save size={15} />
+                    <Save
+                      size={15}
+                      className="shrink-0"
+                      aria-hidden="true"
+                    />
 
                     Save Profile
 
                     <ArrowRight
                       size={15}
                       className="
+                        shrink-0
                         transition-transform
                         duration-200
+
                         group-hover:translate-x-0.5
                       "
+                      aria-hidden="true"
                     />
                   </>
                 )}
@@ -640,6 +750,7 @@ function FormGroupHeader({
     <div
       className="
         flex
+        min-w-0
         items-start
         gap-3
       "
@@ -657,15 +768,21 @@ function FormGroupHeader({
           text-[#0877E8]
         "
       >
-        <Icon size={17} />
+        <Icon
+          size={17}
+          aria-hidden="true"
+        />
       </div>
 
-      <div>
+      <div className="min-w-0">
         <h3
           className="
+            break-words
             text-sm
             font-bold
             text-[#173B63]
+
+            [overflow-wrap:anywhere]
           "
         >
           {title}
@@ -674,9 +791,12 @@ function FormGroupHeader({
         <p
           className="
             mt-1
+            break-words
             text-xs
             leading-5
             text-[#8198AA]
+
+            [overflow-wrap:anywhere]
           "
         >
           {description}

@@ -31,8 +31,14 @@ export default function SkillsList({
   onEdit,
   onDelete,
 }: SkillsListProps) {
+  const skillCount =
+    skills.length;
+
   return (
-    <section>
+    <section
+      className="min-w-0"
+      aria-labelledby="skills-list-title"
+    >
       {/* =====================================================
           SECTION HEADER
       ===================================================== */}
@@ -40,6 +46,7 @@ export default function SkillsList({
       <div
         className="
           flex
+          min-w-0
           flex-col
           gap-4
 
@@ -48,10 +55,16 @@ export default function SkillsList({
           sm:justify-between
         "
       >
-        <div>
+        <div
+          className="
+            min-w-0
+            max-w-2xl
+          "
+        >
           <div
             className="
               flex
+              min-w-0
               items-center
               gap-2
             "
@@ -70,17 +83,27 @@ export default function SkillsList({
 
             <Sparkles
               size={12}
-              className="text-[#38A9EE]"
+              className="
+                shrink-0
+                text-[#38A9EE]
+              "
+              aria-hidden="true"
             />
           </div>
 
           <h2
+            id="skills-list-title"
             className="
               mt-2
-              text-2xl
+              break-words
+              text-xl
               font-bold
               tracking-[-0.035em]
               text-[#173B63]
+
+              [overflow-wrap:anywhere]
+
+              sm:text-2xl
             "
           >
             My Skills
@@ -90,9 +113,12 @@ export default function SkillsList({
             className="
               mt-2
               max-w-xl
+              break-words
               text-sm
               leading-6
               text-[#71899D]
+
+              [overflow-wrap:anywhere]
             "
           >
             Keep your technical strengths current and
@@ -100,11 +126,13 @@ export default function SkillsList({
           </p>
         </div>
 
-        {skills.length > 0 && (
+        {skillCount > 0 && (
           <div
             className="
               inline-flex
               w-fit
+              max-w-full
+              shrink-0
               items-center
               gap-2
               rounded-full
@@ -114,14 +142,24 @@ export default function SkillsList({
               px-3
               py-1.5
             "
+            aria-label={`${skillCount} ${
+              skillCount === 1
+                ? "skill"
+                : "skills"
+            }`}
           >
             <Code2
               size={12}
-              className="text-[#0877E8]"
+              className="
+                shrink-0
+                text-[#0877E8]
+              "
+              aria-hidden="true"
             />
 
             <span
               className="
+                break-words
                 text-[10px]
                 font-bold
                 uppercase
@@ -129,8 +167,8 @@ export default function SkillsList({
                 text-[#68849A]
               "
             >
-              {skills.length}{" "}
-              {skills.length === 1
+              {skillCount}{" "}
+              {skillCount === 1
                 ? "skill"
                 : "skills"}
             </span>
@@ -142,21 +180,26 @@ export default function SkillsList({
           EMPTY STATE
       ===================================================== */}
 
-      {skills.length === 0 ? (
+      {skillCount === 0 ? (
         <div
           className="
             relative
             mt-5
+            min-w-0
             overflow-hidden
-            rounded-[24px]
+            rounded-2xl
             border
             border-dashed
             border-[#C8DEED]
             bg-white/80
-            px-6
-            py-12
+            px-4
+            py-10
             text-center
             shadow-[0_10px_30px_rgba(8,119,232,0.035)]
+
+            sm:rounded-[24px]
+            sm:px-6
+            sm:py-12
           "
         >
           <div
@@ -165,39 +208,57 @@ export default function SkillsList({
               absolute
               left-1/2
               top-0
-              h-36
-              w-36
+              h-32
+              w-32
               -translate-x-1/2
               rounded-full
               bg-[#38BDF8]/10
               blur-[60px]
+
+              sm:h-36
+              sm:w-36
             "
+            aria-hidden="true"
           />
 
-          <div className="relative">
+          <div
+            className="
+              relative
+              min-w-0
+            "
+          >
             <div
               className="
                 mx-auto
                 flex
-                h-14
-                w-14
+                h-12
+                w-12
                 items-center
                 justify-center
                 rounded-2xl
                 bg-[#EAF6FF]
                 text-[#0877E8]
+
+                sm:h-14
+                sm:w-14
               "
             >
-              <Plus size={22} />
+              <Plus
+                size={22}
+                aria-hidden="true"
+              />
             </div>
 
             <h3
               className="
                 mt-4
+                break-words
                 text-lg
                 font-bold
                 tracking-[-0.02em]
                 text-[#173B63]
+
+                [overflow-wrap:anywhere]
               "
             >
               No skills added yet
@@ -208,9 +269,12 @@ export default function SkillsList({
                 mx-auto
                 mt-2
                 max-w-md
+                break-words
                 text-sm
                 leading-6
                 text-[#71899D]
+
+                [overflow-wrap:anywhere]
               "
             >
               Add your first technical skill using the
@@ -228,6 +292,8 @@ export default function SkillsList({
           className="
             mt-5
             grid
+            min-w-0
+            grid-cols-1
             gap-4
 
             sm:grid-cols-2
@@ -235,18 +301,22 @@ export default function SkillsList({
         >
           {skills.map(
             (skill) => (
-              <SkillCard
+              <div
                 key={
                   skill.skillId
                 }
-                skill={skill}
-                deleting={
-                  deletingId ===
-                  skill.skillId
-                }
-                onEdit={onEdit}
-                onDelete={onDelete}
-              />
+                className="min-w-0"
+              >
+                <SkillCard
+                  skill={skill}
+                  deleting={
+                    deletingId ===
+                    skill.skillId
+                  }
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                />
+              </div>
             )
           )}
         </div>

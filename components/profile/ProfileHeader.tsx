@@ -54,6 +54,7 @@ export default function ProfileHeader() {
   return (
     <header
       className="
+        min-w-0
         overflow-hidden
         rounded-2xl
         border
@@ -65,39 +66,46 @@ export default function ProfileHeader() {
 
       <div
         className="
-          flex
-          items-end
-          justify-between
-          gap-4
-          px-5
-          pt-5
+          min-w-0
+          px-4
+          pt-4
 
           sm:px-6
           sm:pt-6
         "
       >
-        <div>
+        <div className="min-w-0">
           <Link
             href="/student"
             className="
               group
               inline-flex
+              min-h-10
               items-center
               gap-1.5
+              rounded-lg
               text-xs
               font-semibold
               text-slate-400
               transition-colors
 
               hover:text-[#1256AF]
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/25
+              focus-visible:ring-offset-2
             "
           >
             <ArrowLeft
               size={14}
               className="
+                shrink-0
                 transition-transform
+
                 group-hover:-translate-x-0.5
               "
+              aria-hidden="true"
             />
 
             Home
@@ -105,15 +113,36 @@ export default function ProfileHeader() {
 
           <h1
             className="
-              mt-3
+              mt-2
+              break-words
               text-2xl
               font-bold
               tracking-[-0.035em]
               text-slate-950
+
+              [overflow-wrap:anywhere]
+
+              sm:mt-3
+              sm:text-3xl
             "
           >
             Profile
           </h1>
+
+          <p
+            className="
+              mt-1
+              max-w-xl
+              break-words
+              text-sm
+              leading-6
+              text-slate-500
+            "
+          >
+            Manage your profile, skills,
+            projects, experience, and coding
+            information.
+          </p>
         </div>
       </div>
 
@@ -121,91 +150,127 @@ export default function ProfileHeader() {
 
       <nav
         className="
-          mt-5
-          overflow-x-auto
+          mt-4
+          min-w-0
           border-t
           border-slate-100
-          px-3
 
-          sm:px-4
+          sm:mt-5
         "
         aria-label="Profile navigation"
       >
         <div
           className="
-            flex
-            min-w-max
-            items-center
-            gap-1
+            overflow-x-auto
+            overscroll-x-contain
+            px-2
+
+            sm:px-4
           "
         >
-          {profileNavigation.map(
-            (item) => {
-              const Icon =
-                item.icon;
+          <div
+            className="
+              flex
+              min-w-max
+              items-center
+              gap-0.5
 
-              const active =
-                pathname ===
-                item.route;
+              sm:gap-1
+            "
+          >
+            {profileNavigation.map(
+              (item) => {
+                const Icon =
+                  item.icon;
 
-              return (
-                <Link
-                  key={
-                    item.label
-                  }
-                  href={
-                    item.href
-                  }
-                  scroll={true}
-                  className={`
-                    relative
-                    inline-flex
-                    items-center
-                    gap-2
-                    px-4
-                    py-4
-                    text-xs
-                    font-semibold
-                    transition-colors
+                const active =
+                  pathname ===
+                  item.route;
 
-                    ${
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    scroll={true}
+                    aria-current={
                       active
-                        ? "text-[#1256AF]"
-                        : `
-                          text-slate-500
-                          hover:text-slate-900
-                        `
+                        ? "page"
+                        : undefined
                     }
-                  `}
-                >
-                  <Icon
-                    size={14}
-                    strokeWidth={
-                      active
-                        ? 2.5
-                        : 2
-                    }
-                  />
+                    className={`
+                      relative
+                      inline-flex
+                      min-h-12
+                      shrink-0
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-t-lg
+                      px-3
+                      text-xs
+                      font-semibold
+                      transition-colors
 
-                  {item.label}
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-inset
+                      focus-visible:ring-[#1256AF]/25
 
-                  {active && (
-                    <span
-                      className="
-                        absolute
-                        bottom-0
-                        left-3
-                        right-3
-                        h-0.5
-                        rounded-full
-                        bg-[#1256AF]
-                      "
+                      sm:min-h-14
+                      sm:px-4
+
+                      ${
+                        active
+                          ? `
+                            bg-[#1256AF]/[0.035]
+                            text-[#1256AF]
+                          `
+                          : `
+                            text-slate-500
+
+                            hover:bg-slate-50
+                            hover:text-slate-900
+                          `
+                      }
+                    `}
+                  >
+                    <Icon
+                      size={14}
+                      className="shrink-0"
+                      strokeWidth={
+                        active
+                          ? 2.5
+                          : 2
+                      }
+                      aria-hidden="true"
                     />
-                  )}
-                </Link>
-              );
-            }
-          )}
+
+                    <span>
+                      {item.label}
+                    </span>
+
+                    {active && (
+                      <span
+                        className="
+                          absolute
+                          bottom-0
+                          left-2.5
+                          right-2.5
+                          h-0.5
+                          rounded-full
+                          bg-[#1256AF]
+
+                          sm:left-3
+                          sm:right-3
+                        "
+                        aria-hidden="true"
+                      />
+                    )}
+                  </Link>
+                );
+              }
+            )}
+          </div>
         </div>
       </nav>
     </header>

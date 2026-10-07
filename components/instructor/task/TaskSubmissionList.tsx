@@ -43,20 +43,38 @@ export default function TaskSubmissionList({
     submissions.length - reviewedCount;
 
   return (
-    <section className="mt-10">
+    <section
+      className="
+        mt-8
+        min-w-0
+
+        sm:mt-10
+      "
+    >
+      {/* SECTION HEADER */}
+
       <div
         className="
           flex
+          min-w-0
           flex-col
           gap-4
+
           sm:flex-row
           sm:items-end
           sm:justify-between
+          sm:gap-6
         "
       >
-        <div>
+        <div
+          className="
+            min-w-0
+            flex-1
+          "
+        >
           <p
             className="
+              break-words
               text-xs
               font-bold
               uppercase
@@ -70,10 +88,13 @@ export default function TaskSubmissionList({
           <h2
             className="
               mt-2
-              text-2xl
+              break-words
+              text-xl
               font-bold
               tracking-tight
               text-slate-950
+
+              sm:text-2xl
             "
           >
             Student Submissions
@@ -82,7 +103,10 @@ export default function TaskSubmissionList({
           <p
             className="
               mt-1
+              max-w-2xl
+              break-words
               text-sm
+              leading-6
               text-slate-500
             "
           >
@@ -91,13 +115,22 @@ export default function TaskSubmissionList({
           </p>
         </div>
 
+        {/* SUMMARY */}
+
         {submissions.length > 0 && (
           <div
             className="
-              flex
-              flex-wrap
+              grid
+              min-w-0
+              grid-cols-3
               gap-2
+
+              sm:flex
+              sm:shrink-0
+              sm:flex-wrap
+              sm:justify-end
             "
+            aria-label="Submission summary"
           >
             <SummaryBadge
               label="Total"
@@ -117,11 +150,14 @@ export default function TaskSubmissionList({
         )}
       </div>
 
+      {/* EMPTY STATE */}
+
       {submissions.length === 0 ? (
         <div
           className="
             mt-5
             flex
+            min-w-0
             flex-col
             items-center
             justify-center
@@ -130,9 +166,12 @@ export default function TaskSubmissionList({
             border-dashed
             border-slate-300
             bg-white
-            px-6
-            py-12
+            px-4
+            py-10
             text-center
+
+            sm:px-6
+            sm:py-12
           "
         >
           <div
@@ -140,6 +179,7 @@ export default function TaskSubmissionList({
               flex
               h-12
               w-12
+              shrink-0
               items-center
               justify-center
               rounded-2xl
@@ -147,12 +187,16 @@ export default function TaskSubmissionList({
               text-slate-400
             "
           >
-            <Inbox size={21} />
+            <Inbox
+              size={21}
+              aria-hidden="true"
+            />
           </div>
 
           <h3
             className="
               mt-4
+              break-words
               font-semibold
               text-slate-900
             "
@@ -164,6 +208,7 @@ export default function TaskSubmissionList({
             className="
               mt-1
               max-w-sm
+              break-words
               text-sm
               leading-6
               text-slate-500
@@ -175,26 +220,40 @@ export default function TaskSubmissionList({
           </p>
         </div>
       ) : (
-        <div className="mt-5 space-y-5">
+        /* SUBMISSION LIST */
+
+        <div
+          className="
+            mt-5
+            min-w-0
+            space-y-4
+
+            sm:space-y-5
+          "
+        >
           {submissions.map(
             (submission) => (
-              <TaskSubmissionCard
+              <div
                 key={submission.id}
-                submission={submission}
-                feedback={
-                  feedback[
+                className="min-w-0"
+              >
+                <TaskSubmissionCard
+                  submission={submission}
+                  feedback={
+                    feedback[
+                      submission.id
+                    ] ?? ""
+                  }
+                  reviewing={
+                    reviewingId ===
                     submission.id
-                  ] ?? ""
-                }
-                reviewing={
-                  reviewingId ===
-                  submission.id
-                }
-                onFeedbackChange={
-                  onFeedbackChange
-                }
-                onReview={onReview}
-              />
+                  }
+                  onFeedbackChange={
+                    onFeedbackChange
+                  }
+                  onReview={onReview}
+                />
+              </div>
             )
           )}
         </div>
@@ -213,18 +272,30 @@ function SummaryBadge({
   return (
     <div
       className="
+        min-w-0
         rounded-xl
         border
         border-slate-200
         bg-white
-        px-3
+        px-2.5
         py-2
+        text-center
+
+        sm:px-3
+        sm:text-left
       "
+      aria-label={`${label}: ${value}`}
     >
       <span
         className="
-          text-xs
+          block
+          break-words
+          text-[10px]
+          leading-4
           text-slate-400
+
+          sm:inline
+          sm:text-xs
         "
       >
         {label}
@@ -232,10 +303,16 @@ function SummaryBadge({
 
       <span
         className="
-          ml-2
+          mt-0.5
+          block
+          break-words
           text-sm
           font-bold
           text-slate-900
+
+          sm:ml-2
+          sm:mt-0
+          sm:inline
         "
       >
         {value}

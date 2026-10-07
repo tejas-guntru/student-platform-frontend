@@ -97,18 +97,23 @@ export default function ProjectForm({
       onSubmit={onSubmit}
       className="
         relative
+        min-w-0
         overflow-hidden
-        rounded-[28px]
+        rounded-2xl
         border
         border-[#DCEAF5]
         bg-white
         shadow-[0_14px_42px_rgba(8,119,232,0.055)]
+
+        sm:rounded-[28px]
       "
+      aria-labelledby="project-form-title"
     >
       {/* TOP ACCENT */}
 
       <div
         className={`
+          pointer-events-none
           absolute
           left-0
           right-0
@@ -122,6 +127,7 @@ export default function ProjectForm({
               : "from-[#0877E8] via-[#1294F2] to-[#38BDF8]"
           }
         `}
+        aria-hidden="true"
       />
 
       {/* BACKGROUND GLOW */}
@@ -130,22 +136,31 @@ export default function ProjectForm({
         className="
           pointer-events-none
           absolute
-          -right-28
-          -top-28
-          h-72
-          w-72
+          -right-20
+          -top-20
+          h-52
+          w-52
           rounded-full
           bg-violet-500/7
-          blur-[100px]
+          blur-[80px]
+
+          sm:-right-28
+          sm:-top-28
+          sm:h-72
+          sm:w-72
+          sm:blur-[100px]
         "
+        aria-hidden="true"
       />
 
       <div
         className="
           relative
-          p-5
+          min-w-0
+          p-4
 
           sm:p-7
+
           lg:p-8
         "
       >
@@ -156,6 +171,7 @@ export default function ProjectForm({
         <div
           className="
             flex
+            min-w-0
             flex-col
             gap-5
 
@@ -167,19 +183,26 @@ export default function ProjectForm({
           <div
             className="
               flex
+              min-w-0
               items-start
-              gap-4
+              gap-3
+
+              sm:gap-4
             "
           >
             <div
               className={`
                 flex
-                h-11
-                w-11
+                h-10
+                w-10
                 shrink-0
                 items-center
                 justify-center
-                rounded-2xl
+                rounded-xl
+
+                sm:h-11
+                sm:w-11
+                sm:rounded-2xl
 
                 ${
                   isEditing
@@ -188,13 +211,17 @@ export default function ProjectForm({
                 }
               `}
             >
-              <FolderGit2 size={19} />
+              <FolderGit2
+                size={19}
+                aria-hidden="true"
+              />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <div
                 className={`
                   inline-flex
+                  max-w-full
                   items-center
                   rounded-full
                   border
@@ -208,30 +235,38 @@ export default function ProjectForm({
                   ${
                     isEditing
                       ? `
-                        border-violet-200
-                        bg-violet-50
-                        text-violet-600
-                      `
+                          border-violet-200
+                          bg-violet-50
+                          text-violet-600
+                        `
                       : `
-                        border-[#CBE5F8]
-                        bg-[#EFF8FF]
-                        text-[#0877E8]
-                      `
+                          border-[#CBE5F8]
+                          bg-[#EFF8FF]
+                          text-[#0877E8]
+                        `
                   }
                 `}
               >
-                {isEditing
-                  ? "Editing Project"
-                  : "New Project"}
+                <span className="truncate">
+                  {isEditing
+                    ? "Editing Project"
+                    : "New Project"}
+                </span>
               </div>
 
               <h2
+                id="project-form-title"
                 className="
                   mt-3
-                  text-2xl
+                  break-words
+                  text-xl
                   font-bold
                   tracking-[-0.035em]
                   text-[#173B63]
+
+                  [overflow-wrap:anywhere]
+
+                  sm:text-2xl
                 "
               >
                 {isEditing
@@ -243,9 +278,12 @@ export default function ProjectForm({
                 className="
                   mt-2
                   max-w-xl
+                  break-words
                   text-sm
                   leading-6
                   text-[#71899D]
+
+                  [overflow-wrap:anywhere]
                 "
               >
                 Showcase what you built, the technologies
@@ -261,7 +299,9 @@ export default function ProjectForm({
               disabled={saving}
               className="
                 inline-flex
-                w-fit
+                min-h-10
+                w-full
+                shrink-0
                 items-center
                 justify-center
                 gap-2
@@ -274,18 +314,29 @@ export default function ProjectForm({
                 text-sm
                 font-semibold
                 text-[#607D92]
-                transition-all
+                transition-colors
                 duration-200
 
                 hover:border-[#BBDCED]
                 hover:bg-white
                 hover:text-[#0877E8]
 
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#0877E8]/25
+                focus-visible:ring-offset-2
+
                 disabled:cursor-not-allowed
                 disabled:opacity-50
+
+                sm:w-fit
               "
             >
-              <X size={14} />
+              <X
+                size={14}
+                className="shrink-0"
+                aria-hidden="true"
+              />
 
               Cancel Edit
             </button>
@@ -298,10 +349,13 @@ export default function ProjectForm({
 
         <div
           className="
-            mt-8
+            mt-7
             flex
+            min-w-0
             items-start
             gap-3
+
+            sm:mt-8
           "
         >
           <div
@@ -317,12 +371,16 @@ export default function ProjectForm({
               text-[#0877E8]
             "
           >
-            <FolderGit2 size={17} />
+            <FolderGit2
+              size={17}
+              aria-hidden="true"
+            />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3
               className="
+                break-words
                 text-sm
                 font-bold
                 text-[#173B63]
@@ -334,9 +392,12 @@ export default function ProjectForm({
             <p
               className="
                 mt-1
+                break-words
                 text-xs
                 leading-5
                 text-[#8198AA]
+
+                [overflow-wrap:anywhere]
               "
             >
               Add the project name, technologies and a
@@ -349,6 +410,8 @@ export default function ProjectForm({
           className="
             mt-5
             grid
+            min-w-0
+            grid-cols-1
             gap-5
 
             md:grid-cols-2
@@ -365,6 +428,8 @@ export default function ProjectForm({
               }
               placeholder="Student Internship Platform"
               maxLength={150}
+              disabled={saving}
+              autoComplete="off"
               className={
                 profileInputClass
               }
@@ -382,13 +447,21 @@ export default function ProjectForm({
               }
               placeholder="Java, Spring Boot, PostgreSQL, Next.js"
               maxLength={500}
+              disabled={saving}
+              autoComplete="off"
               className={
                 profileInputClass
               }
             />
           </ProfileField>
 
-          <div className="md:col-span-2">
+          <div
+            className="
+              min-w-0
+
+              md:col-span-2
+            "
+          >
             <ProfileField label="Description">
               <textarea
                 value={description}
@@ -399,7 +472,12 @@ export default function ProjectForm({
                 }
                 rows={5}
                 placeholder="Describe what you built, your contribution and the key features..."
-                className={`${profileInputClass} resize-none`}
+                disabled={saving}
+                className={`
+                  ${profileInputClass}
+                  min-h-32
+                  resize-y
+                `}
               />
             </ProfileField>
           </div>
@@ -411,15 +489,20 @@ export default function ProjectForm({
 
         <div
           className="
-            mt-8
+            mt-7
+            min-w-0
             border-t
             border-[#E7F0F7]
-            pt-7
+            pt-6
+
+            sm:mt-8
+            sm:pt-7
           "
         >
           <div
             className="
               flex
+              min-w-0
               items-start
               gap-3
             "
@@ -437,12 +520,16 @@ export default function ProjectForm({
                 text-violet-600
               "
             >
-              <Link2 size={17} />
+              <Link2
+                size={17}
+                aria-hidden="true"
+              />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h3
                 className="
+                  break-words
                   text-sm
                   font-bold
                   text-[#173B63]
@@ -454,9 +541,12 @@ export default function ProjectForm({
               <p
                 className="
                   mt-1
+                  break-words
                   text-xs
                   leading-5
                   text-[#8198AA]
+
+                  [overflow-wrap:anywhere]
                 "
               >
                 Add source code and a live project link
@@ -469,13 +559,20 @@ export default function ProjectForm({
             className="
               mt-5
               grid
+              min-w-0
+              grid-cols-1
               gap-5
 
               md:grid-cols-2
             "
           >
             <ProfileField label="GitHub URL">
-              <div className="relative">
+              <div
+                className="
+                  relative
+                  min-w-0
+                "
+              >
                 <Code2
                   size={15}
                   className="
@@ -483,9 +580,11 @@ export default function ProjectForm({
                     absolute
                     left-4
                     top-1/2
+                    z-10
                     -translate-y-1/2
                     text-[#8AA8BC]
                   "
+                  aria-hidden="true"
                 />
 
                 <input
@@ -497,13 +596,24 @@ export default function ProjectForm({
                     )
                   }
                   placeholder="https://github.com/username/project"
-                  className={`${profileInputClass} pl-11`}
+                  disabled={saving}
+                  autoComplete="url"
+                  inputMode="url"
+                  className={`
+                    ${profileInputClass}
+                    pl-11
+                  `}
                 />
               </div>
             </ProfileField>
 
             <ProfileField label="Live / Project URL">
-              <div className="relative">
+              <div
+                className="
+                  relative
+                  min-w-0
+                "
+              >
                 <ExternalLink
                   size={15}
                   className="
@@ -511,9 +621,11 @@ export default function ProjectForm({
                     absolute
                     left-4
                     top-1/2
+                    z-10
                     -translate-y-1/2
                     text-[#8AA8BC]
                   "
+                  aria-hidden="true"
                 />
 
                 <input
@@ -525,7 +637,13 @@ export default function ProjectForm({
                     )
                   }
                   placeholder="https://your-project.com"
-                  className={`${profileInputClass} pl-11`}
+                  disabled={saving}
+                  autoComplete="url"
+                  inputMode="url"
+                  className={`
+                    ${profileInputClass}
+                    pl-11
+                  `}
                 />
               </div>
             </ProfileField>
@@ -538,15 +656,20 @@ export default function ProjectForm({
 
         <div
           className="
-            mt-8
+            mt-7
+            min-w-0
             border-t
             border-[#E7F0F7]
-            pt-7
+            pt-6
+
+            sm:mt-8
+            sm:pt-7
           "
         >
           <div
             className="
               flex
+              min-w-0
               items-start
               gap-3
             "
@@ -564,12 +687,16 @@ export default function ProjectForm({
                 text-cyan-600
               "
             >
-              <CalendarDays size={17} />
+              <CalendarDays
+                size={17}
+                aria-hidden="true"
+              />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h3
                 className="
+                  break-words
                   text-sm
                   font-bold
                   text-[#173B63]
@@ -581,9 +708,12 @@ export default function ProjectForm({
               <p
                 className="
                   mt-1
+                  break-words
                   text-xs
                   leading-5
                   text-[#8198AA]
+
+                  [overflow-wrap:anywhere]
                 "
               >
                 Add when you started and completed the project.
@@ -595,6 +725,8 @@ export default function ProjectForm({
             className="
               mt-5
               grid
+              min-w-0
+              grid-cols-1
               gap-5
 
               md:grid-cols-2
@@ -609,6 +741,7 @@ export default function ProjectForm({
                     event.target.value
                   )
                 }
+                disabled={saving}
                 className={
                   profileInputClass
                 }
@@ -624,6 +757,10 @@ export default function ProjectForm({
                     event.target.value
                   )
                 }
+                min={
+                  startDate || undefined
+                }
+                disabled={saving}
                 className={
                   profileInputClass
                 }
@@ -638,36 +775,45 @@ export default function ProjectForm({
 
         <div
           className="
-            mt-8
+            mt-7
             flex
+            min-w-0
             flex-col
             gap-4
             border-t
             border-[#E7F0F7]
             pt-6
 
+            sm:mt-8
             sm:flex-row
             sm:items-center
             sm:justify-between
           "
         >
-          <div>
+          <div className="min-w-0">
             <p
               className="
+                break-words
                 text-xs
                 font-semibold
                 text-[#688399]
               "
             >
-              Build your portfolio
+              {isEditing
+                ? "Update your portfolio project"
+                : "Build your portfolio"}
             </p>
 
             <p
               className="
                 mt-1
+                max-w-xl
+                break-words
                 text-xs
                 leading-5
                 text-[#94A6B5]
+
+                [overflow-wrap:anywhere]
               "
             >
               Focus on projects that clearly demonstrate
@@ -678,33 +824,42 @@ export default function ProjectForm({
           <div
             className="
               flex
+              min-w-0
               flex-col
               gap-3
 
               sm:flex-row
               sm:items-center
+              sm:justify-end
             "
           >
             {saving && (
               <div
                 className="
                   flex
+                  min-w-0
                   items-center
                   gap-2
                   text-sm
                   font-medium
                   text-[#71899D]
                 "
+                role="status"
+                aria-live="polite"
               >
                 <LoaderCircle
                   size={15}
                   className="
+                    shrink-0
                     animate-spin
                     text-[#0877E8]
                   "
+                  aria-hidden="true"
                 />
 
-                Saving project...
+                <span>
+                  Saving project...
+                </span>
               </div>
             )}
 
@@ -714,7 +869,8 @@ export default function ProjectForm({
               className="
                 group
                 inline-flex
-                min-h-[46px]
+                min-h-12
+                w-full
                 items-center
                 justify-center
                 gap-2
@@ -731,32 +887,52 @@ export default function ProjectForm({
                 transition-all
                 duration-200
 
-                hover:-translate-y-0.5
                 hover:shadow-[0_14px_30px_rgba(8,119,232,0.28)]
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#0877E8]/30
+                focus-visible:ring-offset-2
 
                 disabled:cursor-not-allowed
                 disabled:opacity-60
-                disabled:hover:translate-y-0
+
+                sm:w-auto
+
+                lg:hover:-translate-y-0.5
+                lg:disabled:hover:translate-y-0
               "
             >
               {saving ? (
                 <>
                   <LoaderCircle
                     size={15}
-                    className="animate-spin"
+                    className="
+                      shrink-0
+                      animate-spin
+                    "
+                    aria-hidden="true"
                   />
 
                   Saving...
                 </>
               ) : isEditing ? (
                 <>
-                  <Save size={15} />
+                  <Save
+                    size={15}
+                    className="shrink-0"
+                    aria-hidden="true"
+                  />
 
                   Save Changes
                 </>
               ) : (
                 <>
-                  <Plus size={16} />
+                  <Plus
+                    size={16}
+                    className="shrink-0"
+                    aria-hidden="true"
+                  />
 
                   Add Project
                 </>

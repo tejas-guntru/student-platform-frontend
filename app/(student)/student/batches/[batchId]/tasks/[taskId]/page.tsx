@@ -3,6 +3,18 @@
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Clock3,
+  ExternalLink,
+  FileText,
+  LoaderCircle,
+  LockKeyhole,
+  Send,
+} from "lucide-react";
+
 import {
   FormEvent,
   useCallback,
@@ -35,9 +47,9 @@ export default function StudentTaskPage() {
       ? params.taskId
       : "";
 
-  // =========================================================
-  // DATA
-  // =========================================================
+  /* =========================================================
+     DATA
+  ========================================================= */
 
   const [task, setTask] =
     useState<TaskResponse | null>(null);
@@ -47,9 +59,9 @@ export default function StudentTaskPage() {
       null
     );
 
-  // =========================================================
-  // FORM
-  // =========================================================
+  /* =========================================================
+     FORM
+  ========================================================= */
 
   const [content, setContent] =
     useState("");
@@ -57,9 +69,9 @@ export default function StudentTaskPage() {
   const [resourceUrl, setResourceUrl] =
     useState("");
 
-  // =========================================================
-  // PAGE STATE
-  // =========================================================
+  /* =========================================================
+     PAGE STATE
+  ========================================================= */
 
   const [loading, setLoading] =
     useState(true);
@@ -73,9 +85,9 @@ export default function StudentTaskPage() {
   const [message, setMessage] =
     useState("");
 
-  // =========================================================
-  // AUTH FAILURE
-  // =========================================================
+  /* =========================================================
+     AUTH FAILURE
+  ========================================================= */
 
   const handleAuthFailure =
     useCallback(() => {
@@ -86,9 +98,9 @@ export default function StudentTaskPage() {
       window.location.replace("/login");
     }, []);
 
-  // =========================================================
-  // LOAD
-  // =========================================================
+  /* =========================================================
+     LOAD
+  ========================================================= */
 
   const loadTask = useCallback(
     async () => {
@@ -115,7 +127,6 @@ export default function StudentTaskPage() {
          * Therefore a 404 from the submission
          * endpoint is a valid initial state.
          */
-
         try {
           const submissionResponse =
             await getOwnTaskSubmission(
@@ -210,9 +221,9 @@ export default function StudentTaskPage() {
     loadTask();
   }, [loadTask]);
 
-  // =========================================================
-  // SUBMIT / UPDATE
-  // =========================================================
+  /* =========================================================
+     SUBMIT / UPDATE
+  ========================================================= */
 
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
@@ -232,6 +243,7 @@ export default function StudentTaskPage() {
       setError(
         "Add submission content or a resource link."
       );
+
       return;
     }
 
@@ -241,6 +253,7 @@ export default function StudentTaskPage() {
       setError(
         "This submission has already been reviewed and can no longer be edited."
       );
+
       return;
     }
 
@@ -324,9 +337,9 @@ export default function StudentTaskPage() {
     }
   };
 
-  // =========================================================
-  // HELPERS
-  // =========================================================
+  /* =========================================================
+     HELPERS
+  ========================================================= */
 
   const formatDateTime = (
     value: string | null
@@ -335,52 +348,145 @@ export default function StudentTaskPage() {
       return null;
     }
 
-    return new Date(
-      value
-    ).toLocaleString();
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return null;
+    }
+
+    return date.toLocaleString();
   };
 
-  const isOverdue =
+  const dueDate =
     task?.dueAt
-      ? new Date() >
-        new Date(task.dueAt)
+      ? new Date(task.dueAt)
+      : null;
+
+  const isOverdue =
+    dueDate &&
+    !Number.isNaN(
+      dueDate.getTime()
+    )
+      ? new Date() > dueDate
       : false;
 
   const isReviewed =
     submission?.status === "REVIEWED";
 
-  // =========================================================
-  // LOADING
-  // =========================================================
+  const submittedAt =
+    submission
+      ? formatDateTime(
+          submission.submittedAt
+        )
+      : null;
+
+  const reviewedAt =
+    submission?.reviewedAt
+      ? formatDateTime(
+          submission.reviewedAt
+        )
+      : null;
+
+  /* =========================================================
+     LOADING
+  ========================================================= */
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-slate-50 px-6 py-10">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-slate-500">
-            Loading task...
-          </p>
+      <main
+        className="
+          min-h-screen
+          min-w-0
+          bg-slate-50
+          px-4
+          py-8
+
+          sm:px-6
+          sm:py-10
+        "
+      >
+        <div
+          className="
+            mx-auto
+            flex
+            min-w-0
+            max-w-4xl
+            items-center
+            gap-3
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            p-5
+            text-sm
+            text-slate-500
+
+            sm:p-6
+          "
+          role="status"
+        >
+          <LoaderCircle
+            size={18}
+            className="
+              shrink-0
+              animate-spin
+            "
+            aria-hidden="true"
+          />
+
+          Loading task...
         </div>
       </main>
     );
   }
 
-  // =========================================================
-  // ERROR / NOT FOUND
-  // =========================================================
+  /* =========================================================
+     ERROR / NOT FOUND
+  ========================================================= */
 
   if (!task) {
     return (
-      <main className="min-h-screen bg-slate-50 px-6 py-10">
-        <div className="mx-auto max-w-4xl">
-          <Link
-            href={`/student/batches/${batchId}`}
-            className="text-sm font-semibold text-blue-700"
-          >
-            ← Back to batch
-          </Link>
+      <main
+        className="
+          min-h-screen
+          min-w-0
+          bg-slate-50
+          px-4
+          py-8
 
-          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-700">
+          sm:px-6
+          sm:py-10
+        "
+      >
+        <div
+          className="
+            mx-auto
+            min-w-0
+            max-w-4xl
+          "
+        >
+          <BackToBatch
+            batchId={batchId}
+          />
+
+          <div
+            className="
+              mt-6
+              min-w-0
+              break-words
+              rounded-xl
+              border
+              border-red-200
+              bg-red-50
+              p-5
+              text-sm
+              leading-6
+              text-red-700
+
+              [overflow-wrap:anywhere]
+            "
+            role="alert"
+          >
             {error ||
               "Task not found."}
           </div>
@@ -389,33 +495,92 @@ export default function StudentTaskPage() {
     );
   }
 
-  // =========================================================
-  // PAGE
-  // =========================================================
+  /* =========================================================
+     PAGE
+  ========================================================= */
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-4xl">
-        <Link
-          href={`/student/batches/${batchId}`}
-          className="text-sm font-semibold text-blue-700"
-        >
-          ← Back to batch
-        </Link>
+    <main
+      className="
+        min-h-screen
+        min-w-0
+        bg-slate-50
+        px-4
+        py-8
+
+        sm:px-6
+        sm:py-10
+      "
+    >
+      <div
+        className="
+          mx-auto
+          min-w-0
+          max-w-4xl
+        "
+      >
+        <BackToBatch
+          batchId={batchId}
+        />
 
         {/* =================================================
             MESSAGES
         ================================================= */}
 
         {error && (
-          <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <div
+            className="
+              mt-6
+              min-w-0
+              break-words
+              rounded-xl
+              border
+              border-red-200
+              bg-red-50
+              p-4
+              text-sm
+              leading-6
+              text-red-700
+
+              [overflow-wrap:anywhere]
+            "
+            role="alert"
+          >
             {error}
           </div>
         )}
 
         {message && (
-          <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700">
-            {message}
+          <div
+            className="
+              mt-6
+              flex
+              min-w-0
+              items-start
+              gap-2
+              rounded-xl
+              border
+              border-green-200
+              bg-green-50
+              p-4
+              text-sm
+              leading-6
+              text-green-700
+            "
+            role="status"
+          >
+            <CheckCircle2
+              size={16}
+              className="
+                mt-0.5
+                shrink-0
+              "
+              aria-hidden="true"
+            />
+
+            <span className="break-words">
+              {message}
+            </span>
           </div>
         )}
 
@@ -423,61 +588,154 @@ export default function StudentTaskPage() {
             TASK DETAILS
         ================================================= */}
 
-        <section className="mt-6 rounded-xl border border-slate-200 bg-white p-6">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
-            <div>
-              <p className="text-sm font-semibold text-blue-700">
-                Task
-              </p>
+        <section
+          className="
+            mt-5
+            min-w-0
+            rounded-2xl
+            border
+            border-slate-200
+            bg-white
+            p-4
 
-              <h1 className="mt-2 text-3xl font-bold text-slate-950">
+            sm:mt-6
+            sm:p-6
+          "
+        >
+          <div
+            className="
+              flex
+              min-w-0
+              flex-col
+              gap-4
+
+              sm:flex-row
+              sm:items-start
+              sm:justify-between
+            "
+          >
+            <div
+              className="
+                min-w-0
+                flex-1
+              "
+            >
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-blue-50
+                  px-3
+                  py-1.5
+                  text-blue-700
+                "
+              >
+                <FileText
+                  size={14}
+                  aria-hidden="true"
+                />
+
+                <span
+                  className="
+                    text-xs
+                    font-semibold
+                  "
+                >
+                  Task
+                </span>
+              </div>
+
+              <h1
+                className="
+                  mt-3
+                  break-words
+                  text-2xl
+                  font-bold
+                  tracking-tight
+                  text-slate-950
+
+                  [overflow-wrap:anywhere]
+
+                  sm:text-3xl
+                "
+              >
                 {task.title}
               </h1>
             </div>
 
             <span
-              className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${
-                isOverdue
-                  ? "bg-red-100 text-red-700"
-                  : "bg-green-100 text-green-700"
-              }`}
+              className={`
+                inline-flex
+                w-fit
+                shrink-0
+                rounded-full
+                px-3
+                py-1.5
+                text-xs
+                font-bold
+
+                ${
+                  isOverdue
+                    ? "bg-red-100 text-red-700"
+                    : "bg-green-100 text-green-700"
+                }
+              `}
             >
               {isOverdue
-                ? "OVERDUE"
-                : "ACTIVE"}
+                ? "Overdue"
+                : "Active"}
             </span>
           </div>
 
           {task.description && (
-            <p className="mt-5 whitespace-pre-wrap text-sm leading-6 text-slate-600">
+            <p
+              className="
+                mt-5
+                whitespace-pre-wrap
+                break-words
+                text-sm
+                leading-7
+                text-slate-600
+
+                [overflow-wrap:anywhere]
+              "
+            >
               {task.description}
             </p>
           )}
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-lg bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Due
-              </p>
+          <div
+            className="
+              mt-6
+              grid
+              min-w-0
+              grid-cols-1
+              gap-3
 
-              <p className="mt-2 text-sm font-semibold text-slate-900">
-                {formatDateTime(
+              sm:grid-cols-2
+            "
+          >
+            <TaskInfo
+              label="Due"
+              value={
+                formatDateTime(
                   task.dueAt
-                ) || "No deadline"}
-              </p>
-            </div>
+                ) || "No deadline"
+              }
+              icon={Clock3}
+            />
 
-            <div className="rounded-lg bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Assigned
-              </p>
-
-              <p className="mt-2 text-sm font-semibold text-slate-900">
-                {formatDateTime(
+            <TaskInfo
+              label="Assigned"
+              value={
+                formatDateTime(
                   task.createdAt
-                )}
-              </p>
-            </div>
+                ) || "Unknown"
+              }
+              icon={FileText}
+            />
           </div>
         </section>
 
@@ -486,39 +744,122 @@ export default function StudentTaskPage() {
         ================================================= */}
 
         {submission && (
-          <section className="mt-6 rounded-xl border border-slate-200 bg-white p-6">
-            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-              <div>
-                <h2 className="font-semibold text-slate-950">
+          <section
+            className="
+              mt-6
+              min-w-0
+              rounded-2xl
+              border
+              border-slate-200
+              bg-white
+              p-4
+
+              sm:p-6
+            "
+          >
+            <div
+              className="
+                flex
+                min-w-0
+                flex-col
+                gap-3
+
+                sm:flex-row
+                sm:items-start
+                sm:justify-between
+              "
+            >
+              <div className="min-w-0">
+                <p
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.12em]
+                    text-blue-700
+                  "
+                >
+                  Submission
+                </p>
+
+                <h2
+                  className="
+                    mt-1
+                    font-semibold
+                    text-slate-950
+                  "
+                >
                   Submission Status
                 </h2>
 
-                <p className="mt-1 text-sm text-slate-500">
+                <p
+                  className="
+                    mt-1
+                    break-words
+                    text-sm
+                    leading-6
+                    text-slate-500
+                  "
+                >
                   Submitted{" "}
-                  {new Date(
-                    submission.submittedAt
-                  ).toLocaleString()}
+                  {submittedAt ||
+                    "recently"}
                 </p>
               </div>
 
               <span
-                className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${
-                  isReviewed
-                    ? "bg-green-100 text-green-700"
-                    : "bg-amber-100 text-amber-700"
-                }`}
+                className={`
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  rounded-full
+                  px-3
+                  py-1
+                  text-xs
+                  font-bold
+
+                  ${
+                    isReviewed
+                      ? "bg-green-100 text-green-700"
+                      : "bg-amber-100 text-amber-700"
+                  }
+                `}
               >
-                {submission.status}
+                {formatStatus(
+                  submission.status
+                )}
               </span>
             </div>
 
-            {submission.reviewedAt && (
-              <p className="mt-4 text-sm text-slate-500">
-                Reviewed{" "}
-                {new Date(
-                  submission.reviewedAt
-                ).toLocaleString()}
-              </p>
+            {reviewedAt && (
+              <div
+                className="
+                  mt-4
+                  flex
+                  min-w-0
+                  items-start
+                  gap-2
+                  border-t
+                  border-slate-100
+                  pt-4
+                  text-sm
+                  leading-6
+                  text-slate-500
+                "
+              >
+                <CheckCircle2
+                  size={15}
+                  className="
+                    mt-0.5
+                    shrink-0
+                  "
+                  aria-hidden="true"
+                />
+
+                <span className="break-words">
+                  Reviewed {reviewedAt}
+                </span>
+              </div>
             )}
           </section>
         )}
@@ -527,17 +868,86 @@ export default function StudentTaskPage() {
             INSTRUCTOR FEEDBACK
         ================================================= */}
 
-        {isReviewed && (
-          <section className="mt-6 rounded-xl border border-green-200 bg-green-50 p-6">
-            <p className="text-xs font-bold uppercase tracking-wide text-green-700">
-              Instructor Feedback
-            </p>
+        {isReviewed && submission && (
+          <section
+            className="
+              mt-6
+              min-w-0
+              rounded-2xl
+              border
+              border-green-200
+              bg-green-50
+              p-4
 
-            <h2 className="mt-2 text-lg font-semibold text-slate-950">
-              Your work has been reviewed
-            </h2>
+              sm:p-6
+            "
+          >
+            <div
+              className="
+                flex
+                min-w-0
+                items-start
+                gap-3
+              "
+            >
+              <div
+                className="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-green-100
+                  text-green-700
+                "
+              >
+                <CheckCircle2
+                  size={18}
+                  aria-hidden="true"
+                />
+              </div>
 
-            <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-slate-700">
+              <div className="min-w-0">
+                <p
+                  className="
+                    text-xs
+                    font-bold
+                    uppercase
+                    tracking-wide
+                    text-green-700
+                  "
+                >
+                  Instructor Feedback
+                </p>
+
+                <h2
+                  className="
+                    mt-2
+                    break-words
+                    text-lg
+                    font-semibold
+                    text-slate-950
+                  "
+                >
+                  Your work has been reviewed
+                </h2>
+              </div>
+            </div>
+
+            <p
+              className="
+                mt-4
+                whitespace-pre-wrap
+                break-words
+                text-sm
+                leading-7
+                text-slate-700
+
+                [overflow-wrap:anywhere]
+              "
+            >
               {submission.feedback ||
                 "No feedback was provided."}
             </p>
@@ -548,93 +958,474 @@ export default function StudentTaskPage() {
             SUBMISSION FORM
         ================================================= */}
 
-        <section className="mt-6 rounded-xl border border-slate-200 bg-white p-6">
-          <h2 className="text-xl font-semibold text-slate-950">
-            {submission
-              ? isReviewed
-                ? "Your Submission"
-                : "Update Submission"
-              : "Submit Task"}
-          </h2>
+        <section
+          className="
+            mt-6
+            min-w-0
+            rounded-2xl
+            border
+            border-slate-200
+            bg-white
+            p-4
 
-          <p className="mt-1 text-sm text-slate-500">
-            {isReviewed
-              ? "Your submission has been reviewed and is now locked."
-              : "You can provide written work, a resource link, or both."}
-          </p>
+            sm:p-6
+          "
+        >
+          <div
+            className="
+              flex
+              min-w-0
+              items-start
+              gap-3
+            "
+          >
+            <div
+              className={`
+                flex
+                h-10
+                w-10
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+
+                ${
+                  isReviewed
+                    ? "bg-slate-100 text-slate-500"
+                    : "bg-blue-50 text-blue-700"
+                }
+              `}
+            >
+              {isReviewed ? (
+                <LockKeyhole
+                  size={18}
+                  aria-hidden="true"
+                />
+              ) : (
+                <Send
+                  size={18}
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+
+            <div className="min-w-0">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-semibold
+                  text-slate-950
+
+                  sm:text-xl
+                "
+              >
+                {submission
+                  ? isReviewed
+                    ? "Your Submission"
+                    : "Update Submission"
+                  : "Submit Task"}
+              </h2>
+
+              <p
+                className="
+                  mt-1
+                  break-words
+                  text-sm
+                  leading-6
+                  text-slate-500
+                "
+              >
+                {isReviewed
+                  ? "Your submission has been reviewed and is now locked."
+                  : "You can provide written work, a resource link, or both."}
+              </p>
+            </div>
+          </div>
 
           <form
             onSubmit={handleSubmit}
-            className="mt-6 space-y-5"
+            className="
+              mt-6
+              min-w-0
+              space-y-5
+            "
           >
-            <div>
+            {/* CONTENT */}
+
+            <div className="min-w-0">
               <label
                 htmlFor="submission-content"
-                className="text-sm font-medium text-slate-700"
+                className="
+                  text-sm
+                  font-medium
+                  text-slate-700
+                "
               >
                 Submission
               </label>
 
               <textarea
                 id="submission-content"
+                name="submissionContent"
                 value={content}
-                onChange={(event) =>
+                onChange={(event) => {
                   setContent(
                     event.target.value
-                  )
-                }
+                  );
+
+                  if (error) {
+                    setError("");
+                  }
+                }}
                 disabled={isReviewed}
                 rows={8}
                 placeholder="Write your answer, explanation, notes, or submission here."
-                className="mt-2 w-full resize-none rounded-lg border border-slate-300 px-4 py-3 text-slate-950 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500"
+                className="
+                  mt-2
+                  min-h-44
+                  w-full
+                  min-w-0
+                  resize-y
+                  rounded-xl
+                  border
+                  border-slate-300
+                  bg-white
+                  px-4
+                  py-3
+                  text-sm
+                  leading-6
+                  text-slate-950
+                  outline-none
+                  transition
+
+                  placeholder:text-slate-400
+
+                  focus:border-blue-500
+                  focus:ring-2
+                  focus:ring-blue-100
+
+                  disabled:cursor-not-allowed
+                  disabled:bg-slate-100
+                  disabled:text-slate-500
+                "
               />
             </div>
 
-            <div>
+            {/* RESOURCE */}
+
+            <div className="min-w-0">
               <label
                 htmlFor="resource-url"
-                className="text-sm font-medium text-slate-700"
+                className="
+                  text-sm
+                  font-medium
+                  text-slate-700
+                "
               >
                 Resource Link
               </label>
 
               <input
                 id="resource-url"
+                name="resourceUrl"
                 type="url"
+                inputMode="url"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
                 value={resourceUrl}
-                onChange={(event) =>
+                onChange={(event) => {
                   setResourceUrl(
                     event.target.value
-                  )
-                }
+                  );
+
+                  if (error) {
+                    setError("");
+                  }
+                }}
                 disabled={isReviewed}
                 placeholder="https://github.com/username/project"
-                className="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-950 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500"
+                className="
+                  mt-2
+                  min-h-12
+                  w-full
+                  min-w-0
+                  rounded-xl
+                  border
+                  border-slate-300
+                  bg-white
+                  px-4
+                  text-sm
+                  text-slate-950
+                  outline-none
+                  transition
+
+                  placeholder:text-slate-400
+
+                  focus:border-blue-500
+                  focus:ring-2
+                  focus:ring-blue-100
+
+                  disabled:cursor-not-allowed
+                  disabled:bg-slate-100
+                  disabled:text-slate-500
+                "
               />
 
-              <p className="mt-2 text-xs text-slate-400">
+              <p
+                className="
+                  mt-2
+                  break-words
+                  text-xs
+                  leading-5
+                  text-slate-400
+                "
+              >
                 Example: GitHub repository,
                 Google Drive file, deployed
                 project, or documentation.
               </p>
+
+              {isReviewed &&
+                resourceUrl && (
+                  <a
+                    href={resourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="
+                      mt-3
+                      inline-flex
+                      min-h-10
+                      max-w-full
+                      items-center
+                      gap-2
+                      text-sm
+                      font-semibold
+                      text-blue-700
+
+                      hover:text-blue-800
+
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-blue-200
+                      focus-visible:ring-offset-2
+                    "
+                  >
+                    <span className="break-all">
+                      Open submitted resource
+                    </span>
+
+                    <ExternalLink
+                      size={14}
+                      className="shrink-0"
+                      aria-hidden="true"
+                    />
+
+                    <span className="sr-only">
+                      Opens in a new tab
+                    </span>
+                  </a>
+                )}
             </div>
 
+            {/* ACTION */}
+
             {!isReviewed && (
-              <button
-                type="submit"
-                disabled={saving}
-                className="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              <div
+                className="
+                  border-t
+                  border-slate-100
+                  pt-5
+                "
               >
-                {saving
-                  ? "Saving..."
-                  : submission
-                    ? "Update Submission"
-                    : "Submit Task"}
-              </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="
+                    inline-flex
+                    min-h-12
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    bg-blue-600
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-white
+                    transition
+
+                    hover:bg-blue-700
+
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-blue-300
+                    focus-visible:ring-offset-2
+
+                    disabled:cursor-not-allowed
+                    disabled:opacity-50
+
+                    sm:w-auto
+                  "
+                >
+                  {saving ? (
+                    <>
+                      <LoaderCircle
+                        size={16}
+                        className="
+                          shrink-0
+                          animate-spin
+                        "
+                        aria-hidden="true"
+                      />
+
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Send
+                        size={16}
+                        className="shrink-0"
+                        aria-hidden="true"
+                      />
+
+                      {submission
+                        ? "Update Submission"
+                        : "Submit Task"}
+                    </>
+                  )}
+                </button>
+              </div>
             )}
           </form>
         </section>
       </div>
     </main>
   );
+}
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+function BackToBatch({
+  batchId,
+}: {
+  batchId: string;
+}) {
+  return (
+    <Link
+      href={`/student/batches/${batchId}`}
+      className="
+        inline-flex
+        min-h-10
+        items-center
+        gap-2
+        rounded-lg
+        text-sm
+        font-semibold
+        text-blue-700
+        transition-colors
+
+        hover:text-blue-800
+
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-blue-200
+        focus-visible:ring-offset-2
+      "
+    >
+      <ArrowLeft
+        size={15}
+        aria-hidden="true"
+      />
+
+      Back to batch
+    </Link>
+  );
+}
+
+/* =========================================================
+   TASK INFO
+========================================================= */
+
+function TaskInfo({
+  label,
+  value,
+  icon: Icon,
+}: {
+  label: string;
+  value: string;
+  icon: typeof Clock3;
+}) {
+  return (
+    <div
+      className="
+        min-w-0
+        rounded-xl
+        bg-slate-50
+        p-4
+      "
+    >
+      <div
+        className="
+          flex
+          items-center
+          gap-2
+          text-slate-400
+        "
+      >
+        <Icon
+          size={14}
+          className="shrink-0"
+          aria-hidden="true"
+        />
+
+        <p
+          className="
+            text-xs
+            font-semibold
+            uppercase
+            tracking-wide
+          "
+        >
+          {label}
+        </p>
+      </div>
+
+      <p
+        className="
+          mt-2
+          break-words
+          text-sm
+          font-semibold
+          leading-6
+          text-slate-900
+
+          [overflow-wrap:anywhere]
+        "
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+/* =========================================================
+   FORMAT STATUS
+========================================================= */
+
+function formatStatus(
+  value: string
+) {
+  return value
+    .split("_")
+    .map(
+      (word) =>
+        word.charAt(0) +
+        word.slice(1).toLowerCase()
+    )
+    .join(" ");
 }

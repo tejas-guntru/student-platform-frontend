@@ -13,10 +13,23 @@ export default function StudentLayout({
 }>) {
   return (
     <StudentAuthGuard>
-      <div className="flex min-h-screen flex-col bg-[#F7F9FC]">
+      <div
+        className="
+          flex
+          min-h-screen
+          min-w-0
+          flex-col
+          bg-[#F7F9FC]
+        "
+      >
         <StudentNavbar />
 
-        <main className="flex-1">
+        <main
+          className="
+            min-w-0
+            flex-1
+          "
+        >
           {children}
         </main>
 
