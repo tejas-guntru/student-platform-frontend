@@ -30,27 +30,34 @@ export default function PendingJoinRequests({
     <section
       id="join-requests"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
 
         sm:p-6
       "
     >
+      {/* HEADER */}
+
       <div
         className="
           flex
+          min-w-0
           items-start
           justify-between
-          gap-4
+          gap-3
+
+          sm:gap-4
         "
       >
         <div
           className="
             flex
+            min-w-0
             items-start
             gap-3
           "
@@ -71,12 +78,15 @@ export default function PendingJoinRequests({
             <UserPlus size={18} />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2
               className="
-                text-lg
+                break-words
+                text-base
                 font-bold
                 text-slate-950
+
+                sm:text-lg
               "
             >
               Pending Requests
@@ -85,7 +95,9 @@ export default function PendingJoinRequests({
             <p
               className="
                 mt-1
+                break-words
                 text-sm
+                leading-5
                 text-slate-500
               "
             >
@@ -106,10 +118,13 @@ export default function PendingJoinRequests({
             font-bold
             text-amber-700
           "
+          aria-label={`${requests.length} pending requests`}
         >
           {requests.length}
         </span>
       </div>
+
+      {/* EMPTY STATE */}
 
       {requests.length === 0 ? (
         <div
@@ -120,9 +135,12 @@ export default function PendingJoinRequests({
             border-dashed
             border-slate-200
             bg-slate-50
-            px-5
-            py-8
+            px-4
+            py-7
             text-center
+
+            sm:px-5
+            sm:py-8
           "
         >
           <div
@@ -156,6 +174,7 @@ export default function PendingJoinRequests({
             className="
               mt-1
               text-xs
+              leading-5
               text-slate-400
             "
           >
@@ -164,9 +183,12 @@ export default function PendingJoinRequests({
           </p>
         </div>
       ) : (
+        /* REQUEST LIST */
+
         <div
           className="
             mt-5
+            min-w-0
             divide-y
             divide-slate-100
           "
@@ -183,6 +205,7 @@ export default function PendingJoinRequests({
                     request.requestId
                   }
                   className="
+                    min-w-0
                     py-4
                     first:pt-0
                     last:pb-0
@@ -191,6 +214,7 @@ export default function PendingJoinRequests({
                   <div
                     className="
                       flex
+                      min-w-0
                       flex-col
                       gap-4
 
@@ -199,12 +223,16 @@ export default function PendingJoinRequests({
                       sm:justify-between
                     "
                   >
+                    {/* STUDENT */}
+
                     <div
                       className="
                         flex
                         min-w-0
-                        items-center
+                        items-start
                         gap-3
+
+                        sm:items-center
                       "
                     >
                       <StudentAvatar
@@ -213,10 +241,15 @@ export default function PendingJoinRequests({
                         }
                       />
 
-                      <div className="min-w-0">
+                      <div
+                        className="
+                          min-w-0
+                          flex-1
+                        "
+                      >
                         <p
                           className="
-                            truncate
+                            break-words
                             text-sm
                             font-bold
                             text-slate-950
@@ -230,10 +263,14 @@ export default function PendingJoinRequests({
                         <p
                           className="
                             mt-0.5
+                            max-w-full
                             truncate
                             text-xs
                             text-slate-500
                           "
+                          title={
+                            request.studentEmail
+                          }
                         >
                           {
                             request.studentEmail
@@ -244,29 +281,43 @@ export default function PendingJoinRequests({
                           className="
                             mt-1.5
                             flex
-                            items-center
+                            min-w-0
+                            items-start
                             gap-1.5
                             text-[11px]
+                            leading-4
                             text-slate-400
                           "
                         >
                           <Clock3
                             size={11}
+                            className="
+                              mt-0.5
+                              shrink-0
+                            "
                           />
 
-                          Requested{" "}
-                          {new Date(
-                            request.requestedAt
-                          ).toLocaleString()}
+                          <span className="break-words">
+                            Requested{" "}
+                            {new Date(
+                              request.requestedAt
+                            ).toLocaleString()}
+                          </span>
                         </div>
                       </div>
                     </div>
 
+                    {/* ACTIONS */}
+
                     <div
                       className="
                         flex
-                        shrink-0
+                        w-full
+                        min-w-0
                         gap-2
+
+                        sm:w-auto
+                        sm:shrink-0
                       "
                     >
                       <button
@@ -281,6 +332,8 @@ export default function PendingJoinRequests({
                         }
                         className="
                           inline-flex
+                          min-h-10
+                          min-w-0
                           flex-1
                           items-center
                           justify-center
@@ -288,7 +341,7 @@ export default function PendingJoinRequests({
                           rounded-lg
                           border
                           border-red-200
-                          px-3.5
+                          px-3
                           py-2
                           text-xs
                           font-semibold
@@ -297,13 +350,22 @@ export default function PendingJoinRequests({
 
                           hover:bg-red-50
 
+                          focus-visible:outline-none
+                          focus-visible:ring-2
+                          focus-visible:ring-red-200
+                          focus-visible:ring-offset-2
+
                           disabled:cursor-not-allowed
                           disabled:opacity-50
 
                           sm:flex-none
+                          sm:px-3.5
                         "
                       >
-                        <X size={14} />
+                        <X
+                          size={14}
+                          className="shrink-0"
+                        />
 
                         Reject
                       </button>
@@ -320,13 +382,15 @@ export default function PendingJoinRequests({
                         }
                         className="
                           inline-flex
+                          min-h-10
+                          min-w-0
                           flex-1
                           items-center
                           justify-center
                           gap-1.5
                           rounded-lg
                           bg-[#1256AF]
-                          px-3.5
+                          px-3
                           py-2
                           text-xs
                           font-semibold
@@ -335,14 +399,21 @@ export default function PendingJoinRequests({
 
                           hover:bg-[#0F4B99]
 
+                          focus-visible:outline-none
+                          focus-visible:ring-2
+                          focus-visible:ring-[#1256AF]/30
+                          focus-visible:ring-offset-2
+
                           disabled:cursor-not-allowed
                           disabled:opacity-50
 
                           sm:flex-none
+                          sm:px-3.5
                         "
                       >
                         <Check
                           size={14}
+                          className="shrink-0"
                         />
 
                         {processing
@@ -392,6 +463,7 @@ function StudentAvatar({
         font-bold
         text-slate-600
       "
+      aria-hidden="true"
     >
       {initials || "ST"}
     </div>

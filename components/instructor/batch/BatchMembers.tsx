@@ -22,27 +22,34 @@ export default function BatchMembers({
     <section
       id="students"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
 
         sm:p-6
       "
     >
+      {/* HEADER */}
+
       <div
         className="
           flex
+          min-w-0
           items-start
           justify-between
-          gap-4
+          gap-3
+
+          sm:gap-4
         "
       >
         <div
           className="
             flex
+            min-w-0
             items-start
             gap-3
           "
@@ -63,12 +70,15 @@ export default function BatchMembers({
             <UsersRound size={18} />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2
               className="
-                text-lg
+                break-words
+                text-base
                 font-bold
                 text-slate-950
+
+                sm:text-lg
               "
             >
               Students
@@ -77,7 +87,9 @@ export default function BatchMembers({
             <p
               className="
                 mt-1
+                break-words
                 text-sm
+                leading-5
                 text-slate-500
               "
             >
@@ -98,10 +110,13 @@ export default function BatchMembers({
             font-bold
             text-[#1256AF]
           "
+          aria-label={`${members.length} students`}
         >
           {members.length}
         </span>
       </div>
+
+      {/* EMPTY STATE */}
 
       {members.length === 0 ? (
         <div
@@ -112,9 +127,12 @@ export default function BatchMembers({
             border-dashed
             border-slate-200
             bg-slate-50
-            px-5
-            py-8
+            px-4
+            py-7
             text-center
+
+            sm:px-5
+            sm:py-8
           "
         >
           <div
@@ -146,7 +164,9 @@ export default function BatchMembers({
 
           <p
             className="
+              mx-auto
               mt-1
+              max-w-md
               text-xs
               leading-5
               text-slate-400
@@ -158,9 +178,12 @@ export default function BatchMembers({
           </p>
         </div>
       ) : (
+        /* STUDENT LIST */
+
         <div
           className="
             mt-5
+            min-w-0
             divide-y
             divide-slate-100
           "
@@ -175,20 +198,35 @@ export default function BatchMembers({
                 className="
                   group
                   flex
+                  min-w-0
                   items-center
                   justify-between
-                  gap-4
+                  gap-3
+                  rounded-lg
                   py-4
+
                   first:pt-0
                   last:pb-0
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#1256AF]/30
+                  focus-visible:ring-offset-2
+
+                  sm:gap-4
                 "
               >
+                {/* STUDENT INFO */}
+
                 <div
                   className="
                     flex
                     min-w-0
-                    items-center
+                    flex-1
+                    items-start
                     gap-3
+
+                    sm:items-center
                   "
                 >
                   <StudentAvatar
@@ -197,10 +235,15 @@ export default function BatchMembers({
                     }
                   />
 
-                  <div className="min-w-0">
+                  <div
+                    className="
+                      min-w-0
+                      flex-1
+                    "
+                  >
                     <p
                       className="
-                        truncate
+                        break-words
                         text-sm
                         font-bold
                         text-slate-950
@@ -214,10 +257,14 @@ export default function BatchMembers({
                     <p
                       className="
                         mt-0.5
+                        max-w-full
                         truncate
                         text-xs
                         text-slate-500
                       "
+                      title={
+                        member.studentEmail
+                      }
                     >
                       {
                         member.studentEmail
@@ -227,7 +274,9 @@ export default function BatchMembers({
                     <p
                       className="
                         mt-1.5
+                        break-words
                         text-[11px]
+                        leading-4
                         text-slate-400
                       "
                     >
@@ -238,6 +287,8 @@ export default function BatchMembers({
                     </p>
                   </div>
                 </div>
+
+                {/* VIEW ACTION */}
 
                 <div
                   className="
@@ -253,21 +304,35 @@ export default function BatchMembers({
                   <span
                     className="
                       hidden
-
                       sm:inline
                     "
                   >
                     View Student
                   </span>
 
-                  <ArrowRight
-                    size={15}
+                  <span
                     className="
-                      transition-transform
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-lg
+                      bg-blue-50
+                      transition-colors
 
-                      group-hover:translate-x-1
+                      group-hover:bg-blue-100
                     "
-                  />
+                  >
+                    <ArrowRight
+                      size={15}
+                      className="
+                        transition-transform
+                        group-hover:translate-x-0.5
+                      "
+                    />
+                  </span>
                 </div>
               </Link>
             )
@@ -309,6 +374,7 @@ function StudentAvatar({
         font-bold
         text-[#1256AF]
       "
+      aria-hidden="true"
     >
       {initials || "ST"}
     </div>

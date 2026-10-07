@@ -72,32 +72,114 @@ export default function InstructorAssessmentQuestionList({
   onAuthFailure,
 }: InstructorAssessmentQuestionListProps) {
   return (
-    <section className="mt-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-semibold text-slate-950">
+    <section
+      className="
+        mt-8
+        min-w-0
+      "
+    >
+      {/* HEADER */}
+
+      <div
+        className="
+          flex
+          min-w-0
+          items-start
+          justify-between
+          gap-3
+
+          sm:gap-4
+        "
+      >
+        <div
+          className="
+            min-w-0
+            flex-1
+          "
+        >
+          <h2
+            className="
+              break-words
+              text-lg
+              font-semibold
+              text-slate-950
+
+              sm:text-xl
+            "
+          >
             Questions
           </h2>
 
-          <p className="mt-1 text-sm text-slate-500">
-            Configure assessment
-            questions and their answer
-            rules.
+          <p
+            className="
+              mt-1
+              max-w-2xl
+              break-words
+              text-sm
+              leading-6
+              text-slate-500
+            "
+          >
+            Configure assessment questions
+            and their answer rules.
           </p>
         </div>
 
-        <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+        <span
+          className="
+            shrink-0
+            rounded-full
+            bg-blue-100
+            px-3
+            py-1
+            text-sm
+            font-semibold
+            text-blue-800
+          "
+          aria-label={`${questions.length} questions`}
+        >
           {questions.length}
         </span>
       </div>
 
+      {/* QUESTIONS */}
+
       {questions.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-          No questions have been added
-          yet.
+        <div
+          className="
+            mt-4
+            flex
+            min-h-[150px]
+            min-w-0
+            items-center
+            justify-center
+            rounded-xl
+            border
+            border-dashed
+            border-slate-300
+            bg-white
+            p-5
+            text-center
+            text-sm
+            leading-6
+            text-slate-500
+
+            sm:min-h-[170px]
+            sm:p-8
+          "
+        >
+          No questions have been added yet.
         </div>
       ) : (
-        <div className="mt-4 space-y-5">
+        <div
+          className="
+            mt-4
+            min-w-0
+            space-y-4
+
+            sm:space-y-5
+          "
+        >
           {questions.map(
             (question, index) => (
               <InstructorAssessmentQuestionCard

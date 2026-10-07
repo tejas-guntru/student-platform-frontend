@@ -10,9 +10,9 @@ import {
   useState,
 } from "react";
 
-import AssessmentQuestionForm from "@/components/assessments/instructor/AssessmentQuestionForm";
-import InstructorAssessmentHeader from "@/components/assessments/instructor/InstructorAssessmentHeader";
-import InstructorAssessmentQuestionList from "@/components/assessments/instructor/InstructorAssessmentQuestionList";
+import AssessmentQuestionForm from "@/components/instructor/assessment/AssessmentQuestionForm";
+import InstructorAssessmentHeader from "@/components/instructor/assessment/InstructorAssessmentHeader";
+import InstructorAssessmentQuestionList from "@/components/instructor/assessment/InstructorAssessmentQuestionList";
 
 import {
   createAssessmentQuestion,

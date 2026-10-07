@@ -85,6 +85,46 @@ export default function InstructorCodingQuestion({
       null
     );
 
+  const handleRequestError =
+    useCallback(
+      (
+        error: unknown,
+        fallback: string
+      ) => {
+        console.error(
+          "CODING ASSESSMENT ERROR:",
+          error
+        );
+
+        if (
+          axios.isAxiosError(error)
+        ) {
+          if (
+            error.response?.status ===
+              401 ||
+            error.response?.status ===
+              403
+          ) {
+            onAuthFailure();
+            return;
+          }
+
+          onError(
+            error.response?.data
+              ?.message || fallback
+          );
+
+          return;
+        }
+
+        onError(fallback);
+      },
+      [
+        onAuthFailure,
+        onError,
+      ]
+    );
+
   const loadCoding =
     useCallback(async () => {
       setLoading(true);
@@ -147,7 +187,7 @@ export default function InstructorCodingQuestion({
     ]);
 
   useEffect(() => {
-    loadCoding();
+    void loadCoding();
   }, [loadCoding]);
 
   const handleSaveConfiguration =
@@ -309,50 +349,35 @@ export default function InstructorCodingQuestion({
       }
     };
 
-  const handleRequestError = (
-    error: unknown,
-    fallback: string
-  ) => {
-    console.error(
-      "CODING ASSESSMENT ERROR:",
-      error
-    );
-
-    if (
-      axios.isAxiosError(error)
-    ) {
-      if (
-        error.response?.status ===
-          401 ||
-        error.response?.status ===
-          403
-      ) {
-        onAuthFailure();
-        return;
-      }
-
-      onError(
-        error.response?.data
-          ?.message || fallback
-      );
-
-      return;
-    }
-
-    onError(fallback);
-  };
-
   if (loading) {
     return (
-      <div className="mt-5 rounded-lg bg-slate-50 p-4 text-sm text-slate-500">
-        Loading coding
-        configuration...
+      <div
+        className="
+          mt-5
+          min-w-0
+          rounded-lg
+          bg-slate-50
+          p-4
+          text-sm
+          leading-6
+          text-slate-500
+        "
+        role="status"
+      >
+        Loading coding configuration...
       </div>
     );
   }
 
   return (
-    <div className="mt-5">
+    <div
+      className="
+        mt-5
+        min-w-0
+      "
+    >
+      {/* CODING CONFIGURATION */}
+
       <CodingQuestionEditor
         coding={coding}
         disabled={disabled}
@@ -364,56 +389,128 @@ export default function InstructorCodingQuestion({
         }
       />
 
+      {/* TEST CASE MANAGEMENT */}
+
       {coding && (
-        <div className="mt-5 rounded-xl border border-slate-200 p-5">
-          <div>
-            <h4 className="font-semibold text-slate-950">
-              Test Cases
-            </h4>
+        <section
+          className="
+            mt-5
+            min-w-0
+            overflow-hidden
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            p-4
 
-            <p className="mt-1 text-sm text-slate-500">
-              Sample tests are visible
-              to students. Hidden tests
-              are used only during final
-              code submission.
-            </p>
-          </div>
+            sm:p-5
+          "
+        >
+          <div className="min-w-0">
+            <div
+              className="
+                flex
+                min-w-0
+                flex-col
+                gap-2
 
-          <CodingTestCaseList
-            testCases={
-              coding.testCases
-            }
-            disabled={disabled}
-            deletingId={
-              deletingTestCaseId
-            }
-            onEdit={
-              setEditingTestCase
-            }
-            onDelete={
-              handleDeleteTestCase
-            }
-          />
+                sm:flex-row
+                sm:items-start
+                sm:justify-between
+                sm:gap-4
+              "
+            >
+              <div
+                className="
+                  min-w-0
+                  flex-1
+                "
+              >
+                <h4
+                  className="
+                    break-words
+                    font-semibold
+                    text-slate-950
+                  "
+                >
+                  Test Cases
+                </h4>
 
-          {!disabled && (
-            <CodingTestCaseForm
-              editing={
-                editingTestCase
+                <p
+                  className="
+                    mt-1
+                    max-w-2xl
+                    break-words
+                    text-sm
+                    leading-6
+                    text-slate-500
+                  "
+                >
+                  Sample tests are visible
+                  to students. Hidden tests
+                  are used only during final
+                  code submission.
+                </p>
+              </div>
+
+              <span
+                className="
+                  w-fit
+                  shrink-0
+                  rounded-full
+                  bg-slate-100
+                  px-2.5
+                  py-1
+                  text-xs
+                  font-semibold
+                  text-slate-600
+                "
+                aria-label={`${coding.testCases.length} test cases`}
+              >
+                {coding.testCases.length}{" "}
+                {coding.testCases.length ===
+                1
+                  ? "test"
+                  : "tests"}
+              </span>
+            </div>
+
+            <CodingTestCaseList
+              testCases={
+                coding.testCases
               }
-              saving={
-                savingTestCase
+              disabled={disabled}
+              deletingId={
+                deletingTestCaseId
               }
-              onSave={
-                handleSaveTestCase
+              onEdit={
+                setEditingTestCase
               }
-              onCancelEdit={() =>
-                setEditingTestCase(
-                  null
-                )
+              onDelete={
+                handleDeleteTestCase
               }
             />
-          )}
-        </div>
+
+            {!disabled && (
+              <CodingTestCaseForm
+                editing={
+                  editingTestCase
+                }
+                saving={
+                  savingTestCase
+                }
+                onSave={
+                  handleSaveTestCase
+                }
+                onCancelEdit={() =>
+                  setEditingTestCase(
+                    null
+                  )
+                }
+              />
+            )}
+          </div>
+        </section>
       )}
     </div>
   );

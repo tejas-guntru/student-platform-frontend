@@ -234,9 +234,7 @@ export default function InstructorNavbar() {
           justify-between
           gap-4
           px-4
-
           sm:px-6
-
           lg:px-8
         "
       >
@@ -261,7 +259,6 @@ export default function InstructorNavbar() {
               h-8
               w-auto
               object-contain
-
               sm:h-9
             "
           />
@@ -275,7 +272,6 @@ export default function InstructorNavbar() {
             hidden
             items-center
             gap-1
-
             md:flex
           "
         >
@@ -295,14 +291,13 @@ export default function InstructorNavbar() {
           )}
         </nav>
 
-        {/* ACCOUNT */}
+        {/* DESKTOP ACCOUNT */}
 
         <div
           ref={accountRef}
           className="
             relative
             hidden
-
             md:block
           "
         >
@@ -324,6 +319,10 @@ export default function InstructorNavbar() {
               px-1.5
               pr-2.5
               transition-colors
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/30
+              focus-visible:ring-offset-2
 
               ${
                 accountOpen ||
@@ -339,6 +338,7 @@ export default function InstructorNavbar() {
                     `
               }
             `}
+            aria-haspopup="menu"
             aria-expanded={
               accountOpen
             }
@@ -348,6 +348,7 @@ export default function InstructorNavbar() {
                 flex
                 h-8
                 w-8
+                shrink-0
                 items-center
                 justify-center
                 rounded-lg
@@ -365,7 +366,6 @@ export default function InstructorNavbar() {
                 hidden
                 max-w-[135px]
                 text-left
-
                 lg:block
               "
             >
@@ -420,7 +420,7 @@ export default function InstructorNavbar() {
           )}
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
 
         <button
           type="button"
@@ -441,7 +441,12 @@ export default function InstructorNavbar() {
             border-slate-200
             bg-white
             text-slate-700
-
+            transition-colors
+            hover:bg-slate-50
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/30
+            focus-visible:ring-offset-2
             md:hidden
           "
           aria-label={
@@ -452,6 +457,7 @@ export default function InstructorNavbar() {
           aria-expanded={
             mobileOpen
           }
+          aria-controls="instructor-mobile-navigation"
         >
           {mobileOpen ? (
             <X size={19} />
@@ -464,24 +470,25 @@ export default function InstructorNavbar() {
       {/* MOBILE NAV */}
 
       <div
+        id="instructor-mobile-navigation"
         className={`
-          overflow-hidden
           bg-white
           transition-all
           duration-300
-
           md:hidden
 
           ${
             mobileOpen
               ? `
-                  max-h-[650px]
+                  max-h-[calc(100dvh-68px)]
+                  overflow-y-auto
                   border-t
                   border-slate-200
                   opacity-100
                 `
               : `
                   max-h-0
+                  overflow-hidden
                   opacity-0
                 `
           }
@@ -493,10 +500,11 @@ export default function InstructorNavbar() {
             max-w-7xl
             px-4
             py-4
-
             sm:px-6
           "
         >
+          {/* WORKSPACE */}
+
           <p
             className="
               px-3
@@ -532,7 +540,7 @@ export default function InstructorNavbar() {
             )}
           </div>
 
-          {/* MOBILE ACCOUNT */}
+          {/* ACCOUNT DIVIDER */}
 
           <div
             className="
@@ -554,6 +562,8 @@ export default function InstructorNavbar() {
           >
             Account
           </p>
+
+          {/* ACCOUNT SUMMARY */}
 
           <div
             className="
@@ -625,10 +635,13 @@ export default function InstructorNavbar() {
               gap-3
               rounded-xl
               px-3
-              py-2.5
+              py-3
               text-sm
               font-semibold
               transition-colors
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1256AF]/30
 
               ${
                 profileActive
@@ -687,13 +700,15 @@ export default function InstructorNavbar() {
               gap-3
               rounded-xl
               px-3
-              py-2.5
+              py-3
               text-sm
               font-semibold
               text-red-600
               transition-colors
-
               hover:bg-red-50
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-red-200
             "
           >
             <span
@@ -747,6 +762,10 @@ function DesktopNavLink({
         text-sm
         font-semibold
         transition-colors
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/30
+        focus-visible:ring-offset-2
 
         ${
           active
@@ -803,6 +822,7 @@ function AccountDropdown({
 
   return (
     <div
+      role="menu"
       className="
         absolute
         right-0
@@ -882,6 +902,7 @@ function AccountDropdown({
       >
         <Link
           href="/instructor/profile"
+          role="menuitem"
           className={`
             flex
             items-center
@@ -892,6 +913,9 @@ function AccountDropdown({
             text-sm
             font-semibold
             transition-colors
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-[#1256AF]/30
 
             ${
               profileActive
@@ -965,6 +989,7 @@ function AccountDropdown({
       >
         <button
           type="button"
+          role="menuitem"
           onClick={onLogout}
           className="
             flex
@@ -979,8 +1004,10 @@ function AccountDropdown({
             font-semibold
             text-red-600
             transition-colors
-
             hover:bg-red-50
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-red-200
           "
         >
           <span
@@ -1031,10 +1058,13 @@ function MobileNavLink({
         gap-3
         rounded-xl
         px-3
-        py-2.5
+        py-3
         text-sm
         font-semibold
         transition-colors
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/30
 
         ${
           active

@@ -27,18 +27,38 @@ export default function BatchCourses({
     <section
       id="courses"
       className="
+        min-w-0
         scroll-mt-24
         rounded-2xl
         border
         border-slate-200
         bg-white
-        p-5
+        p-4
 
         sm:p-6
       "
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
+      {/* HEADER */}
+
+      <div
+        className="
+          flex
+          min-w-0
+          items-start
+          justify-between
+          gap-3
+
+          sm:gap-4
+        "
+      >
+        <div
+          className="
+            flex
+            min-w-0
+            items-start
+            gap-3
+          "
+        >
           <div
             className="
               flex
@@ -55,12 +75,29 @@ export default function BatchCourses({
             <BookOpen size={18} />
           </div>
 
-          <div>
-            <h2 className="text-lg font-bold text-slate-950">
+          <div className="min-w-0">
+            <h2
+              className="
+                break-words
+                text-base
+                font-bold
+                text-slate-950
+
+                sm:text-lg
+              "
+            >
               Courses
             </h2>
 
-            <p className="mt-1 text-sm text-slate-500">
+            <p
+              className="
+                mt-1
+                break-words
+                text-sm
+                leading-5
+                text-slate-500
+              "
+            >
               Learning material assigned to
               this batch.
             </p>
@@ -69,6 +106,7 @@ export default function BatchCourses({
 
         <span
           className="
+            shrink-0
             rounded-full
             bg-emerald-50
             px-2.5
@@ -77,25 +115,36 @@ export default function BatchCourses({
             font-bold
             text-emerald-700
           "
+          aria-label={`${assignments.length} assigned courses`}
         >
           {assignments.length}
         </span>
       </div>
 
+      {/* CONTENT */}
+
       <div
         className="
           mt-6
           grid
+          min-w-0
           gap-6
 
-          xl:grid-cols-[1.15fr_0.85fr]
+          xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]
         "
       >
-        <div>
+        {/* ASSIGNED COURSES */}
+
+        <div className="min-w-0">
           {assignments.length === 0 ? (
             <EmptyCourses />
           ) : (
-            <div className="space-y-3">
+            <div
+              className="
+                min-w-0
+                space-y-3
+              "
+            >
               {assignments.map(
                 (assignment) => {
                   const course =
@@ -107,19 +156,22 @@ export default function BatchCourses({
 
                   return (
                     <div
-                      key={
-                        assignment.id
-                      }
+                      key={assignment.id}
                       className="
+                        min-w-0
+                        overflow-hidden
                         rounded-xl
                         border
                         border-slate-200
-                        p-4
+                        p-3.5
+
+                        sm:p-4
                       "
                     >
                       <div
                         className="
                           flex
+                          min-w-0
                           flex-col
                           gap-4
 
@@ -128,10 +180,19 @@ export default function BatchCourses({
                           sm:justify-between
                         "
                       >
-                        <div className="min-w-0">
+                        {/* COURSE INFO */}
+
+                        <div
+                          className="
+                            min-w-0
+                            flex-1
+                          "
+                        >
                           <h3
                             className="
+                              break-words
                               font-semibold
+                              leading-5
                               text-slate-950
                             "
                           >
@@ -144,6 +205,7 @@ export default function BatchCourses({
                               className="
                                 mt-1.5
                                 line-clamp-2
+                                break-words
                                 text-sm
                                 leading-6
                                 text-slate-500
@@ -158,7 +220,9 @@ export default function BatchCourses({
                           <p
                             className="
                               mt-2
+                              break-words
                               text-[11px]
+                              leading-4
                               text-slate-400
                             "
                           >
@@ -169,12 +233,17 @@ export default function BatchCourses({
                           </p>
                         </div>
 
+                        {/* PROGRESS */}
+
                         <Link
                           href={`/instructor/courses/${assignment.courseId}/batches/${batchId}/progress`}
                           className="
                             inline-flex
+                            min-h-10
+                            w-full
                             shrink-0
                             items-center
+                            justify-center
                             gap-1.5
                             rounded-lg
                             border
@@ -184,14 +253,23 @@ export default function BatchCourses({
                             text-xs
                             font-semibold
                             text-emerald-700
+                            transition-colors
 
                             hover:bg-emerald-50
+
+                            focus-visible:outline-none
+                            focus-visible:ring-2
+                            focus-visible:ring-emerald-200
+                            focus-visible:ring-offset-2
+
+                            sm:w-auto
                           "
                         >
                           View Progress
 
                           <ArrowRight
                             size={14}
+                            className="shrink-0"
                           />
                         </Link>
                       </div>
@@ -203,7 +281,11 @@ export default function BatchCourses({
           )}
         </div>
 
-        <div>{children}</div>
+        {/* ASSIGN COURSE */}
+
+        <div className="min-w-0">
+          {children}
+        </div>
       </div>
     </section>
   );
@@ -214,7 +296,8 @@ function EmptyCourses() {
     <div
       className="
         flex
-        min-h-[200px]
+        min-h-[190px]
+        min-w-0
         flex-col
         items-center
         justify-center
@@ -223,8 +306,11 @@ function EmptyCourses() {
         border-dashed
         border-slate-200
         bg-slate-50
-        p-6
+        p-5
         text-center
+
+        sm:min-h-[200px]
+        sm:p-6
       "
     >
       <div
@@ -242,11 +328,27 @@ function EmptyCourses() {
         <BookOpen size={18} />
       </div>
 
-      <p className="mt-3 text-sm font-semibold text-slate-700">
+      <p
+        className="
+          mt-3
+          text-sm
+          font-semibold
+          text-slate-700
+        "
+      >
         No courses assigned
       </p>
 
-      <p className="mt-1 max-w-xs text-xs leading-5 text-slate-400">
+      <p
+        className="
+          mt-1
+          max-w-xs
+          break-words
+          text-xs
+          leading-5
+          text-slate-400
+        "
+      >
         Assign one of your published courses
         to make it available to this batch.
       </p>

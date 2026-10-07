@@ -23,7 +23,7 @@ export default function InstructorLayout({
       >
         <InstructorNavbar />
 
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           {children}
         </div>
 

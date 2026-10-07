@@ -23,22 +23,31 @@ export default function BatchWorkspaceHeader({
   onCopyJoinCode,
 }: BatchWorkspaceHeaderProps) {
   return (
-    <section>
+    <section className="min-w-0">
       <Link
         href="/instructor"
         className="
           inline-flex
           items-center
           gap-2
+          rounded-lg
           text-sm
           font-semibold
           text-slate-500
           transition-colors
 
           hover:text-[#1256AF]
+
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[#1256AF]/30
+          focus-visible:ring-offset-2
         "
       >
-        <ArrowLeft size={16} />
+        <ArrowLeft
+          size={16}
+          className="shrink-0"
+        />
 
         My Batches
       </Link>
@@ -46,19 +55,24 @@ export default function BatchWorkspaceHeader({
       <div
         className="
           mt-5
+          min-w-0
           overflow-hidden
-          rounded-3xl
+          rounded-2xl
           border
           border-slate-200
           bg-white
-          p-6
+          p-4
 
-          sm:p-8
+          sm:rounded-3xl
+          sm:p-6
+
+          lg:p-8
         "
       >
         <div
           className="
             flex
+            min-w-0
             flex-col
             gap-6
 
@@ -73,37 +87,48 @@ export default function BatchWorkspaceHeader({
             className="
               flex
               min-w-0
-              items-start
+              flex-col
               gap-4
+
+              sm:flex-row
+              sm:items-start
             "
           >
             <div
               className="
                 flex
-                h-12
-                w-12
+                h-11
+                w-11
                 shrink-0
                 items-center
                 justify-center
-                rounded-2xl
+                rounded-xl
                 bg-blue-50
                 text-[#1256AF]
+
+                sm:h-12
+                sm:w-12
+                sm:rounded-2xl
               "
             >
               <Layers3 size={22} />
             </div>
 
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div
                 className="
                   flex
+                  min-w-0
                   flex-wrap
                   items-center
-                  gap-3
+                  gap-2
+
+                  sm:gap-3
                 "
               >
                 <h1
                   className="
+                    min-w-0
                     break-words
                     text-2xl
                     font-bold
@@ -125,6 +150,7 @@ export default function BatchWorkspaceHeader({
                 className="
                   mt-3
                   max-w-2xl
+                  break-words
                   text-sm
                   leading-6
                   text-slate-600
@@ -142,14 +168,18 @@ export default function BatchWorkspaceHeader({
 
           <div
             className="
-              shrink-0
+              w-full
+              min-w-0
               rounded-2xl
               border
               border-slate-200
               bg-slate-50
               p-4
 
-              sm:min-w-[230px]
+              lg:w-auto
+              lg:min-w-[230px]
+              lg:max-w-[300px]
+              lg:shrink-0
             "
           >
             <p
@@ -166,20 +196,29 @@ export default function BatchWorkspaceHeader({
 
             <div
               className="
-                mt-2
+                mt-3
                 flex
-                items-center
-                justify-between
-                gap-4
+                min-w-0
+                flex-col
+                gap-3
+
+                xs:flex-row
+                xs:items-center
+                xs:justify-between
               "
             >
               <p
                 className="
+                  min-w-0
+                  break-all
                   font-mono
-                  text-xl
+                  text-lg
                   font-bold
-                  tracking-[0.14em]
+                  tracking-[0.12em]
                   text-slate-950
+
+                  sm:text-xl
+                  sm:tracking-[0.14em]
                 "
               >
                 {batch.joinCode}
@@ -190,8 +229,11 @@ export default function BatchWorkspaceHeader({
                 onClick={onCopyJoinCode}
                 className="
                   inline-flex
-                  h-9
+                  h-10
+                  w-full
+                  shrink-0
                   items-center
+                  justify-center
                   gap-1.5
                   rounded-lg
                   border
@@ -205,19 +247,35 @@ export default function BatchWorkspaceHeader({
 
                   hover:border-blue-200
                   hover:text-[#1256AF]
+
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#1256AF]/30
+                  focus-visible:ring-offset-2
+
+                  xs:w-auto
                 "
+                aria-label={
+                  copied
+                    ? "Join code copied"
+                    : "Copy student join code"
+                }
               >
                 {copied ? (
                   <>
                     <CheckCircle2
                       size={14}
+                      className="shrink-0"
                     />
 
                     Copied
                   </>
                 ) : (
                   <>
-                    <Copy size={14} />
+                    <Copy
+                      size={14}
+                      className="shrink-0"
+                    />
 
                     Copy
                   </>
@@ -227,7 +285,8 @@ export default function BatchWorkspaceHeader({
 
             <p
               className="
-                mt-2
+                mt-3
+                break-words
                 text-xs
                 leading-5
                 text-slate-400
@@ -258,6 +317,7 @@ function BatchStatus({
   return (
     <span
       className={`
+        shrink-0
         rounded-full
         px-2.5
         py-1

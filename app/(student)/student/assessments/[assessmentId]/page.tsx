@@ -9,14 +9,14 @@ import {
   useState,
 } from "react";
 
-import AssessmentMessages from "@/components/assessments/student/AssessmentMessages";
-import AssessmentSubmitCard from "@/components/assessments/student/AssessmentSubmitCard";
-import StudentAssessmentHeader from "@/components/assessments/student/StudentAssessmentHeader";
-import StudentAssessmentQuestionList from "@/components/assessments/student/StudentAssessmentQuestionList";
+import AssessmentMessages from "@/components/student/assessment/AssessmentMessages";
+import AssessmentSubmitCard from "@/components/student/assessment/AssessmentSubmitCard";
+import StudentAssessmentHeader from "@/components/student/assessment/StudentAssessmentHeader";
+import StudentAssessmentQuestionList from "@/components/student/assessment/StudentAssessmentQuestionList";
 
 import type {
   StudentLocalAnswer,
-} from "@/components/assessments/student/StudentAssessmentQuestion";
+} from "@/components/student/assessment/StudentAssessmentQuestion";
 
 import {
   getAssessmentAttemptAnswers,

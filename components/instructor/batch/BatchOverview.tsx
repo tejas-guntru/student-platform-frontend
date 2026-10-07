@@ -23,12 +23,15 @@ export default function BatchOverview({
 }: BatchOverviewProps) {
   return (
     <section
+      aria-label="Batch overview"
       className="
         mt-6
         grid
+        min-w-0
+        grid-cols-2
         gap-3
 
-        sm:grid-cols-2
+        md:grid-cols-3
 
         lg:grid-cols-5
       "
@@ -93,16 +96,27 @@ function OverviewCard({
       className={`
         group
         flex
-        items-center
+        min-w-0
+        flex-col
+        items-start
         gap-3
         rounded-2xl
         border
         bg-white
-        p-4
+        p-3.5
         transition-all
 
         hover:-translate-y-0.5
         hover:shadow-sm
+
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#1256AF]/30
+        focus-visible:ring-offset-2
+
+        sm:flex-row
+        sm:items-center
+        sm:p-4
 
         ${
           attention
@@ -120,12 +134,15 @@ function OverviewCard({
       <div
         className={`
           flex
-          h-10
-          w-10
+          h-9
+          w-9
           shrink-0
           items-center
           justify-center
           rounded-xl
+
+          sm:h-10
+          sm:w-10
 
           ${
             attention
@@ -146,9 +163,13 @@ function OverviewCard({
       <div className="min-w-0">
         <p
           className="
-            text-xl
+            text-lg
             font-bold
+            leading-none
             text-slate-950
+
+            sm:text-xl
+            sm:leading-normal
           "
         >
           {value}
@@ -156,10 +177,15 @@ function OverviewCard({
 
         <p
           className="
-            truncate
-            text-xs
+            mt-1
+            break-words
+            text-[11px]
             font-medium
+            leading-4
             text-slate-500
+
+            sm:mt-0
+            sm:text-xs
           "
         >
           {label}
