@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend collaboration guide
 
-## Getting Started
+## Person 1: Frontend developer
 
-First, run the development server:
+### First-time setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Install Git and Node.js, then open PowerShell and run:
+
+```powershell
+git clone https://github.com/tejas-guntru/student-platform-frontend.git
+cd student-platform-frontend
+npm ci
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ask the project owner for the required `.env.local` settings privately. Login and other features also need a working backend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Start the frontend:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+npm run dev
+```
 
-## Learn More
+Open http://localhost:3000. Press **Ctrl+C** to stop it.
 
-To learn more about Next.js, take a look at the following resources:
+### Every time you work
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open PowerShell inside your `student-platform-frontend` folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Before editing, download the latest code:
 
-## Deploy on Vercel
+```powershell
+git switch main
+git pull --ff-only origin main
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Edit the files. When finished, check the build:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```powershell
+npm run build
+```
+
+If the build passes, save and upload your changes:
+
+```powershell
+git add .
+git diff --cached --stat
+git commit -m "Describe what you changed"
+git push origin main
+```
+
+Tell the project owner that your changes are pushed.
+
+Never commit `.env.local`, passwords, or API keys. If Git reports a conflict or rejects a command, stop and send the owner the output.
+
+## Person 2: Project owner
+
+### Use your configured integration folder
+
+Your subtree setup is in:
+
+```powershell
+cd C:\Users\NITYARADHANA\student-platform-sync
+```
+
+Use this folder for the commands below.
+
+### Receive frontend changes
+
+First, check that your working folder is clean:
+
+```powershell
+git status
+```
+
+If it reports uncommitted changes, save those before continuing.
+
+Update the original project, then import the frontend developer’s changes:
+
+```powershell
+git switch main
+git pull --ff-only origin main
+git subtree pull --prefix=frontend frontend-origin main
+```
+
+The imported files appear inside `frontend/`.
+
+Check the frontend:
+
+```powershell
+cd frontend
+npm ci
+npm run build
+cd ..
+```
+
+If everything looks correct, upload the combined project:
+
+```powershell
+git push origin main
+```
+
+**Pushing to the original project’s `main` can trigger its configured CI and deployment.**
+
+### Send your own frontend changes back
+
+If you edit frontend files in `student-platform-sync`, commit them:
+
+```powershell
+git add frontend
+git commit -m "Describe the frontend update"
+```
+
+Import any changes the frontend person pushed before sending yours:
+
+```powershell
+git subtree pull --prefix=frontend frontend-origin main
+```
+
+Then update both repositories:
+
+```powershell
+git subtree push --prefix=frontend frontend-origin main
+git push origin main
+```
+
+The frontend person receives your updates by running:
+
+```powershell
+git pull --ff-only origin main
+```
+
+## Remember
+
+- Frontend developer: normal `git pull` and `git push`.
+- Project owner: `git subtree pull` and `git subtree push` for frontend sharing.
+- Sync is manual.
+- Run commands one at a time. Stop on errors.
+- Don’t use force-push for routine syncing.
