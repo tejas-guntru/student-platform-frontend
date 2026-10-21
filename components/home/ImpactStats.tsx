@@ -8,7 +8,7 @@ import {
 
 const stats = [
   {
-    value: 50807,
+    value: 50000,
     suffix: "+",
     label: "Trained",
   },
@@ -18,7 +18,7 @@ const stats = [
     label: "Placed",
   },
   {
-    value: 45,
+    value: 368,
     suffix: "+",
     label: "Companies",
   },

@@ -216,7 +216,7 @@ export default function CompaniesSection() {
           "
         >
           <Stat
-            value="52,000+"
+            value="50,000+"
             label="Trained"
           />
 
@@ -226,7 +226,7 @@ export default function CompaniesSection() {
           />
 
           <Stat
-            value="45+"
+            value="368+"
             label="Companies"
           />
         </div>
