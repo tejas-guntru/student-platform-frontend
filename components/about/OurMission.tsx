@@ -1,767 +1,308 @@
-import Link from "next/link";
+"use client";
 
 import {
-  ArrowRight,
-  BadgeCheck,
-  Compass,
-  FolderKanban,
-  Route,
-  Sparkles,
+  Lightbulb,
+  Shield,
+  GraduationCap,
+  Users,
   Target,
-  UserRound,
+  ArrowRight,
 } from "lucide-react";
-
-const principles = [
-  {
-    icon: Compass,
-    number: "01",
-    title: "Clarity",
-    description:
-      "Students should understand where they are, what they have built and what they should work on next.",
-    points: [
-      {
-        title: "One connected profile",
-        text: "Academics, skills and projects in one place.",
-      },
-      {
-        title: "Visible progress",
-        text: "See what is complete and what needs attention.",
-      },
-      {
-        title: "Clear direction",
-        text: "Move forward with less confusion.",
-      },
-    ],
-  },
-  {
-    icon: BadgeCheck,
-    number: "02",
-    title: "Proof",
-    description:
-      "A career profile should show evidence of ability, not just a list of claims on a resume.",
-    points: [
-      {
-        title: "Show your work",
-        text: "Projects become visible proof of your skills.",
-      },
-      {
-        title: "Build credibility",
-        text: "Connect what you know with what you have done.",
-      },
-      {
-        title: "Be opportunity-ready",
-        text: "Keep your profile ready for what comes next.",
-      },
-    ],
-  },
-];
-
-const actions = [
-  {
-    icon: UserRound,
-    number: "01",
-    title: "Build",
-    description:
-      "Create a student profile that grows with your academics, skills and career journey.",
-  },
-  {
-    icon: FolderKanban,
-    number: "02",
-    title: "Show",
-    description:
-      "Turn projects and skills into visible proof of what you can actually do.",
-  },
-  {
-    icon: Target,
-    number: "03",
-    title: "Discover",
-    description:
-      "Explore opportunities that align with your direction and growing profile.",
-  },
-  {
-    icon: Route,
-    number: "04",
-    title: "Move",
-    description:
-      "Track your progress and keep taking the next meaningful step forward.",
-  },
-];
 
 export default function OurMission() {
   return (
-    <section
-      id="how-trailbliz-works"
-      className="
-        relative
-        isolate
-        overflow-hidden
-        bg-white
-        py-20
-        sm:py-24
-        lg:py-28
-      "
-    >
-      {/* =====================================================
-          SUBTLE BACKGROUND
-      ===================================================== */}
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-      >
-        <div
-          className="
-            absolute
-            -left-40
-            top-32
-            h-[360px]
-            w-[360px]
-            rounded-full
-            bg-blue-50/70
-            blur-3xl
-          "
-        />
-
-        <div
-          className="
-            absolute
-            -right-40
-            bottom-32
-            h-[400px]
-            w-[400px]
-            rounded-full
-            bg-sky-50/60
-            blur-3xl
-          "
-        />
-      </div>
-
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          max-w-7xl
-          px-4
-          sm:px-6
-          lg:px-12
-        "
-      >
-        {/* =====================================================
-            HEADER
-        ===================================================== */}
-
-        <div className="mx-auto max-w-4xl text-center">
-          <div
-            className="
-              inline-flex
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-[#1256af]/15
-              bg-[#1256af]/5
-              px-4
-              py-2
-            "
-          >
-            <Sparkles
-              size={14}
-              className="text-[#1256af]"
-            />
-
-            <span
-              className="
-                text-xs
-                font-semibold
-                uppercase
-                tracking-[0.12em]
-                text-[#1256af]
-                sm:text-sm
-              "
-            >
-              Our Mission
-            </span>
-          </div>
-
-          <h2
-            className="
-              mx-auto
-              mt-6
-              max-w-4xl
-              text-4xl
-              font-semibold
-              leading-[1.08]
-              tracking-tight
-              text-gray-900
-              sm:text-5xl
-              lg:text-6xl
-            "
-          >
-            Help students turn{" "}
-            <span className="text-[#1256af]">
-              progress into opportunity.
-            </span>
+    <section className="mt-12 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Core Values Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Our Core Values
           </h2>
-
-          <p
-            className="
-              mx-auto
-              mt-6
-              max-w-2xl
-              text-base
-              font-light
-              leading-7
-              text-gray-600
-              sm:text-lg
-              sm:leading-8
-            "
-          >
-            Trailbliz is designed to make a student&apos;s journey
-            easier to understand, easier to build and easier to present
-            when the right opportunity appears.
+          <p className="text-lg sm:text-xl text-gray-600">
+            Two principles that drive everything we do
           </p>
         </div>
 
-        {/* =====================================================
-            PRINCIPLES
-        ===================================================== */}
+        {/* Core Values Visual Section */}
+        <div className="relative mb-16">
+          {/* Values Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start relative">
+            {/* Vertical Divider Line */}
+            <div className="absolute left-1/2 top-8 bottom-8 w-0.5 bg-gradient-to-b from-transparent via-gray-200 to-transparent transform -translate-x-1/2 hidden lg:block"></div>
 
-        <div
-          className="
-            mt-14
-            grid
-            gap-5
-            lg:mt-16
-            lg:grid-cols-2
-            lg:gap-6
-          "
-        >
-          {principles.map((principle) => {
-            const Icon = principle.icon;
-
-            return (
-              <article
-                key={principle.title}
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-[28px]
-                  border
-                  border-gray-200
-                  bg-[#FAFAFA]
-                  p-6
-                  transition-all
-                  duration-300
-
-                  hover:-translate-y-1
-                  hover:border-[#1256af]/20
-                  hover:bg-white
-                  hover:shadow-[0_20px_50px_rgba(18,86,175,0.08)]
-
-                  sm:p-8
-                  lg:p-9
-                "
-              >
-                {/* top */}
-
-                <div className="flex items-start justify-between gap-5">
-                  <div
-                    className="
-                      flex
-                      h-14
-                      w-14
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      bg-[#1256af]/[0.07]
-                      text-[#1256af]
-                      transition-all
-                      duration-300
-
-                      group-hover:bg-[#1256af]
-                      group-hover:text-white
-                    "
-                  >
-                    <Icon size={25} />
-                  </div>
-
-                  <span
-                    className="
-                      text-sm
-                      font-bold
-                      tracking-[0.12em]
-                      text-[#1256af]/30
-                    "
-                  >
-                    {principle.number}
-                  </span>
+            {/* Curiosity Side */}
+            <div className="text-center relative">
+              <div className="inline-block relative mb-6">
+                {/* Large Icon Background */}
+                <div className="w-28 h-28 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-2 border-blue-200">
+                  <Lightbulb className="w-14 h-14 text-[#093697]" />
                 </div>
+              </div>
 
-                {/* content */}
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Curiosity
+              </h3>
+              <p className="text-base text-gray-600 mb-6 max-w-sm mx-auto leading-relaxed">
+                We believe in the power of asking{" "}
+                <span className="text-[#093697] font-bold">"why"</span> and{" "}
+                <span className="text-[#093697] font-bold">"what if"</span> -
+                driving innovation through endless exploration.
+              </p>
 
-                <h3
-                  className="
-                    mt-7
-                    text-3xl
-                    font-semibold
-                    tracking-tight
-                    text-gray-900
-                  "
-                >
-                  {principle.title}
-                </h3>
-
-                <p
-                  className="
-                    mt-3
-                    max-w-xl
-                    text-sm
-                    leading-7
-                    text-gray-600
-                    sm:text-base
-                  "
-                >
-                  {principle.description}
-                </p>
-
-                {/* points */}
-
-                <div className="mt-7 space-y-3">
-                  {principle.points.map((point) => (
-                    <div
-                      key={point.title}
-                      className="
-                        flex
-                        items-start
-                        gap-3
-                        rounded-2xl
-                        border
-                        border-gray-200/80
-                        bg-white
-                        px-4
-                        py-4
-                      "
-                    >
-                      <div
-                        className="
-                          mt-0.5
-                          flex
-                          h-6
-                          w-6
-                          shrink-0
-                          items-center
-                          justify-center
-                          rounded-full
-                          bg-[#1256af]/[0.07]
-                        "
-                      >
-                        <div
-                          className="
-                            h-2
-                            w-2
-                            rounded-full
-                            bg-[#1256af]
-                          "
-                        />
-                      </div>
-
-                      <div>
-                        <p
-                          className="
-                            text-sm
-                            font-semibold
-                            text-gray-800
-                          "
-                        >
-                          {point.title}
-                        </p>
-
-                        <p
-                          className="
-                            mt-1
-                            text-xs
-                            leading-5
-                            text-gray-500
-                          "
-                        >
-                          {point.text}
-                        </p>
-                      </div>
+              {/* Key Points - Enhanced with Gray Background */}
+              <div className="bg-gray-100 rounded-xl p-6 max-w-sm mx-auto">
+                <h4 className="text-sm font-bold  text-[#093697] mb-4 uppercase tracking-wide">
+                  What This Means
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Lifelong Learning
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Never stop growing
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Innovative Thinking
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Creative problem solving
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Future-Ready Skills
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Prepare for tomorrow
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </article>
-            );
-          })}
-        </div>
-
-        {/* =====================================================
-            MISSION IN ACTION
-        ===================================================== */}
-
-        <div className="mt-24">
-          <div className="text-center">
-            <div
-              className="
-                inline-flex
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-[#1256af]/15
-                bg-[#1256af]/5
-                px-4
-                py-2
-              "
-            >
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-[#1256af]
-                "
-              />
-
-              <span
-                className="
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.12em]
-                  text-[#1256af]
-                  sm:text-sm
-                "
-              >
-                Mission in action
-              </span>
+              </div>
             </div>
 
-            <h3
-              className="
-                mt-6
-                text-3xl
-                font-semibold
-                tracking-tight
-                text-gray-900
-                sm:text-4xl
-                lg:text-5xl
-              "
-            >
-              One journey.{" "}
-              <span className="text-[#1256af]">
-                Four connected steps.
-              </span>
+            {/* Courage Side */}
+            <div className="text-center relative">
+              <div className="inline-block relative mb-6">
+                {/* Large Icon Background */}
+                <div className="w-28 h-28 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-2 border-blue-200">
+                  <Shield className="w-14 h-14 text-[#093697]" />
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Courage</h3>
+              <p className="text-base text-gray-600 mb-6 max-w-sm mx-auto leading-relaxed">
+                We empower bold decisions and brave steps -{" "}
+                <span className="font-bold text-[#093697]">
+                  {" "}
+                  transforming students
+                </span>{" "}
+                dreams into successful careers.
+              </p>
+
+              {/* Key Points - Enhanced with Gray Background */}
+              <div className="bg-gray-100 rounded-xl p-6 max-w-sm mx-auto">
+                <h4 className="text-sm font-bold  text-[#093697] mb-4 uppercase tracking-wide">
+                  What This Means
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Bold Career Moves
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Take calculated risks
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Risk & Growth
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Embrace challenges
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#093697] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="text-left">
+                      <span className="text-sm font-medium text-gray-800 block">
+                        Unwavering Support
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        You're never alone
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Transition Section */}
+        <div className="text-center mb-12">
+          <div className="relative inline-block mb-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#093697] to-purple-600 rounded-full blur-xl opacity-20"></div>
+            <div className="relative bg-white px-8 py-4 rounded-full border-2 border-gray-100 shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-[#093697] rounded-full"></div>
+                <span className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                  Values in Action
+                </span>
+                <div className="w-3 h-3 bg-[#093697] rounded-full "></div>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            How We Deliver on These Values
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+            Our <span className="font-semibold text-[#093697]">curiosity</span>{" "}
+            and <span className="font-semibold text-[#093697]">courage</span>{" "}
+            aren't just words—they're the foundation of concrete actions that
+            transform lives through quality education and meaningful career
+            opportunities.
+          </p>
+        </div>
+      </div>
+
+      {/* Mission Cards Section - Different Background */}
+      <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          {/* Mission Cards */}
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+            {/* Quality Education Card */}
+            <div className="bg-white rounded-xl p-5 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <GraduationCap className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                Quality Education
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Provide industry-relevant, practical education that prepares
+                students for real-world challenges and career success.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Modern curriculum design
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Hands-on learning approach
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Expert instructor guidance
+                </li>
+              </ul>
+            </div>
+
+            {/* Bridge the Gap Card */}
+            <div className="bg-white rounded-xl p-5 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-600"></div>
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-50 to-green-100 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Users className="w-6 h-6 text-green-600" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                Bridge the Gap
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Connect talented individuals with employment opportunities
+                through strategic partnerships and dedicated career support.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Industry partnerships
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Direct job placements
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Career mentorship programs
+                </li>
+              </ul>
+            </div>
+
+            {/* Continuous Innovation Card */}
+            <div className="bg-white rounded-xl p-5 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Lightbulb className="w-6 h-6 text-purple-600" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                Continuous Innovation
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Constantly evolve our methods and curriculum to adapt to
+                changing industry needs and emerging career opportunities.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Regular curriculum updates
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Technology integration
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-600 rounded-full mr-3 flex-shrink-0"></div>
+                  Future-ready skills focus
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Compact Mission Statement Section */}
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 text-center relative overflow-hidden max-w-4xl mx-auto">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#093697] via-blue-500 to-purple-600"></div>
+
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl mb-4 border-2 border-gray-100">
+              <Target className="w-8 h-8 text-[#093697]" />
+            </div>
+
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+              Our Commitment
             </h3>
 
-            <p
-              className="
-                mx-auto
-                mt-4
-                max-w-2xl
-                text-base
-                leading-7
-                text-gray-600
-              "
-            >
-              Trailbliz connects the pieces students normally manage
-              separately into one continuous career journey.
+            <p className="text-base text-gray-700 leading-relaxed mb-6 max-w-3xl mx-auto">
+              "Built on{" "}
+              <span className="font-semibold text-[#093697]">Curiosity</span>{" "}
+              and <span className="font-semibold text-[#093697]">Courage</span>,
+              we transform lives by bridging the gap between learning and career
+              success. Every student deserves the opportunity to explore, grow,
+              and boldly pursue their professional dreams."
             </p>
-          </div>
 
-          {/* ===================================================
-              ACTION CARDS
-          =================================================== */}
-
-          <div
-            className="
-              relative
-              mt-12
-              grid
-              gap-4
-              sm:grid-cols-2
-              lg:grid-cols-4
-            "
-          >
-            {actions.map((action, index) => {
-              const Icon = action.icon;
-
-              return (
-                <div
-                  key={action.title}
-                  className="relative"
-                >
-                  {/* desktop connector */}
-
-                  {index < actions.length - 1 && (
-                    <div
-                      aria-hidden="true"
-                      className="
-                        absolute
-                        left-[calc(100%-2px)]
-                        top-[35px]
-                        z-20
-                        hidden
-                        h-px
-                        w-[20px]
-                        bg-[#1256af]/15
-                        lg:block
-                      "
-                    />
-                  )}
-
-                  <div
-                    className="
-                      group
-                      relative
-                      h-full
-                      overflow-hidden
-                      rounded-[24px]
-                      border
-                      border-gray-200
-                      bg-white
-                      p-5
-                      transition-all
-                      duration-300
-
-                      hover:-translate-y-1
-                      hover:border-[#1256af]/20
-                      hover:shadow-[0_16px_40px_rgba(18,86,175,0.08)]
-                    "
-                  >
-                    <span
-                      className="
-                        absolute
-                        right-5
-                        top-5
-                        text-xs
-                        font-bold
-                        tracking-[0.1em]
-                        text-gray-300
-                      "
-                    >
-                      {action.number}
-                    </span>
-
-                    <div
-                      className="
-                        flex
-                        h-11
-                        w-11
-                        items-center
-                        justify-center
-                        rounded-2xl
-                        bg-[#1256af]/[0.07]
-                        text-[#1256af]
-                        transition-all
-                        duration-300
-
-                        group-hover:bg-[#1256af]
-                        group-hover:text-white
-                      "
-                    >
-                      <Icon size={20} />
-                    </div>
-
-                    <h4
-                      className="
-                        mt-5
-                        text-xl
-                        font-semibold
-                        tracking-tight
-                        text-gray-900
-                      "
-                    >
-                      {action.title}
-                    </h4>
-
-                    <p
-                      className="
-                        mt-2
-                        text-sm
-                        leading-6
-                        text-gray-500
-                      "
-                    >
-                      {action.description}
-                    </p>
-
-                    <div
-                      className="
-                        mt-6
-                        h-[2px]
-                        w-8
-                        rounded-full
-                        bg-[#1256af]/20
-                        transition-all
-                        duration-300
-
-                        group-hover:w-14
-                        group-hover:bg-[#1256af]
-                      "
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* =====================================================
-            BOTTOM CTA
-        ===================================================== */}
-
-        <div
-          className="
-            relative
-            mt-20
-            overflow-hidden
-            rounded-[30px]
-            bg-[#1256af]
-            px-6
-            py-8
-            shadow-[0_22px_55px_rgba(18,86,175,0.16)]
-
-            sm:px-9
-            sm:py-10
-
-            lg:px-12
-          "
-        >
-          {/* subtle decoration */}
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              -right-20
-              -top-24
-              h-64
-              w-64
-              rounded-full
-              bg-white/10
-              blur-3xl
-            "
-          />
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              -bottom-28
-              left-1/3
-              h-56
-              w-56
-              rounded-full
-              bg-blue-300/10
-              blur-3xl
-            "
-          />
-
-          <div
-            className="
-              relative
-              flex
-              flex-col
-              gap-7
-
-              lg:flex-row
-              lg:items-center
-              lg:justify-between
-            "
-          >
-            <div className="max-w-2xl">
-              <p
-                className="
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.14em]
-                  text-white/60
-                "
-              >
-                Your trail starts here
-              </p>
-
-              <h3
-                className="
-                  mt-3
-                  text-2xl
-                  font-semibold
-                  tracking-tight
-                  text-white
-
-                  sm:text-3xl
-                  lg:text-4xl
-                "
-              >
-                Build a profile that grows as you do.
-              </h3>
-
-              <p
-                className="
-                  mt-3
-                  max-w-xl
-                  text-sm
-                  leading-6
-                  text-white/75
-
-                  sm:text-base
-                "
-              >
-                Start with where you are today. Keep adding the work,
-                skills and progress that move you forward.
+            <div className="inline-flex items-center bg-gradient-to-r from-[#093697] to-blue-600 px-6 py-2 rounded-full shadow-md">
+              <p className="font-semibold text-white !text-white text-sm">
+                — Team Trailbliz
               </p>
             </div>
-
-            <Link
-              href="/register"
-              className="
-                group
-                inline-flex
-                min-h-[52px]
-                shrink-0
-                items-center
-                justify-center
-                gap-3
-                rounded-2xl
-                border
-                border-white
-                bg-white
-                px-7
-                py-3.5
-                text-sm
-                font-bold
-                text-[#1256af]
-                shadow-lg
-                transition-all
-                duration-300
-
-                hover:-translate-y-0.5
-                hover:bg-transparent
-                hover:text-white
-                hover:shadow-xl
-
-                focus:outline-none
-                focus:ring-2
-                focus:ring-white/40
-              "
-            >
-              Join Trailbliz
-
-              <ArrowRight
-                size={17}
-                className="
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-1
-                "
-              />
-            </Link>
           </div>
         </div>
       </div>

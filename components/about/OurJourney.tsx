@@ -1,837 +1,308 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
-import {
-  BadgeCheck,
-  BriefcaseBusiness,
-  Compass,
-  FolderKanban,
-  Layers3,
-  Rocket,
-  Sparkles,
-} from "lucide-react";
-
-const milestones = [
-  {
-    phase: "The idea",
-    label: "START",
-    title: "Make the student journey clearer",
-    description:
-      "Trailbliz starts from a simple problem: students make progress throughout college, but that progress is often scattered across resumes, documents, projects and different platforms.",
-    detail:
-      "The goal is to bring those pieces together into one career story.",
-    icon: Compass,
-  },
-  {
-    phase: "The foundation",
-    label: "BUILD",
-    title: "Create one connected student profile",
-    description:
-      "Academics, college information, career preferences and personal details form the foundation of a student's Trailbliz profile.",
-    detail:
-      "One place to understand where you are before deciding where to go next.",
-    icon: Layers3,
-  },
-  {
-    phase: "The proof",
-    label: "SHOW",
-    title: "Turn skills into visible evidence",
-    description:
-      "Projects, experience, technical skills and coding profiles help students show more than a list of claims.",
-    detail:
-      "What you build becomes part of the story you present to opportunities.",
-    icon: FolderKanban,
-  },
-  {
-    phase: "The connection",
-    label: "DISCOVER",
-    title: "Connect profiles with opportunities",
-    description:
-      "Trailbliz brings career opportunities closer to the student profile so eligibility, preparation and applications can become part of the same journey.",
-    detail:
-      "The profile is not the destination — it should help students move forward.",
-    icon: BriefcaseBusiness,
-  },
-  {
-    phase: "What comes next",
-    label: "GROW",
-    title: "Keep building around student progress",
-    description:
-      "Trailbliz is designed to keep evolving as students build more skills, gain more experience and move through different stages of their careers.",
-    detail:
-      "The next chapter is about making that journey more connected, useful and actionable.",
-    icon: Rocket,
-  },
-];
 
 export default function OurJourney() {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const timelineRef = useRef<HTMLDivElement | null>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  /* =========================================================
-     REVEAL MILESTONES
-  ========================================================= */
+  const milestones = [
+    {
+      date: "February 2024",
+      title: "Company Founded",
+      description:
+        "Established with a mission to bridge the gap between academic learning and industry demands through comprehensive skill development and career support programs.",
+      metrics: "Founding Investment: ₹50L",
+    },
+    {
+      date: "June 2024",
+      title: "First Training Programs Launched",
+      description:
+        "Successfully launched comprehensive training programs in Full-Stack Web Development, AI/ML, and Placement Preparation with industry-aligned curriculum.",
+      metrics: "Initial Cohort: 250 Students",
+    },
+    {
+      date: "October 2024",
+      title: "College Partnership Network",
+      description:
+        "Established strategic partnerships with 5 engineering colleges across Hyderabad, delivering technical workshops and career development sessions.",
+      metrics: "Partner Institutions: 5 Colleges",
+    },
+    {
+      date: "March 2025",
+      title: "Market Leadership Position",
+      description:
+        "Achieved significant scale with 120+ college partnerships and 17,000+ students trained through workshops, bootcamps, and placement drives, with 13,600+ successful placements.",
+      metrics: "Placement Rate: 94% Success",
+    },
+    {
+      date: "June 2025",
+      title: "National Expansion",
+      description:
+        "Executing nationwide growth strategy with expanded college partnerships, internship programs, and career services across major Indian cities.",
+      metrics: "Expansion Target: 50+ Cities",
+    },
+  ];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const index = Number(
-            entry.target.getAttribute("data-index") ?? "0"
-          );
-
-          setVisibleItems((current) =>
-            current.includes(index)
-              ? current
-              : [...current, index]
-          );
+          const index = Number(entry.target.getAttribute("data-index") ?? "0");
+          if (entry.isIntersecting) {
+            setVisibleItems((prev) => [...new Set([...prev, index])]);
+          }
         });
       },
-      {
-        threshold: 0.18,
-      }
+      { threshold: 0.3 },
     );
 
-    itemRefs.current.forEach((item) => {
-      if (item) observer.observe(item);
-    });
-
-    return () => observer.disconnect();
+    return () => observerRef.current?.disconnect();
   }, []);
-
-  /* =========================================================
-     TIMELINE SCROLL PROGRESS
-  ========================================================= */
 
   useEffect(() => {
     const handleScroll = () => {
-      const timeline = timelineRef.current;
+      if (!sectionRef.current) return;
 
-      if (!timeline) return;
+      const section = sectionRef.current;
+      const timelineContainer = section.querySelector(".timeline-container");
+      if (!timelineContainer) return;
 
-      const rect = timeline.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
+      const containerRect = timelineContainer.getBoundingClientRect();
+      const containerTop = containerRect.top + window.scrollY;
+      const containerHeight = containerRect.height;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
 
-      const start = viewportHeight * 0.75;
-      const end = viewportHeight * 0.2;
-
-      const totalDistance = rect.height + start - end;
-      const travelled = start - rect.top;
-
-      const progress = travelled / totalDistance;
-
-      setScrollProgress(
-        Math.max(0, Math.min(1, progress))
+      // Calculate progress through the timeline container specifically
+      const startOffset = containerTop - windowHeight * 0.8;
+      const endOffset = containerTop + containerHeight - windowHeight * 0.2;
+      const progress = Math.max(
+        0,
+        Math.min(1, (scrollTop - startOffset) / (endOffset - startOffset)),
       );
+
+      setScrollProgress(progress);
     };
 
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <section
-      id="our-journey"
-      className="
-        relative
-        isolate
-        overflow-hidden
-        bg-[#FAFAFA]
-        py-20
-        sm:py-24
-        lg:py-28
-      "
-    >
-      {/* =====================================================
-          SUBTLE BACKGROUND
-      ===================================================== */}
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+    <>
+      <style jsx>{`
+        @keyframes subtle-float {
+          0% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-2px);
+          }
+          100% {
+            transform: translateY(0px);
+          }
+        }
+        .animate-subtle-float {
+          animation: subtle-float 3s ease-in-out infinite;
+        }
+      `}</style>
+      <section
+        ref={sectionRef}
+        id="our-journey"
+        className="relative pt-24 pb-12 bg-slate-50"
       >
-        <div
-          className="
-            absolute
-            -left-40
-            top-40
-            h-[380px]
-            w-[380px]
-            rounded-full
-            bg-blue-50/70
-            blur-3xl
-          "
-        />
-
-        <div
-          className="
-            absolute
-            -right-40
-            bottom-20
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-sky-50/60
-            blur-3xl
-          "
-        />
-      </div>
-
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          max-w-7xl
-          px-4
-          sm:px-6
-          lg:px-12
-        "
-      >
-        {/* =====================================================
-            HEADER
-        ===================================================== */}
-
-        <div className="mx-auto max-w-4xl text-center">
-          <div
-            className="
-              inline-flex
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-[#1256af]/15
-              bg-[#1256af]/5
-              px-4
-              py-2
-            "
-          >
-            <Sparkles
-              size={14}
-              className="text-[#1256af]"
-            />
-
-            <span
-              className="
-                text-xs
-                font-semibold
-                uppercase
-                tracking-[0.12em]
-                text-[#1256af]
-                sm:text-sm
-              "
-            >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <div className="inline-block">
+              <span className="inline-flex items-center px-4 py-2 rounded-md bg-slate-900 text-white text-sm font-medium tracking-wide mb-6">
+                COMPANY TIMELINE
+              </span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
               Our Journey
-            </span>
+            </h2>
+            <div className="w-16 h-px bg-slate-900 mx-auto mb-6"></div>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Milestones that define our growth and commitment to excellence in
+              professional education.
+            </p>
           </div>
 
-          <h2
-            className="
-              mx-auto
-              mt-6
-              max-w-4xl
-              text-4xl
-              font-semibold
-              leading-[1.08]
-              tracking-tight
-              text-gray-900
+          {/* Timeline */}
+          <div className="relative timeline-container">
+            {/* Timeline line with scroll progress */}
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px md:transform md:-translate-x-0.5">
+              {/* Background line */}
+              <div className="w-full h-full bg-slate-300"></div>
+              {/* Progress line */}
+              <div
+                className="absolute top-0 left-0 w-full bg-slate-900 transition-all duration-300 ease-out"
+                style={{ height: `${scrollProgress * 100}%` }}
+              ></div>
+              {/* Moving cursor */}
+              <div
+                className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 transition-all duration-300 ease-out"
+                style={{
+                  top: `${Math.max(0, Math.min(96, scrollProgress * 100))}%`,
+                  opacity: scrollProgress > 0 ? 1 : 0,
+                }}
+              >
+                <div className="w-full h-full bg-slate-900 rounded-full shadow-lg border-2 border-white">
+                  <div className="absolute inset-0 bg-slate-900 rounded-full animate-ping opacity-75"></div>
+                </div>
+              </div>
+            </div>
 
-              sm:text-5xl
-              lg:text-6xl
-            "
-          >
-            From scattered progress{" "}
-            <span className="text-[#1256af]">
-              to one connected trail.
-            </span>
-          </h2>
-
-          <p
-            className="
-              mx-auto
-              mt-6
-              max-w-2xl
-              text-base
-              font-light
-              leading-7
-              text-gray-600
-
-              sm:text-lg
-              sm:leading-8
-            "
-          >
-            Trailbliz is being built around the stages students
-            naturally move through — understanding themselves,
-            building proof and moving toward opportunity.
-          </p>
-        </div>
-
-        {/* =====================================================
-            TIMELINE
-        ===================================================== */}
-
-        <div
-          ref={timelineRef}
-          className="
-            relative
-            mx-auto
-            mt-16
-            max-w-6xl
-
-            sm:mt-20
-          "
-        >
-          {/* ===================================================
-              TIMELINE LINE
-          =================================================== */}
-
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              bottom-0
-              left-[23px]
-              top-0
-              w-[2px]
-
-              md:left-1/2
-              md:-translate-x-1/2
-            "
-          >
-            {/* Base line */}
-
-            <div
-              className="
-                absolute
-                inset-0
-                rounded-full
-                bg-gray-200
-              "
-            />
-
-            {/* Scroll progress */}
-
-            <div
-              className="
-                absolute
-                left-0
-                top-0
-                w-full
-                rounded-full
-                bg-[#1256af]
-                transition-[height]
-                duration-150
-              "
-              style={{
-                height: `${scrollProgress * 100}%`,
-              }}
-            />
-
-            {/* Moving marker */}
-
-            <div
-              className="
-                absolute
-                left-1/2
-                z-30
-                h-3
-                w-3
-                -translate-x-1/2
-                -translate-y-1/2
-                rounded-full
-                border-[3px]
-                border-white
-                bg-[#1256af]
-                shadow-[0_4px_12px_rgba(18,86,175,0.25)]
-                transition-[top,opacity]
-                duration-150
-              "
-              style={{
-                top: `${Math.min(
-                  98,
-                  scrollProgress * 100
-                )}%`,
-                opacity:
-                  scrollProgress > 0 ? 1 : 0,
-              }}
-            />
-          </div>
-
-          {/* ===================================================
-              MILESTONES
-          =================================================== */}
-
-          <div className="space-y-14 md:space-y-20">
-            {milestones.map((milestone, index) => {
-              const Icon = milestone.icon;
-              const visible =
-                visibleItems.includes(index);
-
-              const even = index % 2 === 0;
-
-              return (
+            {/* Timeline items */}
+            <div className="space-y-20">
+              {milestones.map((milestone, index) => (
                 <div
-                  key={milestone.title}
+                  key={index}
                   data-index={index}
-                  ref={(element) => {
-                    itemRefs.current[index] =
-                      element;
-                  }}
-                  className={`
-                    relative
-                    transition-all
-                    duration-700
-                    ease-out
-
-                    ${
-                      visible
-                        ? `
-                          translate-y-0
-                          opacity-100
-                        `
-                        : `
-                          translate-y-8
-                          opacity-0
-                        `
+                  ref={(el) => {
+                    if (el && observerRef.current) {
+                      observerRef.current.observe(el);
                     }
-                  `}
+                  }}
+                  className={`relative transition-all duration-700 ease-out ${
+                    visibleItems.includes(index)
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }`}
                   style={{
-                    transitionDelay: `${index * 80}ms`,
+                    transitionDelay: `${index * 150}ms`,
                   }}
                 >
-                  {/* Timeline marker */}
-
                   <div
-                    className="
-                      absolute
-                      left-[14px]
-                      top-5
-                      z-20
-
-                      md:left-1/2
-                      md:-translate-x-1/2
-                    "
+                    className={`flex flex-col md:flex-row items-start ${
+                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                    }`}
                   >
-                    <div
-                      className="
-                        flex
-                        h-[20px]
-                        w-[20px]
-                        items-center
-                        justify-center
-                        rounded-full
-                        border-4
-                        border-[#FAFAFA]
-                        bg-[#1256af]
-                        shadow-[0_4px_12px_rgba(18,86,175,0.18)]
-                      "
-                    />
-                  </div>
-
-                  {/* =================================================
-                      ROW
-                  ================================================= */}
-
-                  <div
-                    className={`
-                      flex
-                      flex-col
-                      md:flex-row
-
-                      ${
-                        even
-                          ? ""
-                          : "md:flex-row-reverse"
-                      }
-                    `}
-                  >
-                    {/* ===============================================
-                        PHASE SIDE
-                    =============================================== */}
-
-                    <div
-                      className={`
-                        w-full
-                        pl-16
-
-                        md:w-1/2
-                        md:pl-0
-
-                        ${
-                          even
-                            ? `
-                              md:pr-14
-                              md:text-right
-                            `
-                            : `
-                              md:pl-14
-                              md:text-left
-                            `
-                        }
-                      `}
-                    >
-                      <div
-                        className="
-                          inline-flex
-                          items-center
-                          gap-2
-                          rounded-full
-                          border
-                          border-[#1256af]/10
-                          bg-white
-                          px-3
-                          py-1.5
-                          shadow-sm
-                        "
-                      >
-                        <span
-                          className="
-                            h-1.5
-                            w-1.5
-                            rounded-full
-                            bg-[#1256af]
-                          "
-                        />
-
-                        <span
-                          className="
-                            text-[10px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.14em]
-                            text-gray-500
-                          "
-                        >
-                          {milestone.phase}
-                        </span>
-                      </div>
+                    {/* Timeline marker */}
+                    <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 z-10">
+                      <div className="w-3 h-3 rounded-full bg-slate-900 border-4 border-white shadow-sm"></div>
                     </div>
 
-                    {/* ===============================================
-                        CARD SIDE
-                    =============================================== */}
-
+                    {/* Date section */}
                     <div
-                      className={`
-                        mt-4
-                        w-full
-                        pl-16
-
-                        md:mt-0
-                        md:w-1/2
-                        md:pl-0
-
-                        ${
-                          even
-                            ? "md:pl-10"
-                            : "md:pr-10"
-                        }
-                      `}
+                      className={`w-full md:w-1/2 mb-4 md:mb-0 pl-20 md:pl-0 ${
+                        index % 2 === 0
+                          ? "md:pr-12 md:text-right"
+                          : "md:pl-12 md:text-left"
+                      }`}
                     >
-                      <article
-                        className="
-                          group
-                          relative
-                          overflow-hidden
-                          rounded-[26px]
-                          border
-                          border-gray-200
-                          bg-white
-                          p-5
-                          shadow-[0_10px_35px_rgba(17,24,39,0.045)]
-                          transition-all
-                          duration-300
+                      <span className="inline-block text-sm font-semibold text-slate-500 bg-white px-3 py-1 rounded border">
+                        {milestone.date}
+                      </span>
+                    </div>
 
-                          hover:-translate-y-1
-                          hover:border-[#1256af]/20
-                          hover:shadow-[0_20px_50px_rgba(18,86,175,0.08)]
-
-                          sm:p-6
-                        "
+                    {/* Content section */}
+                    <div
+                      className={`w-full md:w-1/2 pl-20 md:pl-0 ${
+                        index % 2 === 0 ? "md:pl-8" : "md:pr-8"
+                      }`}
+                    >
+                      <div
+                        className={`bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500 ${
+                          visibleItems.includes(index)
+                            ? "animate-subtle-float"
+                            : ""
+                        }`}
                       >
-                        {/* top */}
-
-                        <div
-                          className="
-                            flex
-                            items-start
-                            justify-between
-                            gap-4
-                          "
-                        >
-                          <div
-                            className="
-                              flex
-                              h-12
-                              w-12
-                              items-center
-                              justify-center
-                              rounded-2xl
-                              bg-[#1256af]/[0.07]
-                              text-[#1256af]
-                              transition-all
-                              duration-300
-
-                              group-hover:bg-[#1256af]
-                              group-hover:text-white
-                            "
-                          >
-                            <Icon size={21} />
-                          </div>
-
-                          <span
-                            className="
-                              rounded-full
-                              bg-gray-50
-                              px-3
-                              py-1.5
-                              text-[10px]
-                              font-bold
-                              uppercase
-                              tracking-[0.14em]
-                              text-gray-400
-                            "
-                          >
-                            {milestone.label}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-
-                        <h3
-                          className="
-                            mt-5
-                            text-xl
-                            font-semibold
-                            leading-tight
-                            tracking-tight
-                            text-gray-900
-
-                            sm:text-2xl
-                          "
-                        >
+                        <h3 className="text-lg font-semibold text-slate-900 mb-2">
                           {milestone.title}
                         </h3>
-
-                        {/* Description */}
-
-                        <p
-                          className="
-                            mt-3
-                            text-sm
-                            leading-6
-                            text-gray-600
-                          "
-                        >
+                        <p className="text-slate-600 mb-4 leading-relaxed text-sm">
                           {milestone.description}
                         </p>
 
-                        {/* Detail */}
-
-                        <div
-                          className="
-                            mt-5
-                            flex
-                            items-start
-                            gap-3
-                            rounded-2xl
-                            border
-                            border-[#1256af]/10
-                            bg-[#1256af]/[0.035]
-                            px-4
-                            py-3.5
-                          "
-                        >
-                          <BadgeCheck
-                            size={17}
-                            className="
-                              mt-0.5
-                              shrink-0
-                              text-[#1256af]
-                            "
-                          />
-
-                          <p
-                            className="
-                              text-xs
-                              leading-5
-                              text-gray-500
-                            "
-                          >
-                            {milestone.detail}
-                          </p>
+                        {/* Metrics */}
+                        <div className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg border-l-4 border-[#093697]">
+                          <div className="flex-shrink-0">
+                            <div className="w-5 h-5 bg-[#093697] rounded flex items-center justify-center">
+                              <svg
+                                className="w-3 h-3 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+                              Key Metric
+                            </p>
+                            <p className="text-sm font-semibold text-slate-900">
+                              {milestone.metrics}
+                            </p>
+                          </div>
                         </div>
-
-                        {/* Bottom accent */}
-
-                        <div
-                          aria-hidden="true"
-                          className="
-                            mt-5
-                            h-[2px]
-                            w-8
-                            rounded-full
-                            bg-[#1256af]/20
-                            transition-all
-                            duration-300
-
-                            group-hover:w-14
-                            group-hover:bg-[#1256af]
-                          "
-                        />
-                      </article>
+                      </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* =====================================================
-            END POINT
-        ===================================================== */}
+          {/* Enhanced Timeline Ending */}
+          <div className="relative mt-16">
+            {/* Extended timeline line ending */}
+            <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-0.5 top-0 h-12 w-px bg-gradient-to-b from-slate-900 to-transparent"></div>
 
-        <div
-          className="
-            relative
-            mx-auto
-            mt-20
-            max-w-4xl
-          "
-        >
-          <div
-            className="
-              relative
-              overflow-hidden
-              rounded-[30px]
-              bg-[#1256af]
-              px-6
-              py-10
-              text-center
-              shadow-[0_22px_55px_rgba(18,86,175,0.16)]
-
-              sm:px-10
-              sm:py-12
-            "
-          >
-            {/* subtle decorations */}
-
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none
-                absolute
-                -right-16
-                -top-24
-                h-64
-                w-64
-                rounded-full
-                bg-white/10
-                blur-3xl
-              "
-            />
-
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none
-                absolute
-                -bottom-24
-                -left-10
-                h-64
-                w-64
-                rounded-full
-                bg-blue-300/10
-                blur-3xl
-              "
-            />
-
-            <div className="relative">
-              <div
-                className="
-                  mx-auto
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-white/10
-                  text-white
-                "
-              >
-                <Rocket size={21} />
+            {/* Future milestone placeholder */}
+            <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 top-8 z-10">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#093697] to-blue-500 border-4 border-white shadow-lg flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
               </div>
+            </div>
 
-              <p
-                className="
-                  mt-6
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.14em]
-                  text-white/60
-                "
-              >
-                The journey continues
-              </p>
-
-              <h3
-                className="
-                  mx-auto
-                  mt-3
-                  max-w-2xl
-                  text-3xl
-                  font-semibold
-                  tracking-tight
-                  text-white
-
-                  sm:text-4xl
-                "
-              >
-                Trailbliz is only the beginning
-                of the trail.
+            {/* Future content */}
+            <div className="pt-16 text-center">
+              <div className="inline-flex items-center gap-2 bg-[#093697] px-6 py-3 rounded-full text-white text-sm font-semibold mb-4 shadow-lg">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+                THE JOURNEY CONTINUES
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                What's Next?
               </h3>
-
-              <p
-                className="
-                  mx-auto
-                  mt-4
-                  max-w-2xl
-                  text-sm
-                  leading-7
-                  text-white/75
-
-                  sm:text-base
-                "
-              >
-                As students grow, Trailbliz will keep evolving
-                around the same purpose — helping progress become
-                visible and helping that progress lead somewhere.
+              <p className="text-slate-600 max-w-lg mx-auto mb-8">
+                Our story is still being written. Every student we empower,
+                every partnership we forge, and every innovation we embrace adds
+                a new chapter to our mission.
               </p>
             </div>
           </div>
+
+          {/* Completely Redesigned Footer */}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
