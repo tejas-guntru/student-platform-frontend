@@ -1,13 +1,14 @@
 "use client";
 
-import AboutHeader from "../../components/about/AboutHeader";
-import OurMission from "../../components/about/OurMission";
-import OurTeam from "../../components/about/OurTeam";
-import OurJourney from "../../components/about/OurJourney";
-import EducationalApproach from "../../components/about/EducationalApproach";
-import TechnologyPlatform from "../../components/about/TechnologyPlatform";
+import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AboutHeader from "@/components/about/AboutHeader";
+import OurMission from "@/components/about/OurMission";
+import EducationalApproach from "@/components/about/EducationalApproach";
+import TechnologyPlatform from "@/components/about/TechnologyPlatform";
+import OurTeam from "@/components/about/OurTeam";
+import OurJourney from "@/components/about/OurJourney";
 
 export default function AboutPage() {
   return (
@@ -19,7 +20,10 @@ export default function AboutPage() {
       <TechnologyPlatform />
       <OurTeam />
       <OurJourney />
-      <Footer/>
+      <Footer />
     </main>
   );
 }
+
+
+
