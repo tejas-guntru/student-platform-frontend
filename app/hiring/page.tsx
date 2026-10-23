@@ -1,23 +1,30 @@
-import Build from "@/components/home/Build";
-import Discover from "@/components/home/Discover";
-import MoveForward from "@/components/home/MoveForward";
-import Show from "@/components/home/Show";
+
+"use client";
+
+import { Suspense } from "react";
+
+import HiringSections from "@/components/hiring/HiringSections";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export default function Hiring() {
+function HiringLoading() {
+  return (
+    <div className="min-h-screen bg-white pt-24 md:pt-28">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="h-96 animate-pulse rounded-lg border border-gray-200 bg-gray-50 shadow-sm" />
+      </div>
+    </div>
+  );
+}
+
+export default function HiringPage() {
   return (
     <>
-      <Navbar />
-
-      <main>
-        <Build />
-        <Discover />
-        <MoveForward />
-        <Show />
-      </main>
-
-      <Footer />
+    <Navbar/>
+      <Suspense fallback={<HiringLoading />}>
+        <HiringSections />
+      </Suspense>
+    <Footer/>
     </>
   );
 }

@@ -1,4 +1,3 @@
-// To add a logo, drop the file in public/images/collab-colleges/ and set `logo: '/images/collab-colleges/<file>'` — nothing else needs to change.
 
 export type CollabCollege = {
   name: string;
@@ -13,6 +12,17 @@ export type CollabCity = {
 };
 
 export const collabCities: CollabCity[] = [
+  {
+    city: "New Delhi",
+    state: "Delhi",
+    colleges: [
+      {
+        name: "IIT Delhi",
+        fullName: "Indian Institute of Technology Delhi",
+        logo: "/images/collab-colleges/iit-delhi.svg",
+      },
+    ],
+  },
   {
     city: "Hyderabad",
     state: "Telangana",
@@ -48,10 +58,6 @@ export const collabCities: CollabCity[] = [
         logo: "/images/colleges/image 101.jpg",
       },
       {
-        name: "MRCW",
-        logo: "/images/collab-colleges/mrecw.jpg",
-      },
-      {
         name: "MRECW",
         fullName: "Malla Reddy Engineering College for Women",
         logo: "/images/collab-colleges/mrecw.jpg",
@@ -72,7 +78,8 @@ export const collabCities: CollabCity[] = [
       },
       {
         name: "Geethanjali",
-        fullName: "Geethanjali College of Engineering and Technology",
+        fullName:
+          "Geethanjali College of Engineering and Technology",
         logo: "/images/collab-colleges/geethanjali.png",
       },
       {
@@ -93,7 +100,8 @@ export const collabCities: CollabCity[] = [
     colleges: [
       {
         name: "IERT",
-        fullName: "Institute of Engineering and Rural Technology",
+        fullName:
+          "Institute of Engineering and Rural Technology",
         logo: "/images/collab-colleges/iert.png",
       },
       {
@@ -106,15 +114,26 @@ export const collabCities: CollabCity[] = [
       },
     ],
   },
-  {
-    city: "New Delhi",
-    state: "Delhi",
-    colleges: [
-      {
-        name: "IIT Delhi",
-        fullName: "Indian Institute of Technology Delhi",
-        logo: "/images/collab-colleges/iit-delhi.svg",
-      },
-    ],
-  },
+];
+
+// Static display order.
+// Lucknow institutions can be added near the top later.
+export const collabDisplayOrder: string[] = [
+  "IIT Delhi",
+  "CMR Group",
+  "MRU",
+  "Sreyas",
+  "IERT",
+  "MRDU",
+  "Sree Dattha",
+  "United University",
+  "MVV",
+  "Geethanjali",
+  "United Group of Institutions",
+  "MRCE",
+  "KBRIT",
+  "MRCET",
+  "Saint Mary's",
+  "NIAT",
+  "MRECW",
 ];
