@@ -12,10 +12,9 @@ import {
   UserCheck,
   FileCheck,
   Clock3,
-  ShieldCheck,
 } from "lucide-react";
 
-const PRIMARY_COLOR = "#093697";
+const PRIMARY_COLOR = "#1256af";
 
 const plans = [
   {
@@ -106,6 +105,15 @@ const services = [
   },
 ];
 
+const sectionTitle =
+  "text-3xl font-extrabold tracking-tight text-[#122a46] sm:text-4xl lg:leading-[1.1]";
+
+const primaryBtn =
+  "mt-auto flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#1256af] px-5 py-2.5 !text-sm !font-semibold text-white transition-colors hover:bg-[#0f4b99]";
+
+const quietBtn =
+  "mt-auto flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#122a46] px-5 py-2.5 !text-sm !font-semibold text-white transition-colors hover:bg-[#1256af]";
+
 export default function ProSubscriptionSection() {
   const router = useRouter();
 
@@ -117,22 +125,26 @@ export default function ProSubscriptionSection() {
     <section className="w-full bg-white px-4 py-16 sm:px-6 md:py-20 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-20 text-center">
-          <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-[#093697]">
-            <Crown size={16} />
-            <span>Career Membership</span>
+        <div className="mb-16 text-center sm:mb-20">
+          <div className="mb-6 flex flex-col items-center">
+            <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b93a3]">
+              <Crown size={14} className="text-[#1256af]" />
+              Career Membership
+            </p>
+            <span
+              aria-hidden="true"
+              className="mt-2.5 block h-[2px] w-7 rounded-full bg-[#c4a265]"
+            />
           </div>
 
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-950 md:text-5xl">
+          <h1 className="text-3xl font-extrabold tracking-tight text-[#122a46] sm:text-4xl lg:text-5xl lg:leading-[1.1]">
             Professional{" "}
             <span style={{ color: PRIMARY_COLOR }}>
               Membership
             </span>
           </h1>
 
-          <div className="mx-auto mb-7 h-1 w-24 rounded-full bg-[#093697]" />
-
-          <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-gray-600 md:text-xl">
+          <p className="mx-auto mt-5 max-w-2xl text-center text-[15px] leading-7 text-[#5c6b80] sm:text-base">
             Accelerate your career with professional guidance,
             exclusive resources, and opportunities designed to
             support your next career move.
@@ -140,35 +152,35 @@ export default function ProSubscriptionSection() {
         </div>
 
         {/* Services */}
-        <div className="mb-24">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
+        <div className="mb-16 sm:mb-20">
+          <div className="mb-10 text-center sm:mb-12">
+            <h2 className={sectionTitle}>
               Everything You Need to Grow
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-600">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#4a607a] sm:text-base">
               Explore the support available through our career plans.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {services.map((service) => {
               const Icon = service.icon;
 
               return (
                 <div
                   key={service.title}
-                  className="group flex h-full flex-col rounded-2xl border border-gray-200 bg-gray-50 p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-lg"
+                  className="group flex h-full flex-col rounded-2xl border border-[#e4e9f0] bg-[#f8fafc] p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#dce7f3] hover:bg-white hover:shadow-[0_16px_40px_rgba(16,33,58,0.08)]"
                 >
-                  <div className="mb-6 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#093697] text-white transition-transform duration-300 group-hover:scale-105">
-                    <Icon size={25} />
+                  <div className="mb-5 flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#1256af] text-white transition-transform duration-300 group-hover:scale-105">
+                    <Icon size={20} />
                   </div>
 
-                  <h3 className="mb-3 text-lg font-bold leading-7 text-gray-950 lg:min-h-[56px]">
+                  <h3 className="mb-2 text-lg font-extrabold leading-7 tracking-tight text-[#122a46] lg:min-h-[56px]">
                     {service.title}
                   </h3>
 
-                  <p className="text-sm leading-7 text-gray-600">
+                  <p className="text-sm leading-6 text-[#4a607a]">
                     {service.description}
                   </p>
                 </div>
@@ -178,66 +190,69 @@ export default function ProSubscriptionSection() {
         </div>
 
         {/* Pricing */}
-        <div className="mb-20">
-          <div className="mb-14 text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-950">
+        <div className="mb-4">
+          <div className="mb-10 text-center sm:mb-12">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#122a46] sm:text-4xl lg:text-5xl lg:leading-[1.1]">
               Choose Your{" "}
-              <span className="text-[#093697]">
+              <span className="text-[#1256af]">
                 Plan
               </span>
             </h2>
 
-            <div className="mx-auto my-6 h-1 w-20 rounded-full bg-[#093697]" />
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-4 block h-[2px] w-7 rounded-full bg-[#c4a265]"
+            />
 
-            <p className="mx-auto max-w-2xl text-lg leading-7 text-gray-600">
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-7 text-[#5c6b80] sm:text-base">
               Select the membership duration that fits your
               career goals.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-3">
+          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-3 lg:gap-8">
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className={`relative flex h-full flex-col rounded-2xl border-2 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 ${
+                className={`relative flex h-full flex-col rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(16,33,58,0.08)] sm:p-7 ${
                   plan.popular
-                    ? "border-[#093697] shadow-lg"
-                    : "border-gray-200 shadow-sm"
+                    ? "border-[#1256af] shadow-[0_16px_40px_rgba(16,33,58,0.06)]"
+                    : "border-[#e4e9f0]"
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#093697] px-5 py-2 text-xs font-bold tracking-wide text-white">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1256af] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white">
                     MOST POPULAR
                   </div>
                 )}
 
                 {/* Plan Header */}
-                <div className="mb-8 flex min-h-[240px] flex-col items-center text-center">
+                <div className="mb-8 flex min-h-[220px] flex-col items-center text-center sm:min-h-[240px]">
                   <div
-                    className={`mb-5 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl ${
+                    className={`mb-5 flex size-14 shrink-0 items-center justify-center rounded-2xl ${
                       plan.popular
-                        ? "bg-blue-50 text-[#093697]"
-                        : "bg-gray-100 text-gray-800"
+                        ? "bg-[#e7f1fc] text-[#1256af]"
+                        : "bg-[#eef2f6] text-[#122a46]"
                     }`}
                   >
-                    <Crown size={30} />
+                    <Crown size={26} />
                   </div>
 
-                  <h3 className="mb-2 text-2xl font-bold text-gray-950">
+                  <h3 className="mb-2 text-2xl font-extrabold tracking-tight text-[#122a46]">
                     {plan.name}
                   </h3>
 
-                  <p className="min-h-12 text-base leading-6 text-gray-600">
+                  <p className="min-h-12 text-[15px] leading-6 text-[#5c6b80]">
                     {plan.description}
                   </p>
 
                   <div className="mt-auto w-full pt-5">
                     <div className="flex flex-wrap items-baseline justify-center gap-x-1 gap-y-2">
-                      <span className="text-4xl font-extrabold tracking-tight text-gray-950">
+                      <span className="text-[2.2rem] font-bold tracking-[-0.04em] text-[#101828]">
                         ₹{plan.price.toLocaleString("en-IN")}
                       </span>
 
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-[#8b93a3]">
                         / {plan.duration}{" "}
                         {plan.duration === 1
                           ? "month"
@@ -245,25 +260,25 @@ export default function ProSubscriptionSection() {
                       </span>
                     </div>
 
-                    <p className="mt-2 text-xs text-gray-500">
+                    <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#98a2b3]">
                       Total plan price
                     </p>
                   </div>
                 </div>
 
                 {/* Plan Features */}
-                <div className="mb-9 flex flex-1 flex-col gap-4 border-t border-gray-100 pt-7 text-left">
+                <div className="mb-8 flex flex-1 flex-col gap-3.5 border-t border-[#eef1f5] pt-6 text-left">
                   {plan.features.map((feature) => (
                     <div
                       key={feature}
                       className="flex items-start gap-3"
                     >
                       <Check
-                        size={19}
-                        className="mt-0.5 shrink-0 text-[#093697]"
+                        size={18}
+                        className="mt-0.5 shrink-0 text-[#1256af]"
                       />
 
-                      <span className="text-sm leading-6 text-gray-700">
+                      <span className="text-sm leading-6 text-[#3e4d63]">
                         {feature}
                       </span>
                     </div>
@@ -274,20 +289,16 @@ export default function ProSubscriptionSection() {
                 <button
                   type="button"
                   onClick={goToLogin}
-                  className={`mt-auto flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
-                    plan.popular
-                      ? "bg-[#093697] text-white hover:bg-[#072a7a]"
-                      : "bg-gray-950 text-white hover:bg-[#093697]"
-                  }`}
+                  className={plan.popular ? primaryBtn : quietBtn}
                 >
                   <span>Get Started</span>
-                  <ArrowRight size={18} />
+                  <ArrowRight size={16} />
                 </button>
               </div>
             ))}
           </div>
 
-          <p className="mx-auto mt-8 max-w-xl text-center text-sm leading-6 text-gray-500">
+          <p className="mx-auto mt-8 max-w-xl text-center text-sm leading-6 text-[#8b93a3]">
             Sign in to continue. Selecting a plan does not
             initiate a payment.
           </p>

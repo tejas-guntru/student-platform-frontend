@@ -50,12 +50,12 @@ export default function HiringSections() {
   }, [searchParams]);
 
   return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <main className="min-h-screen bg-[#eef2f6] text-[#121826] [font-family:var(--font-geist-sans),Arial,Helvetica,sans-serif]">
+      <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-8 lg:px-10">
         {/* Overview */}
         <section
           id="overview"
-          className="scroll-mt-24 pb-20 pt-24 md:pt-28"
+          className="scroll-mt-24 pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36"
         >
           <HiringOverview setActiveTab={scrollToSection} />
         </section>
@@ -65,7 +65,7 @@ export default function HiringSections() {
 
         {/* Pro Membership */}
         <section id="pro" className="scroll-mt-24">
-          <div className="rounded-lg border border-gray-200 bg-white shadow-md">
+          <div className="rounded-2xl border border-[#e4e9f0] bg-white shadow-[0_16px_40px_rgba(16,33,58,0.05)]">
             <ProSubscription />
           </div>
         </section>

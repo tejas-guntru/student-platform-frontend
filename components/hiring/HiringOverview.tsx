@@ -4,13 +4,11 @@ import React from "react";
 import {
   TrendingUp,
   Sparkles,
-  Zap,
   Award,
   Building2,
   Globe,
   ArrowRight,
   Bell,
-  Crown,
   Users,
   Target,
   Briefcase,
@@ -20,6 +18,21 @@ import {
 interface HiringOverviewProps {
   setActiveTab: (tab: string) => void;
 }
+
+const primaryBtn =
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#1256af] px-5 py-2.5 !text-sm !font-semibold text-white transition-colors hover:bg-[#0f4b99]";
+
+const secondaryBtn =
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg !border !border-solid !border-[#e1e6ee] bg-white px-5 py-2.5 !text-sm !font-semibold !text-[#3e4d63] transition-colors hover:bg-[#f7f9fc]";
+
+const surface =
+  "rounded-2xl border border-[#e4e9f0] bg-white shadow-[0_16px_40px_rgba(16,33,58,0.05)]";
+
+const sectionTitle =
+  "text-3xl font-extrabold tracking-tight text-[#122a46] sm:text-4xl lg:text-5xl lg:leading-[1.1]";
+
+const lede =
+  "text-[15px] leading-7 text-[#5c6b80] sm:text-base";
 
 export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
   const features = [
@@ -85,30 +98,34 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Hero Section */}
-      <section className="bg-white rounded-lg border border-gray-200 shadow-sm">
-        <div className="p-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <section className={surface}>
+        <div className="px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
               <div className="space-y-6">
                 {/* Professional Badge */}
-                <div className="inline-flex items-center gap-2 bg-blue-50 rounded px-3 py-1 border">
-                  <Sparkles className="w-4 h-4" style={{ color: "#093697" }} />
-                  <span className="text-sm font-medium text-gray-700">
+                <div>
+                  <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b93a3]">
+                    <Sparkles className="h-3.5 w-3.5 text-[#1256af]" />
                     Trusted by 50,000+ professionals
-                  </span>
+                  </p>
+                  <span
+                    aria-hidden="true"
+                    className="mt-2.5 block h-[2px] w-7 rounded-full bg-[#c4a265]"
+                  />
                 </div>
 
                 {/* Main Heading */}
                 <div className="space-y-4">
-                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                    Advance Your{" "}
-                    <span style={{ color: "#093697" }}>
+                  <h1 className="text-[1.95rem] font-bold leading-[1.05] tracking-[-0.04em] text-[#101828] min-[420px]:text-[2.2rem] sm:text-[2.55rem] lg:text-[2.75rem] xl:text-[2.9rem]">
+                    <span className="block">Advance Your</span>
+                    <span className="mt-1 block italic text-[#1256af]">
                       Professional Career
                     </span>
                   </h1>
-                  <p className="text-lg text-gray-600">
+                  <p className={`max-w-[460px] ${lede}`}>
                     Connect with industry-leading companies and discover
                     opportunities that match your expertise and career
                     aspirations.
@@ -116,36 +133,32 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <div className="flex flex-col gap-3 pt-1 sm:flex-row">
                   <button
                     onClick={() => setActiveTab("apply")}
-                    className="text-white px-6 py-3 rounded font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                    style={{ backgroundColor: "#093697" }}
+                    className={primaryBtn}
                   >
-                    <Briefcase className="w-4 h-4" />
+                    <Briefcase className="h-4 w-4" />
                     Start Application
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => setActiveTab("jobs")}
-                    className="border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 px-6 py-3 rounded font-semibold transition-colors flex items-center justify-center gap-2"
+                    className={secondaryBtn}
                   >
-                    <Bell className="w-4 h-4" />
+                    <Bell className="h-4 w-4" />
                     Browse Positions
                   </button>
                 </div>
               </div>
 
               {/* Stats Section */}
-              <div className="bg-gray-50 rounded border border-gray-200 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className="p-2 rounded"
-                    style={{ backgroundColor: "#093697" }}
-                  >
-                    <TrendingUp className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900">
+              <div className="rounded-2xl border border-[#eef1f5] bg-[#f8fafc] p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-[#1256af] text-white">
+                    <TrendingUp className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-[17px] font-semibold leading-6 tracking-[-0.02em] text-[#121826]">
                     Platform Statistics
                   </h3>
                 </div>
@@ -158,12 +171,14 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
                   ].map((stat, index) => (
                     <div
                       key={index}
-                      className="text-center p-3 bg-white rounded border"
+                      className="rounded-xl border border-[#e4e9f0] bg-white p-3 text-center"
                     >
-                      <div className="text-xl font-bold text-gray-900 mb-1">
+                      <div className="mb-1 text-[17px] font-semibold leading-6 tracking-[-0.02em] text-[#121826]">
                         {stat.value}
                       </div>
-                      <div className="text-gray-600 text-xs">{stat.label}</div>
+                      <div className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#8b93a3]">
+                        {stat.label}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -174,37 +189,34 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
       </section>
 
       {/* Features Section */}
-      <section className="bg-white rounded border border-gray-200 shadow-sm">
-        <div className="p-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+      <section className={surface}>
+        <div className="px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8 text-center">
+              <h2 className={sectionTitle}>
                 Professional{" "}
-                <span style={{ color: "#093697" }}>Advantages</span>
+                <span className="text-[#1256af]">Advantages</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className={`mx-auto mt-4 max-w-2xl ${lede}`}>
                 Our platform provides comprehensive tools and resources designed
                 for serious professionals seeking career advancement.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="p-5 bg-white rounded border border-gray-200 hover:shadow-sm transition-shadow"
+                  className="rounded-2xl border border-[#e4e9f0] bg-white p-5 transition-shadow hover:shadow-[0_10px_30px_rgb(23_59_99_/_0.08)] sm:p-6"
                 >
                   <div className="flex items-start gap-4">
-                    <div
-                      className="p-2 rounded flex-shrink-0"
-                      style={{ backgroundColor: "#093697" }}
-                    >
-                      <feature.icon className="w-5 h-5 text-white" />
-                    </div>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#1256af] text-white">
+                      <feature.icon className="h-5 w-5" />
+                    </span>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <h3 className="text-lg font-extrabold tracking-tight text-[#122a46]">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="mt-1.5 text-sm leading-6 text-[#4a607a]">
                         {feature.description}
                       </p>
                     </div>
@@ -217,47 +229,44 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
       </section>
 
       {/* Success Stories Section */}
-      <section className="bg-white rounded border border-gray-200 shadow-sm">
-        <div className="p-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+      <section className={surface}>
+        <div className="px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8 text-center">
+              <h2 className={sectionTitle}>
                 Professional{" "}
-                <span style={{ color: "#093697" }}>Success Stories</span>
+                <span className="text-[#1256af]">Success Stories</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className={`mx-auto mt-4 max-w-2xl ${lede}`}>
                 Read about professionals who have successfully advanced their
                 careers through our comprehensive platform.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
               {successStories.map((person, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 rounded p-5 border border-gray-200"
+                  className="rounded-2xl border border-[#e4e9f0] bg-[#f8fafc] p-5 sm:p-6"
                 >
-                  <div className="text-center mb-4">
-                    <div className="w-12 h-12 bg-white rounded-full mx-auto mb-3 flex items-center justify-center">
-                      <Users className="w-6 h-6" style={{ color: "#093697" }} />
+                  <div className="mb-4 text-center">
+                    <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-[#e7f1fc]">
+                      <Users className="h-5 w-5 text-[#1256af]" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-[17px] font-semibold leading-6 tracking-[-0.02em] text-[#121826]">
                       {person.name}
                     </h3>
-                    <p
-                      className="font-medium text-sm mb-1"
-                      style={{ color: "#093697" }}
-                    >
+                    <p className="mt-1 text-sm font-semibold !text-[#1256af]">
                       {person.role}
                     </p>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="mt-0.5 text-sm leading-6 text-[#667085]">
                       {person.company}
                     </p>
-                    <div className="inline-block px-3 py-1 bg-white text-gray-900 font-semibold text-sm rounded border">
+                    <div className="mt-3 inline-block rounded-lg border border-[#e4e9f0] bg-white px-3 py-1 text-sm font-semibold text-[#121826]">
                       {person.salary}
                     </div>
                   </div>
-                  <p className="text-gray-600 text-center text-sm">
-                    "{person.story}"
+                  <p className="text-center text-sm leading-6 text-[#4a607a]">
+                    &ldquo;{person.story}&rdquo;
                   </p>
                 </div>
               ))}
@@ -267,60 +276,55 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-white rounded border border-gray-200 shadow-sm">
-        <div className="p-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <section className={surface}>
+        <div className="px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
               <div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                <h2 className={sectionTitle}>
                   Comprehensive{" "}
-                  <span style={{ color: "#093697" }}>Career Support</span>
+                  <span className="text-[#1256af]">Career Support</span>
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className={`mt-4 ${lede}`}>
                   Access professional tools and resources designed to support
                   every aspect of your career development journey.
                 </p>
-                <div className="space-y-3">
+                <div className="mt-6 space-y-3">
                   {benefits.map((benefit, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <CheckCircle
-                        className="w-5 h-5 flex-shrink-0"
-                        style={{ color: "#093697" }}
-                      />
-                      <span className="text-gray-700">{benefit}</span>
+                      <CheckCircle className="h-5 w-5 shrink-0 text-[#1256af]" />
+                      <span className="text-sm leading-6 text-[#122a46]">
+                        {benefit}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="bg-gray-50 rounded p-6 border border-gray-200">
+              <div className="rounded-2xl border border-[#eef1f5] bg-[#f8fafc] p-6 sm:p-7">
                 <div className="text-center">
-                  <div
-                    className="w-12 h-12 rounded mx-auto mb-4 flex items-center justify-center"
-                    style={{ backgroundColor: "#093697" }}
-                  >
-                    <Target className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <span className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#1256af] text-white">
+                    <Target className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-xl font-extrabold tracking-tight text-[#122a46] sm:text-2xl">
                     Ready to Advance Your Career?
                   </h3>
-                  <p className="text-gray-600 mb-5 text-sm">
+                  <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#4a607a]">
                     Join our professional network and connect with opportunities
                     that match your expertise and career objectives.
                   </p>
-                  <div className="space-y-3">
+                  <div className="mt-6 space-y-3">
                     <button
                       onClick={() => setActiveTab("apply")}
-                      className="w-full text-white px-5 py-3 rounded font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 text-sm"
-                      style={{ backgroundColor: "#093697" }}
+                      className={`${primaryBtn} w-full`}
                     >
-                      <Briefcase className="w-4 h-4" />
+                      <Briefcase className="h-4 w-4" />
                       Create Professional Profile
                     </button>
                     <button
                       onClick={() => setActiveTab("jobs")}
-                      className="w-full border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 px-5 py-3 rounded font-semibold transition-colors flex items-center justify-center gap-2 text-sm"
+                      className={`${secondaryBtn} w-full`}
                     >
-                      <Bell className="w-4 h-4" />
+                      <Bell className="h-4 w-4" />
                       View Available Positions
                     </button>
                   </div>
