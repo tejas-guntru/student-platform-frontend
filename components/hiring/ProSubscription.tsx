@@ -144,7 +144,7 @@ export default function ProSubscriptionSection() {
             </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-center text-[15px] leading-7 text-[#5c6b80] sm:text-base">
+          <p className="!mx-auto mt-5 max-w-2xl text-center text-[15px] leading-7 text-[#5c6b80] sm:text-base">
             Accelerate your career with professional guidance,
             exclusive resources, and opportunities designed to
             support your next career move.
@@ -158,7 +158,7 @@ export default function ProSubscriptionSection() {
               Everything You Need to Grow
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#4a607a] sm:text-base">
+            <p className="!mx-auto mt-4 max-w-2xl text-center text-sm leading-7 text-[#4a607a] sm:text-base">
               Explore the support available through our career plans.
             </p>
           </div>
@@ -204,7 +204,7 @@ export default function ProSubscriptionSection() {
               className="mx-auto mt-4 block h-[2px] w-7 rounded-full bg-[#c4a265]"
             />
 
-            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-7 text-[#5c6b80] sm:text-base">
+            <p className="!mx-auto mt-5 max-w-2xl text-center text-[15px] leading-7 text-[#5c6b80] sm:text-base">
               Select the membership duration that fits your
               career goals.
             </p>

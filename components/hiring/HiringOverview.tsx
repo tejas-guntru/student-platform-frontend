@@ -197,7 +197,7 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
                 Professional{" "}
                 <span className="text-[#1256af]">Advantages</span>
               </h2>
-              <p className={`mx-auto mt-4 max-w-2xl ${lede}`}>
+              <p className={`!mx-auto mt-4 max-w-2xl text-center ${lede}`}>
                 Our platform provides comprehensive tools and resources designed
                 for serious professionals seeking career advancement.
               </p>
@@ -237,7 +237,7 @@ export default function HiringOverview({ setActiveTab }: HiringOverviewProps) {
                 Professional{" "}
                 <span className="text-[#1256af]">Success Stories</span>
               </h2>
-              <p className={`mx-auto mt-4 max-w-2xl ${lede}`}>
+              <p className={`!mx-auto mt-4 max-w-2xl text-center ${lede}`}>
                 Read about professionals who have successfully advanced their
                 careers through our comprehensive platform.
               </p>
